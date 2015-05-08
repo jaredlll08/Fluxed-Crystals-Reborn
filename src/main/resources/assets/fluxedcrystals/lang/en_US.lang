@@ -3,8 +3,8 @@ commands.fluxedcrystals.usage=/fluxedcrystals
 commands.fluxedcrystals.reset-seeds.usage=/fluxedcrystals reset-seeds
 
 item.fluxedcrystals.seed.name=%s Seed
-item.fluxedcrystals.shard.name=Smooth %s Shard
-item.roughShard.name=Rough %s Shard
+item.fluxedcrystals.smoothShard.name=Smooth %s Shard
+item.fluxedcrystals.roughShard.name=Rough %s Shard
 item.fluxedcrystals.roughChunk.name=Rough %s Chunk
 item.shardHelm.name=%s Helmet
 item.shardChest.name=%s Chestplate

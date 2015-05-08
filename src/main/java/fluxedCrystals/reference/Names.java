@@ -17,12 +17,20 @@ public class Names
 		public static final String RESET_SEEDS = "reset-seeds";
 
 	}
-
+	
+	public static final class Blocks
+	{
+		public static final String POWEREDSOIL = "poweredSoil";
+	}
 	public static final class Items
 	{
 
 		public static final String SEED = "seed";
 		public static final String UNIVERSAL_SEED = "universalSeed";
+		
+		public static final String SHARDROUGH = "roughShard";
+		public static final String SHARDSMOOTH = "smoothShard";
+		
 
 	}
 

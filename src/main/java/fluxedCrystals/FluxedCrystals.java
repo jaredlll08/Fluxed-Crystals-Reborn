@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxedCrystals.command.CommandFC;
 import fluxedCrystals.handler.ConfigurationHandler;
+import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
@@ -58,6 +59,7 @@ public class FluxedCrystals
 		SeedRegistry.getInstance().LoadAllFromDisk();
 
 		FCItems.preInit();
+		FCBlocks.preInit();
 
 		proxy.preInit();
 
@@ -83,6 +85,8 @@ public class FluxedCrystals
 	{
 
 		FCItems.initialize();
+		FCBlocks.initialize();
+		
 
 		proxy.initialize();
 
@@ -95,6 +99,8 @@ public class FluxedCrystals
 	{
 
 		FCItems.postInit();
+		FCBlocks.postInit();
+		
 
 		proxy.postInit();
 
