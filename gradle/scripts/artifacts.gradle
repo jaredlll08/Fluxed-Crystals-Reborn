@@ -1,0 +1,12 @@
+task devJar(type: Jar) {
+
+    from(sourceSets.main.output) {
+        include "**"
+    }
+
+    classifier = 'dev'
+}
+
+artifacts {
+    archives devJar
+}
