@@ -1,6 +1,5 @@
 package fluxedCrystals.tileEntity;
 
-import fluxedCrystals.api.CrystalBase;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.registry.SeedData;
 import fluxedCrystals.registry.SeedRegistry;

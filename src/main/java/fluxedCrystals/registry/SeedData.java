@@ -356,11 +356,11 @@ public class SeedData implements INBTTaggable, JsonSerializer<SeedData>, JsonDes
 
 			jsonReader = new JsonReader(new FileReader(file));
 
-			SeedData playerSpirit = jsonSerializer.fromJson(jsonReader, SeedData.class);
+			SeedData seedData = jsonSerializer.fromJson(jsonReader, SeedData.class);
 
 			jsonReader.close();
 
-			return playerSpirit;
+			return seedData;
 
 		}
 		catch (FileNotFoundException ignored)
@@ -491,7 +491,7 @@ public class SeedData implements INBTTaggable, JsonSerializer<SeedData>, JsonDes
 				name = jsonObject.get("name").getAsString();
 			}
 			if(jsonObject.has("lore") && jsonObject.get("lore").isJsonPrimitive()) {
-				name = jsonObject.get("lore").getAsString();
+				lore = jsonObject.get("lore").getAsString();
 			}
 			if(jsonObject.has("ingredient") && jsonObject.get("ingredient").isJsonPrimitive()) {
 				ingredient = jsonObject.get("ingredient").getAsString();

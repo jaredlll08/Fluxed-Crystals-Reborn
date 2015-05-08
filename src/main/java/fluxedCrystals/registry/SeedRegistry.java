@@ -230,9 +230,7 @@ public class SeedRegistry
 				if (file.exists() && file.isFile() && file.getName().endsWith("json"))
 				{
 
-					SeedData seedData = new SeedData();
-
-					seedData.readFromFile(file);
+					SeedData seedData = SeedData.readFromFile(file);
 
 					setSeedByID(seedData.getEntityID(), seedData, false);
 
@@ -268,6 +266,7 @@ public class SeedRegistry
 
 		ArrayList<SeedData> defaultSeeds = new ArrayList<SeedData>();
 
+		defaultSeeds.add(new SeedData("Testy", 7507918, 1, 1, 600, 9001, 16, 2000, 1, 32, 0, true, "minecraft:bedrock;0", "minecraft:dirt"));
 		defaultSeeds.add(new SeedData("Iron", 14071681, 1, 1, 2400, 1, 32, 4000, 1, 16, 1, true, "ingotIron", "ingotIron"));
 		defaultSeeds.add(new SeedData("Gold", 11904556, 1, 1, 2400, 1, 32, 4000, 0, 20, 2, false, "ingotGold", ""));
 		defaultSeeds.add(new SeedData("Coal", 788746, 1, 4, 1200, 0, 32, 2000, 0, 12, 3, false, "itemCoal", ""));
