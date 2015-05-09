@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import WayofTime.alchemicalWizardry.book.registries.RecipeRegistry;
 import fluxedCrystals.api.CrystalBase;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.TileEntityPowerBlock;
 
 public class BlockCrystal extends CrystalBase implements ITileEntityProvider
 {
@@ -19,12 +20,11 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider
 
 	}
 
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
-
-		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
-
-//		if (RecipeRegistry.getIsSharp(crop.getIndex()))
+//	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+//	{
+//
+//		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
+//		if (RecipeRegistry.(crop.getIndex()))
 //		{
 //
 //			if (!world.isRemote && world.getWorldTime() % 5 == 0)
@@ -40,13 +40,12 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider
 //			}
 //
 //		}
-
-	}
+//
+//	}
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TileEntityCrystal();
 	}
 
 }

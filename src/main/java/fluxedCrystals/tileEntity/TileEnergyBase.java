@@ -1,14 +1,14 @@
 package fluxedCrystals.tileEntity;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import fluxedCrystals.network.MessageEnergyUpdate;
-import fluxedCrystals.network.PacketHandler;
+import java.util.EnumSet;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.EnumSet;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import fluxedCrystals.network.PacketHandler;
+import fluxedCrystals.network.message.MessageEnergyUpdate;
 
 public abstract class TileEnergyBase extends TileEntity implements IEnergyHandler
 {

@@ -1,9 +1,8 @@
 package fluxedCrystals.tileEntity;
 
-import fluxedCrystals.api.CrystalBase;
-import fluxedCrystals.api.RecipeRegistry;
-import fluxedCrystals.blocks.crystal.BlockCrystal;
-import fluxedCrystals.items.FCItems;
+import java.util.ArrayList;
+import java.util.EnumSet;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -12,9 +11,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
+import WayofTime.alchemicalWizardry.book.registries.RecipeRegistry;
+import fluxedCrystals.api.CrystalBase;
+import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.SeedRegistry;
 
 /**
  * Created by Jared on 11/2/2014.
@@ -23,7 +24,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 
 	public ItemStack[] items;;
 
-	public TileEntityPowerBlock () {
+	public TileEntityPowerBlock() {
 		super(100000);
 		items = new ItemStack[3];
 	}
@@ -253,9 +254,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		int speed = 8;
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
+//				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
 					speed += 2;
-				}
+//				}
 			}
 		}
 		return speed;
@@ -265,9 +266,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		int eff = 0;
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeEffeciency))) {
+//				if (item.isItemEqual(new ItemStack(FCItems.upgradeEffeciency))) {
 					eff += 15;
-				}
+//				}
 			}
 		}
 		if (eff == 0) {
@@ -281,22 +282,22 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	}
 
 	public int getUpgradeDrain(int idx) {
-		int energy = RecipeRegistry.getPowerPerStage(idx);
+		int energy = SeedRegistry.getInstance().getSeedByID(idx).getPowerPerStage();
 
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
+//				if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
 					energy += energy / 15;
-				}
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
+//				}
+//				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
 					energy += energy / 12;
-				}
+//				}
 			}
 		}
 
-		if (isUpgradeActive(new ItemStack(FCItems.upgradeEffeciency))) {
+//		if (isUpgradeActive(new ItemStack(FCItems.upgradeEffeciency))) {
 			energy /= getEffeciency();
-		}
+//		}
 
 		return energy;
 	}

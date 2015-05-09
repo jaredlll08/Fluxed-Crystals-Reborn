@@ -9,6 +9,7 @@ import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.reference.Textures;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
 
 public class FCBlocks
 {
@@ -37,6 +38,7 @@ public class FCBlocks
 		crystal.setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":crop_stage_7").setCreativeTab(FluxedCrystals.tab);
 		
 		GameRegistry.registerBlock(crystal, "crystal");
+		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");
 		
 
 	}
