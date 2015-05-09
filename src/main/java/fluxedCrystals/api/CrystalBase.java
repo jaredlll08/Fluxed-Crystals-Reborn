@@ -2,11 +2,14 @@ package fluxedCrystals.api;
 
 import java.util.Random;
 
+import org.apache.http.impl.conn.Wire;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,7 +19,7 @@ import fluxedCrystals.reference.Reference;
 
 public abstract class CrystalBase extends Block {
 
-	private IIcon[] icons;
+	public IIcon[] icons;
 
 	public CrystalBase() {
 
@@ -64,19 +67,13 @@ public abstract class CrystalBase extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
 
-		this.icons = new IIcon[9];
+		this.icons = new IIcon[8];
 		this.blockIcon = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_7");
-
-		for (int i = 0; i < this.icons.length - 1; ++i) {
-
+		for (int i = 0; i < this.icons.length; ++i) {
 			this.icons[i] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + i);
-
 		}
 
-		this.icons[8] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_overlay");
-
 	}
-
 
 	/**
 	 * Gets the block's texture. Args: side, meta
@@ -84,15 +81,20 @@ public abstract class CrystalBase extends Block {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-
 		if (meta < 0 || meta > 7) {
 
 			meta = 7;
-
 		}
-
 		return this.icons[meta];
 
+	}
+
+	@Override
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		if (world.getBlockMetadata(x, y, z) < 0 || world.getBlockMetadata(x, y, z) >= 7) {
+			return getIcon(side, 7);
+		}
+		return getIcon(side, world.getBlockMetadata(x, y, z));
 	}
 
 	/**
@@ -103,7 +105,7 @@ public abstract class CrystalBase extends Block {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 
-		return world.getBlock(x, y, z) == FCBlocks.poweredSoil;
+		return world.getBlock(x, y - 1, z) == FCBlocks.poweredSoil;
 
 	}
 

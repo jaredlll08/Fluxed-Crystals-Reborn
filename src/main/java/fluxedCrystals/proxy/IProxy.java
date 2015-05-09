@@ -9,4 +9,5 @@ public interface IProxy
 
 	ClientProxy getClientProxy();
 
+	void registerRenderers();
 }

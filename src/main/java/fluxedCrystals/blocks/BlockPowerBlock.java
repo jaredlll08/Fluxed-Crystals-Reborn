@@ -1,17 +1,19 @@
 package fluxedCrystals.blocks;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.TileEntityPowerBlock;
 
-public class BlockPowerBlock extends Block // implements ITileEntityProvider
+public class BlockPowerBlock extends Block  implements ITileEntityProvider
 {
 
 	public BlockPowerBlock() {
@@ -26,6 +28,11 @@ public class BlockPowerBlock extends Block // implements ITileEntityProvider
 		ArrayList<ItemStack> stack = new ArrayList<ItemStack>();
 		stack.add(new ItemStack(this));
 		return stack;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		return new TileEntityPowerBlock();
 	}
 
 	// public void onBlockPreDestroy(World world, int x, int y, int z, int meta)

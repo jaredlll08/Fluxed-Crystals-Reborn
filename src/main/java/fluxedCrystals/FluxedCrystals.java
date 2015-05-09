@@ -1,8 +1,20 @@
 package fluxedCrystals;
 
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import tterrag.core.common.Lang;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import fluxedCrystals.command.CommandFC;
 import fluxedCrystals.handler.ConfigurationHandler;
 import fluxedCrystals.init.FCBlocks;
@@ -12,15 +24,9 @@ import fluxedCrystals.proxy.IProxy;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
-import tterrag.core.common.Lang;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
-public class FluxedCrystals
-{
+public class FluxedCrystals {
 
 	public static final CreativeTabFluxedCrystals tab = new CreativeTabFluxedCrystals();
 	public static File configDir = null;
@@ -37,16 +43,14 @@ public class FluxedCrystals
 	public static IProxy proxy;
 
 	@Mod.EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
-	{
+	public void onServerStarting(FMLServerStartingEvent event) {
 
 		event.registerServerCommand(new CommandFC());
 
 	}
 
 	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 
 		configDir = new File(event.getSuggestedConfigurationFile().getParentFile().getAbsolutePath() + File.separator + Reference.MOD_ID);
 		ConfigurationHandler.init(new File(configDir.getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
@@ -63,14 +67,11 @@ public class FluxedCrystals
 
 		proxy.preInit();
 
-		if (Loader.isModLoaded("Thaumcraft"))
-		{
+		if (Loader.isModLoaded("Thaumcraft")) {
 
 			thaumcraftThere = true;
 
-		}
-		else
-		{
+		} else {
 
 			thaumcraftThere = false;
 
@@ -81,26 +82,22 @@ public class FluxedCrystals
 	}
 
 	@Mod.EventHandler
-	public void initialize(FMLInitializationEvent event)
-	{
+	public void initialize(FMLInitializationEvent event) {
 
 		FCItems.initialize();
 		FCBlocks.initialize();
-		
 
 		proxy.initialize();
-
+		proxy.registerRenderers();
 		LogHelper.info("Initialization Complete!");
 
 	}
 
 	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+	public void postInit(FMLPostInitializationEvent event) {
 
 		FCItems.postInit();
 		FCBlocks.postInit();
-		
 
 		proxy.postInit();
 
@@ -109,15 +106,13 @@ public class FluxedCrystals
 	}
 
 	@Mod.EventHandler
-	public void onServerStopping(FMLServerStoppingEvent event)
-	{
+	public void onServerStopping(FMLServerStoppingEvent event) {
 
 		SeedRegistry.getInstance().SaveAll();
 
 	}
 
-	public SeedRegistry getSeedRegistry()
-	{
+	public SeedRegistry getSeedRegistry() {
 
 		return SeedRegistry.getInstance();
 

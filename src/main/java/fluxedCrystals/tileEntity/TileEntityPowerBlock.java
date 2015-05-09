@@ -254,9 +254,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		int speed = 8;
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-//				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-					speed += 2;
-//				}
+				// if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
+				speed += 2;
+				// }
 			}
 		}
 		return speed;
@@ -266,9 +266,10 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		int eff = 0;
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-//				if (item.isItemEqual(new ItemStack(FCItems.upgradeEffeciency))) {
-					eff += 15;
-//				}
+				// if (item.isItemEqual(new
+				// ItemStack(FCItems.upgradeEffeciency))) {
+//				eff += 15;
+				// }
 			}
 		}
 		if (eff == 0) {
@@ -286,18 +287,18 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {
-//				if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
-					energy += energy / 15;
-//				}
-//				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-					energy += energy / 12;
-//				}
+				// if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
+//				energy += energy / 15;
+				// }
+				// if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
+//				energy += energy / 12;
+				// }
 			}
 		}
 
-//		if (isUpgradeActive(new ItemStack(FCItems.upgradeEffeciency))) {
-			energy /= getEffeciency();
-//		}
+		// if (isUpgradeActive(new ItemStack(FCItems.upgradeEffeciency))) {
+//		energy /= getEffeciency();
+		// }
 
 		return energy;
 	}
