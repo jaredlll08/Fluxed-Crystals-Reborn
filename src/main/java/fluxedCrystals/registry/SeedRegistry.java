@@ -12,7 +12,10 @@ import org.apache.commons.io.FileUtils;
 import tterrag.core.common.json.JsonUtils;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class SeedRegistry
 {
@@ -66,7 +69,7 @@ public class SeedRegistry
 			Seed seed = new Seed();
 
 			seed.seedID = SeedRegistry.getInstance().getNextID();
-			seed.name = UUID.randomUUID().toString();
+			seed.name = itemStack.getDisplayName();
 			seed.ingredient = JsonUtils.getStringForItemStack(itemStack, true, false);
 			seed.weightedDrop = "";
 
