@@ -5,15 +5,16 @@ import java.util.HashMap;
 public class RecipeRegistry
 {
 
-	private static HashMap<Integer, RecipeSeedInfuser> seedRecipes = new HashMap<Integer, RecipeSeedInfuser>();
+	private static HashMap<Integer, RecipeSeedInfuser> seedInfuserRecipes = new HashMap<Integer, RecipeSeedInfuser>();
+	private static HashMap<Integer, RecipeGemCutter> gemCutterRecipes = new HashMap<Integer, RecipeGemCutter>();
 
 	public static void registerSeedInfuserRecipe(int seedID, RecipeSeedInfuser recipe)
 	{
 
-		if (!seedRecipes.containsKey(seedID))
+		if (!seedInfuserRecipes.containsKey(seedID))
 		{
 
-			seedRecipes.put(seedID, recipe);
+			seedInfuserRecipes.put(seedID, recipe);
 
 		}
 
@@ -22,10 +23,10 @@ public class RecipeRegistry
 	public static RecipeSeedInfuser getSeedInfuserRecipeByID(int seedID)
 	{
 
-		if (seedRecipes.containsKey(seedID))
+		if (seedInfuserRecipes.containsKey(seedID))
 		{
 
-			return seedRecipes.get(seedID);
+			return seedInfuserRecipes.get(seedID);
 
 		}
 
@@ -36,7 +37,40 @@ public class RecipeRegistry
 	public static HashMap<Integer, RecipeSeedInfuser> getAllSeedInfuserRecipes()
 	{
 
-		return seedRecipes;
+		return seedInfuserRecipes;
+
+	}
+
+	public static void registerGemCutterRecipe(int seedID, RecipeGemCutter recipe)
+	{
+
+		if (!gemCutterRecipes.containsKey(seedID))
+		{
+
+			gemCutterRecipes.put(seedID, recipe);
+
+		}
+
+	}
+
+	public static RecipeGemCutter getGemCutterRecipeByID(int seedID)
+	{
+
+		if (gemCutterRecipes.containsKey(seedID))
+		{
+
+			return gemCutterRecipes.get(seedID);
+
+		}
+
+		return null;
+
+	}
+
+	public static HashMap<Integer, RecipeGemCutter> getAllGemCutterRecipes()
+	{
+
+		return gemCutterRecipes;
 
 	}
 

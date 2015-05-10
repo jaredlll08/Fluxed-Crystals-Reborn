@@ -1,6 +1,9 @@
 package fluxedCrystals;
 
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -19,8 +22,6 @@ import fluxedCrystals.util.LogHelper;
 import tterrag.core.common.Lang;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class FluxedCrystals {
@@ -36,8 +37,6 @@ public class FluxedCrystals {
 	public static int seedInfuserRenderID;
 	public static int glassRenderID;
 	public static int chunkRenderID;
-	public static boolean thaumcraftThere;
-	public static List<ModContainer> activeMods = new ArrayList<ModContainer>();
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
 	public static IProxy proxy;
@@ -66,8 +65,6 @@ public class FluxedCrystals {
 		FCBlocks.preInit();
 
 		proxy.preInit();
-
-		thaumcraftThere = Loader.isModLoaded("Thaumcraft");
 
 		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT)
 		{
@@ -101,8 +98,6 @@ public class FluxedCrystals {
 		FCItems.postInit();
 		FCBlocks.postInit();
 		RecipeHandler.postInit();
-
-		activeMods = Loader.instance().getActiveModList();
 
 		proxy.postInit();
 

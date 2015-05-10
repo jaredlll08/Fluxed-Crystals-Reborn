@@ -24,6 +24,7 @@ public class Names
 
 		public static final String POWEREDSOIL = "poweredSoil";
 		public static final String SEED_INFUSER = "seedinfuser";
+		public static final String GEM_CUTTER = "gemCutter";
 
 	}
 	public static final class Items
@@ -34,6 +35,17 @@ public class Names
 		
 		public static final String SHARDROUGH = "roughShard";
 		public static final String SHARDSMOOTH = "smoothShard";
+
+		public static final String UPGRADE_EFFECIENCY = "upgradeEfficiency";
+		public static final String UPGRADE_NIGHT = "upgradeNight";
+		public static final String UPGRADE_SPEED = "upgradeSpeed";
+		public static final String UPGRADE_AUTOMATION = "upgradeAutomation";
+		public static final String UPGRADE_MANA = "upgradeMana";
+		public static final String UPGRADE_ESSENTIA = "upgradeEssentia";
+		public static final String UPGRADE_LP = "upgradeLP";
+		public static final String UPGRADE_RANGE_BASIC = "upgradeRangeBasic";
+		public static final String UPGRADE_RANGE_GREATER = "upgradeRangeGreater";
+		public static final String UPGRADE_RANGE_ADVANCED = "upgradeRangeAdvanced";
 		
 
 	}
