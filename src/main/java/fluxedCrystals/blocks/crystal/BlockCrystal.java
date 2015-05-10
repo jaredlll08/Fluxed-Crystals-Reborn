@@ -70,13 +70,11 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 				}
 			}
 		}
-		 if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(new
-		 ItemStack(FCItems.upgradeAutomation)) && power.getEnergyStored() >=
-		 250) {
-		 doDrop(crystal, world, x, y, z, 0, false);
-		 world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-		 power.storage.extractEnergy(250, false);
-		 }
+		if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(new ItemStack(FCItems.upgradeAutomation)) && power.getEnergyStored() >= 250) {
+			doDrop(crystal, world, x, y, z, 0, false);
+			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+			power.storage.extractEnergy(250, false);
+		}
 	}
 
 	private void doDrop(TileEntityCrystal crop, World world, int x, int y, int z, int itemMultiplier, boolean seed) {
@@ -148,29 +146,29 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 			if (stack != null && stack.getItem() instanceof ItemScythe) {
 				if (stack.isItemEqual(new ItemStack(FCItems.scytheWood))) {
 					if (world.rand.nextInt(4) == 0) {
-						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
+						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
 					}
 				}
 				if (stack.isItemEqual(new ItemStack(FCItems.scytheStone))) {
 					if (world.rand.nextInt(3) == 0) {
-						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
+						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
 					}
 				}
 				if (stack.isItemEqual(new ItemStack(FCItems.scytheIron))) {
 					if (world.rand.nextInt(2) == 0) {
-						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
+						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
 					}
 				}
 				if (stack.isItemEqual(new ItemStack(FCItems.scytheGold))) {
 					if (world.rand.nextInt(1) == 0) {
-						dropCropDrops(world, x, y, z,(new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
+						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
 					}
 				}
 				if (stack.isItemEqual(new ItemStack(FCItems.scytheDiamond))) {
-					dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
+					dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), false);
 				}
 			} else {
-			dropCropDrops(world, x, y, z, 0, false);
+				dropCropDrops(world, x, y, z, 0, false);
 			}
 			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
 			return true;
@@ -230,35 +228,27 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player)
-	{
+	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
 
 		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
 
 		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, 1, crop.getIndex()));
 
-		if (world.getBlockMetadata(x, y, z) >= 7)
-		{
+		if (world.getBlockMetadata(x, y, z) >= 7) {
 
-			if (player != null && player.getCurrentEquippedItem() != null)
-			{
+			if (player != null && player.getCurrentEquippedItem() != null) {
 
 				ItemStack stack = player.getCurrentEquippedItem();
 
-				if (stack != null && stack.getItem() instanceof ItemScythe)
-				{
+				if (stack != null && stack.getItem() instanceof ItemScythe) {
 
-					if (stack.isItemEqual(new ItemStack(FCItems.scytheWood)))
-					{
+					if (stack.isItemEqual(new ItemStack(FCItems.scytheWood))) {
 
-						if (world.rand.nextInt(4) == 0)
-						{
+						if (world.rand.nextInt(4) == 0) {
 
-							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
+							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
 
-						}
-						else
-						{
+						} else {
 
 							dropCropDrops(world, x, y, z, 0, true);
 
@@ -266,34 +256,26 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 					}
 
-					if (stack.isItemEqual(new ItemStack(FCItems.scytheStone)))
-					{
+					if (stack.isItemEqual(new ItemStack(FCItems.scytheStone))) {
 
-						if (world.rand.nextInt(3) == 0)
-						{
+						if (world.rand.nextInt(3) == 0) {
 
-							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
+							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
 
-						}
-						else
-						{
+						} else {
 
 							dropCropDrops(world, x, y, z, 0, true);
 
 						}
 					}
 
-					if (stack.isItemEqual(new ItemStack(FCItems.scytheIron)))
-					{
+					if (stack.isItemEqual(new ItemStack(FCItems.scytheIron))) {
 
-						if (world.rand.nextInt(2) == 0)
-						{
+						if (world.rand.nextInt(2) == 0) {
 
-							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
+							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
 
-						}
-						else
-						{
+						} else {
 
 							dropCropDrops(world, x, y, z, 0, true);
 
@@ -301,17 +283,13 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 					}
 
-					if (stack.isItemEqual(new ItemStack(FCItems.scytheGold)))
-					{
+					if (stack.isItemEqual(new ItemStack(FCItems.scytheGold))) {
 
-						if (world.rand.nextInt(1) == 0)
-						{
+						if (world.rand.nextInt(1) == 0) {
 
-							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
+							dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
 
-						}
-						else
-						{
+						} else {
 
 							dropCropDrops(world, x, y, z, 0, true);
 
@@ -319,18 +297,15 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 					}
 
-					if (stack.isItemEqual(new ItemStack(FCItems.scytheDiamond)))
-					{
+					if (stack.isItemEqual(new ItemStack(FCItems.scytheDiamond))) {
 
-						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax)+SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
+						dropCropDrops(world, x, y, z, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMin), true);
 
 					}
 
 					crop.setHarvested(true);
 
-				}
-				else
-				{
+				} else {
 
 					dropCropDrops(world, x, y, z, 0, true);
 					crop.setHarvested(true);
