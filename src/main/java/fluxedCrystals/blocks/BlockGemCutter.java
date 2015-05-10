@@ -3,6 +3,7 @@ package fluxedCrystals.blocks;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.TileEntityGemCutter;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -19,6 +20,7 @@ public class BlockGemCutter extends Block implements ITileEntityProvider
 		setHarvestLevel("pickaxe", 2);
 		setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_CUTTER);
 		this.setCreativeTab(FluxedCrystals.tab);
+		this.setBlockTextureName(Textures.Blocks.GEM_CUTTER);
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {

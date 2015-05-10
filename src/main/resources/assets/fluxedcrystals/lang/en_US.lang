@@ -16,7 +16,7 @@ tile.fluxedcrystals.poweredSoil.name=Powered Soil
 item.fluxedcrystals.upgradeRangeBasic.name=Basic Range Upgrade
 item.fluxedcrystals.upgradeRangeGreater.name=Greater Range Upgrade
 item.fluxedcrystals.upgradeRangeAdvanced.name=Advanced Range Upgrade
-tile.fluxedcrystals.Gem Cutter.name=Gem Cutter
+tile.fluxedcrystals.gemCutter.name=Gem Cutter
 item.fluxedcrystals.universalSeed.name=Universal Seed
 item.fluxedcrystals.upgradeEfficiency.name=Efficiency Upgrade
 item.fluxedcrystals.upgradeNight.name=Nocturnal Upgrade
@@ -26,7 +26,7 @@ item.fluxedcrystals.upgradeMana.name=Mana Upgrade
 item.fluxedcrystals.upgradeEssentia.name=Essentia Upgrade
 item.fluxedcrystals.upgradeLP.name=LP Upgrade
 item.fluxedcrystals.upgradeRange.name=Range Upgrade
-tile.fluxedcrystals.seedinfuser.name=Seed Infuser
+tile.fluxedcrystals.seedInfuser.name=Seed Infuser
 
 
 

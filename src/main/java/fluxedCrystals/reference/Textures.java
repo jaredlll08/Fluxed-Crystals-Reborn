@@ -5,6 +5,14 @@ public class Textures
 
 	public static final String RESOURCE_PREFIX = Reference.LOWERCASE_MOD_ID + ":";
 
+	public static final class Blocks
+	{
+
+		public static final String SEED_INFUSER = RESOURCE_PREFIX + Names.Blocks.SEED_INFUSER;
+		public static final String GEM_CUTTER = RESOURCE_PREFIX + Names.Blocks.GEM_CUTTER;
+
+	}
+
 	public static final class Items
 	{
 

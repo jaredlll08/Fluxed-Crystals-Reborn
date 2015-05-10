@@ -30,7 +30,7 @@ public class GUIGemCutter extends GuiContainer
 
 	}
 
-	private static final ResourceLocation texture = new ResourceLocation(Reference.MOD_ID, "textures/gui/cutrefine.png");
+	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 
 	@SuppressWarnings("unchecked")
 	public void initGui() {
