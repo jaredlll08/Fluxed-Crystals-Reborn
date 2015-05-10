@@ -16,6 +16,7 @@
                     "dimensionWhitelist":0,
                     "lore":"The color codes are in integer format\nfor more information, go to\nwww.colors.jaredlll08.info",
                     "aspect":"aer",
+                    "seedReturn":0,
                     "seedID":0
             },
             {
@@ -32,6 +33,7 @@
                 "weightedDrop":"ingotIron",
                 "weightedDropChance":1,
                 "refinerAmount":16,
+                    "seedReturn":0,
                     "seedID":1
             },
             {
@@ -45,6 +47,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":20,
+                    "seedReturn":0,
                     "seedID":2
             },
             {
@@ -58,6 +61,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":12,
+                    "seedReturn":0,
                     "seedID":3
             },
             {
@@ -71,6 +75,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":12,
+                    "seedReturn":0,
                     "seedID":4
             },
             {
@@ -84,6 +89,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":10000,
                 "refinerAmount":24,
+                    "seedReturn":0,
                     "seedID":5
             },
             {
@@ -97,6 +103,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":10000,
                 "refinerAmount":24,
+                    "seedReturn":0,
                     "seedID":6
             },
             {
@@ -110,6 +117,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":8000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                     "seedID":7
             },
             {
@@ -123,6 +131,7 @@
                 "ingredientAmount":16,
                 "powerPerStage":8000,
                 "refinerAmount":12,
+                    "seedReturn":0,
                     "seedID":8
             },
             {
@@ -136,6 +145,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":12,
+                    "seedReturn":0,
                     "seedID":9
             },
             {
@@ -149,6 +159,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                     "seedID":10
             },
             {
@@ -162,6 +173,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                     "seedID":11
             },
             {
@@ -175,6 +187,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                 "seedID":12
             },
             {
@@ -188,6 +201,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":16,
+                    "seedReturn":0,
                     "seedID":13
             },
             {
@@ -201,6 +215,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":12,
+                    "seedReturn":0,
                     "seedID":14
             },
             {
@@ -214,6 +229,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                     "seedID":15
             },
             {
@@ -227,6 +243,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":8000,
                 "refinerAmount":20,
+                    "seedReturn":0,
                     "seedID":16
             },
             {
@@ -240,6 +257,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":2000,
                 "refinerAmount":8,
+                    "seedReturn":0,
                     "seedID":17
             },
             {
@@ -252,6 +270,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":25,
                 "modRequired": "ThermalFoundation"
             },{
@@ -264,6 +283,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":26,
                 "modRequired": "ThermalFoundation"
             },{
@@ -276,6 +296,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":27,
                 "modRequired": "ThermalFoundation"
             },{
@@ -288,6 +309,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":28,
                 "modRequired": "ThermalFoundation"
             },{
@@ -300,6 +322,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":29,
                 "modRequired": "ThermalFoundation"
             },{
@@ -312,6 +335,7 @@
                 "ingredientAmount":24,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":30,
                 "modRequired": "ThermalFoundation"
             },{
@@ -324,6 +348,7 @@
                 "ingredientAmount":24,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":31,
                 "modRequired": "ThermalFoundation"
             },{
@@ -336,6 +361,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":32,
                 "modRequired": "ThermalFoundation"
             },{
@@ -348,6 +374,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":33,
                 "modRequired": "ThermalFoundation"
             },{
@@ -360,6 +387,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":34,
                 "modRequired": "ThermalFoundation"
             },{
@@ -372,6 +400,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":35,
                 "modRequired": "ThermalFoundation"
             },{
@@ -384,6 +413,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":36,
                 "modRequired": "ThermalFoundation"
             },{
@@ -396,6 +426,7 @@
                 "ingredientAmount":16,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":37,
                 "modRequired": "ThermalFoundation"
             },
@@ -409,6 +440,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":18,
                 "modRequired": "EnderIO"
             },{
@@ -421,6 +453,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":19,
                 "modRequired": "EnderIO"
             },{
@@ -433,6 +466,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":20,
                 "modRequired": "EnderIO"
             },{
@@ -445,6 +479,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":21,
                 "modRequired": "EnderIO"
             },{
@@ -457,6 +492,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":22,
                 "modRequired": "EnderIO"
             },{
@@ -469,6 +505,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":23,
                 "modRequired": "EnderIO"
             },{
@@ -481,6 +518,7 @@
                 "ingredientAmount":32,
                 "powerPerStage":4000,
                 "refinerAmount":4,
+                    "seedReturn":0,
                 "ID":24,
                 "modRequired": "EnderIO"
             }

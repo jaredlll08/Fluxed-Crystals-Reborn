@@ -80,28 +80,11 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	private void doDrop(TileEntityCrystal crop, World world, int x, int y, int z, int itemMultiplier, boolean seed) {
 
 		if (seed)
-			dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, 1, crop.getIndex()));
-		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.shardRough, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + itemMultiplier), crop.getIndex()));
-		try {
-			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).entityID > 0) {
-				int id = SeedRegistry.getInstance().getSeedByID(crop.getIdx()).entityID;
-
-				if (id == 48 || id == 49 || id == 1 || id == 8 || id == 9 || id == 21) {
-
-				} else if (id == 22) {
-					TTEntityUtils.spawnFirework(new BlockCoord(crop), world.provider.dimensionId);
-				} else {
-					Entity ent = EntityList.createEntityByID(id, world);
-					ent.setLocationAndAngles(x + .5, y + .5, z + .5, 0, 0);
-					world.spawnEntityInWorld(ent);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getWeightedDrop() != null) {
-			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).weigthedDropChance == world.rand.nextInt(9) + 1) {
-				dropBlockAsItem(world, x, y, z, SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getWeightedDrop());
+			dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, SeedRegistry.getInstance().getSeedByID(crop.getIndex()).seedReturn, crop.getIndex()));
+		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.shardRough, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIndex()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIndex()).dropMin) + itemMultiplier));
+		if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDrop() != null) {
+			if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).weigthedDropChance == world.rand.nextInt(9) + 1) {
+				dropBlockAsItem(world, x, y, z, SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDrop());
 			}
 		}
 	}
@@ -231,8 +214,8 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
 
 		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
-
-		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, 1, crop.getIndex()));
+		if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).seedReturn > 0)
+			dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, 1, crop.getIndex()));
 
 		if (world.getBlockMetadata(x, y, z) >= 7) {
 
@@ -305,12 +288,12 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 					crop.setHarvested(true);
 
-				} else {
-
-					dropCropDrops(world, x, y, z, 0, true);
-					crop.setHarvested(true);
-
 				}
+
+			} else {
+
+				dropCropDrops(world, x, y, z, 0, true);
+				crop.setHarvested(true);
 
 			}
 		}
