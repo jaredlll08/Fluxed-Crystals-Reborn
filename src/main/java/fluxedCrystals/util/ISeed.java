@@ -1,4 +1,4 @@
-package fluxedCrystals.api;
+package fluxedCrystals.util;
 
 public interface ISeed
 {

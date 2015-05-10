@@ -1,6 +1,5 @@
 package fluxedCrystals.items.seeds;
 
-import fluxedCrystals.api.SeedBase;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;

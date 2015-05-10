@@ -1,7 +1,7 @@
-package fluxedCrystals.api.solarFlux;
+package fluxedCrystals.tileEntity.solarFlux;
 
-import fluxedCrystals.network.message.MessageSolarFluxSync;
 import fluxedCrystals.network.PacketHandler;
+import fluxedCrystals.network.message.MessageSolarFluxSync;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

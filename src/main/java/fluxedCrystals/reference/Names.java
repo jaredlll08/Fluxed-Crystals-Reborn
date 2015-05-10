@@ -23,6 +23,7 @@ public class Names
 	{
 
 		public static final String POWEREDSOIL = "poweredSoil";
+		public static final String SEED_INFUSER = "seedinfuser";
 
 	}
 	public static final class Items

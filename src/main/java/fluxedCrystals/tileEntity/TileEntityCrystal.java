@@ -1,7 +1,7 @@
 package fluxedCrystals.tileEntity;
 
-import fluxedCrystals.api.CrystalBase;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.compat.waila.IWailaInfo;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;

@@ -2,15 +2,23 @@ package fluxedCrystals;
 
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import fluxedCrystals.client.gui.GUIHandler;
 import fluxedCrystals.command.CommandFC;
 import fluxedCrystals.handler.ConfigurationHandler;
+import fluxedCrystals.handler.RecipeHandler;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
+import fluxedCrystals.nei.FluxedCrystalsNEIConfig;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
+import net.minecraft.item.ItemStack;
 import tterrag.core.common.Lang;
 
 import java.io.File;
@@ -24,7 +32,10 @@ public class FluxedCrystals {
 	public static File configDir = null;
 	public static int crystalRenderID;
 	public static final Lang lang = new Lang(Reference.MOD_ID);
+
+	@Mod.Instance("fluxedCrystals")
 	public static FluxedCrystals instance;
+
 	public static int seedInfuserRenderID;
 	public static int glassRenderID;
 	public static int chunkRenderID;
@@ -61,6 +72,13 @@ public class FluxedCrystals {
 
 		thaumcraftThere = Loader.isModLoaded("Thaumcraft");
 
+		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT)
+		{
+			new FluxedCrystalsNEIConfig().loadConfig();
+		}
+
+		FMLInterModComms.sendMessage("Waila", "register", "fluxedCrystals.compat.waila.WailaCompat.load");
+
 		LogHelper.info("Pre Initialization Complete!");
 
 	}
@@ -73,6 +91,9 @@ public class FluxedCrystals {
 
 		proxy.initialize();
 		proxy.registerRenderers();
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
+
 		LogHelper.info("Initialization Complete!");
 
 	}
@@ -82,6 +103,9 @@ public class FluxedCrystals {
 
 		FCItems.postInit();
 		FCBlocks.postInit();
+		RecipeHandler.postInit();
+
+		activeMods = Loader.instance().getActiveModList();
 
 		proxy.postInit();
 
@@ -94,6 +118,19 @@ public class FluxedCrystals {
 	{
 
 		SeedRegistry.getInstance().Save();
+
+	}
+
+	@Mod.EventHandler
+	public void remap(FMLModIdMappingEvent event)
+	{
+
+		for (int i : SeedRegistry.getInstance().keySet())
+		{
+
+			RecipeRegistry.registerSeedInfuserRecipe(i, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), SeedRegistry.getInstance().getSeedByID(i).getIngredient(), new ItemStack(FCItems.seed, 1, i), SeedRegistry.getInstance().getSeedByID(i).ingredientAmount));
+
+		}
 
 	}
 

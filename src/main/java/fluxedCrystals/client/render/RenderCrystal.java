@@ -1,4 +1,4 @@
-package fluxedCrystals.client.gui;
+package fluxedCrystals.client.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import fluxedCrystals.FluxedCrystals;

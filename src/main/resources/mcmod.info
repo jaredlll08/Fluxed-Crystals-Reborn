@@ -1,15 +1,15 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "fluxedcrystals",
+  "name": "Fluxed-Crystals",
+  "description": "RF-Powered Crystal Farming!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
+  "authorList": ["Jaredlll08, Darkbyte, JHarb52207"],
+  "credits": "Roze, for the amazing crystal texture",
+  "logoFile": "FCLogo.png",
   "screenshots": [],
   "dependencies": []
 }

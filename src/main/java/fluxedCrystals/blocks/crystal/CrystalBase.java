@@ -1,21 +1,18 @@
-package fluxedCrystals.api;
+package fluxedCrystals.blocks.crystal;
 
-import java.util.Random;
-
-import org.apache.http.impl.conn.Wire;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public abstract class CrystalBase extends Block {
 
@@ -28,7 +25,7 @@ public abstract class CrystalBase extends Block {
 		float f = 0.5f;
 
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
-		this.setCreativeTab((CreativeTabs) null);
+		this.setCreativeTab(null);
 		this.setStepSound(soundTypeGrass);
 		this.disableStats();
 

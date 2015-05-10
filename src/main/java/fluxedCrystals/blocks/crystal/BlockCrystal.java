@@ -1,7 +1,6 @@
 package fluxedCrystals.blocks.crystal;
 
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.api.CrystalBase;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;

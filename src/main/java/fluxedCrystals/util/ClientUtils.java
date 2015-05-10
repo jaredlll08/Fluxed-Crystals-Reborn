@@ -1,9 +1,9 @@
 package fluxedCrystals.util;
 
-import fluxedCrystals.api.solarFlux.TileSolarFlux;
 import fluxedCrystals.network.message.MessageEnergyUpdate;
 import fluxedCrystals.network.message.MessageSolarFluxSync;
 import fluxedCrystals.tileEntity.TileEnergyBase;
+import fluxedCrystals.tileEntity.solarFlux.TileSolarFlux;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import vazkii.botania.api.mana.IManaReceiver;

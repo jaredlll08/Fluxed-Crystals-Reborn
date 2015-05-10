@@ -1,8 +1,8 @@
-package fluxedCrystals.api;
+package fluxedCrystals.items.seeds;
 
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.util.ISeed;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 

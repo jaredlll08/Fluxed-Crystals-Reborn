@@ -1,7 +1,7 @@
 package fluxedCrystals.tileEntity;
 
-import fluxedCrystals.api.CrystalBase;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
