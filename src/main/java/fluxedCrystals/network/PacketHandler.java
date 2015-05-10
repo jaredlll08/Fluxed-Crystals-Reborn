@@ -13,13 +13,15 @@ public class PacketHandler
 
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.LOWERCASE_MOD_ID);
 
+	private static int id = 0;
+
 	public static void init()
 	{
 
-		INSTANCE.registerMessage(MessageSyncSeed.class, MessageSyncSeed.class, 0, Side.CLIENT);
-		INSTANCE.registerMessage(MessageSyncSeeds.class, MessageSyncSeeds.class, 1, Side.CLIENT);
-		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, 2, Side.CLIENT);
-		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, 3, Side.SERVER);
+		INSTANCE.registerMessage(MessageSyncSeed.class, MessageSyncSeed.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncSeeds.class, MessageSyncSeeds.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, id++, Side.SERVER);
 
 	}
 
