@@ -1,5 +1,6 @@
 package fluxedCrystals.items;
 
+import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
@@ -16,6 +17,7 @@ public class ItemShardRough extends Item {
 		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SHARDROUGH);
 		setTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Items.SHARDROUGH);
 		setHasSubtypes(true);
+		setCreativeTab(FluxedCrystals.tab);
 	}
 
 	public int getRenderPasses(int metadata) {

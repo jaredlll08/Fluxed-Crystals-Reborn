@@ -1,5 +1,6 @@
 package fluxedCrystals.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public interface IProxy
@@ -13,5 +14,6 @@ public interface IProxy
 	void registerRenderers();
 	boolean isClient();
 	boolean isServer();
+	EntityPlayer getClientPlayer();
 
 }

@@ -2,7 +2,6 @@ package fluxedCrystals.init;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.items.ItemShardRough;
 import fluxedCrystals.items.ItemShardSmooth;
 import fluxedCrystals.items.seeds.ItemSeed;
@@ -20,18 +19,18 @@ public class FCItems
 	public static Item shardRough= new ItemShardRough();
 	public static Item shardSmooth = new ItemShardSmooth();
 
-	public static Item upgradeEffeciency = new Upgrade();
-	public static Item upgradeNight = new Upgrade();
-	public static Item upgradeSpeed = new Upgrade();
-	public static Item upgradeAutomation = new Upgrade();
+	public static Item upgradeEffeciency = new Upgrade(Textures.Items.UPGRADE_EFFECIENCY, Names.Items.UPGRADE_EFFECIENCY);
+	public static Item upgradeNight = new Upgrade(Textures.Items.UPGRADE_NIGHT, Names.Items.UPGRADE_NIGHT);
+	public static Item upgradeSpeed = new Upgrade(Textures.Items.UPGRADE_SPEED, Names.Items.UPGRADE_SPEED);
+	public static Item upgradeAutomation = new Upgrade(Textures.Items.UPGRADE_AUTOMATION, Names.Items.UPGRADE_AUTOMATION);
 
-	public static Item upgradeMana = new Upgrade();
-	public static Item upgradeLP = new Upgrade();
-	public static Item upgradeEssentia = new Upgrade();
+	public static Item upgradeMana = new Upgrade(Textures.Items.UPGRADE_MANA, Names.Items.UPGRADE_MANA);
+	public static Item upgradeLP = new Upgrade(Textures.Items.UPGRADE_LP, Names.Items.UPGRADE_LP);
+	public static Item upgradeEssentia = new Upgrade(Textures.Items.UPGRADE_ESSENTIA, Names.Items.UPGRADE_ESSENTIA);
 
-	public static Item upgradeRangeBasic = new Upgrade();
-	public static Item upgradeRangeGreater = new Upgrade();
-	public static Item upgradeRangeAdvanced= new Upgrade();
+	public static Item upgradeRangeBasic = new Upgrade(Textures.Items.UPGRADE_RANGE_BASIC, Names.Items.UPGRADE_RANGE_BASIC);
+	public static Item upgradeRangeGreater = new Upgrade(Textures.Items.UPGRADE_RANGE_GREATER, Names.Items.UPGRADE_RANGE_GREATER);
+	public static Item upgradeRangeAdvanced= new Upgrade(Textures.Items.UPGRADE_RANGE_ADVANCED, Names.Items.UPGRADE_RANGE_ADVANCED);
 
 	public FCItems()
 	{
@@ -46,11 +45,6 @@ public class FCItems
 	public static void initialize()
 	{
 
-		seed.setCreativeTab(FluxedCrystals.tab);
-		shardRough.setCreativeTab(FluxedCrystals.tab);
-		shardSmooth.setCreativeTab(FluxedCrystals.tab);
-		universalSeed.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UNIVERSAL_SEED).setUnlocalizedName(Names.Items.UNIVERSAL_SEED);
-
 		GameRegistry.registerItem(universalSeed, Names.Items.UNIVERSAL_SEED);
 		GameRegistry.registerItem(seed, Names.Items.SEED);
 		GameRegistry.registerItem(shardRough, Names.Items.SHARDROUGH);
@@ -59,16 +53,12 @@ public class FCItems
 		if (Loader.isModLoaded("Thaumcraft"))
 		{
 
-			upgradeEssentia.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_ESSENTIA).setUnlocalizedName(Names.Items.UPGRADE_ESSENTIA);
-
 			GameRegistry.registerItem(upgradeEssentia, Names.Items.UPGRADE_ESSENTIA);
 
 		}
 
 		if (Loader.isModLoaded("AWWayofTime"))
 		{
-
-			upgradeLP.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_LP).setUnlocalizedName(Names.Items.UPGRADE_LP);
 
 			GameRegistry.registerItem(upgradeLP, Names.Items.UPGRADE_LP);
 
@@ -77,19 +67,9 @@ public class FCItems
 		if (Loader.isModLoaded("Botania"))
 		{
 
-			upgradeMana.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_MANA).setUnlocalizedName(Names.Items.UPGRADE_MANA);
-
 			GameRegistry.registerItem(upgradeMana, Names.Items.UPGRADE_MANA);
 
 		}
-
-		upgradeEffeciency.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_EFFECIENCY).setUnlocalizedName(Names.Items.UPGRADE_EFFECIENCY);
-		upgradeNight.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_NIGHT).setUnlocalizedName(Names.Items.UPGRADE_NIGHT);
-		upgradeSpeed.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_SPEED).setUnlocalizedName(Names.Items.UPGRADE_SPEED);
-		upgradeAutomation.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_AUTOMATION).setUnlocalizedName(Names.Items.UPGRADE_AUTOMATION);
-		upgradeRangeBasic.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_RANGE_BASIC).setUnlocalizedName(Names.Items.UPGRADE_RANGE_BASIC);
-		upgradeRangeGreater.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_RANGE_GREATER).setUnlocalizedName(Names.Items.UPGRADE_RANGE_GREATER);
-		upgradeRangeAdvanced.setCreativeTab(FluxedCrystals.tab).setTextureName(Textures.Items.UPGRADE_RANGE_ADVANCED).setUnlocalizedName(Names.Items.UPGRADE_RANGE_ADVANCED);
 
 		GameRegistry.registerItem(upgradeEffeciency, Names.Items.UPGRADE_EFFECIENCY);
 		GameRegistry.registerItem(upgradeNight, Names.Items.UPGRADE_NIGHT);

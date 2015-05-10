@@ -1,5 +1,6 @@
 package fluxedCrystals.items.seeds;
 
+import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
@@ -20,6 +21,7 @@ public class ItemSeed extends SeedBase {
 		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SEED);
 		setTextureName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SEED);
 		setHasSubtypes(true);
+		setCreativeTab(FluxedCrystals.tab);
 	}
 
 	@Override

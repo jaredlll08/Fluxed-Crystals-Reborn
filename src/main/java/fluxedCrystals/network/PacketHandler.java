@@ -3,10 +3,7 @@ package fluxedCrystals.network;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import fluxedCrystals.network.message.MessageGemCutter;
-import fluxedCrystals.network.message.MessageSeedInfuser;
-import fluxedCrystals.network.message.MessageSyncSeed;
-import fluxedCrystals.network.message.MessageSyncSeeds;
+import fluxedCrystals.network.message.*;
 import fluxedCrystals.reference.Reference;
 
 public class PacketHandler
@@ -19,12 +16,16 @@ public class PacketHandler
 	public static void init()
 	{
 
-		INSTANCE.registerMessage(MessageSyncSeed.class, MessageSyncSeed.class, id++, Side.CLIENT);
-		INSTANCE.registerMessage(MessageSyncSeeds.class, MessageSyncSeeds.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageEnergyUpdate.class, MessageEnergyUpdate.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageEnergyStorage.class, MessageEnergyStorage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageBiome.class, MessageBiome.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, id++, Side.SERVER);
+		//INSTANCE.registerMessage(MessageGemRefiner.class, MessageGemRefiner.class, id++, Side.SERVER);
+		//INSTANCE.registerMessage(MessageGemRefiner.class, MessageGemRefiner.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageGemCutter.class, MessageGemCutter.class, id++, Side.SERVER);
 		INSTANCE.registerMessage(MessageGemCutter.class, MessageGemCutter.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSolarFluxSync.class, MessageSolarFluxSync.class, id++, Side.CLIENT);
 
 	}
 

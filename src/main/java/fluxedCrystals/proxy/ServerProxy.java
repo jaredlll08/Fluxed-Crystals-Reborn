@@ -2,6 +2,7 @@ package fluxedCrystals.proxy;
 
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class ServerProxy extends CommonProxy
@@ -58,6 +59,10 @@ public class ServerProxy extends CommonProxy
 
 		}
 
+	}
+
+	public EntityPlayer getClientPlayer() {
+		return null;
 	}
 
 }

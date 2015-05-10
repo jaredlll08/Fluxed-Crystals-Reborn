@@ -7,6 +7,8 @@ import fluxedCrystals.client.render.RenderCrystal;
 import fluxedCrystals.client.render.SeedInfuserRenderer;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class ClientProxy extends CommonProxy
@@ -70,6 +72,11 @@ public class ClientProxy extends CommonProxy
 
 		}
 
+	}
+
+	@Override
+	public EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
 	}
 
 }
