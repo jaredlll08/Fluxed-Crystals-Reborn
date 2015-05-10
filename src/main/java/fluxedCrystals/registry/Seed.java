@@ -12,7 +12,6 @@ public class Seed implements Serializable
 	public String lore = "";
 	public String ingredient = "minecraft:bedrock;0";
 	public String weightedDrop = "minecraft:dirt";
-	public String requiredMods = "";
 	public int color = 7507918;
 	public int dropMin = 1;
 	public int dropMax = 1;

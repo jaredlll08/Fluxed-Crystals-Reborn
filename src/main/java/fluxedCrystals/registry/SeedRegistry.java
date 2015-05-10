@@ -7,13 +7,12 @@ import com.google.gson.JsonParser;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
+import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
+import tterrag.core.common.json.JsonUtils;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SeedRegistry
 {
@@ -56,6 +55,29 @@ public class SeedRegistry
 
 	}
 
+	public Seed addTemplateSeed(ItemStack itemStack)
+	{
+
+		if (itemStack != null)
+		{
+
+			itemStack.stackSize = 1;
+
+			Seed seed = new Seed();
+
+			seed.seedID = SeedRegistry.getInstance().getNextID();
+			seed.name = UUID.randomUUID().toString();
+			seed.ingredient = JsonUtils.getStringForItemStack(itemStack, true, false);
+			seed.weightedDrop = "";
+
+			return addSeed(seed);
+
+		}
+
+		return null;
+
+	}
+
 	private void addSeed(int id, Seed seed)
 	{
 
@@ -70,7 +92,7 @@ public class SeedRegistry
 
 	}
 
-	public void addSeed(Seed seed)
+	public Seed addSeed(Seed seed)
 	{
 
 		if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
@@ -80,7 +102,7 @@ public class SeedRegistry
 
 			addSeed(seed.seedID, seed);
 
-			return;
+			return seed;
 
 		}
 
@@ -91,7 +113,7 @@ public class SeedRegistry
 
 			addSeed(seed.seedID, seed);
 
-			return;
+			return seed;
 
 		}
 
@@ -125,11 +147,13 @@ public class SeedRegistry
 
 				addSeed(seed.seedID, seed);
 
+				return seed;
+
 			}
 
-			return;
-
 		}
+
+		return null;
 
 	}
 

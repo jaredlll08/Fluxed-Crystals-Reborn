@@ -1,7 +1,11 @@
 # Commands
 commands.fluxedcrystals.usage=/fluxedcrystals
-commands.fluxedcrystals.reset-seeds.usage=/fluxedcrystals reset-seeds
+commands.ee3.player-not-found.error=Player with name %s was not found on the server
+commands.ee3.no-item.error=No current item
+commands.fluxedcrystals.seed-from-current.usage=/fluxedcrystals seed-from-current
+commands.fluxedcrystals.seed-from-current.success=A template seed has been created out of %s
 
+# Other
 item.fluxedcrystals.seed.name=%s Seed
 item.fluxedcrystals.smoothShard.name=Smooth %s Shard
 item.fluxedcrystals.roughShard.name=Rough %s Shard

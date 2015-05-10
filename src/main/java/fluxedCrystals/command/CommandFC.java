@@ -87,7 +87,7 @@ public class CommandFC extends CommandBase
 	static
 	{
 
-		// modCommands.add(new CommandResetSeeds());
+		modCommands.add(new CommandSeedFromCurrentItem());
 
 		for (CommandBase commandBase : modCommands)
 		{
