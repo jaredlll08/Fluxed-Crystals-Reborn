@@ -1,28 +1,30 @@
 package fluxedCrystals.registry;
 
-import fluxedCrystals.util.LogHelper;
-import fluxedCrystals.util.SerializationHelper;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.reference.Reference;
+import fluxedCrystals.util.JsonTools;
+import org.apache.commons.io.FileUtils;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.*;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class SeedRegistry
 {
 
 	private static SeedRegistry seedRegistry = null;
-	private static File seedRegistryDirectory;
-	private static HashMap<Integer, SeedData> seedDataMap;
+	private static HashMap<Integer, Seed> seedMap;
 
 	private SeedRegistry()
 	{
 
-		seedRegistryDirectory = new File(SerializationHelper.getDataDirectory(), "seedData");
-		seedRegistryDirectory.mkdirs();
-
-		seedDataMap = new HashMap<Integer, SeedData>();
+		seedMap = new HashMap<Integer, Seed>();
 
 	}
 
@@ -40,76 +42,92 @@ public class SeedRegistry
 
 	}
 
-	public SeedData getSeedByID(int id)
+	public Seed getSeedByID(int id)
 	{
 
-		loadSeedDataFromDisk(id);
-
-		if (seedDataMap.containsKey(id))
+		if (seedMap.containsKey(id))
 		{
 
-			return seedDataMap.get(id);
+			return seedMap.get(id);
 
 		}
 
-		return new SeedData();
+		return new Seed();
 
 	}
 
-	public void setSeedByID(int id, SeedData seedData, boolean hasBeenModified)
+	private void addSeed(int id, Seed seed)
 	{
 
-		seedData.setHasBeenModified(hasBeenModified);
-
-		if (seedDataMap.containsKey(id))
+		if (seedMap.containsKey(id))
 		{
 
-			seedDataMap.remove(id);
+			seedMap.remove(id);
 
 		}
 
-		seedDataMap.put(id, seedData);
-
-		if (seedDataMap.containsKey(id) && getSeedByID(id).getName().equalsIgnoreCase(seedData.getName()))
-		{
-			LogHelper.info("Added seed!");
-		}
-		else
-		{
-			LogHelper.error("Did not add seed!");
-		}
+		seedMap.put(id, seed);
 
 	}
 
-	public void addSeed(SeedData seedData)
+	public void addSeed(Seed seed)
 	{
 
-		boolean exists = false;
-
-		for (int i : seedDataMap.keySet())
+		if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
 		{
 
-			if (getSeedByID(i).getName().equalsIgnoreCase(seedData.getName()) && seedData.getEntityID() != i)
+			//	Seed is there, treat as an update
+
+			addSeed(seed.seedID, seed);
+
+			return;
+
+		}
+
+		if (!seedMap.containsKey(seed.seedID))
+		{
+
+			// This is an insert and someone knew the right ID to pass
+
+			addSeed(seed.seedID, seed);
+
+			return;
+
+		}
+
+		if(seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
+		{
+
+			//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
+
+			boolean exists = false;
+
+			for (int i : seedMap.keySet())
 			{
 
-				exists = true;
+				if (getSeedByID(i).name.equalsIgnoreCase(seed.name))
+				{
 
-				break;
+					exists = true;
+
+					break;
+
+				}
 
 			}
 
-		}
+			if (!exists)
+			{
 
-		if (!exists)
-		{
+				// This is a new seed and someone did something stupid
 
-			setSeedByID(seedData.getEntityID(), seedData, true);
+				seed.seedID = getNextID();
 
-		}
-		else
-		{
+				addSeed(seed.seedID, seed);
 
-			LogHelper.error("Did not add seed!");
+			}
+
+			return;
 
 		}
 
@@ -118,19 +136,19 @@ public class SeedRegistry
 	public int getNextID()
 	{
 
-		if (seedDataMap.isEmpty())
+		if (seedMap.isEmpty())
 		{
 
 			return 1;
 
 		}
 
-		SortedSet<Integer> keys = new TreeSet<Integer>(seedDataMap.keySet());
+		SortedSet<Integer> keys = new TreeSet<Integer>(seedMap.keySet());
 
 		for (int key = 1; key < Integer.MAX_VALUE; key++)
 		{
 
-			if (!seedDataMap.containsKey(key))
+			if (!seedMap.containsKey(key))
 			{
 
 				return key;
@@ -143,165 +161,131 @@ public class SeedRegistry
 
 	}
 
-	public void loadSeedDataFromDisk(int id)
+	public void Load()
 	{
 
-		if (seedRegistryDirectory != null && !seedDataMap.containsKey((id)))
+		File seedRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.json");
+
+		if (seedRegistryFile == null || !seedRegistryFile.exists())
 		{
 
-			SeedData seedData = new SeedData();
-
-			File seedDataFile = new File(seedRegistryDirectory, Integer.toString(id) + ".json");
-
-			if (seedDataFile.exists() && seedDataFile.isFile())
+			try
 			{
 
-				seedData = SerializationHelper.readSeedDataFromFile(seedRegistryDirectory, Integer.toString(id) + ".json");
+				FileUtils.copyURLToFile(FluxedCrystals.class.getResource("/assets/" + Reference.LOWERCASE_MOD_ID + "/misc/crystal.json"), seedRegistryFile);
+
+				seedRegistryFile = new File(FluxedCrystals.configDir .getAbsolutePath() + File.separator + "masterSeedData.json");
 
 			}
-
-			setSeedByID(id, seedData, false);
-
-		}
-
-	}
-
-	public void unloadSeedData(int id)
-	{
-
-		if (seedDataMap.containsKey(id))
-		{
-
-			saveSeedDataToDisk(id);
-
-			seedDataMap.remove(id);
-
-		}
-
-	}
-
-	public void saveSeedDataToDisk(int id)
-	{
-
-		if (seedRegistryDirectory != null && seedDataMap.containsKey((id)))
-		{
-
-			SerializationHelper.writeSeedDataToFile(seedRegistryDirectory, Integer.toString(id) + ".json", seedDataMap.get(id));
-
-		}
-
-	}
-
-	public void SaveAll()
-	{
-
-		if (seedRegistryDirectory != null)
-		{
-
-			for (int key : seedDataMap.keySet())
+			catch (IOException e)
 			{
 
-				saveSeedDataToDisk(key);
+				throw new RuntimeException(e);
 
 			}
 
 		}
 
+		ReadFromDisk(seedRegistryFile);
+
 	}
 
-	public void LoadAllFromDisk()
+	private void ReadFromDisk(File fileToRead)
 	{
 
-		if (seedRegistryDirectory != null)
+		if (fileToRead != null && fileToRead.exists())
 		{
 
-			if(!seedRegistryDirectory.isDirectory())
+			try
 			{
 
-				LogHelper.error("seedRegistryDirectory is not directory");
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-			}
+				JsonParser parser = new JsonParser();
 
-			LogHelper.info("seedRegistryDirectory:  " + seedRegistryDirectory.getPath());
+				JsonObject jsonObject = parser.parse(new FileReader(fileToRead)).getAsJsonObject();
 
-			for(File file : seedRegistryDirectory.listFiles())
-			{
-
-				if (file.exists() && file.isFile() && file.getName().endsWith("json"))
+				for(Seed seed : JsonTools.jsontoList(jsonObject))
 				{
 
-					SeedData seedData = SeedData.readFromFile(file);
-
-					setSeedByID(seedData.getEntityID(), seedData, false);
-
-					LogHelper.info("Loaded Seed From Disk:  " + seedData.getName());
+					addSeed(seed.seedID, seed);
 
 				}
 
 			}
+			catch (FileNotFoundException ignored)
+			{
+
+				// NOOP
+
+			}
+			catch (IOException e)
+			{
+
+				e.printStackTrace();
+
+			}
 
 		}
-
-		if (seedDataMap.isEmpty())
-		{
-
-			LogHelper.info("seedDataMap contains " + Integer.toString(seedDataMap.size()) + " seeds");
-
-			resetSeedRegistry();
-
-		}
-		else
-		{
-
-			LogHelper.info("seedDataMap contains " + Integer.toString(seedDataMap.size()) + " seeds");
-
-		}
-
-	}
-
-	public void resetSeedRegistry()
-	{
-
-		this.seedDataMap.clear();
-
-		ArrayList<SeedData> defaultSeeds = new ArrayList<SeedData>();
-
-		defaultSeeds.add(new SeedData("Testy", 7507918, 1, 1, 600, 9001, 16, 2000, 1, 32, 0, true, "minecraft:bedrock;0", "minecraft:dirt"));
-		defaultSeeds.add(new SeedData("Iron", 14071681, 1, 1, 2400, 1, 32, 4000, 1, 16, 1, true, "ingotIron", "ingotIron"));
-		defaultSeeds.add(new SeedData("Gold", 11904556, 1, 1, 2400, 1, 32, 4000, 0, 20, 2, false, "ingotGold", ""));
-		defaultSeeds.add(new SeedData("Coal", 788746, 1, 4, 1200, 0, 32, 2000, 0, 12, 3, false, "itemCoal", ""));
-		defaultSeeds.add(new SeedData("Charcoal", 3418156, 1, 4, 1200, 0, 32, 2000, 0, 12, 4, false, "itemCharcoal", ""));
-		defaultSeeds.add(new SeedData("Emerald", 6290199, 1, 1, 4800, 4, 32, 10000, 0, 24, 5, false, "gemEmerald", ""));
-		defaultSeeds.add(new SeedData("Diamond", 5169900, 1, 1, 2400, 4, 32, 10000, 0, 24, 6, false, "gemDiamond", ""));
-		defaultSeeds.add(new SeedData("Redstone", 16190746, 4, 8, 3600, 3, 32, 8000, 0, 8, 7, false, "ingotIron", ""));
-		defaultSeeds.add(new SeedData("Ender", 5146997, 1, 1, 3600, 3, 16, 8000, 0, 12, 8, false, "pearlEnder", ""));
-		defaultSeeds.add(new SeedData("Glowstone", 16766977, 1, 2, 1200, 0, 32, 2000, 0, 12, 9, false, "dustGlowstone", ""));
-		defaultSeeds.add(new SeedData("Blaze", 15246103, 1, 1, 2400, 1, 32, 4000, 0, 8, 10, false, "itemBlazeRod", ""));
-		defaultSeeds.add(new SeedData("Clay", 15066338, 1, 4, 1200, 0, 32, 2000, 0, 8, 11, false, "minecraft:clay_ball", ""));
-		defaultSeeds.add(new SeedData("Flint", 7499373, 1, 1, 1200, 1, 32, 4000, 0, 8, 12, false, "itemFlint", ""));
-		defaultSeeds.add(new SeedData("Ghast", 12371660, 1, 1, 2400, 2, 32, 4000, 0, 16, 13, false, "itemGhastTear", ""));
-		defaultSeeds.add(new SeedData("Gunpowder", 5656657, 1, 1, 1200, 0, 32, 4000, 0, 12, 14, false, "dustGunpowder", ""));
-		defaultSeeds.add(new SeedData("Leather", 16767832, 1, 1, 1200, 0, 32, 2000, 0, 8, 15, false, "itemLeather", ""));
-		defaultSeeds.add(new SeedData("Quartz", 16641780, 1, 4, 3600, 3, 32, 8000, 0, 20, 16, false, "gemQuartz", ""));
-		defaultSeeds.add(new SeedData("Slime", 12380500, 1, 1, 1200, 0, 32, 2000, 0, 8, 17, false, "slimeball", ""));
-
-		for (SeedData seedData : defaultSeeds)
-		{
-
-			LogHelper.info("Attempting to add new default seed for:  " + seedData.getName());
-
-			this.addSeed(seedData);
-
-		}
-
-		SaveAll();
 
 	}
 
 	public Set<Integer> keySet()
 	{
 
-		return seedDataMap.keySet();
+		return seedMap.keySet();
+
+	}
+
+	public void Save()
+	{
+
+		Writer writer = null;
+
+		try
+		{
+
+			writer = new FileWriter(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.tmp");
+			writer.write(JsonTools.hashmapToJson(seedMap));
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(writer != null)
+			{
+				try
+				{
+					writer.close();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+
+		File file1 = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.tmp");
+		File file2 = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.json");
+
+		if (file2.exists())
+		{
+
+			file2.delete();
+
+		}
+
+		file1.renameTo(file2);
+
+	}
+
+	public HashMap<Integer, Seed> getSeedMap()
+	{
+
+		return seedMap;
 
 	}
 

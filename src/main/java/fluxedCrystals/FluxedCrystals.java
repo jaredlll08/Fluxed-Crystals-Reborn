@@ -1,20 +1,7 @@
 package fluxedCrystals;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import tterrag.core.common.Lang;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.event.*;
 import fluxedCrystals.command.CommandFC;
 import fluxedCrystals.handler.ConfigurationHandler;
 import fluxedCrystals.init.FCBlocks;
@@ -24,6 +11,11 @@ import fluxedCrystals.proxy.IProxy;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
+import tterrag.core.common.Lang;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class FluxedCrystals {
@@ -60,22 +52,14 @@ public class FluxedCrystals {
 
 		SeedRegistry.getInstance();
 
-		SeedRegistry.getInstance().LoadAllFromDisk();
+		SeedRegistry.getInstance().Load();
 
 		FCItems.preInit();
 		FCBlocks.preInit();
 
 		proxy.preInit();
 
-		if (Loader.isModLoaded("Thaumcraft")) {
-
-			thaumcraftThere = true;
-
-		} else {
-
-			thaumcraftThere = false;
-
-		}
+		thaumcraftThere = Loader.isModLoaded("Thaumcraft");
 
 		LogHelper.info("Pre Initialization Complete!");
 
@@ -106,9 +90,10 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void onServerStopping(FMLServerStoppingEvent event) {
+	public void onServerStopping(FMLServerStoppingEvent event)
+	{
 
-		SeedRegistry.getInstance().SaveAll();
+		SeedRegistry.getInstance().Save();
 
 	}
 

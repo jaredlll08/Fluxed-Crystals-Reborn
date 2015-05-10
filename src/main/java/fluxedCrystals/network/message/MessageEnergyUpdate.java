@@ -49,7 +49,7 @@ public class MessageEnergyUpdate implements IMessage, IMessageHandler<MessageEne
 
 	@Override
 	public IMessage onMessage(MessageEnergyUpdate message, MessageContext ctx) {
-		//ClientUtils.updateEnergy(message);
+		ClientUtils.updateEnergy(message);
 		return null;
 	}
 }

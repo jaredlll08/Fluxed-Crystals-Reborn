@@ -1,15 +1,13 @@
 package fluxedCrystals.client.gui;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.blocks.crystal.BlockCrystal;
-import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
 
 public class RenderCrystal implements ISimpleBlockRenderingHandler {
 
@@ -22,10 +20,10 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler {
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntityCrystal tile = (TileEntityCrystal) world.getTileEntity(x, y, z);
 		Tessellator tess = Tessellator.instance;
-		tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).getColor());
+		tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 		tess.setBrightness(0xF000F0);
 		renderer.enableAO = false;
-		renderer.drawCrossedSquares(((BlockCrystal) block).getIcon(world, x, y, z, meta), x, y, z, 1.0f);
+		renderer.drawCrossedSquares(block.getIcon(world, x, y, z, meta), x, y, z, 1.0f);
 		renderer.enableAO = true;
 		return true;
 	}

@@ -1,8 +1,8 @@
 package fluxedCrystals.tileEntity;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-
+import fluxedCrystals.api.CrystalBase;
+import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -11,18 +11,16 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-import WayofTime.alchemicalWizardry.book.registries.RecipeRegistry;
-import fluxedCrystals.api.CrystalBase;
-import fluxedCrystals.blocks.crystal.BlockCrystal;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.registry.SeedRegistry;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
 
 /**
  * Created by Jared on 11/2/2014.
  */
 public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInventory {
 
-	public ItemStack[] items;;
+	public ItemStack[] items;
 
 	public TileEntityPowerBlock() {
 		super(100000);
@@ -60,7 +58,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	public void readInventoryFromNBT(NBTTagCompound tags) {
 		NBTTagList nbttaglist = tags.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		for (int iter = 0; iter < nbttaglist.tagCount(); iter++) {
-			NBTTagCompound tagList = (NBTTagCompound) nbttaglist.getCompoundTagAt(iter);
+			NBTTagCompound tagList = nbttaglist.getCompoundTagAt(iter);
 			byte slotID = tagList.getByte("Slot");
 			if (slotID >= 0 && slotID < items.length) {
 				items[slotID] = ItemStack.loadItemStackFromNBT(tagList);
@@ -283,7 +281,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	}
 
 	public int getUpgradeDrain(int idx) {
-		int energy = SeedRegistry.getInstance().getSeedByID(idx).getPowerPerStage();
+		int energy = SeedRegistry.getInstance().getSeedByID(idx).powerPerStage;
 
 		for (ItemStack item : getUpgrades()) {
 			if (item != null) {

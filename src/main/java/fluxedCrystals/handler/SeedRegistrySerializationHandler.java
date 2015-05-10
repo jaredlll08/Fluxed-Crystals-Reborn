@@ -4,7 +4,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.util.LogHelper;
 
 public class SeedRegistrySerializationHandler
 {
@@ -19,7 +18,7 @@ public class SeedRegistrySerializationHandler
 			if (FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getWorldTime() % 600 == 0)
 			{
 
-				SeedRegistry.getInstance().SaveAll();
+				SeedRegistry.getInstance().Save();
 
 			}
 

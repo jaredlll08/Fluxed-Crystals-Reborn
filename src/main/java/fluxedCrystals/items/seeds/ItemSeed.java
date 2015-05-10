@@ -1,16 +1,11 @@
 package fluxedCrystals.items.seeds;
 
 import fluxedCrystals.api.SeedBase;
-import fluxedCrystals.blocks.BlockPowerBlock;
-import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.registry.SeedData;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityPowerBlock;
-import fluxedCrystals.util.LogHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -45,18 +40,18 @@ public class ItemSeed extends SeedBase {
 
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 
-		list.add("-" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getName());
-		list.add("Growth:" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getGrowthTime());
+		list.add("-" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
+		list.add("Growth:" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).growthTime);
 
-		if (SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getTier() > 0) {
+		if (SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).tier > 0) {
 
-			list.add("Tier:" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getTier());
+			list.add("Tier:" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).tier);
 
 		}
 
-		if (!SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getLore().equals("")) {
+		if (!SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).lore.equals("")) {
 
-			String lore = SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getLore();
+			String lore = SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).lore;
 
 			lore.replaceAll("\t", "    ");
 
@@ -81,7 +76,7 @@ public class ItemSeed extends SeedBase {
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
 
-		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).getColor();
+		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).color;
 
 	}
 
@@ -91,7 +86,7 @@ public class ItemSeed extends SeedBase {
 
 		for (int i : SeedRegistry.getInstance().keySet()) {
 
-			list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).getEntityID()));
+			list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).seedID));
 
 		}
 
@@ -100,7 +95,7 @@ public class ItemSeed extends SeedBase {
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
 
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getName());
+		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
 
 	}
 

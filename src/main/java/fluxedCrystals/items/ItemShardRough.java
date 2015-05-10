@@ -1,14 +1,9 @@
 package fluxedCrystals.items;
 
-import fluxedCrystals.api.SeedBase;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.registry.SeedData;
 import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.util.LogHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -30,7 +25,7 @@ public class ItemShardRough extends Item {
 
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).getColor();
+		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).color;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -38,7 +33,7 @@ public class ItemShardRough extends Item {
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
 
 		for (int i : SeedRegistry.getInstance().keySet()) {
-			list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).getEntityID()));
+			list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).seedID));
 
 		}
 
@@ -47,7 +42,7 @@ public class ItemShardRough extends Item {
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
 
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).getName());
+		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
 
 	}
 

@@ -38,7 +38,7 @@ public class MessageSolarFluxSync implements IMessage, IMessageHandler<MessageSo
 
 	@Override
 	public IMessage onMessage(MessageSolarFluxSync message, MessageContext ctx) {
-		//ClientUtils.updateSolarflux(message);
+		ClientUtils.updateSolarflux(message);
 		return null;
 	}
 }

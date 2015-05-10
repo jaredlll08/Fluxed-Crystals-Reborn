@@ -1,8 +1,10 @@
 package fluxedCrystals.tileEntity;
 
-import java.util.List;
-import java.util.Random;
-
+import fluxedCrystals.api.CrystalBase;
+import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.compat.waila.IWailaInfo;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.SeedRegistry;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.cbcore.LangUtil;
@@ -15,11 +17,9 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import tterrag.core.common.util.BlockCoord;
-import fluxedCrystals.api.CrystalBase;
-import fluxedCrystals.blocks.crystal.BlockCrystal;
-import fluxedCrystals.compat.waila.IWailaInfo;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.registry.SeedRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 
@@ -68,7 +68,7 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 			power = (TileEntityPowerBlock) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 		if (SeedRegistry.getInstance().getSeedByID(idx) != null && power != null) {
 			ticksgrown++;
-			if (ticksgrown > SeedRegistry.getInstance().getSeedByID(idx).getGrowthTime() / power.getSpeed()) {
+			if (ticksgrown > SeedRegistry.getInstance().getSeedByID(idx).growthTime / power.getSpeed()) {
 				worldObj.getBlock(xCoord, yCoord, zCoord).updateTick(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
 				ticksgrown = 0;
 			}

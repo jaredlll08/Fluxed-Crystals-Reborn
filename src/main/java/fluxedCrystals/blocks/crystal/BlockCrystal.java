@@ -1,7 +1,11 @@
 package fluxedCrystals.blocks.crystal;
 
-import java.util.Random;
-
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.api.CrystalBase;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.TileEntityPowerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.Entity;
@@ -14,12 +18,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import tterrag.core.common.util.BlockCoord;
 import tterrag.core.common.util.TTEntityUtils;
-import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.api.CrystalBase;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityPowerBlock;
+
+import java.util.Random;
 
 public class BlockCrystal extends CrystalBase implements ITileEntityProvider {
 
@@ -39,7 +39,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider {
 		int index = crystal.getIdx();
 		if (world.getBlockMetadata(x, y, z) < 7) {
 			if (crystal != null && power != null) {
-				if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).getGrowthTime() / power.getSpeed()) {
+				if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
 					if (power.getEnergyStored() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
 						crystal.setTicksgrown(0);
 						power.storage.extractEnergy(power.getUpgradeDrain(index), false);
@@ -64,10 +64,10 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider {
 		// dropBlockAsItem(world, x, y, z, new ItemStack(type.smoothShard, (new
 		// Random().nextInt(type.getDropMax())+type.getDropMin()) +
 		// itemMultiplier));
-		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.shardRough, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getDropMax()) + itemMultiplier), crop.getIndex()));
+		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.shardRough, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIdx()).dropMax) + itemMultiplier), crop.getIndex()));
 		try {
-			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getEntityID() > 0) {
-				int id = SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getEntityID();
+			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).entityID > 0) {
+				int id = SeedRegistry.getInstance().getSeedByID(crop.getIdx()).entityID;
 
 				if (id == 48 || id == 49 || id == 1 || id == 8 || id == 9 || id == 21) {
 
@@ -83,7 +83,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider {
 			e.printStackTrace();
 		}
 		if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getWeightedDrop() != null) {
-			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getWeightedDropChance() == world.rand.nextInt(9) + 1) {
+			if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).weigthedDropChance == world.rand.nextInt(9) + 1) {
 				dropBlockAsItem(world, x, y, z, SeedRegistry.getInstance().getSeedByID(crop.getIdx()).getWeightedDrop());
 			}
 		}
@@ -158,7 +158,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider {
 		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
 		if (world.getBlockMetadata(x, y, z) >= 7)
 			if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDrop() != null) {
-				if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDropChance() == world.rand.nextInt(9) + 1) {
+				if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).weigthedDropChance == world.rand.nextInt(9) + 1) {
 					dropBlockAsItem(world, x, y, z, SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDrop());
 				}
 			}

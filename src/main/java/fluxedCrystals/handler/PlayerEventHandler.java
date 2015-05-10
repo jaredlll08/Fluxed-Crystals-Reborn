@@ -16,12 +16,7 @@ public class PlayerEventHandler
 		if (event.player != null)
 		{
 
-			for(int i : SeedRegistry.getInstance().keySet())
-			{
-
-				PacketHandler.INSTANCE.sendTo(new MessageSyncSeeds(SeedRegistry.getInstance().getSeedByID(i)), (EntityPlayerMP) event.player);
-
-			}
+			PacketHandler.INSTANCE.sendTo(new MessageSyncSeeds(SeedRegistry.getInstance().getSeedMap()), (EntityPlayerMP) event.player);
 
 		}
 
