@@ -5,6 +5,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.client.render.RenderCrystal;
 import fluxedCrystals.client.render.SeedInfuserRenderer;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import net.minecraft.world.World;
 
 public class ClientProxy extends CommonProxy
@@ -52,6 +54,21 @@ public class ClientProxy extends CommonProxy
 	{
 
 		return true;
+
+	}
+
+	@Override
+	public void postInit()
+	{
+
+		super.postInit();
+
+		for(int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
+		{
+
+			RecipeSeedInfuser recipeSeedInfuser = RecipeRegistry.getSeedInfuserRecipeByID(i);
+
+		}
 
 	}
 

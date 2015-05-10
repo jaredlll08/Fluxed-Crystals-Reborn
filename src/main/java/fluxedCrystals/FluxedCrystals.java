@@ -13,12 +13,9 @@ import fluxedCrystals.init.FCItems;
 import fluxedCrystals.nei.FluxedCrystalsNEIConfig;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
-import net.minecraft.item.ItemStack;
 import tterrag.core.common.Lang;
 
 import java.io.File;
@@ -121,20 +118,8 @@ public class FluxedCrystals {
 
 	}
 
-	@Mod.EventHandler
-	public void remap(FMLModIdMappingEvent event)
+	public SeedRegistry getSeedRegistry()
 	{
-
-		for (int i : SeedRegistry.getInstance().keySet())
-		{
-
-			RecipeRegistry.registerSeedInfuserRecipe(i, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), SeedRegistry.getInstance().getSeedByID(i).getIngredient(), new ItemStack(FCItems.seed, 1, i), SeedRegistry.getInstance().getSeedByID(i).ingredientAmount));
-
-		}
-
-	}
-
-	public SeedRegistry getSeedRegistry() {
 
 		return SeedRegistry.getInstance();
 

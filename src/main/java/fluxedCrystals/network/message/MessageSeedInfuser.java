@@ -56,7 +56,7 @@ public class MessageSeedInfuser implements IMessage, IMessageHandler<MessageSeed
 					infuser.setInfusing(true);
 				}
 				int index = infuser.getRecipeIndex();
-				if (index >= 0) {
+				if (index != -1) {
 					return new MessageSeedInfuser(x, y, z, index);
 				}
 			}

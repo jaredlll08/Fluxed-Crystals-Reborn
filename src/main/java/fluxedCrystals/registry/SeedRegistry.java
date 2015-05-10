@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
 import net.minecraft.item.ItemStack;
@@ -98,6 +101,8 @@ public class SeedRegistry
 	public Seed addSeed(Seed seed)
 	{
 
+		boolean seedAdded = false;
+
 		if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
 		{
 
@@ -105,7 +110,7 @@ public class SeedRegistry
 
 			addSeed(seed.seedID, seed);
 
-			return seed;
+			seedAdded = true;
 
 		}
 
@@ -116,7 +121,7 @@ public class SeedRegistry
 
 			addSeed(seed.seedID, seed);
 
-			return seed;
+			seedAdded = true;
 
 		}
 
@@ -150,9 +155,18 @@ public class SeedRegistry
 
 				addSeed(seed.seedID, seed);
 
-				return seed;
+				seedAdded = true;
 
 			}
+
+		}
+
+		if (seedAdded)
+		{
+
+			RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount));
+
+			return seed;
 
 		}
 
@@ -235,7 +249,7 @@ public class SeedRegistry
 				for(Seed seed : JsonTools.jsontoList(jsonObject))
 				{
 
-					addSeed(seed.seedID, seed);
+					addSeed(seed);
 
 				}
 

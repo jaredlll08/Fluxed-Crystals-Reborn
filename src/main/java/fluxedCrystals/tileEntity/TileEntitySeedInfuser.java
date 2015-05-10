@@ -170,17 +170,32 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 		tags.setTag("Items", nbttaglist);
 	}
 
-	public boolean addItemToSlot(int slotNumber, ItemStack stack) {
+	public boolean addItemToSlot(int slotNumber, ItemStack stack)
+	{
+
 		boolean returnBool = false;
-		if (stack != null) {
-			if (getStackInSlot(slotNumber).isItemEqual(new ItemStack(FCItems.universalSeed)) || (getStackInSlot(slotNumber).isItemEqual(stack)) && (getStackInSlot(slotNumber).getMaxStackSize() - getStackInSlot(slotNumber).stackSize - stack.stackSize) > 0) {
+
+		if (stack != null)
+		{
+
+			if (getStackInSlot(slotNumber).isItemEqual(new ItemStack(FCItems.universalSeed)) ||
+					(getStackInSlot(slotNumber).isItemEqual(stack)) &&
+							(getStackInSlot(slotNumber).getMaxStackSize() - getStackInSlot(slotNumber).stackSize - stack.stackSize) > 0)
+			{
+
 				ItemStack out = stack.copy();
-				if (getStackInSlot(slotNumber) != null && getStackInSlot(slotNumber).isItemEqual(stack)) {
+
+				if (getStackInSlot(slotNumber) != null && getStackInSlot(slotNumber).isItemEqual(stack))
+				{
 					out.stackSize += getStackInSlot(slotNumber).stackSize;
 				}
+
 				setInventorySlotContents(slotNumber, out);
+
 				returnBool = true;
+
 			}
+
 		}
 
 		return returnBool;
@@ -189,7 +204,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	public boolean infuseSeed()
 	{
 
-		if (getRecipeIndex() >= 0)
+		if (getRecipeIndex() != -1)
 		{
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(getRecipeIndex());
@@ -225,8 +240,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	{
 
 		this.infusing = infusing;
-		int number = -1;
-		setRecipeIndex(number);
+		setRecipeIndex(-1);
 
 		if (getStackInSlot(0) != null && getStackInSlot(1) != null)
 		{
@@ -239,7 +253,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 				if (recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1)))
 				{
 
-					setRecipeIndex(number);
+					setRecipeIndex(i);
 					break;
 
 				}
