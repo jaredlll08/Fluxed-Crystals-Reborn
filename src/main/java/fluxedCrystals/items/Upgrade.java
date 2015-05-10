@@ -1,6 +1,7 @@
-package fluxedCrystals.items.upgrades;
+package fluxedCrystals.items;
 
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.IUpgrade;
 import net.minecraft.item.Item;
 
@@ -12,7 +13,7 @@ public class Upgrade extends Item implements IUpgrade
 
 		setCreativeTab(FluxedCrystals.tab);
 		setTextureName(textureName);
-		setUnlocalizedName(itemName);
+		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + itemName);
 
 	}
 	

@@ -46,7 +46,12 @@ public class Names
 		public static final String UPGRADE_RANGE_BASIC = "upgradeRangeBasic";
 		public static final String UPGRADE_RANGE_GREATER = "upgradeRangeGreater";
 		public static final String UPGRADE_RANGE_ADVANCED = "upgradeRangeAdvanced";
-		
+
+		public static final String SCYTHE_WOOD = "scytheWood";
+		public static final String SCYTHE_STONE = "scytheStone";
+		public static final String SCYTHE_IRON = "scytheIron";
+		public static final String SCYTHE_GOLD = "scytheGold";
+		public static final String SCYTHE_DIAMOND = "scytheDiamond";
 
 	}
 

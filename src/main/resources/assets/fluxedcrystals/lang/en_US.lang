@@ -27,6 +27,12 @@ item.fluxedcrystals.upgradeEssentia.name=Essentia Upgrade
 item.fluxedcrystals.upgradeLP.name=LP Upgrade
 item.fluxedcrystals.upgradeRange.name=Range Upgrade
 tile.fluxedcrystals.seedInfuser.name=Seed Infuser
+item.fluxedcrystals.scytheWood.name=Wooden Scythe
+item.fluxedcrystals.scytheStone.name=Stone Scythe
+item.fluxedcrystals.scytheIron.name=Iron Scythe
+item.fluxedcrystals.scytheGold.name=Gold Scythe
+item.fluxedcrystals.scytheDiamond.name=Diamond Scythe
+death.attack.Crystal=%s was cut by a Crystal
 
 
 
@@ -41,13 +47,7 @@ tile.Thaumic Manager Block=Thaumic Manager Block
 tile.Mana Manager Block.name=Mana Manager Block
 tile.Industrial Manager Block.name=Industrial Manager Block
 tile.Gem Refiner.name=Gem Refiner
-item.scytheWood.name=Wooden Scythe
-item.scytheStone.name=Stone Scythe
-item.scytheIron.name=Iron Scythe
-item.scytheGold.name=Gold Scythe
-item.scytheDiamond.name=Diamond Scythe
 item.hammerCrystal.name=Crystal Hammer
-death.attack.Crystal=%s was cut by a Crystal
 fc.manager.energy.eu=Current EU
 fc.manager.energy.rf=Current RF
 fc.manager.energy.mana=Current Mana

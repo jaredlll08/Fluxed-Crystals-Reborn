@@ -1,6 +1,7 @@
 package fluxedCrystals.blocks;
 
-import fluxedCrystals.items.upgrades.Upgrade;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.items.Upgrade;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.tileEntity.TileEntityPowerBlock;
@@ -24,6 +25,7 @@ public class BlockPowerBlock extends Block  implements ITileEntityProvider
 		this.setHarvestLevel("shovel", 1);
 		this.setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL);
 		this.setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Blocks.POWEREDSOIL);
+		this.setCreativeTab(FluxedCrystals.tab);
 	}
 
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {

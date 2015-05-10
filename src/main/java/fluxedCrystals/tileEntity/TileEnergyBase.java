@@ -1,14 +1,14 @@
 package fluxedCrystals.tileEntity;
 
-import java.util.EnumSet;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.network.message.MessageEnergyUpdate;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.EnumSet;
 
 public abstract class TileEnergyBase extends TileEntity implements IEnergyHandler
 {
@@ -166,13 +166,14 @@ public abstract class TileEnergyBase extends TileEntity implements IEnergyHandle
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
-		storage.writeToNBT(nbt);
 		super.writeToNBT(nbt);
+		storage.writeToNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		storage.readFromNBT(nbt);
 		super.readFromNBT(nbt);
+		storage.readFromNBT(nbt);
+
 	}
 }

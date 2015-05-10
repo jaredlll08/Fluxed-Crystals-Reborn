@@ -4,6 +4,7 @@ import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.reference.Textures;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,7 +20,7 @@ public class ItemSeed extends SeedBase {
 
 	public ItemSeed() {
 		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SEED);
-		setTextureName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SEED);
+		setTextureName(Textures.Items.SEED);
 		setHasSubtypes(true);
 		setCreativeTab(FluxedCrystals.tab);
 	}

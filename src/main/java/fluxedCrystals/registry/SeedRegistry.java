@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import cpw.mods.fml.common.Loader;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.recipe.RecipeGemCutter;
@@ -104,59 +105,64 @@ public class SeedRegistry
 
 		boolean seedAdded = false;
 
-		if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
+		if ((seed.modRequired != "" && Loader.isModLoaded(seed.modRequired)) || (seed.modRequired.equals("null") || seed.modRequired == ""))
 		{
 
-			//	Seed is there, treat as an update
-
-			addSeed(seed.seedID, seed);
-
-			seedAdded = true;
-
-		}
-
-		if (!seedMap.containsKey(seed.seedID))
-		{
-
-			// This is an insert and someone knew the right ID to pass
-
-			addSeed(seed.seedID, seed);
-
-			seedAdded = true;
-
-		}
-
-		if(seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
-		{
-
-			//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
-
-			boolean exists = false;
-
-			for (int i : seedMap.keySet())
+			if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
 			{
 
-				if (getSeedByID(i).name.equalsIgnoreCase(seed.name))
-				{
-
-					exists = true;
-
-					break;
-
-				}
-
-			}
-
-			if (!exists)
-			{
-
-				// This is a new seed and someone did something stupid
-
-				seed.seedID = getNextID();
+				//	Seed is there, treat as an update
 
 				addSeed(seed.seedID, seed);
 
 				seedAdded = true;
+
+			}
+
+			if (!seedMap.containsKey(seed.seedID))
+			{
+
+				// This is an insert and someone knew the right ID to pass
+
+				addSeed(seed.seedID, seed);
+
+				seedAdded = true;
+
+			}
+
+			if(seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
+			{
+
+				//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
+
+				boolean exists = false;
+
+				for (int i : seedMap.keySet())
+				{
+
+					if (getSeedByID(i).name.equalsIgnoreCase(seed.name))
+					{
+
+						exists = true;
+
+						break;
+
+					}
+
+				}
+
+				if (!exists)
+				{
+
+					// This is a new seed and someone did something stupid
+
+					seed.seedID = getNextID();
+
+					addSeed(seed.seedID, seed);
+
+					seedAdded = true;
+
+				}
 
 			}
 

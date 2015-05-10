@@ -30,6 +30,12 @@ public class Textures
 		public static final String UPGRADE_RANGE_GREATER = RESOURCE_PREFIX + Names.Items.UPGRADE_RANGE_GREATER;
 		public static final String UPGRADE_RANGE_ADVANCED = RESOURCE_PREFIX + Names.Items.UPGRADE_RANGE_ADVANCED;
 
+		public static final String SCYTHE_WOOD = RESOURCE_PREFIX + Names.Items.SCYTHE_WOOD;
+		public static final String SCYTHE_STONE = RESOURCE_PREFIX + Names.Items.SCYTHE_STONE;
+		public static final String SCYTHE_IRON = RESOURCE_PREFIX + Names.Items.SCYTHE_IRON;
+		public static final String SCYTHE_GOLD = RESOURCE_PREFIX + Names.Items.SCYTHE_GOLD;
+		public static final String SCYTHE_DIAMOND = RESOURCE_PREFIX + Names.Items.SCYTHE_DIAMOND;
+
 	}
 
 }

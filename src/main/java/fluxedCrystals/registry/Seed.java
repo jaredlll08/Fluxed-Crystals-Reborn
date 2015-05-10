@@ -24,6 +24,8 @@ public class Seed implements Serializable
 	public int seedID = 0;
 	public int entityID = 0;
 	public boolean decorationBlock = false;
+	public boolean isSharp = false;
+	public String modRequired = "";
 
 	public ItemStack getIngredient()
 	{
