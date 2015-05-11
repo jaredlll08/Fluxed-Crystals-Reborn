@@ -24,7 +24,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	public ItemStack[] items;
 
 	public TileEntityPowerBlock() {
-		super(100000);
+		super(0);
 		items = new ItemStack[3];
 	}
 

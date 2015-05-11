@@ -6,6 +6,7 @@ import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.network.message.MessageGemRefiner;
 import fluxedCrystals.recipe.RecipeGemRefiner;
 import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -54,7 +55,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	private int energy = 0;
 
 	public TileEntityGemRefiner () {
-		super(10000);
+		super(0);
 		MAX_MANA = getMaxStorage();
 		mana = 0;
 		items = new ItemStack[7];
@@ -339,6 +340,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	public int refineShard() {
 		int energyUsed = 0;
+		LogHelper.info("refineShard:  " + getRecipeIndex());
 		if (getRecipeIndex() != -1)
 		{
 
@@ -364,6 +366,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	public boolean refine() {
+		LogHelper.info("refine:  " + getRecipeIndex());
 		if (getRecipeIndex() != -1) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe.matchesExact(getStackInSlot(0))) {
@@ -472,8 +475,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	public void setRefining(boolean infusing) {
 		this.refining = infusing;
-		int number = -1;
-		setRecipeIndex(number);
+		setRecipeIndex(-1);
 		if (getStackInSlot(0) != null)
 		{
 
