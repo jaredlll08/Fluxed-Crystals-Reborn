@@ -24,14 +24,14 @@ public class Seed implements Serializable
 	public int seedID = 0;
 	public int entityID = 0;
 	public boolean decorationBlock = false;
-	public int seedReturn = 0;
+	public int seedReturn = 1;
 	public boolean isSharp = true;
 	public String modRequired = "";
 
 	public ItemStack getIngredient()
 	{
 
-		if (ingredient != null && ingredient != "")
+		if (ingredient != null && ingredient.equals(""))
 		{
 
 			return JsonUtils.parseStringIntoItemStack(ingredient);
@@ -45,7 +45,7 @@ public class Seed implements Serializable
 	public ItemStack getWeightedDrop()
 	{
 
-		if (weightedDrop != null && weightedDrop != "")
+		if (weightedDrop != null && !weightedDrop.equals(""))
 		{
 
 			return JsonUtils.parseStringIntoItemStack(weightedDrop);

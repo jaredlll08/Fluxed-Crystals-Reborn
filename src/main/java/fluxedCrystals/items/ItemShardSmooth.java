@@ -1,5 +1,6 @@
 package fluxedCrystals.items;
 
+import cpw.mods.fml.common.Loader;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
@@ -32,10 +33,16 @@ public class ItemShardSmooth extends Item {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
+	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list)
+	{
 
-		for (int i : SeedRegistry.getInstance().keySet()) {
-			list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).seedID));
+		for (int i : SeedRegistry.getInstance().keySet())
+		{
+
+			if (SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") || (!SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") && Loader.isModLoaded(SeedRegistry.getInstance().getSeedByID(i).modRequired)))
+			{
+				list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).seedID));
+			}
 
 		}
 

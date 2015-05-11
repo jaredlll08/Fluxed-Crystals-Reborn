@@ -4,12 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import cpw.mods.fml.common.Loader;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.recipe.RecipeGemCutter;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
 import net.minecraft.item.ItemStack;
@@ -105,64 +100,59 @@ public class SeedRegistry
 
 		boolean seedAdded = false;
 
-		if ((seed.modRequired != "" && Loader.isModLoaded(seed.modRequired)) || (seed.modRequired.equals("null") || seed.modRequired == ""))
+		if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
 		{
 
-			if(seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
+			//	Seed is there, treat as an update
+
+			addSeed(seed.seedID, seed);
+
+			seedAdded = true;
+
+		}
+
+		if (!seedMap.containsKey(seed.seedID))
+		{
+
+			// This is an insert and someone knew the right ID to pass
+
+			addSeed(seed.seedID, seed);
+
+			seedAdded = true;
+
+		}
+
+		if(seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
+		{
+
+			//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
+
+			boolean exists = false;
+
+			for (int i : seedMap.keySet())
 			{
 
-				//	Seed is there, treat as an update
+				if (getSeedByID(i).name.equalsIgnoreCase(seed.name))
+				{
+
+					exists = true;
+
+					break;
+
+				}
+
+			}
+
+			if (!exists)
+			{
+
+				// This is a new seed and someone did something stupid
+
+				seed.seedID = getNextID();
 
 				addSeed(seed.seedID, seed);
 
 				seedAdded = true;
-
-			}
-
-			if (!seedMap.containsKey(seed.seedID))
-			{
-
-				// This is an insert and someone knew the right ID to pass
-
-				addSeed(seed.seedID, seed);
-
-				seedAdded = true;
-
-			}
-
-			if(seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name))
-			{
-
-				//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
-
-				boolean exists = false;
-
-				for (int i : seedMap.keySet())
-				{
-
-					if (getSeedByID(i).name.equalsIgnoreCase(seed.name))
-					{
-
-						exists = true;
-
-						break;
-
-					}
-
-				}
-
-				if (!exists)
-				{
-
-					// This is a new seed and someone did something stupid
-
-					seed.seedID = getNextID();
-
-					addSeed(seed.seedID, seed);
-
-					seedAdded = true;
-
-				}
 
 			}
 
@@ -170,10 +160,6 @@ public class SeedRegistry
 
 		if (seedAdded)
 		{
-
-			RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount));
-
-			RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
 
 			return seed;
 

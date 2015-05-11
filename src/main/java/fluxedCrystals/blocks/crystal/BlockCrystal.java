@@ -15,17 +15,13 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import tterrag.core.common.util.BlockCoord;
-import tterrag.core.common.util.TTEntityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +36,10 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 		setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":crop_stage_7");
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
-		return null;
-	}
+//	@Override
+//	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+//		return null;
+//	}
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
@@ -124,6 +120,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float hitX, float hitY, float hitZ) {
 		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
+
 		if (world.getBlockMetadata(x, y, z) >= 7) {
 			ItemStack stack = player.getCurrentEquippedItem();
 			if (stack != null && stack.getItem() instanceof ItemScythe) {
@@ -214,6 +211,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
 
 		TileEntityCrystal crop = (TileEntityCrystal) world.getTileEntity(x, y, z);
+
 		if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).seedReturn > 0)
 			dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, 1, crop.getIndex()));
 

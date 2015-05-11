@@ -78,7 +78,8 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void initialize(FMLInitializationEvent event) {
+	public void initialize(FMLInitializationEvent event)
+	{
 
 		FCItems.initialize();
 		FCBlocks.initialize();

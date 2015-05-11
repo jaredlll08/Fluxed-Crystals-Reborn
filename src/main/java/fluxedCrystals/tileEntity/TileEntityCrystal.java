@@ -36,10 +36,12 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	}
 
 	public int getIdx() {
+
 		return idx;
 	}
 
 	public void setIdx(int idx) {
+
 		this.idx = idx;
 	}
 
@@ -64,6 +66,7 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	private BlockCrystal crystal;
 
 	public void updateEntity() {
+
 		if (power == null && worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityPowerBlock)
 			power = (TileEntityPowerBlock) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 		if (SeedRegistry.getInstance().getSeedByID(idx) != null && power != null) {
@@ -93,7 +96,9 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 		return true;
 	}
 
-	public int getIndex() {
+	public int getIndex()
+	{
+
 		return idx;
 	}
 
@@ -104,13 +109,13 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setInteger("index", idx);
+
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		this.idx = tag.getInteger("index");
+
 	}
 
 	@Override
