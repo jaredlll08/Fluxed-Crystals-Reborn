@@ -96,8 +96,7 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 		return true;
 	}
 
-	public int getIndex()
-	{
+	public int getIndex() {
 
 		return idx;
 	}
@@ -109,13 +108,14 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
+		tag.setInteger("FCIndex", idx);
 
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-
+		idx = tag.getInteger("FCIndex");
 	}
 
 	@Override
