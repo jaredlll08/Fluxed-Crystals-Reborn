@@ -7,6 +7,7 @@ public class RecipeRegistry
 
 	private static HashMap<Integer, RecipeSeedInfuser> seedInfuserRecipes = new HashMap<Integer, RecipeSeedInfuser>();
 	private static HashMap<Integer, RecipeGemCutter> gemCutterRecipes = new HashMap<Integer, RecipeGemCutter>();
+	private static HashMap<Integer, RecipeGemRefiner> gemRefinerRecipes = new HashMap<Integer, RecipeGemRefiner>();
 
 	public static void registerSeedInfuserRecipe(int seedID, RecipeSeedInfuser recipe)
 	{
@@ -71,6 +72,39 @@ public class RecipeRegistry
 	{
 
 		return gemCutterRecipes;
+
+	}
+
+	public static void registerGemRefinerRecipe(int seedID, RecipeGemRefiner recipe)
+	{
+
+		if (!gemRefinerRecipes.containsKey(seedID))
+		{
+
+			gemRefinerRecipes.put(seedID, recipe);
+
+		}
+
+	}
+
+	public static RecipeGemRefiner getGemRefinerRecipeByID(int seedID)
+	{
+
+		if (gemRefinerRecipes.containsKey(seedID))
+		{
+
+			return gemRefinerRecipes.get(seedID);
+
+		}
+
+		return null;
+
+	}
+
+	public static HashMap<Integer, RecipeGemRefiner> getAllGemRefinerRecipes()
+	{
+
+		return gemRefinerRecipes;
 
 	}
 

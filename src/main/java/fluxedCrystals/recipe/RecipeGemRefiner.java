@@ -5,38 +5,30 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeSeedInfuser
+public class RecipeGemRefiner
 {
 
 	private ItemStack input;
 	private ItemStack output;
-	private ItemStack ingredient;
 	private int inputAmount;
-	private int index = -1;
+	private int outputAmount;
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount)
-	{
-
-		this(ingredient, input, output, inputAmount, -1);
-
+	public int getOutputAmount() {
+		return outputAmount;
 	}
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount, int index)
-	{
-
+	public RecipeGemRefiner (ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
 		this.input = input;
 		this.output = output;
-		this.ingredient = ingredient;
 		this.inputAmount = inputAmount;
-		this.index = index;
-
+		this.outputAmount = outputAmount;
 	}
 
-	public boolean matches(ItemStack ingredient, ItemStack stack) {
+	public boolean matches(ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int id : ids) {
 			String name = OreDictionary.getOreName(id);
-			if (matches(name) && ingredient.isItemEqual(this.ingredient)) {
+			if (matches(name)) {
 				return true;
 			}
 		}
@@ -46,20 +38,21 @@ public class RecipeSeedInfuser
 	public boolean matches(String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
-			if (OreDictionary.itemMatches(stack, input, false) && ingredient.isItemEqual(this.ingredient)) {
+			if (OreDictionary.itemMatches(stack, input, false)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean matchesExact(ItemStack input, ItemStack ingredient) {
-		return this.input.isItemEqual(ingredient) && this.ingredient.isItemEqual(input);
+	public boolean matchesExact(ItemStack stack) {
+		if (stack != null)
+			return input.isItemEqual(stack);
+		return false;
 	}
 
 	public ItemStack getInput() {
 		ItemStack stack = input.copy();
-		stack.stackSize = getInputamount();
 		return stack;
 	}
 
@@ -67,12 +60,7 @@ public class RecipeSeedInfuser
 		return output.copy();
 	}
 
-	public ItemStack getIngredient() {
-		return ingredient.copy();
-	}
-
 	public int getInputamount() {
 		return inputAmount;
 	}
-
 }

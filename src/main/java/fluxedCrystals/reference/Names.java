@@ -25,6 +25,7 @@ public class Names
 		public static final String POWEREDSOIL = "poweredSoil";
 		public static final String SEED_INFUSER = "seedInfuser";
 		public static final String GEM_CUTTER = "gemCutter";
+		public static final String GEM_REFINER = "gemRefiner";
 
 	}
 	public static final class Items

@@ -1,24 +1,18 @@
 package fluxedCrystals.handler;
 
-import java.util.Random;
-
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.client.event.ClientChatReceivedEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.event.ServerChatEvent;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.network.message.MessageSyncSeeds;
 import fluxedCrystals.registry.SeedRegistry;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.client.event.RenderLivingEvent;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Random;
 
 public class PlayerEventHandler {
 	public boolean resetRender;
@@ -31,11 +25,14 @@ public class PlayerEventHandler {
 		if(e.displayname.equalsIgnoreCase("Jaredlll08")){
 			e.displayname = EnumChatFormatting.BLUE + "Jared" + EnumChatFormatting.RESET;
 		}
+		else if (e.displayname.equalsIgnoreCase("namroc_smith")) {
+			e.displayname = EnumChatFormatting.RED + "Namroc" + EnumChatFormatting.RESET;
+		}
 	}
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void render(RenderLivingEvent.Pre event) {
 		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
-		if (s.equals("Jaredlll08") || s.equals("esriel123") || s.equalsIgnoreCase("parcel31u")) {
+		if (s.equals("Jaredlll08") || s.equals("esriel123") || s.equalsIgnoreCase("parcel31u") || s.equalsIgnoreCase("namroc_smith")) {
 			if (new Random().nextInt(2) == 0) {
 				if (!descending) {
 					trans++;

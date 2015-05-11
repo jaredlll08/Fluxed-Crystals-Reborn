@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import tterrag.core.common.json.JsonUtils;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class Seed implements Serializable
 {
@@ -28,10 +29,12 @@ public class Seed implements Serializable
 	public boolean isSharp = true;
 	public String modRequired = "";
 
+	private static final Random rand = new Random();
+
 	public ItemStack getIngredient()
 	{
 
-		if (ingredient != null && ingredient.equals(""))
+		if (ingredient != null && !ingredient.equals(""))
 		{
 
 			return JsonUtils.parseStringIntoItemStack(ingredient);
@@ -53,6 +56,13 @@ public class Seed implements Serializable
 		}
 
 		return null;
+
+	}
+
+	public int getDropAmount()
+	{
+
+		return rand.nextInt(dropMax - dropMin + 1) + dropMin;
 
 	}
 

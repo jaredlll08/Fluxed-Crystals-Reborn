@@ -33,9 +33,9 @@ item.fluxedcrystals.scytheIron.name=Iron Scythe
 item.fluxedcrystals.scytheGold.name=Gold Scythe
 item.fluxedcrystals.scytheDiamond.name=Diamond Scythe
 death.attack.Crystal=%s was cut by a Crystal
+tile.fluxedcrystals.gemRefiner.name=Gem Refiner
 
-
-
+# Old Stuff
 item.shardHelm.name=%s Helmet
 item.shardChest.name=%s Chestplate
 item.shardLegs.name=%s Leggings
@@ -46,7 +46,6 @@ tile.Blood Manager Block.name=Blood Manager Block
 tile.Thaumic Manager Block=Thaumic Manager Block
 tile.Mana Manager Block.name=Mana Manager Block
 tile.Industrial Manager Block.name=Industrial Manager Block
-tile.Gem Refiner.name=Gem Refiner
 item.hammerCrystal.name=Crystal Hammer
 fc.manager.energy.eu=Current EU
 fc.manager.energy.rf=Current RF
