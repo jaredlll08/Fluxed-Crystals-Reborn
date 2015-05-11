@@ -2,14 +2,12 @@ package fluxedCrystals.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.blocks.BlockGemCutter;
+import fluxedCrystals.blocks.BlockGemRefiner;
 import fluxedCrystals.blocks.BlockPowerBlock;
 import fluxedCrystals.blocks.BlockSeedInfuser;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.reference.Names;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityGemCutter;
-import fluxedCrystals.tileEntity.TileEntityPowerBlock;
-import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
+import fluxedCrystals.tileEntity.*;
 import net.minecraft.block.Block;
 
 public class FCBlocks
@@ -19,6 +17,7 @@ public class FCBlocks
 	public static Block crystal= new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
+	public static Block gemRefiner = new BlockGemRefiner();
 
 	public FCBlocks()
 	{
@@ -44,6 +43,9 @@ public class FCBlocks
 
 		GameRegistry.registerBlock(gemCutter, Names.Blocks.GEM_CUTTER);
 		GameRegistry.registerTileEntity(TileEntityGemCutter.class, Names.Blocks.GEM_CUTTER);
+
+		GameRegistry.registerBlock(gemRefiner, Names.Blocks.GEM_REFINER);
+		GameRegistry.registerTileEntity(TileEntityGemRefiner.class, Names.Blocks.GEM_REFINER);
 
 
 	}

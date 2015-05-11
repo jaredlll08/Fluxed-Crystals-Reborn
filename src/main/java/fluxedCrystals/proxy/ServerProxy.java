@@ -1,7 +1,5 @@
 package fluxedCrystals.proxy;
 
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -43,21 +41,6 @@ public class ServerProxy extends CommonProxy
 	{
 
 		return false;
-
-	}
-
-	@Override
-	public void postInit()
-	{
-
-		super.postInit();
-
-		for(int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
-		{
-
-			RecipeSeedInfuser recipeSeedInfuser = RecipeRegistry.getSeedInfuserRecipeByID(i);
-
-		}
 
 	}
 

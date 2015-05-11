@@ -16,9 +16,16 @@ import fluxedCrystals.init.FCItems;
 import fluxedCrystals.nei.FluxedCrystalsNEIConfig;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
+import fluxedCrystals.recipe.RecipeGemCutter;
+import fluxedCrystals.recipe.RecipeGemRefiner;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import tterrag.core.common.Lang;
 
 import java.io.File;
@@ -111,6 +118,55 @@ public class FluxedCrystals {
 	{
 
 		SeedRegistry.getInstance().Save();
+
+	}
+
+	@Mod.EventHandler
+	public void remap(FMLModIdMappingEvent event)
+	{
+
+		for (int i : SeedRegistry.getInstance().keySet())
+		{
+
+			Seed seed = SeedRegistry.getInstance().getSeedByID(i);
+
+			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired)))
+			{
+
+				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed),
+						seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
+
+				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
+
+				if (seed.weightedDrop != null && !seed.weightedDrop.equals(""))
+				{
+
+					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem())))
+					{
+
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, seed.getDropAmount()));
+
+					}
+					else
+					{
+
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+
+					}
+
+				}
+				else
+				{
+
+					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+
+				}
+
+			}
+
+		}
+
+		LogHelper.info("Remap Complete!");
 
 	}
 
