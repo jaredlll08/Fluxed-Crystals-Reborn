@@ -22,8 +22,8 @@ public class FluxedCrystalsNEIConfig implements IConfigureNEI
 		API.registerRecipeHandler(new GemCutterHandler());
 		API.registerUsageHandler(new GemCutterHandler());
 		API.registerRecipeHandler(new RoughShardHandler());
-//		API.registerRecipeHandler(new GemRefinerHandler());
-//		API.registerUsageHandler(new GemRefinerHandler());
+		API.registerRecipeHandler(new GemRefinerHandler());
+		API.registerUsageHandler(new GemRefinerHandler());
 		API.registerRecipeHandler(new InfuserRecipeHandler());
 		API.registerUsageHandler(new InfuserRecipeHandler());
 	}
