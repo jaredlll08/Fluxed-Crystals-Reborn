@@ -31,7 +31,7 @@ public class FCBlocks
 
 	public static void initialize()
 	{
-
+		GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 		GameRegistry.registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 

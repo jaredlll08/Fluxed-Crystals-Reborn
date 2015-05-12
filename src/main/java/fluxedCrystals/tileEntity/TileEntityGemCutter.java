@@ -21,8 +21,7 @@ import java.util.EnumSet;
 /**
  * Created by Jared on 11/2/2014.
  */
-public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory
-{
+public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory {
 
 	public ItemStack[] items;
 
@@ -64,7 +63,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		return cut;
 	}
 
-	public TileEntityGemCutter () {
+	public TileEntityGemCutter() {
 		super(10000);
 
 		MAX_MANA = getMaxStorage();
@@ -232,13 +231,11 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 		case 0:
 
-			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet())
-			{
+			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
 				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter.getInput().isItemEqual(stack))
-				{
+				if (recipeGemCutter.getInput().isItemEqual(stack)) {
 
 					return true;
 
@@ -333,11 +330,11 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	}
 
 	public boolean refine() {
-		if (getRecipeIndex() != -1)
-		{
+		if (getRecipeIndex() != -1) {
 
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (getStackInSlot(0) != null && recipe.matchesExact(getStackInSlot(0))) {
+				System.out.println("hi");
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
@@ -446,16 +443,13 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public void setRefining(boolean infusing) {
 		this.cutting = infusing;
 		setRecipeIndex(-1);
-		if (getStackInSlot(0) != null)
-		{
+		if (getStackInSlot(0) != null) {
 
-			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet())
-			{
+			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
 				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter.matchesExact(getStackInSlot(0)))
-				{
+				if (recipeGemCutter.matchesExact(getStackInSlot(0))) {
 
 					setRecipeIndex(i);
 					break;
@@ -544,16 +538,13 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		if (isItemValidForSlot(slot, stack))
-		{
+		if (isItemValidForSlot(slot, stack)) {
 
-			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet())
-			{
+			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
 				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter.getInput().isItemEqual(stack))
-				{
+				if (recipeGemCutter.getInput().isItemEqual(stack)) {
 					return true;
 				}
 

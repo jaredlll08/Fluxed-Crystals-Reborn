@@ -24,9 +24,5 @@ dependencies {
     compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.nei_version}:dev"
     compile "mcp.mobius.waila:Waila:${config.waila_version}"
-    compile files("/libs/CoFHLib-[1.7.10]1.0.1-151-dev.jar")
-	compile files("/libs/forestry_1.7.10-3.3.0.6-api.jar")
-	compile files("/libs/MineTweaker3-Dev-1.7.10-3.0.9C.jar")
-    compile files("/libs/BloodMagic-1.7.10-1.2.1b-1-deobf.jar")
 
 }

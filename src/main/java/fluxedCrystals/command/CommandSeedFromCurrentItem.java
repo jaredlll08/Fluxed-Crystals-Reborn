@@ -44,7 +44,7 @@ public class CommandSeedFromCurrentItem extends CommandBase
 		else
 		{
 
-			ItemStack itemStack = ((EntityPlayer) commandSender).getCurrentEquippedItem();
+			ItemStack itemStack = ((EntityPlayer) commandSender).getCurrentEquippedItem().copy();
 
 			if (itemStack != null)
 			{

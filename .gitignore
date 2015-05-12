@@ -18,3 +18,5 @@
 *.ipr
 *.iws
 /.metadata/*
+*.eml
+usernamecache.json
