@@ -75,4 +75,7 @@ public class RecipeSeedInfuser
 		return inputAmount;
 	}
 
+	public int getIndex() {
+		return index;
+	}
 }

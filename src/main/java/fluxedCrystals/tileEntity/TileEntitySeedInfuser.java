@@ -1,8 +1,6 @@
 package fluxedCrystals.tileEntity;
 
 import fluxedCrystals.init.FCItems;
-import fluxedCrystals.network.PacketHandler;
-import fluxedCrystals.network.message.MessageSeedInfuser;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
 import net.minecraft.entity.player.EntityPlayer;
@@ -203,17 +201,20 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 
 	public boolean infuseSeed()
 	{
-
+		System.out.println("0:" + getRecipeIndex());
 		if (getRecipeIndex() != -1)
 		{
-
+			System.out.println("1:" + getRecipeIndex());
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(getRecipeIndex());
+			System.out.println("2:" + recipe.getIngredient().getDisplayName() + "|" + recipe.getOutput().getDisplayName());
 
 			if (getStackInSlot(0) != null && getStackInSlot(0).getItem() == FCItems.universalSeed && getStackInSlot(1) != null)
 			{
+				System.out.println("3: not null");
 
 				if ((recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1))) && getStackInSlot(1).stackSize >= recipe.getInputamount())
 				{
+					System.out.println("4: it matches and infused");
 
 					setInventorySlotContents(0, new ItemStack(FCItems.seed, 1, getRecipeIndex()));
 					decrStackSize(1, recipe.getInputamount());
@@ -239,20 +240,24 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	{
 
 		this.infusing = infusing;
+		System.out.println("0|" + infusing);
 		setRecipeIndex(-1);
+		System.out.println("1|" + getRecipeIndex());
 
 		if (getStackInSlot(0) != null && getStackInSlot(1) != null)
 		{
+			System.out.println("2|" + (getStackInSlot(0) != null) + "|" + (getStackInSlot(1) != null));
 
-			for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
+			for (RecipeSeedInfuser recipe : RecipeRegistry.getAllSeedInfuserRecipes().values())
 			{
+				System.out.println("3|" + recipe.getIndex());
 
-				RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
 
 				if (recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1)))
 				{
+					System.out.println("4|" + recipe.getIndex());
 
-					setRecipeIndex(i);
+					setRecipeIndex(recipe.getIndex());
 					break;
 
 				}

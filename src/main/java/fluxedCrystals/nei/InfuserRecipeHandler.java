@@ -13,8 +13,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InfuserRecipeHandler extends TemplateRecipeHandler
-{
+public class InfuserRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
@@ -46,7 +45,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras(int recipe) {
 		CachedInfusionRecipe r = (CachedInfusionRecipe) arecipes.get(recipe);
-		int coords2[] = { 0, 0 };
+		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -54,15 +53,13 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result)
-	{
+	public void loadCraftingRecipes(ItemStack result) {
 
-		for(int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
-		{
+		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
 
-			if (recipe.getOutput().isItemEqual(result)) {
+			if (recipe.getOutput().getItem() == result.getItem()) {
 				if (checkDupe(recipe)) {
 					this.arecipes.add(new CachedInfusionRecipe(recipe));
 				}
@@ -73,16 +70,13 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient)
-	{
+	public void loadUsageRecipes(ItemStack ingredient) {
 
-		for(int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
-		{
+		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
 
-			if (recipe.getInput().isItemEqual(ingredient) || recipe.getIngredient().isItemEqual(ingredient))
-			{
+			if (recipe.getInput().isItemEqual(ingredient) || recipe.getIngredient().isItemEqual(ingredient)) {
 
 				if (checkDupe(recipe)) {
 					this.arecipes.add(new CachedInfusionRecipe(recipe));
@@ -108,8 +102,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 		return true;
 	}
 
-	public class CachedInfusionRecipe extends CachedRecipe
-	{
+	public class CachedInfusionRecipe extends CachedRecipe {
 
 		private PositionedStack output;
 		private PositionedStack inputs;

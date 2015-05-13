@@ -73,7 +73,10 @@ public class SeedRegistry {
 			seed.dropMin = 3;
 			seed.ingredientAmount = itemStack.stackSize;
 			seed.isSharp = true;
-			seed.modRequired = JsonUtils.getStringForItemStack(itemStack, false, false).split(":")[0];
+			String mod = JsonUtils.getStringForItemStack(itemStack, false, false).split(":")[0];
+			if (!mod.equalsIgnoreCase("minecraft")) {
+				seed.modRequired = mod;
+			}
 			seed.seedReturn = 1;
 			seed = addSeed(seed);
 			if (seed != null) {
