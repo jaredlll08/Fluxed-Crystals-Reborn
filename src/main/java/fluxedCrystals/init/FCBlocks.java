@@ -14,6 +14,8 @@ public class FCBlocks
 {
 
 	public static Block poweredSoil= new BlockPowerBlock();
+	//	public static Block poweredSoilMana= new BlockPowerBlockMana();
+
 	public static Block crystal= new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
@@ -32,8 +34,12 @@ public class FCBlocks
 	public static void initialize()
 	{
 		GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
+
 		GameRegistry.registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
+
+		//		GameRegistry.registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA);
+		//		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
 
 		GameRegistry.registerBlock(crystal, "crystal");
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");

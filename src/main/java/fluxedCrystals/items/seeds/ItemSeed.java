@@ -8,6 +8,7 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.reference.Textures;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.util.IPowerSoil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -30,7 +31,7 @@ public class ItemSeed extends SeedBase {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
 		ItemStack seeds = stack.copy();
 		seeds.stackSize = 1;
-		if (world.getBlock(x, y, z) == FCBlocks.poweredSoil) {
+		if (world.getBlock(x, y, z) instanceof IPowerSoil) {
 			if (hitY == 1.0F) {
 				world.setBlock(x, y + 1, z, FCBlocks.crystal);
 				((TileEntityCrystal) world.getTileEntity(x, y + 1, z)).setIdx(stack.getItemDamage());

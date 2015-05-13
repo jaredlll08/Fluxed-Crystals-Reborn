@@ -2,14 +2,15 @@ package fluxedCrystals.blocks.crystal;
 
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.compat.waila.IWailaInfo;
-import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.items.ItemScythe;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.tileEntity.TileEntityPowerBlock;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.util.DamageSourceCrystal;
+import fluxedCrystals.util.IPowerSoil;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
@@ -33,7 +34,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	public BlockCrystal() {
 		setHardness(0.05F);
 		setTickRandomly(true);
-		setCreativeTab(FluxedCrystals.tab);
+		//		setCreativeTab(FluxedCrystals.tab);
 		setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":crop_stage_7");
 	}
 
@@ -55,22 +56,42 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(x, y, z);
-		TileEntityPowerBlock power = (TileEntityPowerBlock) world.getTileEntity(x, y - 1, z);
 		int index = crystal.getIdx();
 		if (world.getBlockMetadata(x, y, z) < 7) {
-			if (crystal != null && power != null) {
-				if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
-					if (power.getEnergyStored() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
-						crystal.setTicksgrown(0);
-						power.storage.extractEnergy(power.getUpgradeDrain(index), false);
+			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlock) {
+				TileEntityPowerBlock power = (TileEntityPowerBlock) world.getTileEntity(x, y - 1, z);
+
+				if (crystal != null && power != null) {
+					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
+						if (power.getEnergyStored() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
+							crystal.setTicksgrown(0);
+							power.storage.extractEnergy(power.getUpgradeDrain(index), false);
+						}
 					}
 				}
+				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getEnergyStored() >= 250) {
+					doDrop(crystal, world, x, y, z, 0, false);
+					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+					power.storage.extractEnergy(250, false);
+				}
 			}
-		}
-		if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getEnergyStored() >= 250) {
-			doDrop(crystal, world, x, y, z, 0, false);
-			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-			power.storage.extractEnergy(250, false);
+			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlockMana) {
+				TileEntityPowerBlockMana power = (TileEntityPowerBlockMana) world.getTileEntity(x, y - 1, z);
+
+				if (crystal != null && power != null) {
+					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
+						if (power.getCurrentMana() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
+							crystal.setTicksgrown(0);
+							power.recieveMana(-power.getUpgradeDrain(index));
+						}
+					}
+				}
+				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getCurrentMana() >= 250) {
+					doDrop(crystal, world, x, y, z, 0, false);
+					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+					power.recieveMana(-250);
+				}
+			}
 		}
 	}
 
@@ -315,7 +336,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	}
 
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		return world.getBlock(x, y - 1, z) == FCBlocks.poweredSoil;
+		return world.getBlock(x, y - 1, z) instanceof IPowerSoil;
 	}
 
 }

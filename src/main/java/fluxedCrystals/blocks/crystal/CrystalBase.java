@@ -3,8 +3,8 @@ package fluxedCrystals.blocks.crystal;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.util.IPowerSoil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -102,7 +102,7 @@ public abstract class CrystalBase extends Block {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 
-		return world.getBlock(x, y - 1, z) == FCBlocks.poweredSoil;
+		return world.getBlock(x, y - 1, z) instanceof IPowerSoil;
 
 	}
 
@@ -125,7 +125,7 @@ public abstract class CrystalBase extends Block {
 
 	public boolean canBlockStay(World world, int x, int y, int z) {
 
-		return world.getBlock(x, y - 1, z) == FCBlocks.poweredSoil;
+		return world.getBlock(x, y - 1, z) instanceof IPowerSoil;
 
 	}
 
