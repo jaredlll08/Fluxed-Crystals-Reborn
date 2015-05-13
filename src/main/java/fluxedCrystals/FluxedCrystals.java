@@ -38,12 +38,10 @@ public class FluxedCrystals {
 	public static int crystalRenderID;
 	public static final Lang lang = new Lang(Reference.MOD_ID);
 
-	@Mod.Instance("fluxedCrystals")
+	@Mod.Instance(Reference.MOD_ID)
 	public static FluxedCrystals instance;
 
 	public static int seedInfuserRenderID;
-	public static int glassRenderID;
-	public static int chunkRenderID;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
 	public static IProxy proxy;
@@ -63,15 +61,14 @@ public class FluxedCrystals {
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 
 		PacketHandler.init();
-
 		SeedRegistry.getInstance();
-
 		SeedRegistry.getInstance().Load();
 
 		FCItems.preInit();
 		FCBlocks.preInit();
 
 		proxy.preInit();
+
 
 		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT)
 		{
@@ -93,7 +90,6 @@ public class FluxedCrystals {
 
 		proxy.initialize();
 		proxy.registerRenderers();
-
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
 
 		LogHelper.info("Initialization Complete!");
@@ -172,9 +168,9 @@ public class FluxedCrystals {
 
 	public SeedRegistry getSeedRegistry()
 	{
-
 		return SeedRegistry.getInstance();
 
 	}
+
 
 }
