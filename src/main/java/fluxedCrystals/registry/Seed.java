@@ -18,6 +18,7 @@ public class Seed implements Serializable
 	public int dropMax = 1;
 	public int growthTime = 600;
 	public int tier = 9001;
+	public int refinerOutput = 1;
 	public int ingredientAmount = 16;
 	public int powerPerStage = 2000;
 	public int weigthedDropChance = 0;

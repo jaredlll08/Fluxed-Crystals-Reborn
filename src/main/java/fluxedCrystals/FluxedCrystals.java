@@ -140,13 +140,13 @@ public class FluxedCrystals {
 					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem())))
 					{
 
-						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, seed.getDropAmount()));
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 
 					}
 					else
 					{
 
-						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
 					}
 
@@ -154,7 +154,7 @@ public class FluxedCrystals {
 				else
 				{
 
-					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
 				}
 
