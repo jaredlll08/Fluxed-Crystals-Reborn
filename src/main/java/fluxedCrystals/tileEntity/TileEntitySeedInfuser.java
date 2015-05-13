@@ -43,7 +43,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	}
 
 	public void updateEntity() {
-		if (infusing && worldObj.getWorldTime() % 20 == 0) {
+		if (infusing && worldObj.getTotalWorldTime() % 20 == 0 && !worldObj.isRemote) {
 			infuseSeed();
 		}
 	}
@@ -220,7 +220,6 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 					infusing = false;
 					infused = 0;
 					setRecipeIndex(-1);
-					PacketHandler.INSTANCE.sendToDimension(new MessageSeedInfuser(xCoord, yCoord, zCoord, getRecipeIndex()), worldObj.provider.dimensionId);
 					return true;
 
 				}

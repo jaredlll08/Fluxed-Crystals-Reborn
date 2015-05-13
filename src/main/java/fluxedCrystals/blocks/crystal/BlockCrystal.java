@@ -67,7 +67,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 				}
 			}
 		}
-		if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(new ItemStack(FCItems.upgradeAutomation)) && power.getEnergyStored() >= 250) {
+		if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getEnergyStored() >= 250) {
 			doDrop(crystal, world, x, y, z, 0, false);
 			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
 			power.storage.extractEnergy(250, false);

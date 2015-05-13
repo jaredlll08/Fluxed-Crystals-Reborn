@@ -46,19 +46,18 @@ public class GUIGemCutter extends GuiContainer
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		drawTexturedModalRect(guiLeft + 14, guiTop + 15, 177, 4, 14, 42);
-		if (tile.getEnergyStored() > 0 && !tile.isUpgradeActive(new ItemStack(FCItems.upgradeMana)) && !tile.isUpgradeActive(new ItemStack(FCItems.upgradeEssentia)) && !tile.isUpgradeActive(new ItemStack(FCItems.upgradeLP))) {
-			GL11.glColor4d(tile.getEnergyColor() / 10000, tile.getEnergyColor() / 10000, tile.getEnergyColor() / 10000, 1f);
+		if (!tile.isUpgradeActive(FCItems.upgradeMana) && !tile.isUpgradeActive(FCItems.upgradeEssentia) && !tile.isUpgradeActive(FCItems.upgradeLP)) {
+			GL11.glColor4d(tile.getEnergyColor(), tile.getEnergyColor(), tile.getEnergyColor(), 1f);
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 4, 14, 42);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}
-		if (tile.isUpgradeActive(new ItemStack(FCItems.upgradeMana))) {
+		if (tile.isUpgradeActive(FCItems.upgradeMana)) {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 47, 14, 42);
 		}
-		if (tile.isUpgradeActive(new ItemStack(FCItems.upgradeLP))) {
+		if (tile.isUpgradeActive(FCItems.upgradeLP)) {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 90, 14, 42);
 		}
-		if (tile.isUpgradeActive(new ItemStack(FCItems.upgradeEssentia))) {
+		if (tile.isUpgradeActive(FCItems.upgradeEssentia)) {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 133, 14, 42);
 		}
 		GL11.glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
