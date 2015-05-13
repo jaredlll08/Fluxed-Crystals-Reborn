@@ -5,8 +5,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.recipe.RecipeGemCutter;
+import fluxedCrystals.recipe.RecipeGemRefiner;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
 import tterrag.core.common.json.JsonUtils;
@@ -73,7 +79,44 @@ public class SeedRegistry
 			seed.ingredient = JsonUtils.getStringForItemStack(itemStack, true, false);
 			seed.weightedDrop = "";
 
-			return addSeed(seed);
+			seed = addSeed(seed);
+
+			if (seed != null)
+			{
+
+				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed),
+						seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
+
+				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
+
+				if (seed.weightedDrop != null && !seed.weightedDrop.equals(""))
+				{
+
+					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem())))
+					{
+
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getWeightedDrop(), seed.refinerAmount, seed.getDropAmount()));
+
+					}
+					else
+					{
+
+						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+
+					}
+
+				}
+				else
+				{
+
+					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.getDropAmount()));
+
+				}
+
+			}
+
+			return seed;
+
 
 		}
 

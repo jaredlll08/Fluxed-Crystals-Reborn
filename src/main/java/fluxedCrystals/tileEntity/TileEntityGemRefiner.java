@@ -340,7 +340,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	public int refineShard() {
 		int energyUsed = 0;
 
-		if (getRecipeIndex() != -1)
+		if (getRecipeIndex() != -1 && getStackInSlot(0) != null)
 		{
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
@@ -366,7 +366,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	public boolean refine() {
 
-		if (getRecipeIndex() != -1) {
+		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
@@ -393,7 +393,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	public boolean refineMana() {
-		if (getRecipeIndex() != -1) {
+		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
@@ -420,7 +420,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	public boolean refineLP() {
-		if (getRecipeIndex() != -1) {
+		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
@@ -447,7 +447,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	public boolean refineEssentia() {
-		if (getRecipeIndex() != -1) {
+		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
