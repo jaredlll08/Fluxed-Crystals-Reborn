@@ -26,6 +26,7 @@ public class BlockPowerBlockMana extends Block implements ITileEntityProvider, I
 		this.setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA);
 		this.setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Blocks.POWEREDSOILMANA);
 		this.setCreativeTab(FluxedCrystals.tab);
+		setStepSound(Block.soundTypeGrass);
 	}
 
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {

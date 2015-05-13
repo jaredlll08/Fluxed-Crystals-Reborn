@@ -26,6 +26,7 @@ public class BlockPowerBlock extends Block implements ITileEntityProvider, IPowe
 		this.setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL);
 		this.setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Blocks.POWEREDSOIL + "RF");
 		this.setCreativeTab(FluxedCrystals.tab);
+		setStepSound(Block.soundTypeGrass);
 	}
 
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
