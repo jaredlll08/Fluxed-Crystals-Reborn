@@ -3,7 +3,6 @@ package fluxedCrystals.tileEntity;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import fluxedCrystals.network.PacketHandler;
-import fluxedCrystals.network.message.MessageEnergyUpdate;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -15,33 +14,15 @@ public abstract class TileEnergyBase extends TileEntity implements IEnergyHandle
 	public EnergyStorage storage;
 	protected int capacity;
 
-	private int lastStored = 0;
-
 	public TileEnergyBase (int cap) {
 		super();
 		init(cap);
 	}
 
-	public int getEnergyRemainingScaled(int amount) {
-		if (storage.getEnergyStored() == storage.getMaxEnergyStored()) {
-			return storage.getMaxEnergyStored() - 1;
-		}
-		if (storage.getEnergyStored() == 0) {
-			return 1;
-		}
-		return storage.getEnergyStored() * amount / storage.getMaxEnergyStored();
-	}
-
 	public double getEnergyColor() {
 		double energy = storage.getEnergyStored();
 		double maxEnergy = storage.getMaxEnergyStored();
-		if (energy == energy) {
-			return energy - 1;
-		}
-		if (energy == 0) {
-			return 1;
-		}
-		return (energy / 255);
+		return energy / maxEnergy;
 	}
 
 	private void init(int cap) {
@@ -57,16 +38,7 @@ public abstract class TileEnergyBase extends TileEntity implements IEnergyHandle
 		super.updateEntity();
 		if (!worldObj.isRemote) {
 			pushEnergy();
-
-			if (getEnergyStored() != lastStored) {
-				sendPacket();
-				lastStored = getEnergyStored();
-			}
 		}
-	}
-
-	public void sendPacket() {
-		PacketHandler.INSTANCE.sendToDimension(new MessageEnergyUpdate(xCoord, yCoord, zCoord, getEnergyStored()), worldObj.provider.dimensionId);
 	}
 
 	protected void pushEnergy() {

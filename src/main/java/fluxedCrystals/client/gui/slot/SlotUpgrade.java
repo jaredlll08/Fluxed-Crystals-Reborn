@@ -18,6 +18,9 @@ public class SlotUpgrade extends Slot
 	}
 
 	public boolean isItemValid(ItemStack stack) {
-		return stack.getItem() instanceof IUpgrade && !stack.isItemEqual(new ItemStack(FCItems.upgradeRangeAdvanced)) && !stack.isItemEqual(new ItemStack(FCItems.upgradeRangeBasic)) && !stack.isItemEqual(new ItemStack(FCItems.upgradeRangeGreater));
+		return stack.getItem() instanceof IUpgrade
+				&& stack.getItem() != FCItems.upgradeRangeAdvanced
+				&& stack.getItem() != FCItems.upgradeRangeBasic
+				&& stack.getItem() != FCItems.upgradeRangeGreater;
 	}
 }
