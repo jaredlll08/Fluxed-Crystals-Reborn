@@ -70,17 +70,20 @@ public class SeedRegistry
 		if (itemStack != null)
 		{
 
-			itemStack.stackSize = 1;
 
 			Seed seed = new Seed();
 
 			seed.seedID = SeedRegistry.getInstance().getNextID();
 			seed.name = itemStack.getDisplayName();
 			seed.ingredient = JsonUtils.getStringForItemStack(itemStack, true, false);
-			seed.weightedDrop = "";
-
+			seed.weightedDrop = JsonUtils.getStringForItemStack(itemStack, true, true);
+			seed.dropMax = 8;
+			seed.dropMin = 3;
+			seed.ingredientAmount = itemStack.stackSize;
+			seed.isSharp = true;
+			seed.modRequired = JsonUtils.getStringForItemStack(itemStack, false, false).split(":")[0];
+			seed.seedReturn = 1;
 			seed = addSeed(seed);
-
 			if (seed != null)
 			{
 

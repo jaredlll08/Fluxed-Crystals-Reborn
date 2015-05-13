@@ -1,10 +1,9 @@
 package fluxedCrystals.reference;
 
-public class Reference
-{
+public class Reference {
 
 	public static final String MOD_ID = "fluxedcrystals";
-	public static final String LOWERCASE_MOD_ID = MOD_ID.toLowerCase();		// Not needed with this MOD_ID, but here so we can use it incase the MOD_ID changes
+	public static final String LOWERCASE_MOD_ID = MOD_ID.toLowerCase();        // Not needed with this MOD_ID, but here so we can use it incase the MOD_ID changes
 	public static final String MOD_NAME = "FluxedCrystals";
 	public static final String VERSION = "@VERSION@";
 
