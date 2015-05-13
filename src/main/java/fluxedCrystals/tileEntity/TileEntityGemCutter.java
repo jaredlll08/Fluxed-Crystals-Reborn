@@ -3,11 +3,11 @@ package fluxedCrystals.tileEntity;
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.network.PacketHandler;
-import fluxedCrystals.network.message.MessageGemCutter;
 import fluxedCrystals.recipe.RecipeGemCutter;
 import fluxedCrystals.recipe.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -25,23 +25,15 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	public ItemStack[] items;
 
-	private boolean cutting = false;
 	private int cut = 0;
 	private int timePerCut = 0;
 
+	// -1 if not currently working on any valid recipe
 	private int recipeIndex;
 
 	public int mana;
 	public int MAX_MANA;
 	public boolean RF = true;
-
-	public boolean isCutting() {
-		return cutting;
-	}
-
-	public void setCutting(boolean cutting) {
-		this.cutting = cutting;
-	}
 
 	public int getTimePerCut() {
 		return timePerCut;
@@ -73,22 +65,16 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	public void updateEntity() {
 		super.updateEntity();
-		if (!worldObj.isRemote && getStackInSlot(0) != null && !cutting) {
-			PacketHandler.INSTANCE.sendToDimension(new MessageGemCutter(xCoord, yCoord, zCoord), worldObj.provider.dimensionId);
-		}
-		if (worldObj.isRemote && getStackInSlot(0) != null && !cutting) {
-			PacketHandler.INSTANCE.sendToServer(new MessageGemCutter(xCoord, yCoord, zCoord));
-		}
-		if (worldObj != null) {
+		if (worldObj != null && !worldObj.isRemote) {
 			if (storage.getEnergyStored() > 0) {
-				if (!isUpgradeActive(new ItemStack(FCItems.upgradeMana)) && !isUpgradeActive(new ItemStack(FCItems.upgradeLP)) && !isUpgradeActive(new ItemStack(FCItems.upgradeEssentia))) {
+				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
 					if (getStackInSlot(1) != null) {
-						if (worldObj.getWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency() && getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency() && getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
 							refine();
 							return;
 						}
 					} else {
-						if (worldObj.getWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency()) {
+						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency()) {
 							refine();
 							return;
 						}
@@ -98,25 +84,22 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		}
 	}
 
-	public boolean isUpgradeActive(ItemStack stack) {
-		return (getUpgradeSlotOne() != null && getUpgradeSlotOne().isItemEqual(stack)) || (getUpgradeSlotTwo() != null && getUpgradeSlotTwo().isItemEqual(stack)) || (getUpgradeSlotThree() != null && getUpgradeSlotThree().isItemEqual(stack));
-	}
-
-	public ArrayList<ItemStack> getUpgrades() {
-		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		list.add(getUpgradeSlotOne());
-		list.add(getUpgradeSlotTwo());
-		list.add(getUpgradeSlotThree());
-		return list;
+	public boolean isUpgradeActive(Item upgradeItem) {
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack stack = getStackInSlot(slot);
+			if (stack != null && stack.getItem() == upgradeItem) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int getSpeed() {
 		int speed = 100;
-		for (ItemStack item : getUpgrades()) {
-			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-					speed -= 20;
-				}
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
+			if (item != null && item.getItem() == FCItems.upgradeSpeed) {
+				speed -= 20;
 			}
 		}
 		return speed;
@@ -124,47 +107,25 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	public int getEffeciency() {
 		int eff = 250;
-		for (ItemStack item : getUpgrades()) {
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
 			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-					eff += 15;
+				if (item.getItem() == FCItems.upgradeSpeed) {
+					eff += 30;
 				}
-
-			}
-		}
-		for (ItemStack item : getUpgrades()) {
-			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-					eff += 15;
-				}
-
-			}
-		}
-		for (ItemStack item : getUpgrades()) {
-			if (item != null) {
-				if (item.isItemEqual(new ItemStack(FCItems.upgradeEffeciency))) {
+				if (item.getItem() == FCItems.upgradeEffeciency) {
 					eff -= 25;
 				}
 			}
 		}
 
-		if (eff == 0) {
+		if (eff <= 0) {
 			eff = 1;
 		}
 		return eff;
 	}
-
-	public ItemStack getUpgradeSlotOne() {
-		return getStackInSlot(2);
-	}
-
-	public ItemStack getUpgradeSlotTwo() {
-		return getStackInSlot(3);
-	}
-
-	public ItemStack getUpgradeSlotThree() {
-		return getStackInSlot(4);
-	}
+	
+	private final int[] UPGRADE_SLOTS = {2, 3, 4};
 
 	@Override
 	public void closeInventory() {
@@ -261,11 +222,21 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		
+		boolean changedItem;
+		if(items[i] == null || itemstack == null)
+			changedItem = (items[i] == null) != (itemstack == null); // non-null to null, or vice versa
+		else
+			changedItem = !items[i].isItemEqual(itemstack);
+		
 		items[i] = itemstack;
-
+		
 		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
+		
+		if(i == 0 && changedItem)
+			updateCurrentRecipe();
 	}
 
 	public boolean addInventorySlotContents(int i, ItemStack itemstack) {
@@ -288,10 +259,11 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public void readFromNBT(NBTTagCompound tags) {
 		super.readFromNBT(tags);
 		readInventoryFromNBT(tags);
-		cutting = tags.getBoolean("cutting");
 		cut = tags.getInteger("cut");
 		setRecipeIndex(tags.getInteger("recipeIndex"));
 		mana = tags.getInteger("mana");
+		
+		updateCurrentRecipe();
 	}
 
 	public void readInventoryFromNBT(NBTTagCompound tags) {
@@ -309,7 +281,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public void writeToNBT(NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		writeInventoryToNBT(tags);
-		tags.setBoolean("cutting", cutting);
 		tags.setInteger("cut", cut);
 		tags.setInteger("recipeIndex", getRecipeIndex());
 		tags.setInteger("mana", mana);
@@ -340,22 +311,17 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 					cut++;
 					storage.extractEnergy(250, false);
 
-					if (cut == recipe.getInputamount()) {
+					if (cut >= recipe.getInputamount()) {
 						ItemStack out = recipe.getOutput().copy();
 						out.stackSize = recipe.getOutputAmount();
 						addInventorySlotContents(1, out);
-						cutting = false;
 						cut = 0;
-						setRecipeIndex(-1);
-
 					}
 				}
 				return true;
 			}
 		}
 		cut = 0;
-		setRecipeIndex(-1);
-		cutting = false;
 		return false;
 	}
 
@@ -372,7 +338,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 						addInventorySlotContents(1, out);
 						out.stackSize = recipe.getOutputAmount();
 						mana -= 500;
-						cutting = false;
 						cut = 0;
 						setRecipeIndex(-1);
 
@@ -382,8 +347,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			}
 		}
 		cut = 0;
-		setRecipeIndex(-1);
-		cutting = false;
 		return false;
 	}
 
@@ -399,7 +362,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 						ItemStack out = recipe.getOutput().copy();
 						out.stackSize = recipe.getOutputAmount();
 						addInventorySlotContents(1, out);
-						cutting = false;
 						cut = 0;
 						setRecipeIndex(-1);
 
@@ -409,8 +371,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			}
 		}
 		cut = 0;
-		setRecipeIndex(-1);
-		cutting = false;
 		return false;
 	}
 
@@ -425,7 +385,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 						ItemStack out = recipe.getOutput().copy();
 						addInventorySlotContents(1, out);
 						out.stackSize = recipe.getOutputAmount();
-						cutting = false;
 						cut = 0;
 						setRecipeIndex(-1);
 
@@ -435,30 +394,21 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			}
 		}
 		cut = 0;
-		setRecipeIndex(-1);
-		cutting = false;
 		return false;
 	}
 
-	public void setRefining(boolean infusing) {
-		this.cutting = infusing;
-		setRecipeIndex(-1);
-		if (getStackInSlot(0) != null) {
-
-			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
-
-				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
-
-				if (recipeGemCutter.matchesExact(getStackInSlot(0))) {
-
-					setRecipeIndex(i);
-					break;
-
-				}
-
-			}
-
-		}
+ 	public void updateCurrentRecipe() {
+  		setRecipeIndex(-1);
+  		ItemStack inputStack = getStackInSlot(0);
+  		if (inputStack != null && inputStack.stackSize > 0) {
+  			for (int id : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
+  				RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(id);
+ 				if (recipe.matchesExact(inputStack)) {
+  					setRecipeIndex(id);
+  					break;
+  				}
+  			}
+  		}
 	}
 
 	@Override
@@ -496,37 +446,8 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		return true;
 	}
 
-	public int getEnergyRemainingScaled(int amount) {
-		if (storage.getEnergyStored() == storage.getMaxEnergyStored()) {
-			return storage.getMaxEnergyStored() - 1;
-		}
-		if (storage.getEnergyStored() == 0) {
-			return 1;
-		}
-		return storage.getEnergyStored() * amount / storage.getMaxEnergyStored();
-
-	}
-
-	public double getEnergyColor() {
-		double energy = storage.getEnergyStored();
-		double maxEnergy = storage.getMaxEnergyStored();
-		if (energy == energy) {
-			return energy - 1;
-		}
-		if (energy == 0) {
-			return 1;
-		}
-		return (energy / 255);
-	}
-
 	public double getManaColor() {
-		if (getCurrentMana() == MAX_MANA) {
-			return getCurrentMana() - 1;
-		}
-		if (getCurrentMana() == 0) {
-			return 1;
-		}
-		return (mana / 255);
+		return getCurrentMana() * 255 / MAX_MANA;
 	}
 
 	private static int[] slotsAll = { 0, 1, 2, 3, 4, 5, 6 };

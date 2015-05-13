@@ -6,6 +6,7 @@ import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -191,113 +192,86 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return false;
 	}
-
-	public ItemStack getUpgradeOne() {
-		return items[0];
-	}
-
-	public ItemStack getUpgradeTwo() {
-		return items[1];
-	}
-
-	public ItemStack getUpgradeThree() {
-		return items[2];
-	}
+	
+	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 
 	public boolean addUpgrade(ItemStack stack) {
 		ItemStack upgrade = stack.copy();
-		if (getUpgradeOne() == null) {
-			upgrade.stackSize = 1;
-			setInventorySlotContents(0, upgrade);
-			return true;
-		}
-		if (getUpgradeTwo() == null) {
-			upgrade.stackSize = 1;
-			setInventorySlotContents(1, upgrade);
-			return true;
-		}
-		if (getUpgradeThree() == null) {
-			upgrade.stackSize = 1;
-			setInventorySlotContents(2, upgrade);
-			return true;
-		}
-		return false;
+ 		upgrade.stackSize = 1;
+ 		
+ 		for(int slot : UPGRADE_SLOTS) {
+ 			if(getStackInSlot(slot) == null) {
+ 				setInventorySlotContents(slot, upgrade);
+ 				return true;
+ 			}
+  		}
+  		return false;
 	}
 
-	public ArrayList<ItemStack> getUpgrades() {
-		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		list.add(getUpgradeOne());
-		list.add(getUpgradeTwo());
-		list.add(getUpgradeThree());
-		return list;
-	}
 
 	public ItemStack removeUpgrade() {
-		ItemStack stack = null;
-		if (getStackInSlot(2) != null && stack == null) {
-			stack = getStackInSlot(2).copy();
-			setInventorySlotContents(2, null);
-		}
-		if (getStackInSlot(1) != null && stack == null) {
-			stack = getStackInSlot(1).copy();
-			setInventorySlotContents(1, null);
-		}
-		if (getStackInSlot(0) != null && stack == null) {
-			stack = getStackInSlot(0).copy();
-			setInventorySlotContents(0, null);
-		}
-		return stack;
+ 		for(int slot : UPGRADE_SLOTS) {
+ 			ItemStack stack = getStackInSlot(slot);
+ 			if(stack != null) {
+ 				setInventorySlotContents(slot, null);
+ 				return stack;
+ 			}
+  		}
+		return null;
 	}
 
 	public int getSpeed() {
 		int speed = 8;
-		for (ItemStack item : getUpgrades()) {
-			if (item != null) {
-				 if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-				speed += 2;
-				 }
-			}
+		for (int slot : UPGRADE_SLOTS) {
+ 			ItemStack item = getStackInSlot(slot);
+ 			if (item != null && item.getItem() == FCItems.upgradeSpeed) {
+ 				speed += 2;
+ 			}
 		}
 		return speed;
 	}
 
 	public int getEffeciency() {
-		int eff = 0;
-		for (ItemStack item : getUpgrades()) {
-			if (item != null) {
-				 if (item.isItemEqual(new
-				 ItemStack(FCItems.upgradeEffeciency))) {
-				eff += 15;
-				 }
-			}
-		}
-		if (eff == 0) {
-			eff = 1;
-		}
-		return eff;
+ 		int eff = 0;
+ 		for (int slot : UPGRADE_SLOTS) {
+ 			ItemStack item = getStackInSlot(slot);
+ 			if (item != null && item.getItem() == FCItems.upgradeEffeciency) {
+ 				eff += 15;
+ 			}
+ 		}
+ 		if (eff <= 0) {
+ 			eff = 1;
+ 		}
+ 		return eff;
 	}
 
-	public boolean isUpgradeActive(ItemStack stack) {
-		return (getUpgradeOne() != null && getUpgradeOne().isItemEqual(stack)) || (getUpgradeTwo() != null && getUpgradeTwo().isItemEqual(stack)) || (getUpgradeThree() != null && getUpgradeThree().isItemEqual(stack));
+	public boolean isUpgradeActive(Item upgradeItem) {
+ 		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
+ 			if(item != null && item.getItem() == upgradeItem)
+ 				return true;
+ 		}
+ 		return false;
 	}
 
 	public int getUpgradeDrain(int idx) {
 		int energy = SeedRegistry.getInstance().getSeedByID(idx).powerPerStage;
 
-		for (ItemStack item : getUpgrades()) {
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
 			if (item != null) {
-				 if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
-				energy += energy / 15;
-				 }
-				 if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
-				energy += energy / 12;
-				 }
+				if (item.isItemEqual(new ItemStack(FCItems.upgradeNight))) {
+					energy += energy / 15;
+				}
+				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
+					energy += energy / 12;
+				}
 			}
 		}
 
-		 if (isUpgradeActive(new ItemStack(FCItems.upgradeEffeciency))) {
-		energy /= getEffeciency();
-		 }
+		if (isUpgradeActive(FCItems.upgradeEffeciency)) {
+			energy /= getEffeciency();
+		}
 
 		return energy;
 	}
