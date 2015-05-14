@@ -98,9 +98,8 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 				if (crystal != null && power != null) {
 					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
-						if (power.drainEnergy(power.getUpgradeDrain(index)) && growCrop(world, x, y, z, rand, true)) {
+						if (power.drainEnergy(power.getUpgradeDrain(index)/4) && growCrop(world, x, y, z, rand, true)) {
 							crystal.setTicksgrown(0);
-
 						}
 					}
 				}

@@ -20,7 +20,7 @@ public class Names {
 
 		public static final String POWEREDSOIL = "poweredSoil";
 		public static final String POWEREDSOILMANA = POWEREDSOIL + "Mana";
-		public static final String POWEREDSOILLP = POWEREDSOIL + "LP";
+		public static final String POWEREDSOILLP = POWEREDSOIL + "Blood";
 
 
 		public static final String SEED_INFUSER = "seedInfuser";
