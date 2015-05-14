@@ -1,58 +1,49 @@
 package WayofTime.alchemicalWizardry.api.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
 
-public class SpellParadigmSelf extends SpellParadigm
-{
-    public List<ISelfSpellEffect> selfSpellEffectList;
+import java.util.ArrayList;
+import java.util.List;
 
-    public SpellParadigmSelf()
-    {
-        selfSpellEffectList = new ArrayList();
-    }
+public class SpellParadigmSelf extends SpellParadigm {
+	public List<ISelfSpellEffect> selfSpellEffectList;
 
-    @Override
-    public void enhanceParadigm(SpellEnhancement enh)
-    {
+	public SpellParadigmSelf() {
+		selfSpellEffectList = new ArrayList();
+	}
 
-    }
+	@Override
+	public void enhanceParadigm(SpellEnhancement enh) {
 
-    @Override
-    public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack)
-    {
-        this.applyAllSpellEffects();
-        
-        int cost = this.getTotalCost();
-        
-        if(!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost))
-        {
-        	return;
-        }
+	}
 
-        for (ISelfSpellEffect eff : selfSpellEffectList)
-        {
-            eff.onSelfUse(world, entityPlayer);
-        }
-    }
+	@Override
+	public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
+		this.applyAllSpellEffects();
 
-    public void addSelfSpellEffect(ISelfSpellEffect eff)
-    {
-        if (eff != null)
-        {
-            this.selfSpellEffectList.add(eff);
-        }
-    }
+		int cost = this.getTotalCost();
 
-    @Override
-    public int getDefaultCost()
-    {
-        return 100;
-    }
+		if (!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost)) {
+			return;
+		}
+
+		for (ISelfSpellEffect eff : selfSpellEffectList) {
+			eff.onSelfUse(world, entityPlayer);
+		}
+	}
+
+	public void addSelfSpellEffect(ISelfSpellEffect eff) {
+		if (eff != null) {
+			this.selfSpellEffectList.add(eff);
+		}
+	}
+
+	@Override
+	public int getDefaultCost() {
+		return 100;
+	}
 
 }

@@ -6,11 +6,10 @@ import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
-public class SlotCustom extends Slot
-{
+public class SlotCustom extends Slot {
 
-	ArrayList<ItemStack> validItems = new ArrayList<ItemStack>();
 	public int slotMax;
+	ArrayList<ItemStack> validItems = new ArrayList<ItemStack>();
 
 	public SlotCustom(IInventory inventory, int number, int x, int y, int slotMax, ItemStack... validItems) {
 		super(inventory, number, x, y);
@@ -20,10 +19,11 @@ public class SlotCustom extends Slot
 		this.slotMax = slotMax;
 	}
 
-	public int getSlotStackLimit(){
-		
+	public int getSlotStackLimit() {
+
 		return slotMax;
 	}
+
 	public boolean isItemValid(ItemStack stack) {
 		if (validItems.isEmpty()) {
 			return false;

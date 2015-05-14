@@ -11,8 +11,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
-public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler
-{
+public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
@@ -32,9 +31,9 @@ public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler
 			Tessellator tess = Tessellator.instance;
 			tess.setColorOpaque_I(color);
 			float red = (color >> 16 & 255) / 255.0F;
-	        float green = (color >> 8 & 255) / 255.0F;
-	        float blue = (color & 255) / 255.0F;
-			renderer.setOverrideBlockTexture(((BlockSeedInfuser)block).textures[1]);
+			float green = (color >> 8 & 255) / 255.0F;
+			float blue = (color & 255) / 255.0F;
+			renderer.setOverrideBlockTexture(((BlockSeedInfuser) block).textures[1]);
 			renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, red, green, blue);
 			renderer.clearOverrideBlockTexture();
 		}

@@ -4,21 +4,16 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import fluxedCrystals.init.FCItems;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RoughShardHandler extends TemplateRecipeHandler {
+
+	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
 	public String getGuiTexture() {
@@ -35,18 +30,16 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 		return 1;
 	}
 
-	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
-
 	@Override
 	public void drawBackground(int recipe) {
-		 GuiDraw.drawTexturedModalRect(5, 5, 0, 166, 18, 18);
-		GuiDraw.fontRenderer.drawSplitString("You get Rough Shards by breaking Crystals in the world.", 19,38,125,0);
+		GuiDraw.drawTexturedModalRect(5, 5, 0, 166, 18, 18);
+		GuiDraw.fontRenderer.drawSplitString("You get Rough Shards by breaking Crystals in the world.", 19, 38, 125, 0);
 	}
 
 	@Override
 	public void drawExtras(int recipe) {
 		CachedShard r = (CachedShard) arecipes.get(recipe);
-		int coords2[] = { 0, 0 };
+		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 
@@ -70,20 +63,6 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 
 	}
 
-	private class CachedShard extends CachedRecipe {
-		int index;
-
-		public CachedShard(int index) {
-			this.index = index;
-		}
-
-		@Override
-		public PositionedStack getResult() {
-			return new PositionedStack(new ItemStack(FCItems.shardRough, 1, index), 75, 5);
-		}
-
-	}
-
 	private boolean checkDupe(Seed recipe) {
 		for (Object o : this.arecipes.toArray()) {
 			if (o instanceof Seed) {
@@ -99,6 +78,20 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 	@Override
 	public String getOverlayIdentifier() {
 		return "seedInfuser";
+	}
+
+	private class CachedShard extends CachedRecipe {
+		int index;
+
+		public CachedShard(int index) {
+			this.index = index;
+		}
+
+		@Override
+		public PositionedStack getResult() {
+			return new PositionedStack(new ItemStack(FCItems.shardRough, 1, index), 75, 5);
+		}
+
 	}
 
 }

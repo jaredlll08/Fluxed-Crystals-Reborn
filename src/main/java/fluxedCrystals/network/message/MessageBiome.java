@@ -8,16 +8,15 @@ import fluxedCrystals.util.Utils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class MessageBiome implements IMessage, IMessageHandler<MessageBiome, IMessage>
-{
+public class MessageBiome implements IMessage, IMessageHandler<MessageBiome, IMessage> {
 	private int x;
 	private int z;
 	private int biome;
 
-	public MessageBiome () {
+	public MessageBiome() {
 	}
 
-	public MessageBiome (int x, int z, int biome) {
+	public MessageBiome(int x, int z, int biome) {
 		this.x = x;
 		this.z = z;
 		this.biome = biome;

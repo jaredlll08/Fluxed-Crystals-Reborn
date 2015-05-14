@@ -10,12 +10,23 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class ClientEventHandler
-{
+public class ClientEventHandler {
 
 	public boolean resetRender;
 	public float trans = 0;
 	public boolean descending;
+
+	public static void render3DItem(EntityItem item) {
+
+		GL11.glPushMatrix();
+		GL11.glDepthMask(true);
+		GL11.glRotatef(90, 90, 0, 1);
+
+		item.hoverStart = 0.0F;
+
+		RenderManager.instance.func_147939_a(item, 0.0, -0.1, -0.3, 0, 0, false);
+		GL11.glPopMatrix();
+	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void render(RenderLivingEvent.Pre event) {
@@ -51,18 +62,6 @@ public class ClientEventHandler
 			GL11.glDisable(3042);
 			resetRender = false;
 		}
-	}
-
-	public static void render3DItem(EntityItem item) {
-
-		GL11.glPushMatrix();
-		GL11.glDepthMask(true);
-		GL11.glRotatef(90, 90, 0, 1);
-
-		item.hoverStart = 0.0F;
-
-		RenderManager.instance.func_147939_a(item, 0.0, -0.1, -0.3, 0, 0, false);
-		GL11.glPopMatrix();
 	}
 
 }

@@ -2,11 +2,11 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Mar 6, 2014, 9:07:40 AM (GMT)]
  */
 package vazkii.botania.api.mana;
@@ -37,6 +37,7 @@ public interface IManaItem {
 
 	/**
 	 * Can this item receive mana from a mana Pool?
+	 *
 	 * @param pool The pool it's receiving mana from, can be casted to IManaPool.
 	 * @see IManaPool#isOutputtingPower()
 	 */
@@ -49,10 +50,11 @@ public interface IManaItem {
 
 	/**
 	 * Can this item export mana to a mana Pool?
+	 *
 	 * @param pool The pool it's exporting mana to, can be casted to IManaPool.
 	 * @see IManaPool#isOutputtingPower()
 	 */
-	public boolean canExportManaToPool(ItemStack stack,TileEntity pool);
+	public boolean canExportManaToPool(ItemStack stack, TileEntity pool);
 
 	/**
 	 * Can this item export mana to another item?

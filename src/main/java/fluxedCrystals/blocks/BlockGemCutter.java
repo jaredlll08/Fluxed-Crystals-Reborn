@@ -12,9 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockGemCutter extends Block implements ITileEntityProvider
-{
-	public BlockGemCutter () {
+public class BlockGemCutter extends Block implements ITileEntityProvider {
+	public BlockGemCutter() {
 		super(Material.anvil);
 		this.setHardness(2.0F);
 		setHarvestLevel("pickaxe", 2);
@@ -24,7 +23,7 @@ public class BlockGemCutter extends Block implements ITileEntityProvider
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
-			player.openGui(FluxedCrystals.instance, 7, world, x, y, z);
+		player.openGui(FluxedCrystals.instance, 7, world, x, y, z);
 		return true;
 	}
 
@@ -37,11 +36,10 @@ public class BlockGemCutter extends Block implements ITileEntityProvider
 		TileEntityGemCutter tile = (TileEntityGemCutter) world.getTileEntity(x, y, z);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				if (tile.getStackInSlot(i) != null)
-					dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
+				if (tile.getStackInSlot(i) != null) dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
 			}
 		}
-		
+
 	}
 
 }

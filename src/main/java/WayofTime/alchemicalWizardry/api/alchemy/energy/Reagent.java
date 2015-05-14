@@ -1,52 +1,42 @@
 package WayofTime.alchemicalWizardry.api.alchemy.energy;
 
-public class Reagent
-{
-    public final String name;
+public class Reagent {
+	public static final int REAGENT_SIZE = 1000;
+	public final String name;
+	private int colourRed = 0;
+	private int colourGreen = 0;
+	private int colourBlue = 0;
+	private int colourIntensity = 255;
 
-    public static final int REAGENT_SIZE = 1000;
+	public Reagent(String name) {
+		this.name = name;
+	}
 
-    private int colourRed = 0;
-    private int colourGreen = 0;
-    private int colourBlue = 0;
-    private int colourIntensity = 255;
+	public void setColour(int red, int green, int blue, int intensity) {
+		this.colourRed = red;
+		this.colourGreen = green;
+		this.colourBlue = blue;
+		this.colourIntensity = intensity;
+	}
 
-    public Reagent(String name)
-    {
-        this.name = name;
-    }
+	public int getColourRed() {
+		return colourRed;
+	}
 
-    public void setColour(int red, int green, int blue, int intensity)
-    {
-        this.colourRed = red;
-        this.colourGreen = green;
-        this.colourBlue = blue;
-        this.colourIntensity = intensity;
-    }
+	public int getColourGreen() {
+		return colourGreen;
+	}
 
-    public int getColourRed()
-    {
-        return colourRed;
-    }
+	public int getColourBlue() {
+		return colourBlue;
+	}
 
-    public int getColourGreen()
-    {
-        return colourGreen;
-    }
+	public int getColourIntensity() {
+		return colourIntensity;
+	}
 
-    public int getColourBlue()
-    {
-        return colourBlue;
-    }
-
-    public int getColourIntensity()
-    {
-        return colourIntensity;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        return o instanceof Reagent ? this == o && name.equals(((Reagent) o).name) : false;
-    }
+	@Override
+	public boolean equals(Object o) {
+		return o instanceof Reagent ? this == o && name.equals(((Reagent) o).name) : false;
+	}
 }

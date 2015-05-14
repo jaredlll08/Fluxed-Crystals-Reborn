@@ -2,9 +2,8 @@ package cofh.api.inventory;
 
 /**
  * Marks a block which will retain its inventory when broken.
- * 
+ *
  * @author King Lemming
- * 
  */
 public interface IInventoryRetainer {
 

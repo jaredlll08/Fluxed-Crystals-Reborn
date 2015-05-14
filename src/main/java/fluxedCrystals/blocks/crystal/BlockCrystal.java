@@ -7,7 +7,8 @@ import fluxedCrystals.items.ItemScythe;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityPowerBlock;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.util.DamageSourceCrystal;
 import fluxedCrystals.util.IPowerSoil;
@@ -49,8 +50,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 		if (SeedRegistry.getInstance().getSeedByID(crop.getIdx()).isSharp) {
 			if (!world.isRemote)
-				if (entity instanceof EntityPlayer)
-					entity.attackEntityFrom(new DamageSourceCrystal(), 1.0f);
+				if (entity instanceof EntityPlayer) entity.attackEntityFrom(new DamageSourceCrystal(), 1.0f);
 		}
 	}
 
@@ -92,12 +92,29 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 					power.recieveMana(-250);
 				}
 			}
+
+			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlockLP) {
+				TileEntityPowerBlockLP power = (TileEntityPowerBlockLP) world.getTileEntity(x, y - 1, z);
+
+				if (crystal != null && power != null) {
+					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
+						if (power.drainEnergy(power.getUpgradeDrain(index)) && growCrop(world, x, y, z, rand, true)) {
+							crystal.setTicksgrown(0);
+
+						}
+					}
+				}
+				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.drainEnergy(250)) {
+					doDrop(crystal, world, x, y, z, 0, false);
+					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+				}
+			}
 		}
 	}
 
 	private void doDrop(TileEntityCrystal crop, World world, int x, int y, int z, int itemMultiplier, boolean seed) {
 		if (seed)
-		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, SeedRegistry.getInstance().getSeedByID(crop.getIndex()).seedReturn, crop.getIndex()));
+			dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.seed, SeedRegistry.getInstance().getSeedByID(crop.getIndex()).seedReturn, crop.getIndex()));
 		dropBlockAsItem(world, x, y, z, new ItemStack(FCItems.shardRough, (new Random().nextInt(SeedRegistry.getInstance().getSeedByID(crop.getIndex()).dropMax) + SeedRegistry.getInstance().getSeedByID(crop.getIndex()).dropMin) + itemMultiplier, crop.getIndex()));
 		if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).getWeightedDrop() != null) {
 			if (SeedRegistry.getInstance().getSeedByID(crop.getIndex()).weigthedDropChance == world.rand.nextInt(9) + 1) {

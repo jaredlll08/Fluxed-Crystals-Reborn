@@ -10,8 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GemCutterHandler extends TemplateRecipeHandler
-{
+public class GemCutterHandler extends TemplateRecipeHandler {
+
+	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
 	public String getGuiTexture() {
@@ -27,8 +28,6 @@ public class GemCutterHandler extends TemplateRecipeHandler
 	public int recipiesPerPage() {
 		return 1;
 	}
-
-	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
 	public void drawBackground(int recipe) {
@@ -48,7 +47,7 @@ public class GemCutterHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras(int recipe) {
 		CachedCutterRecipe r = (CachedCutterRecipe) arecipes.get(recipe);
-		int coords2[] = { 0, 0 };
+		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -56,17 +55,14 @@ public class GemCutterHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result)
-	{
+	public void loadCraftingRecipes(ItemStack result) {
 
-		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet())
-		{
+		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
 			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
 			if (recipeGemCutter.getOutput().isItemEqual(result)) {
-				if (checkDupe(recipeGemCutter))
-					this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
+				if (checkDupe(recipeGemCutter)) this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
 			}
 
 		}
@@ -74,17 +70,14 @@ public class GemCutterHandler extends TemplateRecipeHandler
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient)
-	{
+	public void loadUsageRecipes(ItemStack ingredient) {
 
-		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet())
-		{
+		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
 			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
 			if (recipeGemCutter.getInput().isItemEqual(ingredient)) {
-				if (checkDupe(recipeGemCutter))
-					this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
+				if (checkDupe(recipeGemCutter)) this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
 			}
 
 		}
@@ -105,13 +98,16 @@ public class GemCutterHandler extends TemplateRecipeHandler
 		return true;
 	}
 
-	public class CachedCutterRecipe extends CachedRecipe
-	{
+	@Override
+	public String getOverlayIdentifier() {
+		return "gemCutter";
+	}
 
-		private PositionedStack output;
-		private PositionedStack inputs;
+	public class CachedCutterRecipe extends CachedRecipe {
 
 		public RecipeGemCutter recipe;
+		private PositionedStack output;
+		private PositionedStack inputs;
 
 		public CachedCutterRecipe(RecipeGemCutter recipe) {
 			this.output = new PositionedStack(recipe.getOutput(), 143, 6);
@@ -119,7 +115,7 @@ public class GemCutterHandler extends TemplateRecipeHandler
 			this.inputs = new PositionedStack(recipe.getInput(), 6, 6);
 			output.item.stackSize = 1;
 			inputs.item.stackSize = 1;
-			
+
 
 		}
 
@@ -133,11 +129,6 @@ public class GemCutterHandler extends TemplateRecipeHandler
 			return this.inputs;
 		}
 
-	}
-
-	@Override
-	public String getOverlayIdentifier() {
-		return "gemCutter";
 	}
 
 }

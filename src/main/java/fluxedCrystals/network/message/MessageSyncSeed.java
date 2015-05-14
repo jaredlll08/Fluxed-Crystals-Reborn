@@ -10,40 +10,34 @@ import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.CompressionHelper;
 import io.netty.buffer.ByteBuf;
 
-public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSeed, IMessage>
-{
+public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSeed, IMessage> {
 
 	private Seed seed;
 
-	public MessageSyncSeed ()
-	{
+	public MessageSyncSeed() {
 
 	}
 
-	public MessageSyncSeed (Seed seed)
-	{
+	public MessageSyncSeed(Seed seed) {
 
 		this.seed = seed;
 
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
-	{
+	public void fromBytes(ByteBuf buf) {
 
 		byte[] compressedString = null;
 
 		int readableBytes = buf.readInt();
 
-		if (readableBytes > 0)
-		{
+		if (readableBytes > 0) {
 
 			compressedString = buf.readBytes(readableBytes).array();
 
 		}
 
-		if (compressedString != null)
-		{
+		if (compressedString != null) {
 
 			String uncompressedString = CompressionHelper.decompressStringFromByteArray(compressedString);
 
@@ -56,13 +50,11 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
-	{
+	public void toBytes(ByteBuf buf) {
 
 		byte[] compressedString = null;
 
-		if (seed != null)
-		{
+		if (seed != null) {
 
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -72,15 +64,12 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 
 		}
 
-		if (compressedString != null)
-		{
+		if (compressedString != null) {
 
 			buf.writeInt(compressedString.length);
 			buf.writeBytes(compressedString);
 
-		}
-		else
-		{
+		} else {
 
 			buf.writeInt(0);
 
@@ -89,11 +78,9 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncSeed message, MessageContext ctx)
-	{
+	public IMessage onMessage(MessageSyncSeed message, MessageContext ctx) {
 
-		if (message.seed != null)
-		{
+		if (message.seed != null) {
 
 			SeedRegistry.getInstance().addSeed(message.seed);
 

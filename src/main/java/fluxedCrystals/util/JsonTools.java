@@ -10,21 +10,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class JsonTools
-{
+public class JsonTools {
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-	public static String hashmapToJson(HashMap<Integer, Seed> seedMap)
-	{
+	public static String hashmapToJson(HashMap<Integer, Seed> seedMap) {
 
 		String tmpString = "{\"seeds\":[";
 
-		for(int i : seedMap.keySet())
-		{
+		for (int i : seedMap.keySet()) {
 
-			if (i > 0)
-			{
+			if (i > 0) {
 
 				tmpString += ",";
 
@@ -40,20 +36,17 @@ public class JsonTools
 
 	}
 
-	public static List<Seed> jsontoList(JsonObject jsonObject)
-	{
+	public static List<Seed> jsontoList(JsonObject jsonObject) {
 
 		List<Seed> list = new ArrayList<Seed>();
 
-		if (jsonObject.has("seeds") && jsonObject.get("seeds").isJsonArray())
-		{
+		if (jsonObject.has("seeds") && jsonObject.get("seeds").isJsonArray()) {
 
 			// Read the seeds from the JSON
 
 			JsonArray jsonArray = (JsonArray) jsonObject.get("seeds");
 
-			for (int i = 0; i < jsonArray.size(); i++)
-			{
+			for (int i = 0; i < jsonArray.size(); i++) {
 
 				list.add(gson.fromJson(jsonArray.get(i), Seed.class));
 

@@ -35,10 +35,9 @@ import java.io.File;
 public class FluxedCrystals {
 
 	public static final CreativeTabFluxedCrystals tab = new CreativeTabFluxedCrystals();
+	public static final Lang lang = new Lang(Reference.MOD_ID);
 	public static File configDir = null;
 	public static int crystalRenderID;
-	public static final Lang lang = new Lang(Reference.MOD_ID);
-
 	@Mod.Instance(Reference.MOD_ID)
 	public static FluxedCrystals instance;
 
@@ -159,6 +158,7 @@ public class FluxedCrystals {
 					}
 					count++;
 				}
+				count = 0;
 				if (map.type == GameRegistry.Type.ITEM) {
 					for (String key : FCItems.itemRegistry.keySet()) {
 						if (map.name.endsWith(key)) {

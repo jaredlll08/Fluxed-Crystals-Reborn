@@ -8,8 +8,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public interface IInventoryConnection {
 
 	/**
-	 * @param from
-	 *            Side to which a connector would connect
+	 * @param from Side to which a connector would connect
 	 * @return DEFAULT if the connector should decide how to connect; FORCE if the connector should always connect; DENY if the connector should never connect.
 	 */
 	public ConnectionType canConnectInventory(ForgeDirection from);

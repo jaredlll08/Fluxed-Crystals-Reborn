@@ -1,9 +1,12 @@
-package fluxedCrystals.tileEntity;
+package fluxedCrystals.tileEntity.soil;
 
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEnergyBase;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.util.ITileSoil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -14,14 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 
 /**
  * Created by Jared on 11/2/2014.
  */
-public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInventory {
+public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInventory, ITileSoil {
 
+	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 	public ItemStack[] items;
 
 	public TileEntityPowerBlock() {
@@ -34,11 +37,10 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	}
 
 	public boolean growPlant(World world, boolean night) {
-		if (world != null)
-			if (world.getBlock(xCoord, yCoord + 1, zCoord) instanceof CrystalBase) {
-				TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
-				return ((CrystalBase) world.getBlock(xCoord, yCoord + 1, zCoord)).growCrop(world, xCoord, yCoord + 1, zCoord, world.rand, night);
-			}
+		if (world != null) if (world.getBlock(xCoord, yCoord + 1, zCoord) instanceof CrystalBase) {
+			TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
+			return ((CrystalBase) world.getBlock(xCoord, yCoord + 1, zCoord)).growCrop(world, xCoord, yCoord + 1, zCoord, world.rand, night);
+		}
 		return false;
 	}
 
@@ -180,7 +182,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[] {};
+		return new int[]{};
 	}
 
 	@Override
@@ -192,66 +194,63 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return false;
 	}
-	
-	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 
 	public boolean addUpgrade(ItemStack stack) {
 		ItemStack upgrade = stack.copy();
- 		upgrade.stackSize = 1;
- 		
- 		for(int slot : UPGRADE_SLOTS) {
- 			if(getStackInSlot(slot) == null) {
- 				setInventorySlotContents(slot, upgrade);
- 				return true;
- 			}
-  		}
-  		return false;
+		upgrade.stackSize = 1;
+
+		for (int slot : UPGRADE_SLOTS) {
+			if (getStackInSlot(slot) == null) {
+				setInventorySlotContents(slot, upgrade);
+				return true;
+			}
+		}
+		return false;
 	}
 
 
 	public ItemStack removeUpgrade() {
- 		for(int slot : UPGRADE_SLOTS) {
- 			ItemStack stack = getStackInSlot(slot);
- 			if(stack != null) {
- 				setInventorySlotContents(slot, null);
- 				return stack;
- 			}
-  		}
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack stack = getStackInSlot(slot);
+			if (stack != null) {
+				setInventorySlotContents(slot, null);
+				return stack;
+			}
+		}
 		return null;
 	}
 
 	public int getSpeed() {
 		int speed = 8;
 		for (int slot : UPGRADE_SLOTS) {
- 			ItemStack item = getStackInSlot(slot);
- 			if (item != null && item.getItem() == FCItems.upgradeSpeed) {
- 				speed += 2;
- 			}
+			ItemStack item = getStackInSlot(slot);
+			if (item != null && item.getItem() == FCItems.upgradeSpeed) {
+				speed += 2;
+			}
 		}
 		return speed;
 	}
 
 	public int getEffeciency() {
- 		int eff = 0;
- 		for (int slot : UPGRADE_SLOTS) {
- 			ItemStack item = getStackInSlot(slot);
- 			if (item != null && item.getItem() == FCItems.upgradeEffeciency) {
- 				eff += 15;
- 			}
- 		}
- 		if (eff <= 0) {
- 			eff = 1;
- 		}
- 		return eff;
+		int eff = 0;
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
+			if (item != null && item.getItem() == FCItems.upgradeEffeciency) {
+				eff += 15;
+			}
+		}
+		if (eff <= 0) {
+			eff = 1;
+		}
+		return eff;
 	}
 
 	public boolean isUpgradeActive(Item upgradeItem) {
- 		for (int slot : UPGRADE_SLOTS) {
+		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
- 			if(item != null && item.getItem() == upgradeItem)
- 				return true;
- 		}
- 		return false;
+			if (item != null && item.getItem() == upgradeItem) return true;
+		}
+		return false;
 	}
 
 	public int getUpgradeDrain(int idx) {

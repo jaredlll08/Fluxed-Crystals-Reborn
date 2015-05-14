@@ -10,8 +10,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import tterrag.core.common.json.JsonUtils;
 
-public class Utils
-{
+public class Utils {
 
 	public static void setBiomeAt(World world, int x, int z, BiomeGenBase biome) {
 		if (biome == null) {

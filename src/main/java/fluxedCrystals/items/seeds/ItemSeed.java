@@ -84,16 +84,13 @@ public class ItemSeed extends SeedBase {
 
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list)
-	{
+	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
 
-		for (int i : SeedRegistry.getInstance().keySet())
-		{
+		for (int i : SeedRegistry.getInstance().keySet()) {
 
-			if (SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") || (!SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") && Loader.isModLoaded(SeedRegistry.getInstance().getSeedByID(i).modRequired)))
-			{
+			if (SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") || (!SeedRegistry.getInstance().getSeedByID(i).modRequired.equals("") && Loader.isModLoaded(SeedRegistry.getInstance().getSeedByID(i).modRequired))) {
 
 				list.add(new ItemStack(this, 1, SeedRegistry.getInstance().getSeedByID(i).seedID));
 

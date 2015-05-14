@@ -2,23 +2,17 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Jan 14, 2014, 6:15:28 PM (GMT)]
  */
 package vazkii.botania.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -37,11 +31,7 @@ import vazkii.botania.api.internal.IInternalMethodHandler;
 import vazkii.botania.api.lexicon.KnowledgeType;
 import vazkii.botania.api.lexicon.LexiconCategory;
 import vazkii.botania.api.lexicon.LexiconEntry;
-import vazkii.botania.api.recipe.RecipeBrew;
-import vazkii.botania.api.recipe.RecipeElvenTrade;
-import vazkii.botania.api.recipe.RecipeManaInfusion;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.api.recipe.RecipeRuneAltar;
+import vazkii.botania.api.recipe.*;
 import vazkii.botania.api.subtile.SubTileEntity;
 import vazkii.botania.api.subtile.signature.BasicSignature;
 import vazkii.botania.api.subtile.signature.SubTileSignature;
@@ -49,43 +39,27 @@ import vazkii.botania.api.wiki.IWikiProvider;
 import vazkii.botania.api.wiki.SimpleWikiProvider;
 import vazkii.botania.api.wiki.WikiHooks;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
+import java.util.*;
 
 public final class BotaniaAPI {
 
-	private static List<LexiconCategory> categories = new ArrayList<LexiconCategory>();
-	private static List<LexiconEntry> allEntries = new ArrayList<LexiconEntry>();
-
 	public static Map<String, KnowledgeType> knowledgeTypes = new HashMap<String, KnowledgeType>();
-
 	public static Map<String, Brew> brewMap = new LinkedHashMap<String, Brew>();
-	
 	public static List<RecipePetals> petalRecipes = new ArrayList<RecipePetals>();
 	public static List<RecipeRuneAltar> runeAltarRecipes = new ArrayList<RecipeRuneAltar>();
 	public static List<RecipeManaInfusion> manaInfusionRecipes = new ArrayList<RecipeManaInfusion>();
 	public static List<RecipeElvenTrade> elvenTradeRecipes = new ArrayList<RecipeElvenTrade>();
 	public static List<RecipeBrew> brewRecipes = new ArrayList<RecipeBrew>();
-
-	private static BiMap<String, Class<? extends SubTileEntity>> subTiles = HashBiMap.<String, Class<? extends SubTileEntity>> create();
-	private static Map<Class<? extends SubTileEntity>, SubTileSignature> subTileSignatures = new HashMap<Class<? extends SubTileEntity>, SubTileSignature>();
 	public static Set<String> subtilesForCreativeMenu = new LinkedHashSet();
-
 	public static Map<String, Integer> oreWeights = new HashMap<String, Integer>();
-
 	public static Map<Item, Block> seeds = new HashMap();
-
-	public static ArmorMaterial manasteelArmorMaterial = EnumHelper.addArmorMaterial("MANASTEEL", 16, new int[] { 2, 6, 5, 2 }, 18);
+	public static ArmorMaterial manasteelArmorMaterial = EnumHelper.addArmorMaterial("MANASTEEL", 16, new int[]{2, 6, 5, 2}, 18);
 	public static ToolMaterial manasteelToolMaterial = EnumHelper.addToolMaterial("MANASTEEL", 3, 300, 6.2F, 2F, 20);
-
-	public static ArmorMaterial elementiumArmorMaterial = EnumHelper.addArmorMaterial("B_ELEMENTIUM", 18, new int[] { 2, 6, 5, 2 }, 18);
+	public static ArmorMaterial elementiumArmorMaterial = EnumHelper.addArmorMaterial("B_ELEMENTIUM", 18, new int[]{2, 6, 5, 2}, 18);
 	public static ToolMaterial elementiumToolMaterial = EnumHelper.addToolMaterial("B_ELEMENTIUM", 3, 720, 6.2F, 2F, 20);
-
-	public static ArmorMaterial terrasteelArmorMaterial = EnumHelper.addArmorMaterial("TERRASTEEL", 34, new int[] {3, 8, 6, 3}, 26);
+	public static ArmorMaterial terrasteelArmorMaterial = EnumHelper.addArmorMaterial("TERRASTEEL", 34, new int[]{3, 8, 6, 3}, 26);
 	public static ToolMaterial terrasteelToolMaterial = EnumHelper.addToolMaterial("TERRASTEEL", 3, 2300, 9F, 3F, 26);
-
 	public static KnowledgeType basicKnowledge, elvenKnowledge;
-
 	// All of these categories are initialized during botania's PreInit stage.
 	public static LexiconCategory categoryBasics;
 	public static LexiconCategory categoryMana;
@@ -96,9 +70,8 @@ public final class BotaniaAPI {
 	public static LexiconCategory categoryBaubles;
 	public static LexiconCategory categoryAlfhomancy;
 	public static LexiconCategory categoryMisc;
-	
 	public static Brew fallbackBrew = new Brew("fallback", "botania.brew.fallback", 0, 0);
-	
+
 	static {
 		registerSubTile("", DummySubTile.class);
 
@@ -112,7 +85,7 @@ public final class BotaniaAPI {
 		addOreWeight("oreCassiterite", 1634); // GregTech
 		addOreWeight("oreCertusQuartz", 3975); // Applied Energistics
 		addOreWeight("oreChimerite", 3970); // Ars Magica
-		addOreWeight("oreCinnabar",  2585); // Thaumcraft
+		addOreWeight("oreCinnabar", 2585); // Thaumcraft
 		addOreWeight("oreCoal", 46525); // Vanilla
 		addOreWeight("oreCooperite", 5); // GregTech
 		addOreWeight("oreCopper", 8325); // IC2, Thermal Expansion, Tinkers' Construct, etc.
@@ -187,14 +160,19 @@ public final class BotaniaAPI {
 
 	/**
 	 * The internal method handler in use. Do not overwrite.
+	 *
 	 * @see IInternalMethodHandler
 	 */
 	public static IInternalMethodHandler internalHandler = new DummyMethodHandler();
-
+	private static List<LexiconCategory> categories = new ArrayList<LexiconCategory>();
+	private static List<LexiconEntry> allEntries = new ArrayList<LexiconEntry>();
+	private static BiMap<String, Class<? extends SubTileEntity>> subTiles = HashBiMap.<String, Class<? extends SubTileEntity>>create();
+	private static Map<Class<? extends SubTileEntity>, SubTileSignature> subTileSignatures = new HashMap<Class<? extends SubTileEntity>, SubTileSignature>();
 
 	/**
 	 * Registers a new Knowledge Type.
-	 * @param id The ID for this knowledge type.
+	 *
+	 * @param id    The ID for this knowledge type.
 	 * @param color The color to display this knowledge type as.
 	 */
 	public static KnowledgeType registerKnowledgeType(String id, EnumChatFormatting color, boolean autoUnlock) {
@@ -202,7 +180,7 @@ public final class BotaniaAPI {
 		knowledgeTypes.put(id, type);
 		return type;
 	}
-	
+
 	/**
 	 * Registers a Brew and returns it.
 	 */
@@ -216,16 +194,16 @@ public final class BotaniaAPI {
 	 * it's not in the map.
 	 */
 	public static Brew getBrewFromKey(String key) {
-		if(brewMap.containsKey(key))
-			return brewMap.get(key);
+		if (brewMap.containsKey(key)) return brewMap.get(key);
 		return fallbackBrew;
 	}
-	
+
 	/**
 	 * Registers a Petal Recipe.
+	 *
 	 * @param output The ItemStack to craft.
 	 * @param inputs The objects for crafting. Can be ItemStack, MappableStackWrapper
-	 * or String (case for Ore Dictionary). The array can't be larger than 16.
+	 *               or String (case for Ore Dictionary). The array can't be larger than 16.
 	 * @return The recipe created.
 	 */
 	public static RecipePetals registerPetalRecipe(ItemStack output, Object... inputs) {
@@ -236,10 +214,11 @@ public final class BotaniaAPI {
 
 	/**
 	 * Registers a Rune Altar
+	 *
 	 * @param output The ItemStack to craft.
-	 * @param mana The amount of mana required. Don't go over 100000!
+	 * @param mana   The amount of mana required. Don't go over 100000!
 	 * @param inputs The objects for crafting. Can be ItemStack, MappableStackWrapper
-	 * or String (case for Ore Dictionary). The array can't be larger than 16.
+	 *               or String (case for Ore Dictionary). The array can't be larger than 16.
 	 * @return The recipe created.
 	 */
 	public static RecipeRuneAltar registerRuneAltarRecipe(ItemStack output, int mana, Object... inputs) {
@@ -250,9 +229,10 @@ public final class BotaniaAPI {
 
 	/**
 	 * Registers a Mana Infusion Recipe (throw an item in a mana pool)
+	 *
 	 * @param output The ItemStack to craft
-	 * @param input The input item, be it an ItemStack or an ore dictionary entry String.
-	 * @param mana The amount of mana required. Don't go over 100000!
+	 * @param input  The input item, be it an ItemStack or an ore dictionary entry String.
+	 * @param mana   The amount of mana required. Don't go over 100000!
 	 * @return The recipe created.
 	 */
 	public static RecipeManaInfusion registerManaInfusionRecipe(ItemStack output, Object input, int mana) {
@@ -264,6 +244,7 @@ public final class BotaniaAPI {
 	/**
 	 * Register a Mana Infusion Recipe and flags it as an Alchemy recipe (requires an
 	 * Alchemy Catalyst below the pool).
+	 *
 	 * @see BotaniaAPI#registerManaInfusionRecipe
 	 */
 	public static RecipeManaInfusion registerManaAlchemyRecipe(ItemStack output, Object input, int mana) {
@@ -275,6 +256,7 @@ public final class BotaniaAPI {
 	/**
 	 * Register a Mana Infusion Recipe and flags it as an Conjuration recipe (requires a
 	 * Conjuration Catalyst below the pool).
+	 *
 	 * @see BotaniaAPI#registerManaInfusionRecipe
 	 */
 	public static RecipeManaInfusion registerManaConjurationRecipe(ItemStack output, Object input, int mana) {
@@ -285,6 +267,7 @@ public final class BotaniaAPI {
 
 	/**
 	 * Registers a Elven Trade recipe (throw an item in an Alfheim Portal).
+	 *
 	 * @param output The ItemStack to return.
 	 * @param inputs The items required, can be ItemStack or ore dictionary entry string.
 	 * @return The recipe created.
@@ -294,9 +277,10 @@ public final class BotaniaAPI {
 		elvenTradeRecipes.add(recipe);
 		return recipe;
 	}
-	
+
 	/**
 	 * Registers a Brew Recipe (for the Botanical Brewery).
+	 *
 	 * @param brew The brew in to be set in this recipe.
 	 * @inputs The items used in the recipe, no more than 6.
 	 */
@@ -315,6 +299,7 @@ public final class BotaniaAPI {
 
 	/**
 	 * Registers a SubTileEntity's signature.
+	 *
 	 * @see SubTileSignature
 	 */
 	public static void registerSubTileSignature(Class<? extends SubTileEntity> subtileClass, SubTileSignature signature) {
@@ -326,7 +311,7 @@ public final class BotaniaAPI {
 	 * before the call.
 	 */
 	public static SubTileSignature getSignatureForClass(Class<? extends SubTileEntity> subtileClass) {
-		if(!subTileSignatures.containsKey(subtileClass))
+		if (!subTileSignatures.containsKey(subtileClass))
 			registerSubTileSignature(subtileClass, new BasicSignature(subTiles.inverse().get(subtileClass)));
 
 		return subTileSignatures.get(subtileClass);
@@ -415,7 +400,7 @@ public final class BotaniaAPI {
 	public static List<IRecipe> getLatestAddedRecipes(int x) {
 		List<IRecipe> list = CraftingManager.getInstance().getRecipeList();
 		List<IRecipe> newList = new ArrayList();
-		for(int i = x - 1; i >= 0; i--)
+		for (int i = x - 1; i >= 0; i--)
 			newList.add(list.get(list.size() - 1 - i));
 
 		return newList;
@@ -430,8 +415,7 @@ public final class BotaniaAPI {
 	}
 
 	public static Class<? extends SubTileEntity> getSubTileMapping(String key) {
-		if(!subTiles.containsKey(key))
-			key = "";
+		if (!subTiles.containsKey(key)) key = "";
 
 		return subTiles.get(key);
 	}

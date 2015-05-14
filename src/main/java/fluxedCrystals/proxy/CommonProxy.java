@@ -6,17 +6,14 @@ import fluxedCrystals.handler.SeedRegistrySerializationHandler;
 import fluxedCrystals.util.Events;
 import net.minecraftforge.common.MinecraftForge;
 
-public abstract class CommonProxy implements IProxy
-{
+public abstract class CommonProxy implements IProxy {
 
 
-	public void preInit()
-	{
+	public void preInit() {
 
 	}
 
-	public void initialize()
-	{
+	public void initialize() {
 
 		PlayerEventHandler playerEventHandler = new PlayerEventHandler();
 		Events playerEventHandlerOther = new Events();
@@ -31,8 +28,7 @@ public abstract class CommonProxy implements IProxy
 
 	}
 
-	public void postInit()
-	{
+	public void postInit() {
 
 	}
 

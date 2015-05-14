@@ -12,9 +12,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GUISeedInfuser extends GuiContainer
-{
+public class GUISeedInfuser extends GuiContainer {
 
+	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/SeedInfuser.png");
 	private TileEntitySeedInfuser tile;
 
 	public GUISeedInfuser(InventoryPlayer invPlayer, TileEntitySeedInfuser tile2) {
@@ -26,8 +26,6 @@ public class GUISeedInfuser extends GuiContainer
 
 	}
 
-	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/SeedInfuser.png");
-
 	@SuppressWarnings("unchecked")
 	public void initGui() {
 		super.initGui();
@@ -38,9 +36,9 @@ public class GUISeedInfuser extends GuiContainer
 	public void actionPerformed(GuiButton button) {
 		switch (button.id) {
 
-		case 0:
-			PacketHandler.INSTANCE.sendToServer(new MessageSeedInfuser(tile.xCoord, tile.yCoord, tile.zCoord));
-			break;
+			case 0:
+				PacketHandler.INSTANCE.sendToServer(new MessageSeedInfuser(tile.xCoord, tile.yCoord, tile.zCoord));
+				break;
 
 		}
 	}

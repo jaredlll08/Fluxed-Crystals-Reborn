@@ -5,6 +5,7 @@ import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.util.ITileSoil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -19,8 +20,9 @@ import vazkii.botania.api.mana.IManaReceiver;
 /**
  * Created by Jared on 11/2/2014.
  */
-public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver {
+public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil {
 
+	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 	public ItemStack[] items;
 	private int mana;
 	private int maxMana;
@@ -91,7 +93,6 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 
 		tags.setTag("Items", nbttaglist);
 	}
-
 
 	@Override
 	public void closeInventory() {
@@ -185,8 +186,6 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return false;
 	}
-
-	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 
 	public boolean addUpgrade(ItemStack stack) {
 		ItemStack upgrade = stack.copy();

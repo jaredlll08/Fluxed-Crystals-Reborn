@@ -5,23 +5,22 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeGemRefiner
-{
+public class RecipeGemRefiner {
 
 	private ItemStack input;
 	private ItemStack output;
 	private int inputAmount;
 	private int outputAmount;
 
-	public int getOutputAmount() {
-		return outputAmount;
-	}
-
-	public RecipeGemRefiner (ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
+	public RecipeGemRefiner(ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
 		this.input = input;
 		this.output = output;
 		this.inputAmount = inputAmount;
 		this.outputAmount = outputAmount;
+	}
+
+	public int getOutputAmount() {
+		return outputAmount;
 	}
 
 	public boolean matches(ItemStack stack) {
@@ -46,8 +45,7 @@ public class RecipeGemRefiner
 	}
 
 	public boolean matchesExact(ItemStack stack) {
-		if (stack != null)
-			return input.isItemEqual(stack);
+		if (stack != null) return input.isItemEqual(stack);
 		return false;
 	}
 

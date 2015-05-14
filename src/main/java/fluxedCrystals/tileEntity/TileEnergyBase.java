@@ -2,19 +2,17 @@ package fluxedCrystals.tileEntity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import fluxedCrystals.network.PacketHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.EnumSet;
 
-public abstract class TileEnergyBase extends TileEntity implements IEnergyHandler
-{
+public abstract class TileEnergyBase extends TileEntity implements IEnergyHandler {
 	public EnergyStorage storage;
 	protected int capacity;
 
-	public TileEnergyBase (int cap) {
+	public TileEnergyBase(int cap) {
 		super();
 		init(cap);
 	}
@@ -118,12 +116,12 @@ public abstract class TileEnergyBase extends TileEntity implements IEnergyHandle
 		return storage.getMaxExtract();
 	}
 
-	public int getMaxOutputSpeed() {
-		return getOutputSpeed();
-	}
-
 	public void setOutputSpeed(int outputSpeed) {
 		this.storage.setMaxExtract(outputSpeed);
+	}
+
+	public int getMaxOutputSpeed() {
+		return getOutputSpeed();
 	}
 
 	public int getInputSpeed() {

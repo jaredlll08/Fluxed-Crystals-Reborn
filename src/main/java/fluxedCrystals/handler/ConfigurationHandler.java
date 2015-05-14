@@ -8,8 +8,7 @@ import thaumcraft.api.aspects.Aspect;
 
 import java.io.File;
 
-public class ConfigurationHandler
-{
+public class ConfigurationHandler {
 
 	public static Configuration CONFIGURATION;
 
@@ -25,11 +24,9 @@ public class ConfigurationHandler
 	public static int aspectRange;
 	public static Aspect aspect;
 
-	public static void init(File configFile)
-	{
+	public static void init(File configFile) {
 
-		if (CONFIGURATION == null)
-		{
+		if (CONFIGURATION == null) {
 
 			CONFIGURATION = new Configuration(configFile);
 
@@ -42,15 +39,13 @@ public class ConfigurationHandler
 
 	}
 
-	private static void loadConfiguration()
-	{
+	private static void loadConfiguration() {
 
 		enderioAddon = CONFIGURATION.get(addonCategory, "EnderIO Addon Support", true).getBoolean(true);
 		aspectString = CONFIGURATION.get(addonCategory, "Override Aspect for Crystals. (null for nothing)", "null").getString();
 		aspectRange = CONFIGURATION.get(addonCategory, "Override Aspect Range for Crystals. (0 for nothing)", "0").getInt();
 
-		if (!aspectString.equals("null"))
-		{
+		if (!aspectString.equals("null")) {
 
 			aspect = Aspect.getAspect(aspectString);
 
@@ -59,8 +54,7 @@ public class ConfigurationHandler
 		normalShardRecipes = CONFIGURATION.get(dropCategory, "Should materials be crafted in a normal crafting table?", false).getBoolean(false);
 		shard3x3 = CONFIGURATION.get(dropCategory, "Should shards craft into the ingredients with 9 of the drops, or with 4 of the drop?", true).getBoolean(true);
 
-		if (CONFIGURATION.hasChanged())
-		{
+		if (CONFIGURATION.hasChanged()) {
 
 			CONFIGURATION.save();
 
@@ -69,11 +63,9 @@ public class ConfigurationHandler
 	}
 
 	@SubscribeEvent
-	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-	{
+	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
 
-		if (event.modID.equalsIgnoreCase(Reference.MOD_ID))
-		{
+		if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
 
 			loadConfiguration();
 

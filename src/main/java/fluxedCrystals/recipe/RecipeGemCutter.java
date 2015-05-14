@@ -5,15 +5,14 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeGemCutter
-{
+public class RecipeGemCutter {
 
 	private ItemStack input;
 	private ItemStack output;
 	private int inputAmount;
 	private int outputAmount;
 
-	public RecipeGemCutter (ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
+	public RecipeGemCutter(ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
 		this.input = input;
 		this.output = output;
 		this.inputAmount = inputAmount;
@@ -46,8 +45,7 @@ public class RecipeGemCutter
 	}
 
 	public boolean matchesExact(ItemStack stack) {
-		if (stack != null)
-			return input.isItemEqual(stack);
+		if (stack != null) return input.isItemEqual(stack);
 		return false;
 	}
 

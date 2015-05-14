@@ -6,11 +6,9 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.reference.Textures;
 import net.minecraft.item.Item;
 
-public class ItemUniversalSeed extends Item
-{
+public class ItemUniversalSeed extends Item {
 
-	public ItemUniversalSeed()
-	{
+	public ItemUniversalSeed() {
 
 		setTextureName(Textures.Items.UNIVERSAL_SEED);
 		setHasSubtypes(true);

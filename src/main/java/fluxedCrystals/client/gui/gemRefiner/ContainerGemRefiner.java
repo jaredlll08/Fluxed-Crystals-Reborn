@@ -1,7 +1,5 @@
 package fluxedCrystals.client.gui.gemRefiner;
 
-import java.util.List;
-
 import fluxedCrystals.client.gui.slot.SlotCustom;
 import fluxedCrystals.client.gui.slot.SlotIBindable;
 import fluxedCrystals.client.gui.slot.SlotUpgrade;
@@ -14,13 +12,15 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGemRefiner extends Container
-{
+import java.util.List;
+
+public class ContainerGemRefiner extends Container {
 
 	private TileEntityGemRefiner tile;
-	
+	private int lastStoredEnergy = -1;
+
 	public ContainerGemRefiner(InventoryPlayer invPlayer, TileEntityGemRefiner manager) {
-		
+
 		this.tile = manager;
 
 		addSlotToContainer(new Slot(manager, 0, 46, 37));
@@ -56,26 +56,24 @@ public class ContainerGemRefiner extends Container
 
 		return null;
 	}
-	
-	private int lastStoredEnergy = -1;
+
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		
-		if(!tile.getWorldObj().isRemote) {
+
+		if (!tile.getWorldObj().isRemote) {
 			int energyStored = tile.getEnergyStored();
 			// send energy to players viewing this GUI
-			if(energyStored != lastStoredEnergy) {
-				for(ICrafting c : (List<ICrafting>)crafters)
+			if (energyStored != lastStoredEnergy) {
+				for (ICrafting c : (List<ICrafting>) crafters)
 					c.sendProgressBarUpdate(this, 0, energyStored);
 				lastStoredEnergy = energyStored;
 			}
 		}
 	}
-	
+
 	@Override
 	public void updateProgressBar(int bar, int value) {
-		if(bar == 0)
-			tile.setEnergyStored(value);
+		if (bar == 0) tile.setEnergyStored(value);
 	}
 }

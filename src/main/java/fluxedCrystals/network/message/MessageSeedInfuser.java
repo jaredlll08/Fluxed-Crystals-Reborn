@@ -8,21 +8,20 @@ import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
-public class MessageSeedInfuser implements IMessage, IMessageHandler<MessageSeedInfuser, IMessage>
-{
+public class MessageSeedInfuser implements IMessage, IMessageHandler<MessageSeedInfuser, IMessage> {
 	public int x, y, z;
 	private int data;
 
-	public MessageSeedInfuser () {
+	public MessageSeedInfuser() {
 	}
 
-	public MessageSeedInfuser (int x, int y, int z) {
+	public MessageSeedInfuser(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	public MessageSeedInfuser (int x, int y, int z, int data) {
+	public MessageSeedInfuser(int x, int y, int z, int data) {
 		this.x = x;
 		this.y = y;
 		this.z = z;

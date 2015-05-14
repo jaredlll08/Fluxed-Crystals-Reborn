@@ -1,10 +1,10 @@
 package vazkii.botania.api.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeElvenTrade {
 
@@ -15,9 +15,8 @@ public class RecipeElvenTrade {
 		this.output = output;
 
 		List<Object> inputsToSet = new ArrayList();
-		for(Object obj : inputs) {
-			if(obj instanceof String || obj instanceof ItemStack)
-				inputsToSet.add(obj);
+		for (Object obj : inputs) {
+			if (obj instanceof String || obj instanceof ItemStack) inputsToSet.add(obj);
 			else throw new IllegalArgumentException("Invalid input");
 		}
 
@@ -28,53 +27,45 @@ public class RecipeElvenTrade {
 		List<Object> inputsMissing = new ArrayList(inputs);
 		List<ItemStack> stacksToRemove = new ArrayList();
 
-		for(ItemStack stack : stacks) {
-			if(stack == null) {
+		for (ItemStack stack : stacks) {
+			if (stack == null) {
 				continue;
 			}
-			if(inputsMissing.isEmpty())
-				break;
+			if (inputsMissing.isEmpty()) break;
 
 			int stackIndex = -1, oredictIndex = -1;
 
-			for(int j = 0; j < inputsMissing.size(); j++) {
+			for (int j = 0; j < inputsMissing.size(); j++) {
 				Object input = inputsMissing.get(j);
-				if(input instanceof String) {
+				if (input instanceof String) {
 					List<ItemStack> validStacks = OreDictionary.getOres((String) input);
 					boolean found = false;
-					for(ItemStack ostack : validStacks) {
+					for (ItemStack ostack : validStacks) {
 						ItemStack cstack = ostack.copy();
-						if(cstack.getItemDamage() == Short.MAX_VALUE)
-							cstack.setItemDamage(stack.getItemDamage());
+						if (cstack.getItemDamage() == Short.MAX_VALUE) cstack.setItemDamage(stack.getItemDamage());
 
-						if(stack.isItemEqual(cstack)) {
-							if(!stacksToRemove.contains(stack))
-								stacksToRemove.add(stack);
+						if (stack.isItemEqual(cstack)) {
+							if (!stacksToRemove.contains(stack)) stacksToRemove.add(stack);
 							oredictIndex = j;
 							found = true;
 							break;
 						}
 					}
 
-					if(found)
-						break;
-				} else if(input instanceof ItemStack && simpleAreStacksEqual((ItemStack) input, stack)) {
-					if(!stacksToRemove.contains(stack))
-						stacksToRemove.add(stack);
+					if (found) break;
+				} else if (input instanceof ItemStack && simpleAreStacksEqual((ItemStack) input, stack)) {
+					if (!stacksToRemove.contains(stack)) stacksToRemove.add(stack);
 					stackIndex = j;
 					break;
 				}
 			}
 
-			if(stackIndex != -1)
-				inputsMissing.remove(stackIndex);
-			else if(oredictIndex != -1)
-				inputsMissing.remove(oredictIndex);
+			if (stackIndex != -1) inputsMissing.remove(stackIndex);
+			else if (oredictIndex != -1) inputsMissing.remove(oredictIndex);
 		}
 
-		if(remove)
-			for(ItemStack r : stacksToRemove)
-				stacks.remove(r);
+		if (remove) for (ItemStack r : stacksToRemove)
+			stacks.remove(r);
 
 		return inputsMissing.isEmpty();
 	}

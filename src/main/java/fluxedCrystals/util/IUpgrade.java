@@ -1,6 +1,5 @@
 package fluxedCrystals.util;
 
-public interface IUpgrade
-{
+public interface IUpgrade {
 
 }

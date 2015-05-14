@@ -14,7 +14,7 @@ public abstract class TileSolarFlux extends TileEntity {
 	public int energyRate;
 	public int range;
 
-	public TileSolarFlux (int maxEnergy, int energyRate, int range) {
+	public TileSolarFlux(int maxEnergy, int energyRate, int range) {
 		this.maxEnergy = maxEnergy;
 		this.energyRate = energyRate;
 		this.energyStored = 0;
@@ -50,8 +50,7 @@ public abstract class TileSolarFlux extends TileEntity {
 	public int recieveEnergy(int energy, boolean simulate) {
 		if (!simulate) {
 			energyStored += energy;
-			if (energyStored > maxEnergy)
-				energyStored = maxEnergy;
+			if (energyStored > maxEnergy) energyStored = maxEnergy;
 			if (energyStored < 0) {
 				energyStored = 0;
 			}
@@ -65,8 +64,7 @@ public abstract class TileSolarFlux extends TileEntity {
 		super.updateEntity();
 		int oldEnergy = energyStored;
 		generateEnergy(worldObj, xCoord, yCoord, zCoord, !worldObj.provider.isDaytime(), worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord));
-		if (new Random().nextInt(energyRate) == 0)
-			sendEnergy(worldObj, xCoord, yCoord, zCoord, range);
+		if (new Random().nextInt(energyRate) == 0) sendEnergy(worldObj, xCoord, yCoord, zCoord, range);
 	}
 
 	@Override

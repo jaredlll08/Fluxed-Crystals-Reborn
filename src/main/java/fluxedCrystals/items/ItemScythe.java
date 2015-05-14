@@ -4,11 +4,9 @@ import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Reference;
 import net.minecraft.item.Item;
 
-public class ItemScythe extends Item
-{
+public class ItemScythe extends Item {
 
-	public ItemScythe(String textureName, String itemName)
-	{
+	public ItemScythe(String textureName, String itemName) {
 
 		setCreativeTab(FluxedCrystals.tab);
 		setTextureName(textureName);

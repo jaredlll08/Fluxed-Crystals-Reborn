@@ -3,11 +3,14 @@ package cofh.api.tileentity;
 /**
  * Implement this interface on Tile Entities which have Redstone Control functionality. This means that a tile can be set to ignore redstone entirely, or
  * respond to a low or high redstone state.
- * 
+ *
  * @author King Lemming
- * 
  */
 public interface IRedstoneControl extends IRedstoneCache {
+
+	ControlMode getControl();
+
+	void setControl(ControlMode control);
 
 	public static enum ControlMode {
 		DISABLED(true), LOW(false), HIGH(true);
@@ -17,6 +20,16 @@ public interface IRedstoneControl extends IRedstoneCache {
 		private ControlMode(boolean state) {
 
 			this.state = state;
+		}
+
+		public static ControlMode stepForward(ControlMode curControl) {
+
+			return curControl == DISABLED ? LOW : curControl == HIGH ? DISABLED : HIGH;
+		}
+
+		public static ControlMode stepBackward(ControlMode curControl) {
+
+			return curControl == DISABLED ? HIGH : curControl == HIGH ? LOW : DISABLED;
 		}
 
 		public boolean isDisabled() {
@@ -38,20 +51,6 @@ public interface IRedstoneControl extends IRedstoneCache {
 
 			return state;
 		}
-
-		public static ControlMode stepForward(ControlMode curControl) {
-
-			return curControl == DISABLED ? LOW : curControl == HIGH ? DISABLED : HIGH;
-		}
-
-		public static ControlMode stepBackward(ControlMode curControl) {
-
-			return curControl == DISABLED ? HIGH : curControl == HIGH ? LOW : DISABLED;
-		}
 	}
-
-	void setControl(ControlMode control);
-
-	ControlMode getControl();
 
 }

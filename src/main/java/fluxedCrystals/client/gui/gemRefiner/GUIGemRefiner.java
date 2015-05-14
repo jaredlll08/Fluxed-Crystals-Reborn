@@ -7,13 +7,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GUIGemRefiner extends GuiContainer
-{
+public class GUIGemRefiner extends GuiContainer {
 
+	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 	private TileEntityGemRefiner tile;
 	private int energyOffset = 0;
 	private int cut = 0;
@@ -28,8 +27,6 @@ public class GUIGemRefiner extends GuiContainer
 		ySize = 166;
 		this.tile = tile2;
 	}
-
-	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 
 	@SuppressWarnings("unchecked")
 	public void initGui() {
@@ -72,7 +69,7 @@ public class GUIGemRefiner extends GuiContainer
 			if (sawX >= guiLeft + 105) {
 				sawX = guiLeft + 62;
 			}
-				RenderItem.getInstance().renderItemIntoGUI(fontRendererObj, Minecraft.getMinecraft().getTextureManager(), tile.getStackInSlot(0), sawX, sawY);
+			RenderItem.getInstance().renderItemIntoGUI(fontRendererObj, Minecraft.getMinecraft().getTextureManager(), tile.getStackInSlot(0), sawX, sawY);
 
 		}
 		GL11.glPopMatrix();

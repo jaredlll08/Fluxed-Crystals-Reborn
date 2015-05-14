@@ -4,8 +4,7 @@ import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import fluxedCrystals.reference.Reference;
 
-public class FluxedCrystalsNEIConfig implements IConfigureNEI
-{
+public class FluxedCrystalsNEIConfig implements IConfigureNEI {
 
 	@Override
 	public String getName() {

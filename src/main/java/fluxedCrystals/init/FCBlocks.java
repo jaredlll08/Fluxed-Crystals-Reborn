@@ -4,47 +4,45 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.BlockGemCutter;
 import fluxedCrystals.blocks.BlockGemRefiner;
-import fluxedCrystals.blocks.BlockPowerBlock;
 import fluxedCrystals.blocks.BlockSeedInfuser;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.tileEntity.*;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import net.minecraft.block.Block;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FCBlocks
-{
+public class FCBlocks {
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
-	public static Block poweredSoil= new BlockPowerBlock();
-	//	public static Block poweredSoilMana= new BlockPowerBlockMana();
+	public static Block poweredSoil = new BlockPowerBlock();
+	//	public static Block poweredSoilMana = new BlockPowerBlockMana();
 
-	public static Block crystal= new BlockCrystal();
+	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
 	public static Block gemRefiner = new BlockGemRefiner();
 
-	public FCBlocks()
-	{
+	public FCBlocks() {
 
 	}
 
-	public static void preInit()
-	{
+	public static void preInit() {
 
 	}
 
-	public static void initialize()
-	{
+	public static void initialize() {
 		GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
 		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 
-		//		GameRegistry.registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA);
-		//		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
+		//		registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
+		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
 
 		registerBlock(crystal, "crystal", "crystal");
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");
@@ -61,8 +59,7 @@ public class FCBlocks
 
 	}
 
-	public static void postInit()
-	{
+	public static void postInit() {
 
 	}
 

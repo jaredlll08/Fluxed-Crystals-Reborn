@@ -2,16 +2,14 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Jan 14, 2014, 6:43:03 PM (GMT)]
  */
 package vazkii.botania.api.internal;
-
-import java.util.List;
 
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,11 +24,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import vazkii.botania.api.boss.IBotaniaBoss;
 import vazkii.botania.api.lexicon.LexiconPage;
-import vazkii.botania.api.recipe.RecipeBrew;
-import vazkii.botania.api.recipe.RecipeElvenTrade;
-import vazkii.botania.api.recipe.RecipeManaInfusion;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.api.recipe.RecipeRuneAltar;
+import vazkii.botania.api.recipe.*;
+
+import java.util.List;
 
 public class DummyMethodHandler implements IInternalMethodHandler {
 
@@ -43,7 +39,7 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public LexiconPage elfPaperTextPage(String key) {
 		return dummyPage(key);
 	}
-	
+
 	@Override
 	public LexiconPage imagePage(String key, String resource) {
 		return dummyPage(key);
@@ -98,7 +94,7 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public LexiconPage elvenTradesPage(String key, RecipeElvenTrade recipe) {
 		return dummyPage(key);
 	}
-	
+
 	@Override
 	public LexiconPage brewPage(String key, String bottomText, RecipeBrew recipe) {
 		return dummyPage(key);

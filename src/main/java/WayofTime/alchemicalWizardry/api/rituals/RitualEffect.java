@@ -1,56 +1,48 @@
 package WayofTime.alchemicalWizardry.api.rituals;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.util.ForgeDirection;
 import WayofTime.alchemicalWizardry.api.alchemy.energy.Reagent;
 import WayofTime.alchemicalWizardry.api.alchemy.energy.ReagentStack;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class RitualEffect
-{
-    public abstract void performEffect(IMasterRitualStone ritualStone);
+import java.util.List;
 
-    public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player)
-    {
-        return true;
-    }
+public abstract class RitualEffect {
+	public abstract void performEffect(IMasterRitualStone ritualStone);
 
-    public void onRitualBroken(IMasterRitualStone ritualStone, RitualBreakMethod method)
-    {
+	public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player) {
+		return true;
+	}
 
-    }
+	public void onRitualBroken(IMasterRitualStone ritualStone, RitualBreakMethod method) {
 
-    public abstract int getCostPerRefresh();
+	}
 
-    public int getInitialCooldown()
-    {
-        return 0;
-    }
+	public abstract int getCostPerRefresh();
 
-    public abstract List<RitualComponent> getRitualComponentList();
+	public int getInitialCooldown() {
+		return 0;
+	}
 
-    public boolean canDrainReagent(IMasterRitualStone ritualStone, Reagent reagent, int amount, boolean doDrain)
-    {
-        if (ritualStone == null || reagent == null || amount == 0)
-        {
-            return false;
-        }
+	public abstract List<RitualComponent> getRitualComponentList();
 
-        ReagentStack reagentStack = new ReagentStack(reagent, amount);
+	public boolean canDrainReagent(IMasterRitualStone ritualStone, Reagent reagent, int amount, boolean doDrain) {
+		if (ritualStone == null || reagent == null || amount == 0) {
+			return false;
+		}
 
-        ReagentStack stack = ritualStone.drain(ForgeDirection.UNKNOWN, reagentStack, false);
+		ReagentStack reagentStack = new ReagentStack(reagent, amount);
 
-        if (stack != null && stack.amount >= amount)
-        {
-            if (doDrain)
-            {
-                ritualStone.drain(ForgeDirection.UNKNOWN, reagentStack, true);
-            }
+		ReagentStack stack = ritualStone.drain(ForgeDirection.UNKNOWN, reagentStack, false);
 
-            return true;
-        }
+		if (stack != null && stack.amount >= amount) {
+			if (doDrain) {
+				ritualStone.drain(ForgeDirection.UNKNOWN, reagentStack, true);
+			}
 
-        return false;
-    }
+			return true;
+		}
+
+		return false;
+	}
 }

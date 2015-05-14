@@ -6,9 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Reference implementation of {@link IEnergyContainerItem}. Use/extend this or implement your own.
- * 
+ *
  * @author King Lemming
- * 
  */
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 

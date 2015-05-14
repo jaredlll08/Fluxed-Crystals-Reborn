@@ -6,9 +6,9 @@ import tterrag.core.common.json.JsonUtils;
 import java.io.Serializable;
 import java.util.Random;
 
-public class Seed implements Serializable
-{
+public class Seed implements Serializable {
 
+	private static final Random rand = new Random();
 	public String name = "";
 	public String lore = "";
 	public String ingredient = "";
@@ -30,13 +30,9 @@ public class Seed implements Serializable
 	public boolean isSharp = true;
 	public String modRequired = "";
 
-	private static final Random rand = new Random();
+	public ItemStack getIngredient() {
 
-	public ItemStack getIngredient()
-	{
-
-		if (ingredient != null && !ingredient.equals(""))
-		{
+		if (ingredient != null && !ingredient.equals("")) {
 
 			return JsonUtils.parseStringIntoItemStack(ingredient);
 
@@ -46,11 +42,9 @@ public class Seed implements Serializable
 
 	}
 
-	public ItemStack getWeightedDrop()
-	{
+	public ItemStack getWeightedDrop() {
 
-		if (weightedDrop != null && !weightedDrop.equals(""))
-		{
+		if (weightedDrop != null && !weightedDrop.equals("")) {
 
 			return JsonUtils.parseStringIntoItemStack(weightedDrop);
 
@@ -60,8 +54,7 @@ public class Seed implements Serializable
 
 	}
 
-	public int getDropAmount()
-	{
+	public int getDropAmount() {
 
 		return rand.nextInt(dropMax - dropMin + 1) + dropMin;
 

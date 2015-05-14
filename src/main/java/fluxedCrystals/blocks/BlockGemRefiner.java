@@ -15,9 +15,8 @@ import net.minecraft.world.World;
 /**
  * Created by Jared on 11/3/2014.
  */
-public class BlockGemRefiner extends Block implements ITileEntityProvider
-{
-	public BlockGemRefiner () {
+public class BlockGemRefiner extends Block implements ITileEntityProvider {
+	public BlockGemRefiner() {
 		super(Material.anvil);
 		this.setHardness(2.0F);
 		setHarvestLevel("pickaxe", 2);
@@ -27,8 +26,7 @@ public class BlockGemRefiner extends Block implements ITileEntityProvider
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
-		if (!world.isRemote)
-			player.openGui(FluxedCrystals.instance, 6, world, x, y, z);
+		if (!world.isRemote) player.openGui(FluxedCrystals.instance, 6, world, x, y, z);
 		return true;
 	}
 
@@ -41,10 +39,9 @@ public class BlockGemRefiner extends Block implements ITileEntityProvider
 		TileEntityGemRefiner tile = (TileEntityGemRefiner) world.getTileEntity(x, y, z);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				if (tile.getStackInSlot(i) != null)
-					dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
+				if (tile.getStackInSlot(i) != null) dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
 			}
 		}
-		
+
 	}
 }

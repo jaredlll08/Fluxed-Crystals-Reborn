@@ -15,44 +15,38 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
 
-public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage>
-{
+public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage> {
 
 	private static HashMap<Integer, Seed> seedMap;
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-	public MessageSyncSeeds ()
-	{
+	public MessageSyncSeeds() {
 
 		seedMap = new HashMap<Integer, Seed>();
 
 	}
 
-	public MessageSyncSeeds (HashMap<Integer, Seed> seedMap)
-	{
+	public MessageSyncSeeds(HashMap<Integer, Seed> seedMap) {
 
 		MessageSyncSeeds.seedMap = seedMap;
 
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
-	{
+	public void fromBytes(ByteBuf buf) {
 
 		byte[] compressedString = null;
 
 		int readableBytes = buf.readInt();
 
-		if (readableBytes > 0)
-		{
+		if (readableBytes > 0) {
 
 			compressedString = buf.readBytes(readableBytes).array();
 
 		}
 
-		if (compressedString != null)
-		{
+		if (compressedString != null) {
 
 			String uncompressedString = CompressionHelper.decompressStringFromByteArray(compressedString);
 
@@ -60,8 +54,7 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 
 			JsonObject jsonObject = parser.parse(uncompressedString).getAsJsonObject();
 
-			for(Seed seed : JsonTools.jsontoList(jsonObject))
-			{
+			for (Seed seed : JsonTools.jsontoList(jsonObject)) {
 
 				seedMap.put(seed.seedID, seed);
 
@@ -72,13 +65,11 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
-	{
+	public void toBytes(ByteBuf buf) {
 
 		byte[] compressedString = null;
 
-		if (seedMap != null)
-		{
+		if (seedMap != null) {
 
 			String tmpString = gson.toJson(seedMap);
 
@@ -86,15 +77,12 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 
 		}
 
-		if (compressedString != null)
-		{
+		if (compressedString != null) {
 
 			buf.writeInt(compressedString.length);
 			buf.writeBytes(compressedString);
 
-		}
-		else
-		{
+		} else {
 
 			buf.writeInt(0);
 
@@ -103,14 +91,11 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncSeeds message, MessageContext ctx)
-	{
+	public IMessage onMessage(MessageSyncSeeds message, MessageContext ctx) {
 
-		if (seedMap != null)
-		{
+		if (seedMap != null) {
 
-			for(int i : seedMap.keySet())
-			{
+			for (int i : seedMap.keySet()) {
 
 				SeedRegistry.getInstance().addSeed(seedMap.get(i));
 

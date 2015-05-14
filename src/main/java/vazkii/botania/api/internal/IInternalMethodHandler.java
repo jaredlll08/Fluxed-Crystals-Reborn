@@ -2,17 +2,17 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Jan 14, 2014, 6:34:34 PM (GMT)]
  */
 package vazkii.botania.api.internal;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,13 +25,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import vazkii.botania.api.boss.IBotaniaBoss;
 import vazkii.botania.api.lexicon.LexiconPage;
-import vazkii.botania.api.recipe.RecipeBrew;
-import vazkii.botania.api.recipe.RecipeElvenTrade;
-import vazkii.botania.api.recipe.RecipeManaInfusion;
-import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.api.recipe.RecipeRuneAltar;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import vazkii.botania.api.recipe.*;
+
+import java.util.List;
 
 /**
  * Any methods that refer to internal methods in Botania are here.
@@ -43,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public interface IInternalMethodHandler {
 
 	public LexiconPage textPage(String key);
-	
+
 	public LexiconPage elfPaperTextPage(String key);
 
 	public LexiconPage imagePage(String key, String resource);
@@ -67,7 +63,7 @@ public interface IInternalMethodHandler {
 	public LexiconPage elvenTradePage(String key, List<RecipeElvenTrade> recipes);
 
 	public LexiconPage elvenTradesPage(String key, RecipeElvenTrade recipe);
-	
+
 	public LexiconPage brewPage(String key, String bottomText, RecipeBrew recipe);
 
 	public IManaNetwork getManaNetworkInstance();
@@ -92,12 +88,12 @@ public interface IInternalMethodHandler {
 
 	@SideOnly(Side.CLIENT)
 	public ResourceLocation getDefaultBossBarTexture();
-	
+
 	@SideOnly(Side.CLIENT)
 	public void setBossStatus(IBotaniaBoss status);
-	
+
 	public boolean isBuildcraftPipe(TileEntity tile);
-	
+
 	public void sparkleFX(World world, double x, double y, double z, float r, float g, float b, float size, int m);
 
 }

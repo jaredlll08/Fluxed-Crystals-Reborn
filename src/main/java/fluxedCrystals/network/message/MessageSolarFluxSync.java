@@ -10,10 +10,10 @@ public class MessageSolarFluxSync implements IMessage, IMessageHandler<MessageSo
 	public int x, y, z;
 	public int stored;
 
-	public MessageSolarFluxSync () {
+	public MessageSolarFluxSync() {
 	}
 
-	public MessageSolarFluxSync (int x, int y, int z, int stored) {
+	public MessageSolarFluxSync(int x, int y, int z, int stored) {
 		this.x = x;
 		this.y = y;
 		this.z = z;

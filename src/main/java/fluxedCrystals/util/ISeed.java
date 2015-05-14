@@ -1,6 +1,5 @@
 package fluxedCrystals.util;
 
-public interface ISeed
-{
+public interface ISeed {
 
 }

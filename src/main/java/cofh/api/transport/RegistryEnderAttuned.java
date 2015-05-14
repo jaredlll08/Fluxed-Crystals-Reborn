@@ -1,16 +1,9 @@
 package cofh.api.transport;
 
 import gnu.trove.map.hash.THashMap;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraftforge.common.config.Configuration;
+
+import java.util.*;
 
 public final class RegistryEnderAttuned {
 

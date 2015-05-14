@@ -1,10 +1,8 @@
 package fluxedCrystals.reference;
 
-public class Messages
-{
+public class Messages {
 
-	public static final class Commands
-	{
+	public static final class Commands {
 
 		private static final String COMMAND_PREFIX = "commands." + Reference.LOWERCASE_MOD_ID + ".";
 

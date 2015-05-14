@@ -22,25 +22,12 @@ import java.util.EnumSet;
  */
 public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, IManaReceiver, ISidedInventory {
 
+	private static int[] slotsAll = {0, 1, 2, 3, 4, 5, 6};
+	private final int[] UPGRADE_SLOTS = {2, 3, 4};
 	public ItemStack[] items;
-
 	private int refined = 0;
-
-	public int getRecipeIndex() {
-		return recipeIndex;
-	}
-
-	public void setRecipeIndex(int recipeIndex) {
-		this.recipeIndex = recipeIndex;
-	}
-
-	public int getRefined() {
-		return refined;
-	}
-
 	// -1 if not currently refining
 	private int recipeIndex;
-
 	private int mana;
 	private int MAX_MANA;
 	private boolean RF = true;
@@ -52,6 +39,18 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		mana = 0;
 		items = new ItemStack[7];
 
+	}
+
+	public int getRecipeIndex() {
+		return recipeIndex;
+	}
+
+	public void setRecipeIndex(int recipeIndex) {
+		this.recipeIndex = recipeIndex;
+	}
+
+	public int getRefined() {
+		return refined;
 	}
 
 	public void updateEntity() {
@@ -115,8 +114,6 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		}
 		return eff;
 	}
-
-	private final int[] UPGRADE_SLOTS = {2, 3, 4};
 
 	@Override
 	public void closeInventory() {
@@ -472,8 +469,6 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 			this.mana = MAX_MANA;
 		}
 	}
-
-	private static int[] slotsAll = {0, 1, 2, 3, 4, 5, 6};
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {

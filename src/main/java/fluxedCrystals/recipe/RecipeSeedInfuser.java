@@ -5,8 +5,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeSeedInfuser
-{
+public class RecipeSeedInfuser {
 
 	private ItemStack input;
 	private ItemStack output;
@@ -14,15 +13,13 @@ public class RecipeSeedInfuser
 	private int inputAmount;
 	private int index = -1;
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount)
-	{
+	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount) {
 
 		this(ingredient, input, output, inputAmount, -1);
 
 	}
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount, int index)
-	{
+	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount, int index) {
 
 		this.input = input;
 		this.output = output;

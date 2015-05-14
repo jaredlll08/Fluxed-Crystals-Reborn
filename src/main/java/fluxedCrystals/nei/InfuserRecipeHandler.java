@@ -15,6 +15,8 @@ import java.util.List;
 
 public class InfuserRecipeHandler extends TemplateRecipeHandler {
 
+	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
+
 	@Override
 	public String getGuiTexture() {
 		return Reference.LOWERCASE_MOD_ID + ":textures/gui/SeedInfuser.png";
@@ -29,8 +31,6 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 	public int recipiesPerPage() {
 		return 1;
 	}
-
-	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
 	public void drawBackground(int recipe) {
@@ -102,13 +102,17 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 		return true;
 	}
 
+	@Override
+	public String getOverlayIdentifier() {
+		return "seedInfuser";
+	}
+
 	public class CachedInfusionRecipe extends CachedRecipe {
 
+		public RecipeSeedInfuser recipe;
 		private PositionedStack output;
 		private PositionedStack inputs;
 		private List<PositionedStack> other = new ArrayList<PositionedStack>();
-
-		public RecipeSeedInfuser recipe;
 
 		public CachedInfusionRecipe(RecipeSeedInfuser recipe) {
 			this.output = new PositionedStack(recipe.getOutput(), 6, 44);
@@ -132,11 +136,6 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 		public List<PositionedStack> getOtherStacks() {
 			return other;
 		}
-	}
-
-	@Override
-	public String getOverlayIdentifier() {
-		return "seedInfuser";
 	}
 
 }

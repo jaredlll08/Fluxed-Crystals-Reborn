@@ -7,13 +7,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GUIGemCutter extends GuiContainer
-{
+public class GUIGemCutter extends GuiContainer {
 
+	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 	private TileEntityGemCutter tile;
 	private int energyOffset = 0;
 	private int cut = 0;
@@ -29,8 +28,6 @@ public class GUIGemCutter extends GuiContainer
 		this.tile = tile2;
 
 	}
-
-	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 
 	@SuppressWarnings("unchecked")
 	public void initGui() {

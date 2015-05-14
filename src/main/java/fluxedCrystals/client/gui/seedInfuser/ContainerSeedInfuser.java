@@ -9,8 +9,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSeedInfuser extends Container
-{
+public class ContainerSeedInfuser extends Container {
 
 	public ContainerSeedInfuser(InventoryPlayer invPlayer, TileEntitySeedInfuser manager) {
 

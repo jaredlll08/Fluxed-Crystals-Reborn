@@ -5,6 +5,8 @@ import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.compat.waila.IWailaInfo;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
+import fluxedCrystals.util.ITileSoil;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.cbcore.LangUtil;
@@ -19,13 +21,14 @@ import net.minecraft.world.World;
 import tterrag.core.common.util.BlockCoord;
 
 import java.util.List;
-import java.util.Random;
 
 public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 
 	private int idx = 0;
 	private int ticksgrown = 0;
 	private boolean harvested = false;
+	private ITileSoil power;
+	private BlockCrystal crystal;
 
 	public boolean isHarvested() {
 		return harvested;
@@ -53,22 +56,18 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 		this.ticksgrown = ticksgrown;
 	}
 
-	public TileEntityPowerBlock getPower() {
+	public ITileSoil getPower() {
 		return power;
 	}
 
-	public void setPower(TileEntityPowerBlock power) {
+	public void setPower(ITileSoil power) {
 		this.power = power;
 	}
 
-	private TileEntityPowerBlock power;
-
-	private BlockCrystal crystal;
-
 	public void updateEntity() {
 
-		if (power == null && worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityPowerBlock)
-			power = (TileEntityPowerBlock) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+		if (power == null && worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof ITileSoil)
+			power = (ITileSoil) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 		if (SeedRegistry.getInstance().getSeedByID(idx) != null && power != null) {
 			ticksgrown++;
 			if (ticksgrown > SeedRegistry.getInstance().getSeedByID(idx).growthTime / power.getSpeed()) {
@@ -84,10 +83,9 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	}
 
 	public boolean growPlant(World world, boolean night) {
-		if (world != null)
-			if (world.getBlock(xCoord, yCoord, zCoord) instanceof CrystalBase) {
-				return ((CrystalBase) world.getBlock(xCoord, yCoord, zCoord)).growCrop(world, xCoord, yCoord, zCoord, world.rand, night);
-			}
+		if (world != null) if (world.getBlock(xCoord, yCoord, zCoord) instanceof CrystalBase) {
+			return ((CrystalBase) world.getBlock(xCoord, yCoord, zCoord)).growCrop(world, xCoord, yCoord, zCoord, world.rand, night);
+		}
 		return false;
 	}
 

@@ -1,7 +1,6 @@
 package cofh.api.modhelpers;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -12,7 +11,9 @@ public class ThermalExpansionHelper {
 
 	}
 
-	/** MACHINES */
+	/**
+	 * MACHINES
+	 */
 
 	/* Furnace */
 	public static void addFurnaceRecipe(int energy, ItemStack input, ItemStack output) {
@@ -155,8 +156,7 @@ public class ThermalExpansionHelper {
 		addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, secondaryOutput, 100);
 	}
 
-	public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput,
-			int secondaryChance) {
+	public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
 
 		if (primaryInput == null || secondaryInput == null || primaryOutput == null) {
 			return;
@@ -201,7 +201,7 @@ public class ThermalExpansionHelper {
 	/**
 	 * Use this to register an Ore TYPE as a "Blast" recipe - it will require Pyrotheum Dust to smelt. Do not add the prefix. This is an opt-in for ores which
 	 * do NOT have vanilla furnace recipes.
-	 *
+	 * <p/>
 	 * Ex: "Steel" or "ElectrumFlux", not "dustSteel" or "dustElectrumFlux"
 	 *
 	 * @param oreType
@@ -357,8 +357,7 @@ public class ThermalExpansionHelper {
 		addInsolatorRecipe(energy, primaryInput, secondaryInput, primaryOutput, secondaryOutput, 100);
 	}
 
-	public static void addInsolatorRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput,
-			int secondaryChance) {
+	public static void addInsolatorRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
 
 		if (primaryInput == null || secondaryInput == null || primaryOutput == null) {
 			return;
@@ -400,7 +399,9 @@ public class ThermalExpansionHelper {
 		FMLInterModComms.sendMessage("ThermalExpansion", "RemoveInsolatorRecipe", toSend);
 	}
 
-	/** DYNAMOS */
+	/**
+	 * DYNAMOS
+	 */
 
 	/* Magmatic */
 	public static void addMagmaticFuel(String fluidName, int energy) {

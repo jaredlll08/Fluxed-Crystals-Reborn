@@ -1,7 +1,5 @@
 package fluxedCrystals.client.gui.gemCutter;
 
-import java.util.List;
-
 import fluxedCrystals.client.gui.slot.SlotCustom;
 import fluxedCrystals.client.gui.slot.SlotIBindable;
 import fluxedCrystals.client.gui.slot.SlotUpgrade;
@@ -14,12 +12,14 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGemCutter extends Container
-{
+import java.util.List;
+
+public class ContainerGemCutter extends Container {
 	private TileEntityGemCutter tile;
-	
+	private int lastStoredEnergy = -1;
+
 	public ContainerGemCutter(InventoryPlayer invPlayer, TileEntityGemCutter manager) {
-		
+
 		this.tile = manager;
 
 		addSlotToContainer(new Slot(manager, 0, 46, 37));
@@ -31,7 +31,7 @@ public class ContainerGemCutter extends Container
 		addSlotToContainer(new SlotCustom(manager, 5, 13, 62, 1, new ItemStack(FCItems.upgradeRangeBasic), new ItemStack(FCItems.upgradeRangeAdvanced), new ItemStack(FCItems.upgradeRangeGreater)));
 
 		addSlotToContainer(new SlotIBindable(manager, 6, 147, 62));
-		
+
 		for (int x = 0; x < 9; x++) {
 			addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));
 		}
@@ -57,26 +57,24 @@ public class ContainerGemCutter extends Container
 
 		return null;
 	}
-	
-	private int lastStoredEnergy = -1;
+
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		
-		if(!tile.getWorldObj().isRemote) {
+
+		if (!tile.getWorldObj().isRemote) {
 			int energyStored = tile.getEnergyStored();
 			// send energy to players viewing this GUI
-			if(energyStored != lastStoredEnergy) {
-				for(ICrafting c : (List<ICrafting>)crafters)
+			if (energyStored != lastStoredEnergy) {
+				for (ICrafting c : (List<ICrafting>) crafters)
 					c.sendProgressBarUpdate(this, 0, energyStored);
 				lastStoredEnergy = energyStored;
 			}
 		}
 	}
-	
+
 	@Override
 	public void updateProgressBar(int bar, int value) {
-		if(bar == 0)
-			tile.setEnergyStored(value);
+		if (bar == 0) tile.setEnergyStored(value);
 	}
 }

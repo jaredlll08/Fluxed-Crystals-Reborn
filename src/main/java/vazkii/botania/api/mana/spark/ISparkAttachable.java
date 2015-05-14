@@ -2,11 +2,11 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Aug 21, 2014, 5:44:13 PM (GMT)]
  */
 package vazkii.botania.api.mana.spark;
@@ -34,14 +34,14 @@ public interface ISparkAttachable extends IManaReceiver {
 	/**
 	 * Gets the Spark that is attached to this block. A common implementation is
 	 * to check for Spark entities above:
-	 * 
-	  	List<ISparkEntity> sparks = worldObj.getEntitiesWithinAABB(ISparkEntity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1));
-	 	if(sparks.size() == 1) {
-			Entity e = (Entity) sparks.get(0);
-			return (ISparkEntity) e;
-		}
-
-		return null;
+	 * <p/>
+	 * List<ISparkEntity> sparks = worldObj.getEntitiesWithinAABB(ISparkEntity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1));
+	 * if(sparks.size() == 1) {
+	 * Entity e = (Entity) sparks.get(0);
+	 * return (ISparkEntity) e;
+	 * }
+	 * <p/>
+	 * return null;
 	 */
 	public ISparkEntity getAttachedSpark();
 

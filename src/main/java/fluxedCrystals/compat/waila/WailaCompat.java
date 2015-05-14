@@ -17,8 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class WailaCompat implements IWailaDataProvider
-{
+public class WailaCompat implements IWailaDataProvider {
 	public static final WailaCompat INSTANCE = new WailaCompat();
 
 	public static void load(IWailaRegistrar registrar) {

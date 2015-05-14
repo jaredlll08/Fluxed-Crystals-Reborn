@@ -14,45 +14,41 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class CommandSeedFromCurrentItem extends CommandBase
-{
+public class CommandSeedFromCurrentItem extends CommandBase {
 
 	@Override
-	public String getCommandName() { return Names.Commands.SEED_FROM_CURRENT; }
+	public String getCommandName() {
+		return Names.Commands.SEED_FROM_CURRENT;
+	}
 
 	@Override
-	public int getRequiredPermissionLevel() { return 2; }
+	public int getRequiredPermissionLevel() {
+		return 2;
+	}
 
 	@Override
-	public String getCommandUsage (ICommandSender commandSender)
-	{
+	public String getCommandUsage(ICommandSender commandSender) {
 
 		return Messages.Commands.SEED_FROM_CURRENT_USAGE;
 
 	}
 
 	@Override
-	public void processCommand(ICommandSender commandSender, String[] args)
-	{
+	public void processCommand(ICommandSender commandSender, String[] args) {
 
-		if (args.length < 1)
-		{
+		if (args.length < 1) {
 
 			throw new WrongUsageException(Messages.Commands.SEED_FROM_CURRENT_USAGE);
 
-		}
-		else
-		{
+		} else {
 
 			ItemStack itemStack = ((EntityPlayer) commandSender).getCurrentEquippedItem().copy();
 
-			if (itemStack != null)
-			{
+			if (itemStack != null) {
 
 				Seed seed = SeedRegistry.getInstance().addTemplateSeed(itemStack);
 
-				if (seed != null)
-				{
+				if (seed != null) {
 
 					SeedRegistry.getInstance().Save();
 
@@ -62,9 +58,7 @@ public class CommandSeedFromCurrentItem extends CommandBase
 
 				}
 
-			}
-			else
-			{
+			} else {
 
 				throw new WrongUsageException(Messages.Commands.NO_ITEM);
 
@@ -75,8 +69,7 @@ public class CommandSeedFromCurrentItem extends CommandBase
 	}
 
 	@Override
-	public List addTabCompletionOptions(ICommandSender commandSender, String[] args)
-	{
+	public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
 
 		return null;
 

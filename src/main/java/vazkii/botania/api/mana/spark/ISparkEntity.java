@@ -2,11 +2,11 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Aug 21, 2014, 5:44:07 PM (GMT)]
  */
 package vazkii.botania.api.mana.spark;
@@ -20,15 +20,15 @@ public interface ISparkEntity {
 
 	/**
 	 * Which TileEntity is this Spark attached to? A common implementation is checking the block below.
-	 * 
-	  	int x = MathHelper.floor_double(posX);
-		int y = MathHelper.floor_double(posY) - 1;
-		int z = MathHelper.floor_double(posZ);
-		TileEntity tile = worldObj.getTileEntity(x, y, z);
-		if(tile != null && tile instanceof ISparkAttachable)
-			return (ISparkAttachable) tile;
-
-		return null;
+	 * <p/>
+	 * int x = MathHelper.floor_double(posX);
+	 * int y = MathHelper.floor_double(posY) - 1;
+	 * int z = MathHelper.floor_double(posZ);
+	 * TileEntity tile = worldObj.getTileEntity(x, y, z);
+	 * if(tile != null && tile instanceof ISparkAttachable)
+	 * return (ISparkAttachable) tile;
+	 * <p/>
+	 * return null;
 	 */
 	public ISparkAttachable getAttachedTile();
 

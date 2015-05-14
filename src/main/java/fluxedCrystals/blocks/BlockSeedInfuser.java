@@ -16,13 +16,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockSeedInfuser extends Block implements ITileEntityProvider
-{
+public class BlockSeedInfuser extends Block implements ITileEntityProvider {
 
 	public IIcon[] textures;
 
-	public BlockSeedInfuser()
-	{
+	public BlockSeedInfuser() {
 		super(Material.anvil);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0f);
@@ -35,8 +33,7 @@ public class BlockSeedInfuser extends Block implements ITileEntityProvider
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9) {
-		if (!world.isRemote)
-			player.openGui(FluxedCrystals.instance, 1, world, x, y, z);
+		if (!world.isRemote) player.openGui(FluxedCrystals.instance, 1, world, x, y, z);
 		return true;
 	}
 
@@ -60,8 +57,7 @@ public class BlockSeedInfuser extends Block implements ITileEntityProvider
 		TileEntitySeedInfuser tile = (TileEntitySeedInfuser) world.getTileEntity(x, y, z);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				if (tile.getStackInSlot(i) != null)
-					dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
+				if (tile.getStackInSlot(i) != null) dropBlockAsItem(world, x, y, z, tile.getStackInSlot(i));
 			}
 		}
 

@@ -10,11 +10,10 @@ import net.minecraft.util.EnumChatFormatting;
 public class PlayerEventHandler {
 
 	@SubscribeEvent
-	public void chat(net.minecraftforge.event.entity.player.PlayerEvent.NameFormat e){
-		if(e.displayname.equalsIgnoreCase("Jaredlll08")){
+	public void chat(net.minecraftforge.event.entity.player.PlayerEvent.NameFormat e) {
+		if (e.displayname.equalsIgnoreCase("Jaredlll08")) {
 			e.displayname = EnumChatFormatting.BLUE + "Jared" + EnumChatFormatting.RESET;
-		}
-		else if (e.displayname.equalsIgnoreCase("namroc_smith")) {
+		} else if (e.displayname.equalsIgnoreCase("namroc_smith")) {
 			e.displayname = EnumChatFormatting.RED + "Namroc" + EnumChatFormatting.RESET;
 		}
 	}

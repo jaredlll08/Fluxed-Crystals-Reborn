@@ -2,10 +2,9 @@ package fluxedCrystals.util;
 
 import net.minecraft.util.DamageSource;
 
-public class DamageSourceCrystal extends DamageSource
-{
+public class DamageSourceCrystal extends DamageSource {
 
-	public DamageSourceCrystal () {
+	public DamageSourceCrystal() {
 		super("Crystal");
 	}
 
