@@ -2,14 +2,17 @@ package fluxedCrystals.proxy;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.client.render.RenderCrystal;
 import fluxedCrystals.client.render.SeedInfuserRenderer;
+import fluxedCrystals.handler.ClientEventHandler;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
@@ -57,6 +60,19 @@ public class ClientProxy extends CommonProxy
 	{
 
 		return true;
+
+	}
+
+	@Override
+	public void initialize()
+	{
+
+		super.initialize();
+
+		ClientEventHandler clientEventHandler = new ClientEventHandler();
+
+		MinecraftForge.EVENT_BUS.register(clientEventHandler);
+		FMLCommonHandler.instance().bus().register(clientEventHandler);
 
 	}
 
