@@ -1,6 +1,7 @@
 package fluxedCrystals.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.BlockGemCutter;
 import fluxedCrystals.blocks.BlockGemRefiner;
 import fluxedCrystals.blocks.BlockPowerBlock;
@@ -10,8 +11,12 @@ import fluxedCrystals.reference.Names;
 import fluxedCrystals.tileEntity.*;
 import net.minecraft.block.Block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FCBlocks
 {
+	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public static Block poweredSoil= new BlockPowerBlock();
 	//	public static Block poweredSoilMana= new BlockPowerBlockMana();
@@ -35,22 +40,22 @@ public class FCBlocks
 	{
 		GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
-		GameRegistry.registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL);
+		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 
 		//		GameRegistry.registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA);
 		//		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
 
-		GameRegistry.registerBlock(crystal, "crystal");
+		registerBlock(crystal, "crystal", "crystal");
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");
 
-		GameRegistry.registerBlock(seedInfuser, Names.Blocks.SEED_INFUSER);
+		registerBlock(seedInfuser, Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
 		GameRegistry.registerTileEntity(TileEntitySeedInfuser.class, Names.Blocks.SEED_INFUSER);
 
-		GameRegistry.registerBlock(gemCutter, Names.Blocks.GEM_CUTTER);
+		registerBlock(gemCutter, Names.Blocks.GEM_CUTTER, Names.Blocks.GEM_CUTTER);
 		GameRegistry.registerTileEntity(TileEntityGemCutter.class, Names.Blocks.GEM_CUTTER);
 
-		GameRegistry.registerBlock(gemRefiner, Names.Blocks.GEM_REFINER);
+		registerBlock(gemRefiner, Names.Blocks.GEM_REFINER, Names.Blocks.GEM_REFINER);
 		GameRegistry.registerTileEntity(TileEntityGemRefiner.class, Names.Blocks.GEM_REFINER);
 
 
@@ -60,5 +65,12 @@ public class FCBlocks
 	{
 
 	}
+
+	private static void registerBlock(Block block, String name, String key) {
+		block.setBlockName(name).setCreativeTab(FluxedCrystals.tab);
+		GameRegistry.registerBlock(block, key);
+		blockRegistry.put(key, block);
+	}
+
 
 }

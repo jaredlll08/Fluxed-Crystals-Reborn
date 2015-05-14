@@ -6,6 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import fluxedCrystals.client.gui.GUIHandler;
 import fluxedCrystals.command.CommandFC;
@@ -70,8 +71,7 @@ public class FluxedCrystals {
 		proxy.preInit();
 
 
-		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT)
-		{
+		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT) {
 			new FluxedCrystalsNEIConfig().loadConfig();
 		}
 
@@ -82,8 +82,7 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void initialize(FMLInitializationEvent event)
-	{
+	public void initialize(FMLInitializationEvent event) {
 
 		FCItems.initialize();
 		FCBlocks.initialize();
@@ -143,49 +142,63 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void onServerStopping(FMLServerStoppingEvent event)
-	{
+	public void onServerStopping(FMLServerStoppingEvent event) {
 
 		SeedRegistry.getInstance().Save();
 
 	}
 
 	@Mod.EventHandler
-	public void remap(FMLModIdMappingEvent event)
-	{
+	public void alias(FMLMissingMappingsEvent e) {
+		for (FMLMissingMappingsEvent.MissingMapping map : e.getAll()) {
+			if (map.name.startsWith("fluxedCrystals:") || map.name.startsWith("fluxedcrystals")) {
+				int count = 0;
+				if (map.type == GameRegistry.Type.BLOCK) for (String key : FCBlocks.blockRegistry.keySet()) {
+					if (map.name.endsWith(key)) {
+						map.remap(FCBlocks.blockRegistry.get(key));
+					}
+					count++;
+				}
+				if (map.type == GameRegistry.Type.ITEM) {
+					for (String key : FCItems.itemRegistry.keySet()) {
+						if (map.name.endsWith(key)) {
+							map.remap(FCItems.itemRegistry.get(key));
+						}
+						count++;
+					}
+				}
 
-		for (int i : SeedRegistry.getInstance().keySet())
-		{
+			}
+		}
+	}
+
+
+	@Mod.EventHandler
+	public void remap(FMLModIdMappingEvent event) {
+
+		for (int i : SeedRegistry.getInstance().keySet()) {
 
 			Seed seed = SeedRegistry.getInstance().getSeedByID(i);
 
-			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired)))
-			{
+			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
 
-				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed),
-						seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
+				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
 
 				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
 
-				if (seed.weightedDrop != null && !seed.weightedDrop.equals(""))
-				{
+				if (seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
 
-					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem())))
-					{
+					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 
-					}
-					else
-					{
+					} else {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
 					}
 
-				}
-				else
-				{
+				} else {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
@@ -199,8 +212,7 @@ public class FluxedCrystals {
 
 	}
 
-	public SeedRegistry getSeedRegistry()
-	{
+	public SeedRegistry getSeedRegistry() {
 		return SeedRegistry.getInstance();
 
 	}

@@ -12,8 +12,12 @@ import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Textures;
 import net.minecraft.item.Item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FCItems {
 
+	public static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 	public static Item universalSeed = new ItemUniversalSeed();
 	public static Item seed = new ItemSeed();
 	public static Item shardRough = new ItemShardRough();
@@ -46,46 +50,51 @@ public class FCItems {
 
 	public static void initialize() {
 
-		GameRegistry.registerItem(universalSeed, Names.Items.UNIVERSAL_SEED);
-		GameRegistry.registerItem(seed, Names.Items.SEED);
-		GameRegistry.registerItem(shardRough, Names.Items.SHARDROUGH);
-		GameRegistry.registerItem(shardSmooth, Names.Items.SHARDSMOOTH);
-		GameRegistry.registerItem(scytheWood, Names.Items.SCYTHE_WOOD);
-		GameRegistry.registerItem(scytheStone, Names.Items.SCYTHE_STONE);
-		GameRegistry.registerItem(scytheIron, Names.Items.SCYTHE_IRON);
-		GameRegistry.registerItem(scytheGold, Names.Items.SCYTHE_GOLD);
-		GameRegistry.registerItem(scytheDiamond, Names.Items.SCYTHE_DIAMOND);
+		registerItem(universalSeed, Names.Items.UNIVERSAL_SEED, Names.Items.UNIVERSAL_SEED);
+		registerItem(seed, Names.Items.SEED, Names.Items.SEED);
+		registerItem(shardRough, Names.Items.SHARDROUGH, Names.Items.SHARDROUGH);
+		registerItem(shardSmooth, Names.Items.SHARDSMOOTH, Names.Items.SHARDSMOOTH);
+		registerItem(scytheWood, Names.Items.SCYTHE_WOOD, Names.Items.SCYTHE_WOOD);
+		registerItem(scytheStone, Names.Items.SCYTHE_STONE, Names.Items.SCYTHE_STONE);
+		registerItem(scytheIron, Names.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON);
+		registerItem(scytheGold, Names.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD);
+		registerItem(scytheDiamond, Names.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND);
+
 
 		if (Loader.isModLoaded("Thaumcraft")) {
 
-			GameRegistry.registerItem(upgradeEssentia, Names.Items.UPGRADE_ESSENTIA);
+			registerItem(upgradeEssentia, Names.Items.UPGRADE_ESSENTIA, Names.Items.UPGRADE_ESSENTIA);
 
 		}
 
 		if (Loader.isModLoaded("AWWayofTime")) {
 
-			GameRegistry.registerItem(upgradeLP, Names.Items.UPGRADE_LP);
+			registerItem(upgradeLP, Names.Items.UPGRADE_LP, Names.Items.UPGRADE_LP);
 
 		}
 
 		if (Loader.isModLoaded("Botania")) {
 
-			GameRegistry.registerItem(upgradeMana, Names.Items.UPGRADE_MANA);
+			registerItem(upgradeMana, Names.Items.UPGRADE_MANA, Names.Items.UPGRADE_MANA);
 
 		}
 
-		GameRegistry.registerItem(upgradeEffeciency, Names.Items.UPGRADE_EFFECIENCY);
-		GameRegistry.registerItem(upgradeNight, Names.Items.UPGRADE_NIGHT);
-		GameRegistry.registerItem(upgradeSpeed, Names.Items.UPGRADE_SPEED);
-		GameRegistry.registerItem(upgradeAutomation, Names.Items.UPGRADE_AUTOMATION);
-		GameRegistry.registerItem(upgradeRangeBasic, Names.Items.UPGRADE_RANGE_BASIC);
-		GameRegistry.registerItem(upgradeRangeGreater, Names.Items.UPGRADE_RANGE_GREATER);
-		GameRegistry.registerItem(upgradeRangeAdvanced, Names.Items.UPGRADE_RANGE_ADVANCED);
+		registerItem(upgradeEffeciency, Names.Items.UPGRADE_EFFECIENCY, Names.Items.UPGRADE_EFFECIENCY);
+		registerItem(upgradeNight, Names.Items.UPGRADE_NIGHT, Names.Items.UPGRADE_NIGHT);
+		registerItem(upgradeSpeed, Names.Items.UPGRADE_SPEED, Names.Items.UPGRADE_SPEED);
+		registerItem(upgradeAutomation, Names.Items.UPGRADE_AUTOMATION, Names.Items.UPGRADE_AUTOMATION);
 
 	}
 
 	public static void postInit() {
 
 	}
+
+	private static void registerItem(Item item, String name, String key) {
+
+		GameRegistry.registerItem(item, key);
+		itemRegistry.put(key, item);
+	}
+
 
 }
