@@ -58,12 +58,12 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
-
-			if (recipe.getOutput().getItem() == result.getItem()) {
-				if (checkDupe(recipe)) {
-					this.arecipes.add(new CachedInfusionRecipe(recipe));
+			if (recipe.getOutput().getItem() == result.getItem())
+				if (recipe.getOutput().getItemDamage() == result.getItemDamage()) {
+					if (checkDupe(recipe)) {
+						this.arecipes.add(new CachedInfusionRecipe(recipe));
+					}
 				}
-			}
 
 		}
 
