@@ -62,7 +62,6 @@ public class SeedRegistry {
 
 		if (itemStack != null) {
 
-
 			Seed seed = new Seed();
 
 			seed.seedID = SeedRegistry.getInstance().getNextID();
@@ -107,10 +106,42 @@ public class SeedRegistry {
 
 			return seed;
 
-
 		}
 
 		return null;
+
+	}
+
+	public Seed addTemplateSeed(Seed seed) {
+
+		seed = addSeed(seed);
+		if (seed != null) {
+
+			RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
+
+			RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
+
+			if (seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
+
+				if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
+
+					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getWeightedDrop(), seed.refinerAmount, seed.refinerOutput));
+
+				} else {
+
+					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
+
+				}
+
+			} else {
+
+				RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
+
+			}
+
+		}
+
+		return seed;
 
 	}
 
@@ -132,7 +163,7 @@ public class SeedRegistry {
 
 		if (seedMap.containsKey(seed.seedID) && getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name)) {
 
-			//	Seed is there, treat as an update
+			// Seed is there, treat as an update
 
 			addSeed(seed.seedID, seed);
 
@@ -152,7 +183,8 @@ public class SeedRegistry {
 
 		if (seedMap.containsKey(seed.seedID) && !getSeedByID(seed.seedID).name.equalsIgnoreCase(seed.name)) {
 
-			//	Someone is attempted to insert a ?new? seed with an ID in use, check the name
+			// Someone is attempted to insert a ?new? seed with an ID in use,
+			// check the name
 
 			boolean exists = false;
 

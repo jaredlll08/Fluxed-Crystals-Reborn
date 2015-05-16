@@ -25,6 +25,7 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
+import fluxedCrystals.util.SeedEditor;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import tterrag.core.common.Lang;
@@ -69,7 +70,6 @@ public class FluxedCrystals {
 
 		proxy.preInit();
 
-
 		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT) {
 			new FluxedCrystalsNEIConfig().loadConfig();
 		}
@@ -89,7 +89,6 @@ public class FluxedCrystals {
 		proxy.initialize();
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
-
 		LogHelper.info("Initialization Complete!");
 
 	}
@@ -172,7 +171,6 @@ public class FluxedCrystals {
 		}
 	}
 
-
 	@Mod.EventHandler
 	public void remap(FMLModIdMappingEvent event) {
 
@@ -216,6 +214,5 @@ public class FluxedCrystals {
 		return SeedRegistry.getInstance();
 
 	}
-
 
 }

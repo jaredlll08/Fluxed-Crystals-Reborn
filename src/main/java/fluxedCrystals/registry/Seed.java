@@ -24,8 +24,6 @@ public class Seed implements Serializable {
 	public int weigthedDropChance = 0;
 	public int refinerAmount = 32;
 	public int seedID = 0;
-	public int entityID = 0;
-	public boolean decorationBlock = false;
 	public int seedReturn = 1;
 	public boolean isSharp = true;
 	public String modRequired = "";

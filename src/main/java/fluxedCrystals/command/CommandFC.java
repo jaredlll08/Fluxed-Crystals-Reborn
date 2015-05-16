@@ -74,7 +74,7 @@ public class CommandFC extends CommandBase {
 	static {
 
 		modCommands.add(new CommandSeedFromCurrentItem());
-
+		modCommands.add(new CommandSeedEditor());
 		for (CommandBase commandBase : modCommands) {
 
 			commands.add(commandBase.getCommandName());

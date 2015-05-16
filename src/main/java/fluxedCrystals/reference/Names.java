@@ -13,6 +13,8 @@ public class Names {
 		public static final String BASE_COMMAND = Reference.LOWERCASE_MOD_ID;
 		public static final String RESET_SEEDS = "reset-seeds";
 		public static final String SEED_FROM_CURRENT = "seed-from-current";
+		public static final String SEED_EDITOR = "seed-editor";
+
 
 	}
 
