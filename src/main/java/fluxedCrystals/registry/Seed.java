@@ -27,6 +27,7 @@ public class Seed implements Serializable {
 	public int seedReturn = 1;
 	public boolean isSharp = true;
 	public String modRequired = "";
+	public String type = "crop";
 
 	public ItemStack getIngredient() {
 

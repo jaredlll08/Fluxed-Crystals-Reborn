@@ -1,27 +1,19 @@
 package fluxedCrystals.util;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.network.message.MessageSyncSeed;
+import fluxedCrystals.registry.Seed;
+import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import tterrag.core.common.json.JsonUtils;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SeedEditor extends JFrame {
 
@@ -44,6 +36,7 @@ public class SeedEditor extends JFrame {
 	private JComboBox seedReturn;
 	private JTextField ingredientMetadata;
 	private JTextField weightedDropMetadata;
+	private JComboBox type;
 
 	/**
 	 * Launch the application.
@@ -234,7 +227,7 @@ public class SeedEditor extends JFrame {
 		lblSeedReturn.setBounds(10, 500, 249, 14);
 		contentPane.add(lblSeedReturn);
 
-		JLabel lblSharp = new JLabel("Sharp");
+		JLabel lblSharp = new JLabel("Sharp:");
 		lblSharp.setBounds(10, 525, 249, 14);
 		contentPane.add(lblSharp);
 
@@ -280,6 +273,16 @@ public class SeedEditor extends JFrame {
 		weightedDropMetadata.setBounds(679, 447, 105, 20);
 		contentPane.add(weightedDropMetadata);
 		weightedDropMetadata.setColumns(10);
+
+		JLabel lblType = new JLabel("Type:");
+		lblType.setBounds(10, 550, 46, 14);
+		contentPane.add(lblType);
+
+		type = new JComboBox();
+		type.setBounds(269, 547, 515, 20);
+		contentPane.add(type);
+		type.addItem("crop");
+		type.addItem("crystal");
 		btnSaveExit.addActionListener(new ActionListener() {
 
 			@Override
@@ -311,7 +314,11 @@ public class SeedEditor extends JFrame {
 		seed.dropMin = Integer.parseInt(String.valueOf(dropMin.getSelectedItem()));
 		seed.growthTime = Integer.parseInt(String.valueOf(GrowthTime.getText()));
 		ItemStack stack = JsonUtils.parseStringIntoItemStack((String) boxIngredient.getSelectedItem());
-		stack.setItemDamage(Integer.parseInt(ingredientMetadata.getText()));
+		if (!ingredientMetadata.getText().isEmpty()) {
+			stack.setItemDamage(Integer.parseInt(ingredientMetadata.getText()));
+		} else {
+			stack.setItemDamage(0);
+		}
 		seed.ingredient = JsonUtils.getStringForItemStack(stack, true, false);
 		seed.ingredientAmount = Integer.parseInt(String.valueOf(ingredientAmount.getSelectedItem()));
 		seed.isSharp = Boolean.parseBoolean(String.valueOf(sharp.getSelectedItem()));
@@ -328,11 +335,14 @@ public class SeedEditor extends JFrame {
 		seed.seedReturn = Integer.parseInt(String.valueOf(seedReturn.getSelectedItem()));
 		seed.tier = Integer.parseInt(String.valueOf(Tier.getText()));
 		ItemStack weightedDropstack = JsonUtils.parseStringIntoItemStack((String) weightedDrop.getSelectedItem());
-		;
-		weightedDropstack.setItemDamage(Integer.parseInt(weightedDropMetadata.getText()));
+		if (!weightedDropMetadata.getText().isEmpty()) {
+			weightedDropstack.setItemDamage(Integer.parseInt(weightedDropMetadata.getText()));
+		} else {
+			weightedDropstack.setItemDamage(0);
+		}
 		seed.weightedDrop = JsonUtils.getStringForItemStack(weightedDropstack, true, false);
 		seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
-
+		seed.type = (String) type.getSelectedItem();
 		SeedRegistry.getInstance().addTemplateSeed(seed);
 		SeedRegistry.getInstance().Save();
 		PacketHandler.INSTANCE.sendToAll(new MessageSyncSeed(seed));

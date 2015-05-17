@@ -4,6 +4,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.registry.Seed;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.IPowerSoil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +19,10 @@ import java.util.Random;
 
 public abstract class CrystalBase extends Block {
 
-	public IIcon[] icons;
+	public IIcon[] crystals;
+	public IIcon[] crop;
+	public IIcon[] cropOverlay;
+
 
 	public CrystalBase() {
 
@@ -64,28 +70,45 @@ public abstract class CrystalBase extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
 
-		this.icons = new IIcon[8];
-		this.blockIcon = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_7");
-		for (int i = 0; i < this.icons.length; ++i) {
-			this.icons[i] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + i);
-		}
+		this.crystals = new IIcon[8];
+		this.crop = new IIcon[8];
+		this.cropOverlay = new IIcon[3];
 
+		this.blockIcon = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crystal_stage_7");
+		for (int i = 0; i < this.crystals.length; ++i) {
+			this.crystals[i] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crystal_stage_" + i);
+		}
+		for (int i = 0; i < this.crop.length; ++i) {
+			this.crop[i] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + i);
+		}
+		cropOverlay[0] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + 5 + "_overlay");
+		cropOverlay[1] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + 6 + "_overlay");
+		cropOverlay[2] = icon.registerIcon(Reference.LOWERCASE_MOD_ID + ":crop_stage_" + 7 + "_overlay");
+
+
+	}
+
+
+	public IIcon getIcon(TileEntityCrystal tile, int meta) {
+		Seed seed = SeedRegistry.getInstance().getSeedByID(tile.getIdx());
+		if (seed.type.equalsIgnoreCase("crystal")) return crystals[meta];
+		if (seed.type.equalsIgnoreCase("crop")) return crop[meta];
+		return crystals[meta];
 	}
 
 	/**
 	 * Gets the block's texture. Args: side, meta
 	 */
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (meta < 0 || meta > 7) {
-
-			meta = 7;
-		}
-		return this.icons[meta];
-
-	}
-
+	//
+	//	@SideOnly(Side.CLIENT)
+	//	public IIcon getIcon(int side, int meta) {
+	//		if (meta < 0 || meta > 7) {
+	//
+	//			meta = 7;
+	//		}
+	//		return this.icons[meta];
+	//
+	//	}
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		if (world.getBlockMetadata(x, y, z) < 0 || world.getBlockMetadata(x, y, z) >= 7) {
