@@ -2,9 +2,13 @@ package fluxedCrystals.compat.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import cpw.mods.fml.common.Optional;
+import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.reference.Reference;
+import net.minecraft.item.ItemStack;
 
-public class FluxedCrystalsNEIConfig implements IConfigureNEI {
+@Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
+public class NEIConfig implements IConfigureNEI {
 
 	@Override
 	public String getName() {
@@ -25,6 +29,7 @@ public class FluxedCrystalsNEIConfig implements IConfigureNEI {
 		API.registerUsageHandler(new GemRefinerHandler());
 		API.registerRecipeHandler(new InfuserRecipeHandler());
 		API.registerUsageHandler(new InfuserRecipeHandler());
+		API.hideItem(new ItemStack(FCBlocks.crystal));
 	}
 
 }

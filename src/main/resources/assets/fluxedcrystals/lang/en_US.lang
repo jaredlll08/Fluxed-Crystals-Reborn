@@ -14,7 +14,7 @@ tile.poweredSoil.name=Powered Soil
 item.fluxedcrystals.upgradeRangeBasic.name=Basic Range Upgrade
 item.fluxedcrystals.upgradeRangeGreater.name=Greater Range Upgrade
 item.fluxedcrystals.upgradeRangeAdvanced.name=Advanced Range Upgrade
-tile.gemCutter.name=Gem Cutter
+tile.fluxedcrystals.gemCutter.name=Gem Cutter
 item.fluxedcrystals.universalSeed.name=Universal Seed
 item.fluxedcrystals.upgradeEfficiency.name=Efficiency Upgrade
 item.fluxedcrystals.upgradeNight.name=Nocturnal Upgrade
@@ -24,14 +24,14 @@ item.fluxedcrystals.upgradeMana.name=Mana Upgrade
 item.fluxedcrystals.upgradeEssentia.name=Essentia Upgrade
 item.fluxedcrystals.upgradeLP.name=LP Upgrade
 item.fluxedcrystals.upgradeRange.name=Range Upgrade
-tile.seedInfuser.name=Seed Infuser
+tile.fluxedcrystals.seedInfuser.name=Seed Infuser
 item.fluxedcrystals.scytheWood.name=Wooden Scythe
 item.fluxedcrystals.scytheStone.name=Stone Scythe
 item.fluxedcrystals.scytheIron.name=Iron Scythe
 item.fluxedcrystals.scytheGold.name=Gold Scythe
 item.fluxedcrystals.scytheDiamond.name=Diamond Scythe
 death.attack.Crystal=%s was cut by a Crystal
-tile.gemRefiner.name=Gem Refiner
+tile.fluxedcrystals.gemRefiner.name=Gem Refiner
 
 # Old Stuff
 item.shardHelm.name=%s Helmet

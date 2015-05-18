@@ -3,6 +3,7 @@ package fluxedCrystals.compat.nei;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import cpw.mods.fml.common.Optional;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
@@ -13,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.List;
 
+@Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
 public class InfuserRecipeHandler extends TemplateRecipeHandler {
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());

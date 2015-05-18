@@ -1,16 +1,13 @@
 package fluxedCrystals;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
 import fluxedCrystals.client.gui.GUIHandler;
 import fluxedCrystals.command.CommandFC;
-import fluxedCrystals.compat.nei.FluxedCrystalsNEIConfig;
 import fluxedCrystals.handler.ConfigurationHandler;
 import fluxedCrystals.handler.RecipeHandler;
 import fluxedCrystals.init.FCBlocks;
@@ -69,10 +66,6 @@ public class FluxedCrystals {
 		FCBlocks.preInit();
 
 		proxy.preInit();
-
-		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT) {
-			new FluxedCrystalsNEIConfig().loadConfig();
-		}
 
 		FMLInterModComms.sendMessage("Waila", "register", "fluxedCrystals.compat.waila.WailaCompat.load");
 

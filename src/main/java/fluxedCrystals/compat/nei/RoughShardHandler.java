@@ -3,6 +3,7 @@ package fluxedCrystals.compat.nei;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import cpw.mods.fml.common.Optional;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.Seed;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+@Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
 public class RoughShardHandler extends TemplateRecipeHandler {
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
