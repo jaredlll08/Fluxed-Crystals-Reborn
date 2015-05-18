@@ -11,10 +11,7 @@ import fluxedCrystals.blocks.soil.BlockPowerBlockLP;
 import fluxedCrystals.blocks.soil.BlockPowerBlockMana;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityGemCutter;
-import fluxedCrystals.tileEntity.TileEntityGemRefiner;
-import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
+import fluxedCrystals.tileEntity.*;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
@@ -27,8 +24,6 @@ public class FCBlocks {
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public static Block poweredSoil = new BlockPowerBlock();
-	public static Block poweredSoilMana = new BlockPowerBlockMana();
-	public static Block poweredSoilLP= new BlockPowerBlockLP();
 
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
@@ -49,15 +44,9 @@ public class FCBlocks {
 		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 
-		registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
-
-		registerBlock(poweredSoilLP, Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class, Names.Blocks.POWEREDSOILLP);
-
 		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);
-
+		
 		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
 		GameRegistry.registerTileEntity(TileEntitySeedInfuser.class, Names.Blocks.SEED_INFUSER);
 

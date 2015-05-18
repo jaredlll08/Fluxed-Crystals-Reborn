@@ -23,4 +23,5 @@ public interface IProxy {
 
 	EntityPlayer getClientPlayer();
 
+	void openTablet();
 }

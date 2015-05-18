@@ -1,5 +1,6 @@
 package fluxedCrystals;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -37,6 +38,7 @@ public class FluxedCrystals {
 	public static final Lang lang = new Lang(Reference.MOD_ID);
 	public static File configDir = null;
 	public static int crystalRenderID;
+	public static int bigCubeID;
 	@Mod.Instance(Reference.MOD_ID)
 	public static FluxedCrystals instance;
 
