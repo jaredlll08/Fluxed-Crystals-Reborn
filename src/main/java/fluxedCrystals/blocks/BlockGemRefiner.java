@@ -1,8 +1,6 @@
 package fluxedCrystals.blocks;
 
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.reference.Names;
-import fluxedCrystals.reference.Reference;
 import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.TileEntityGemRefiner;
 import net.minecraft.block.Block;
@@ -20,8 +18,6 @@ public class BlockGemRefiner extends Block implements ITileEntityProvider {
 		super(Material.anvil);
 		this.setHardness(2.0F);
 		setHarvestLevel("pickaxe", 2);
-		setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_REFINER);
-		this.setCreativeTab(FluxedCrystals.tab);
 		this.setBlockTextureName(Textures.Blocks.GEM_REFINER);
 	}
 

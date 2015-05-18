@@ -15,7 +15,6 @@ public class Names {
 		public static final String SEED_FROM_CURRENT = "seed-from-current";
 		public static final String SEED_EDITOR = "seed-editor";
 
-
 	}
 
 	public static final class Blocks {
@@ -24,6 +23,7 @@ public class Names {
 		public static final String POWEREDSOILMANA = POWEREDSOIL + "Mana";
 		public static final String POWEREDSOILLP = POWEREDSOIL + "Blood";
 
+		public static final String CRYSTAL = "crystal";
 
 		public static final String SEED_INFUSER = "seedInfuser";
 		public static final String GEM_CUTTER = "gemCutter";

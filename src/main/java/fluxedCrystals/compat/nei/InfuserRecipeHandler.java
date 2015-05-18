@@ -1,4 +1,4 @@
-package fluxedCrystals.nei;
+package fluxedCrystals.compat.nei;
 
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;

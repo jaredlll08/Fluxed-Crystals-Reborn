@@ -10,7 +10,11 @@ import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.blocks.soil.BlockPowerBlockLP;
 import fluxedCrystals.blocks.soil.BlockPowerBlockMana;
 import fluxedCrystals.reference.Names;
-import fluxedCrystals.tileEntity.*;
+import fluxedCrystals.reference.Reference;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.TileEntityGemCutter;
+import fluxedCrystals.tileEntity.TileEntityGemRefiner;
+import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
@@ -40,7 +44,7 @@ public class FCBlocks {
 	}
 
 	public static void initialize() {
-		GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
+		//GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
 		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
@@ -51,17 +55,16 @@ public class FCBlocks {
 		registerBlock(poweredSoilLP, Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
 		GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class, Names.Blocks.POWEREDSOILLP);
 
+		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
+		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);
 
-		registerBlock(crystal, "crystal", "crystal");
-		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");
-
-		registerBlock(seedInfuser, Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
+		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
 		GameRegistry.registerTileEntity(TileEntitySeedInfuser.class, Names.Blocks.SEED_INFUSER);
 
-		registerBlock(gemCutter, Names.Blocks.GEM_CUTTER, Names.Blocks.GEM_CUTTER);
+		registerBlock(gemCutter, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_CUTTER, Names.Blocks.GEM_CUTTER);
 		GameRegistry.registerTileEntity(TileEntityGemCutter.class, Names.Blocks.GEM_CUTTER);
 
-		registerBlock(gemRefiner, Names.Blocks.GEM_REFINER, Names.Blocks.GEM_REFINER);
+		registerBlock(gemRefiner, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_REFINER, Names.Blocks.GEM_REFINER);
 		GameRegistry.registerTileEntity(TileEntityGemRefiner.class, Names.Blocks.GEM_REFINER);
 
 

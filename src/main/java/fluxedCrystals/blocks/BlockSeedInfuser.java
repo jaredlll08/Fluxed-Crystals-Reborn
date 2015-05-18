@@ -3,8 +3,6 @@ package fluxedCrystals.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.reference.Names;
-import fluxedCrystals.reference.Reference;
 import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import net.minecraft.block.Block;
@@ -24,8 +22,6 @@ public class BlockSeedInfuser extends Block implements ITileEntityProvider {
 		super(Material.anvil);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0f);
-		setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER);
-		this.setCreativeTab(FluxedCrystals.tab);
 	}
 
 	public int getRenderType() {

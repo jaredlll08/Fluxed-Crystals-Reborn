@@ -38,7 +38,6 @@ item.shardHelm.name=%s Helmet
 item.shardChest.name=%s Chestplate
 item.shardLegs.name=%s Leggings
 item.shardBoots.name=%s Boots
-item.gemCutter.name=Gem Cutter
 tile.Manager Block.name=Farm Manager
 tile.Blood Manager Block.name=Blood Manager Block
 tile.Thaumic Manager Block=Thaumic Manager Block

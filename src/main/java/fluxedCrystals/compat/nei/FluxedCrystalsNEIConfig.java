@@ -1,4 +1,4 @@
-package fluxedCrystals.nei;
+package fluxedCrystals.compat.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;

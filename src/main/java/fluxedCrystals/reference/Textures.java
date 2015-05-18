@@ -10,6 +10,10 @@ public class Textures {
 		public static final String SEED_INFUSER = RESOURCE_PREFIX + "InfuserOnOverlay";
 		public static final String GEM_CUTTER = RESOURCE_PREFIX + Names.Blocks.GEM_CUTTER;
 		public static final String GEM_REFINER = RESOURCE_PREFIX + Names.Blocks.GEM_REFINER;
+		public static final String CRYSTAL = RESOURCE_PREFIX + "crop_stage_7";
+		public static final String POWERED_SOIL = RESOURCE_PREFIX + Names.Blocks.POWEREDSOIL + "RF";
+		public static final String POWEREDSOILMANA = RESOURCE_PREFIX + Names.Blocks.POWEREDSOILMANA;
+		public static final String POWEREDSOILLP = RESOURCE_PREFIX + Names.Blocks.POWEREDSOILLP;
 
 	}
 

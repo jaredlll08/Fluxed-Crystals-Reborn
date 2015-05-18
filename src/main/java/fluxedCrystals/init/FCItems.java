@@ -34,11 +34,11 @@ public class FCItems {
 	public static Item upgradeRangeGreater = new Upgrade(Textures.Items.UPGRADE_RANGE_GREATER, Names.Items.UPGRADE_RANGE_GREATER);
 	public static Item upgradeRangeAdvanced = new Upgrade(Textures.Items.UPGRADE_RANGE_ADVANCED, Names.Items.UPGRADE_RANGE_ADVANCED);
 
-	public static Item scytheWood = new ItemScythe(Textures.Items.SCYTHE_WOOD, Names.Items.SCYTHE_WOOD);
-	public static Item scytheStone = new ItemScythe(Textures.Items.SCYTHE_STONE, Names.Items.SCYTHE_STONE);
-	public static Item scytheIron = new ItemScythe(Textures.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON);
-	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD);
-	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND);
+	public static Item scytheWood = new ItemScythe(Textures.Items.SCYTHE_WOOD, Names.Items.SCYTHE_WOOD, Item.ToolMaterial.WOOD);
+	public static Item scytheStone = new ItemScythe(Textures.Items.SCYTHE_STONE, Names.Items.SCYTHE_STONE, Item.ToolMaterial.STONE);
+	public static Item scytheIron = new ItemScythe(Textures.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON, Item.ToolMaterial.IRON);
+	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
+	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
 
 	public FCItems() {
 

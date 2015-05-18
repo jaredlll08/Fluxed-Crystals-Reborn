@@ -4,7 +4,7 @@ import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.compat.waila.IWailaInfo;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.items.ItemScythe;
-import fluxedCrystals.reference.Reference;
+import fluxedCrystals.reference.Textures;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
@@ -35,8 +35,7 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	public BlockCrystal() {
 		setHardness(0.05F);
 		setTickRandomly(true);
-		//		setCreativeTab(FluxedCrystals.tab);
-		setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":crop_stage_7");
+		setBlockTextureName(Textures.Blocks.CRYSTAL);
 	}
 
 	@Override

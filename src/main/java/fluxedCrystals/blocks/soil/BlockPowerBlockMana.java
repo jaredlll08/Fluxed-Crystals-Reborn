@@ -1,9 +1,7 @@
 package fluxedCrystals.blocks.soil;
 
-import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.items.Upgrade;
-import fluxedCrystals.reference.Names;
-import fluxedCrystals.reference.Reference;
+import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.util.IPowerSoil;
 import net.minecraft.block.Block;
@@ -23,9 +21,7 @@ public class BlockPowerBlockMana extends Block implements ITileEntityProvider, I
 		super(Material.grass);
 		this.setHardness(1.0F);
 		this.setHarvestLevel("shovel", 1);
-		this.setBlockName(Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA);
-		this.setBlockTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Blocks.POWEREDSOILMANA);
-		this.setCreativeTab(FluxedCrystals.tab);
+		this.setBlockTextureName(Textures.Blocks.POWEREDSOILMANA);
 		setStepSound(Block.soundTypeGrass);
 	}
 

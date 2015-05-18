@@ -1,16 +1,16 @@
-package fluxedCrystals.nei;
+package fluxedCrystals.compat.nei;
 
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import fluxedCrystals.recipe.RecipeGemRefiner;
+import fluxedCrystals.recipe.RecipeGemCutter;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.reference.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GemRefinerHandler extends TemplateRecipeHandler {
+public class GemCutterHandler extends TemplateRecipeHandler {
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
@@ -21,7 +21,7 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
-		return "Gem Refiner";
+		return "Gem Cutter";
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void drawExtras(int recipe) {
-		CachedRefinerRecipe r = (CachedRefinerRecipe) arecipes.get(recipe);
+		CachedCutterRecipe r = (CachedCutterRecipe) arecipes.get(recipe);
 		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -57,12 +57,12 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
 
-		for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
+		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
-			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
+			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-			if (recipe.getOutput().isItemEqual(result)) {
-				if (checkDupe(recipe)) this.arecipes.add(new CachedRefinerRecipe(recipe));
+			if (recipeGemCutter.getOutput().isItemEqual(result)) {
+				if (checkDupe(recipeGemCutter)) this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
 			}
 
 		}
@@ -72,22 +72,22 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
 
-		for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
+		for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
-			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
+			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-			if (recipe.getInput().isItemEqual(ingredient)) {
-				if (checkDupe(recipe)) this.arecipes.add(new CachedRefinerRecipe(recipe));
+			if (recipeGemCutter.getInput().isItemEqual(ingredient)) {
+				if (checkDupe(recipeGemCutter)) this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
 			}
 
 		}
 
 	}
 
-	private boolean checkDupe(RecipeGemRefiner recipe) {
+	private boolean checkDupe(RecipeGemCutter recipe) {
 		for (Object o : this.arecipes.toArray()) {
-			if (o instanceof CachedRefinerRecipe) {
-				CachedRefinerRecipe r = (CachedRefinerRecipe) o;
+			if (o instanceof CachedCutterRecipe) {
+				CachedCutterRecipe r = (CachedCutterRecipe) o;
 				if (r.recipe.getInput().isItemEqual(recipe.getInput())) {
 					if (r.recipe.getOutput().isItemEqual(recipe.getOutput())) {
 						return false;
@@ -100,20 +100,22 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 
 	@Override
 	public String getOverlayIdentifier() {
-		return "gemRefiner";
+		return "gemCutter";
 	}
 
-	public class CachedRefinerRecipe extends CachedRecipe {
+	public class CachedCutterRecipe extends CachedRecipe {
 
-		public RecipeGemRefiner recipe;
+		public RecipeGemCutter recipe;
 		private PositionedStack output;
 		private PositionedStack inputs;
 
-		public CachedRefinerRecipe(RecipeGemRefiner recipe) {
+		public CachedCutterRecipe(RecipeGemCutter recipe) {
 			this.output = new PositionedStack(recipe.getOutput(), 143, 6);
 			this.recipe = recipe;
 			this.inputs = new PositionedStack(recipe.getInput(), 6, 6);
-			inputs.item.stackSize = recipe.getInputamount();
+			output.item.stackSize = 1;
+			inputs.item.stackSize = 1;
+
 
 		}
 
