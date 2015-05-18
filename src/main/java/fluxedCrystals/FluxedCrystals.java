@@ -25,7 +25,6 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
-import fluxedCrystals.util.SeedEditor;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import tterrag.core.common.Lang;
@@ -146,30 +145,26 @@ public class FluxedCrystals {
 
 	}
 
-	@Mod.EventHandler
-	public void alias(FMLMissingMappingsEvent e) {
-		for (FMLMissingMappingsEvent.MissingMapping map : e.getAll()) {
-			if (map.name.startsWith("fluxedCrystals:") || map.name.startsWith("fluxedcrystals")) {
-				int count = 0;
-				if (map.type == GameRegistry.Type.BLOCK) for (String key : FCBlocks.blockRegistry.keySet()) {
-					if (map.name.endsWith(key)) {
-						map.remap(FCBlocks.blockRegistry.get(key));
-					}
-					count++;
-				}
-				count = 0;
-				if (map.type == GameRegistry.Type.ITEM) {
-					for (String key : FCItems.itemRegistry.keySet()) {
-						if (map.name.endsWith(key)) {
-							map.remap(FCItems.itemRegistry.get(key));
-						}
-						count++;
-					}
-				}
-
-			}
-		}
-	}
+	//	@Mod.EventHandler
+	//	public void alias(FMLMissingMappingsEvent e) {
+	//		for (FMLMissingMappingsEvent.MissingMapping map : e.getAll()) {
+	//			if (map.name.startsWith("fluxedCrystals:") || map.name.startsWith("fluxedcrystals")) {
+	//				if (map.type == GameRegistry.Type.BLOCK) for (String key : FCBlocks.blockRegistry.keySet()) {
+	//					if (map.name.endsWith(key)) {
+	//						map.remap(FCBlocks.blockRegistry.get(key));
+	//					}
+	//				}
+	//				if (map.type == GameRegistry.Type.ITEM) {
+	//					for (String key : FCItems.itemRegistry.keySet()) {
+	//						if (map.name.endsWith(key)) {
+	//							map.remap(FCItems.itemRegistry.get(key));
+	//						}
+	//					}
+	//				}
+	//
+	//			}
+	//		}
+	//	}
 
 	@Mod.EventHandler
 	public void remap(FMLModIdMappingEvent event) {
