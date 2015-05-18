@@ -29,6 +29,13 @@ public class RecipeSeedInfuser {
 
 	}
 
+	public boolean matchesIngredient(ItemStack itemStack)
+	{
+
+		return this.matches(this.ingredient, itemStack);
+
+	}
+
 	public boolean matches(ItemStack ingredient, ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int id : ids) {

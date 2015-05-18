@@ -1,5 +1,6 @@
 package fluxedCrystals.client.gui.slot;
 
+import fluxedCrystals.init.FCItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -14,8 +15,11 @@ public class SlotInfuser extends Slot {
 		return 64;
 	}
 
-	public boolean isItemValid(ItemStack stack) {
+	public boolean isItemValid(ItemStack stack)
+	{
 
-		return true;
+		return stack.getItem() != FCItems.universalSeed;
+
 	}
+
 }
