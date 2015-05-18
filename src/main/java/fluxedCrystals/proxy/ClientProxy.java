@@ -4,6 +4,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.client.gui.crystalTablet.GuiCrystalTablet;
 import fluxedCrystals.client.render.RenderCrystal;
 import fluxedCrystals.client.render.SeedInfuserRenderer;
 import fluxedCrystals.handler.ClientEventHandler;
@@ -85,6 +86,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public EntityPlayer getClientPlayer() {
 		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	@Override
+	public void openTablet() {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiCrystalTablet());
 	}
 
 }

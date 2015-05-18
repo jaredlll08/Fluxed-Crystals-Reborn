@@ -23,8 +23,6 @@ public class FCBlocks {
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public static Block poweredSoil = new BlockPowerBlock();
-	public static Block poweredSoilMana = new BlockPowerBlockMana();
-	public static Block poweredSoilLP= new BlockPowerBlockLP();
 
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
@@ -44,13 +42,6 @@ public class FCBlocks {
 
 		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
-
-		registerBlock(poweredSoilMana, Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
-
-		registerBlock(poweredSoilLP, Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class, Names.Blocks.POWEREDSOILLP);
-
 
 		registerBlock(crystal, "crystal", "crystal");
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, "FCCrystal");

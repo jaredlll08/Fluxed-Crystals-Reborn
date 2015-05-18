@@ -43,4 +43,9 @@ public class ServerProxy extends CommonProxy {
 		return null;
 	}
 
+	@Override
+	public void openTablet() {
+
+	}
+
 }
