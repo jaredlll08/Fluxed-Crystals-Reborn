@@ -3,9 +3,7 @@ package fluxedCrystals.network;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import fluxedCrystals.network.message.MessageBiome;
-import fluxedCrystals.network.message.MessageSeedInfuser;
-import fluxedCrystals.network.message.MessageSolarFluxSync;
+import fluxedCrystals.network.message.*;
 import fluxedCrystals.reference.Reference;
 
 public class PacketHandler {
@@ -19,6 +17,8 @@ public class PacketHandler {
 		INSTANCE.registerMessage(MessageBiome.class, MessageBiome.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageSeedInfuser.class, MessageSeedInfuser.class, id++, Side.SERVER);
 		INSTANCE.registerMessage(MessageSolarFluxSync.class, MessageSolarFluxSync.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncSeed.class, MessageSyncSeed.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncSeeds.class, MessageSyncSeeds.class, id++, Side.CLIENT);
 
 	}
 
