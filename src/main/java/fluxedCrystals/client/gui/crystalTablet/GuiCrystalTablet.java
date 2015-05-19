@@ -24,11 +24,11 @@ public class GuiCrystalTablet extends GuiScreen {
 		//		if (fontRendererObj != null) {
 		//			fontRendererObj.drawSplitString(AstreaInfinitum.lang.localize("gui.book.basic.text", true), left + 14, top + 8, 120, 0x493D26);
 		//		}
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCItems.universalSeed), left + 45, top + 9);
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCItems.seed), left + 6, top + 100);
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.poweredSoil), left + 45, top + 195);
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.seedInfuser), left + 130, top + 195);
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.poweredSoil), left + 169, top + 100);
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCItems.universalSeed), left + 45-12, top + 9-16-6);
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCItems.seed), left + 6-16, top + 100-12);
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.poweredSoil), left + 45-12, top + 195);
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.seedInfuser), left + 130-6, top + 195);
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(FCBlocks.gemRefiner), left + 169, top + 100-12);
 
 
 	}

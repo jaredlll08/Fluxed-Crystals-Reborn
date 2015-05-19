@@ -58,7 +58,7 @@ public class SeedEditor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SeedEditor() {
 		setType(Type.UTILITY);
 		setTitle("Fluxed-Crystals Seed Editor");
@@ -340,8 +340,10 @@ public class SeedEditor extends JFrame {
 		} else {
 			weightedDropstack.setItemDamage(0);
 		}
-		seed.weightedDrop = JsonUtils.getStringForItemStack(weightedDropstack, true, false);
-		seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
+		if (((String) weightedDrop.getSelectedItem()).equalsIgnoreCase("none")) {
+			seed.weightedDrop = JsonUtils.getStringForItemStack(weightedDropstack, true, false);
+			seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
+		}
 		seed.type = (String) type.getSelectedItem();
 		SeedRegistry.getInstance().addTemplateSeed(seed);
 		SeedRegistry.getInstance().Save();
