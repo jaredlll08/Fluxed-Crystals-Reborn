@@ -1,6 +1,7 @@
 package fluxedCrystals.client.gui.gemRefiner;
 
 import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
+import cpw.mods.fml.common.Loader;
 import fluxedCrystals.client.gui.slot.SlotCustom;
 import fluxedCrystals.client.gui.slot.SlotIBindable;
 import fluxedCrystals.client.gui.slot.SlotUpgrade;
@@ -199,8 +200,7 @@ public class ContainerGemRefiner extends Container {
 
 					}
 
-				}
-				else if (itemstack1.getItem() instanceof IBindable)
+				} else if (Loader.isModLoaded("AWWayofTime") && itemstack1.getItem() instanceof IBindable)
 				{
 
 					// Assuming only 1 upgrade per slot?????
