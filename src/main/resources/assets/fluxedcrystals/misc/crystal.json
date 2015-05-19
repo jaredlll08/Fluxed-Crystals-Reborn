@@ -17,7 +17,8 @@
                     "lore":"The color codes are in integer format\nfor more information, go to\nwww.colors.jaredlll08.info",
                     "aspect":"aer",
                     "seedReturn":1,
-                    "seedID":0
+                    "seedID":0,
+                    "type": "crystal"
             },
             {
                 "name":"Iron",
@@ -34,7 +35,8 @@
                 "weightedDropChance":1,
                 "refinerAmount":16,
                     "seedReturn":1,
-                    "seedID":1
+                    "seedID":1,
+                    "type": "crystal"
             },
             {
                 "name":"Gold",
@@ -48,7 +50,8 @@
                 "powerPerStage":4000,
                 "refinerAmount":20,
                     "seedReturn":1,
-                    "seedID":2
+                    "seedID":2,
+                    "type": "crystal"
             },
             {
                 "name":"Coal",
@@ -62,7 +65,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":12,
                     "seedReturn":1,
-                    "seedID":3
+                    "seedID":3,
+                    "type": "crystal"
             },
             {
                 "name":"Charcoal",
@@ -76,7 +80,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":12,
                     "seedReturn":1,
-                    "seedID":4
+                    "seedID":4,
+                    "type": "crystal"
             },
             {
                 "name":"Emerald",
@@ -90,7 +95,8 @@
                 "powerPerStage":10000,
                 "refinerAmount":24,
                     "seedReturn":1,
-                    "seedID":5
+                    "seedID":5,
+                    "type": "crystal"
             },
             {
                 "name":"Diamond",
@@ -104,7 +110,8 @@
                 "powerPerStage":10000,
                 "refinerAmount":24,
                     "seedReturn":1,
-                    "seedID":6
+                    "seedID":6,
+                    "type": "crystal"
             },
             {
                 "name":"Redstone",
@@ -118,7 +125,8 @@
                 "powerPerStage":8000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                    "seedID":7
+                    "seedID":7,
+                    "type": "crystal"
             },
             {
                 "name":"Ender",
@@ -132,7 +140,8 @@
                 "powerPerStage":8000,
                 "refinerAmount":12,
                     "seedReturn":1,
-                    "seedID":8
+                    "seedID":8,
+                    "type": "crystal"
             },
             {
                 "name":"Glowstone",
@@ -146,7 +155,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":12,
                     "seedReturn":1,
-                    "seedID":9
+                    "seedID":9,
+                    "type": "crystal"
             },
             {
                 "name":"Blaze",
@@ -160,7 +170,8 @@
                 "powerPerStage":4000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                    "seedID":10
+                    "seedID":10,
+                    "type": "crystal"
             },
             {
                 "name":"Clay",
@@ -174,7 +185,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                    "seedID":11
+                    "seedID":11,
+                    "type": "crystal"
             },
             {
                 "name":"Flint",
@@ -188,7 +200,8 @@
                 "powerPerStage":4000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                "seedID":12
+                "seedID":12,
+                    "type": "crystal"
             },
             {
                 "name":"Ghast",
@@ -202,7 +215,8 @@
                 "powerPerStage":4000,
                 "refinerAmount":16,
                     "seedReturn":1,
-                    "seedID":13
+                    "seedID":13,
+                    "type": "crystal"
             },
             {
                 "name":"Gunpowder",
@@ -216,7 +230,8 @@
                 "powerPerStage":4000,
                 "refinerAmount":12,
                     "seedReturn":1,
-                    "seedID":14
+                    "seedID":14,
+                    "type": "crystal"
             },
             {
                 "name":"Leather",
@@ -230,7 +245,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                    "seedID":15
+                    "seedID":15,
+                    "type": "crystal"
             },
             {
                 "name":"Quartz",
@@ -244,7 +260,8 @@
                 "powerPerStage":8000,
                 "refinerAmount":20,
                     "seedReturn":1,
-                    "seedID":16
+                    "seedID":16,
+                    "type": "crystal"
             },
             {
                 "name":"Slime",
@@ -258,7 +275,8 @@
                 "powerPerStage":2000,
                 "refinerAmount":8,
                     "seedReturn":1,
-                    "seedID":17
+                    "seedID":17,
+                    "type": "crystal"
             },
             {
                 "name":"Copper",
@@ -274,7 +292,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":25,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Tin",
                 "color":7571864,
@@ -289,7 +308,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":26,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Silver",
                 "color":9939375,
@@ -304,7 +324,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":27,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Lead",
                 "color":5397108,
@@ -319,7 +340,8 @@
                 "dropMax":8,
                     "seedReturn":1,
                 "ID":28,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Ferrous",
                 "color":12696206,
@@ -334,7 +356,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":29,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Shiny",
                 "color":12696206,
@@ -349,7 +372,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":30,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Mana Infused",
                 "color":5470348,
@@ -364,7 +388,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":31,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Electrum",
                 "color":11838796,
@@ -379,7 +404,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":32,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Invar",
                 "color":9805209,
@@ -394,7 +420,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":33,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Bronze",
                 "color":13606501,
@@ -409,7 +436,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":34,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Signalum",
                 "color":11421966,
@@ -424,7 +452,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":35,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Lumium",
                 "color":14468221,
@@ -439,7 +468,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":36,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },{
                 "name":"Enderium",
                 "color":807507,
@@ -454,7 +484,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":37,
-                "modRequired": "ThermalFoundation"
+                "modRequired": "ThermalFoundation",
+                    "type": "crystal"
             },
             {
                 "name":"Electrical",
@@ -470,7 +501,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":18,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Energetic",
                 "drop":"EnderIO:itemAlloy;1",
@@ -485,7 +517,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":19,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Vibrant",
                 "drop":"EnderIO:itemAlloy;2",
@@ -500,7 +533,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":20,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Redstone Alloy",
                 "drop":"EnderIO:itemAlloy;3",
@@ -515,7 +549,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":21,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Conductive",
                 "drop":"EnderIO:itemAlloy;4",
@@ -530,7 +565,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":22,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Pulsating",
                 "drop":"EnderIO:itemAlloy;5",
@@ -545,7 +581,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":23,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             },{
                 "name":"Dark Steel",
                 "drop":"EnderIO:itemAlloy;6",
@@ -560,7 +597,8 @@
                 "refinerAmount":4,
                     "seedReturn":1,
                 "ID":24,
-                "modRequired": "EnderIO"
+                "modRequired": "EnderIO",
+                    "type": "crystal"
             }
             
             

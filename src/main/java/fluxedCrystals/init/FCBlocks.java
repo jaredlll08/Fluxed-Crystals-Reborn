@@ -40,12 +40,12 @@ public class FCBlocks {
 	public static void initialize() {
 		//GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
-		registerBlock(poweredSoil, Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
+		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 
 		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);
-		
+
 		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
 		GameRegistry.registerTileEntity(TileEntitySeedInfuser.class, Names.Blocks.SEED_INFUSER);
 
