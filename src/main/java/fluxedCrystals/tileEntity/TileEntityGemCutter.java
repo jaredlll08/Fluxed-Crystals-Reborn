@@ -298,7 +298,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
 			if (getStackInSlot(0) != null && recipe.matchesExact(getStackInSlot(0))) {
-				System.out.println("hi");
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;

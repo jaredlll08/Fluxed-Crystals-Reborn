@@ -9,17 +9,11 @@ repositories {
         name "Mobius Repo"
         url "http://mobiusstrip.eu/maven"
     }
-	
-	maven { // ttCore
-		name 'tterrag Repo'
-		url "http://maven.tterrag.com/"
-	}
 
 }
 
 dependencies {
-	
-	compile "tterrag.core:ttCore:MC${config.minecraft_version}-${config.ttCore_version}:deobf"
+
     compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.code_chicken_lib_version}:dev"
     compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.nei_version}:dev"

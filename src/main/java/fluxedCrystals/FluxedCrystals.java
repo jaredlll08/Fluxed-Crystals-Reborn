@@ -24,7 +24,6 @@ import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import tterrag.core.common.Lang;
 
 import java.io.File;
 
@@ -32,7 +31,6 @@ import java.io.File;
 public class FluxedCrystals {
 
 	public static final CreativeTabFluxedCrystals tab = new CreativeTabFluxedCrystals();
-	public static final Lang lang = new Lang(Reference.MOD_ID);
 	public static File configDir = null;
 	public static int crystalRenderID;
 	public static int bigCubeID;

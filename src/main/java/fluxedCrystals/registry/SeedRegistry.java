@@ -15,7 +15,6 @@ import fluxedCrystals.util.JsonTools;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
-import tterrag.core.common.json.JsonUtils;
 
 import java.io.*;
 import java.util.HashMap;
@@ -66,13 +65,13 @@ public class SeedRegistry {
 
 			seed.seedID = SeedRegistry.getInstance().getNextID();
 			seed.name = itemStack.getDisplayName();
-			seed.ingredient = JsonUtils.getStringForItemStack(itemStack, true, false);
-			seed.weightedDrop = JsonUtils.getStringForItemStack(itemStack, true, true);
+			seed.ingredient = JsonTools.getStringForItemStack(itemStack, true, false);
+			seed.weightedDrop = JsonTools.getStringForItemStack(itemStack, true, true);
 			seed.dropMax = 8;
 			seed.dropMin = 3;
 			seed.ingredientAmount = itemStack.stackSize;
 			seed.isSharp = true;
-			String mod = JsonUtils.getStringForItemStack(itemStack, false, false).split(":")[0];
+			String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
 			if (!mod.equalsIgnoreCase("minecraft")) {
 				seed.modRequired = mod;
 			}

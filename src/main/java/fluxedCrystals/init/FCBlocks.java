@@ -7,14 +7,13 @@ import fluxedCrystals.blocks.BlockGemRefiner;
 import fluxedCrystals.blocks.BlockSeedInfuser;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.soil.BlockPowerBlock;
-import fluxedCrystals.blocks.soil.BlockPowerBlockLP;
-import fluxedCrystals.blocks.soil.BlockPowerBlockMana;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.tileEntity.*;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.TileEntityGemCutter;
+import fluxedCrystals.tileEntity.TileEntityGemRefiner;
+import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import net.minecraft.block.Block;
 
 import java.util.HashMap;

@@ -5,7 +5,6 @@ import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.compat.waila.IWailaInfo;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import fluxedCrystals.util.ITileSoil;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -18,7 +17,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import tterrag.core.common.util.BlockCoord;
 
 import java.util.List;
 
@@ -146,13 +144,6 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo {
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
 		return new ItemStack(FCItems.shardRough, 1, getIndex());
-	}
-
-	public TileEntityPowerBlock getPowerTile(World world, BlockCoord coord) {
-		if (world.getTileEntity(coord.x, coord.y - 1, coord.z) != null && world.getTileEntity(coord.x, coord.y - 1, coord.z) instanceof TileEntityPowerBlock) {
-			return (TileEntityPowerBlock) world.getTileEntity(coord.x, coord.y - 1, coord.z);
-		}
-		return null;
 	}
 
 }

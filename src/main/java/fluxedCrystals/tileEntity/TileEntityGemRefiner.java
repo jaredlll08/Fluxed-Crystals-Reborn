@@ -1,7 +1,10 @@
 package fluxedCrystals.tileEntity;
 
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxedCrystals.init.FCItems;
+import fluxedCrystals.network.PacketHandler;
+import fluxedCrystals.network.message.MessageGemRefiner;
 import fluxedCrystals.recipe.RecipeGemRefiner;
 import fluxedCrystals.recipe.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,6 +36,11 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	private boolean RF = true;
 	private int energy = 0;
 
+	public int itemCycleTime;				// How long the current cycle has been running
+	public int deviceCycleTime;				// How long the machine will cycle
+	public byte state;
+	public int needCycleTime;				// Based on everything how long should this take?????
+
 	public TileEntityGemRefiner() {
 		super(10000);
 		MAX_MANA = getMaxStorage();
@@ -53,25 +61,124 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return refined;
 	}
 
-	public void updateEntity() {
+	public void updateEntity()
+	{
+
 		super.updateEntity();
-		if (getStackInSlot(0) != null) if (worldObj != null && !worldObj.isRemote && getRecipeIndex() >= 0) {
-			if (storage.getEnergyStored() > 0) {
-				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
-					if (getStackInSlot(1) != null) {
-						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency() && getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
-							storage.extractEnergy(refineShard(), false);
-							return;
-						}
-					} else {
-						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency()) {
-							storage.extractEnergy(refineShard(), false);
-							return;
-						}
-					}
-				}
-			}
+
+		boolean canWork = false;
+		boolean sendUpdate = false;
+
+		// If we are still working then cycle the counter down 1
+		if(this.deviceCycleTime > 0)
+		{
+
+			this.deviceCycleTime--;
+
 		}
+
+		if (!this.worldObj.isRemote)
+		{
+
+			RecipeGemRefiner recipeGemRefiner;
+
+			// See if we can work
+			if (getStackInSlot(0) != null && getRecipeIndex() >= 0 && storage.getEnergyStored() > 0)
+			{
+
+				recipeGemRefiner = RecipeRegistry.getGemRefinerRecipeByID(getRecipeIndex());
+
+				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia))
+				{
+
+					if (storage.getEnergyStored() >= getEffeciency())
+					{
+
+						if (getStackInSlot(1) != null)
+						{
+
+							// TODO Need to add check that slot 1 = expected output
+							if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize())
+							{
+
+								canWork = true;
+
+							}
+
+						}
+						else
+						{
+
+							canWork = true;
+
+						}
+
+					}
+
+				}
+
+			}
+
+			// Can we run a new item
+
+			if (this.deviceCycleTime == 0 && canWork)
+			{
+
+				this.deviceCycleTime = getSpeed();
+				this.needCycleTime = getSpeed();
+				sendUpdate = true;
+
+			}
+
+			// Keep working if there is something in progress
+
+			if (this.deviceCycleTime > 0 && canWork)
+			{
+
+				this.itemCycleTime++;
+
+				if(this.itemCycleTime == getSpeed())
+				{
+
+					this.itemCycleTime = 0;
+
+					storage.extractEnergy(refineShard(), false);
+
+					sendUpdate = true;
+
+				}
+
+			}
+			else
+			{
+
+				this.itemCycleTime = 0;
+
+			}
+
+			// Last check
+			if (this.deviceCycleTime > 0)
+			{
+
+				sendUpdate = true;
+
+			}
+
+		}
+
+		if (sendUpdate)
+		{
+
+			this.state = this.deviceCycleTime > 0 ? (byte) 1 : (byte) 0;
+
+			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
+
+			PacketHandler.INSTANCE.sendToAllAround(new MessageGemRefiner(this), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double)this.yCoord, (double)this.zCoord, 128d));
+
+			this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+
+		}
+
 	}
 
 	public boolean isUpgradeActive(Item upgradeItem) {
@@ -245,6 +352,9 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		refined = tags.getInteger("refined");
 		setRecipeIndex(tags.getInteger("recipeIndex"));
 		mana = tags.getInteger("mana");
+		deviceCycleTime = tags.getInteger("deviceCycleTime");
+		itemCycleTime = tags.getInteger("itemCycleTime");
+		needCycleTime = tags.getInteger("needCycleTime");
 		updateCurrentRecipe();
 	}
 
@@ -260,12 +370,15 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tags) {
+	public void writeToNBT (NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		writeInventoryToNBT(tags);
 		tags.setInteger("refined", refined);
 		tags.setInteger("recipeIndex", getRecipeIndex());
 		tags.setInteger("mana", mana);
+		tags.setInteger("deviceCycleTime", deviceCycleTime);
+		tags.setInteger("itemCycleTime", itemCycleTime);
+		tags.setInteger("needCycleTime", needCycleTime);
 	}
 
 	public void writeInventoryToNBT(NBTTagCompound tags) {

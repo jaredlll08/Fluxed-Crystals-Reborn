@@ -8,7 +8,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
-import tterrag.core.common.json.JsonUtils;
 
 public class Utils {
 
@@ -46,7 +45,7 @@ public class Utils {
 				string = string.substring(0, idx);
 			}
 
-			ItemStack stack = (ItemStack) JsonUtils.parseStringIntoRecipeItem(string, true);
+			ItemStack stack = (ItemStack) JsonTools.parseStringIntoRecipeItem(string, true);
 			stack.stackSize = MathHelper.clamp_int(size, 1, stack.getMaxStackSize());
 			stacks[i] = stack;
 		}

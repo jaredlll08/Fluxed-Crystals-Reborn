@@ -1,7 +1,7 @@
 package fluxedCrystals.registry;
 
+import fluxedCrystals.util.JsonTools;
 import net.minecraft.item.ItemStack;
-import tterrag.core.common.json.JsonUtils;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -33,7 +33,7 @@ public class Seed implements Serializable {
 
 		if (ingredient != null && !ingredient.equals("")) {
 
-			return JsonUtils.parseStringIntoItemStack(ingredient);
+			return JsonTools.parseStringIntoItemStack(ingredient);
 
 		}
 
@@ -45,7 +45,7 @@ public class Seed implements Serializable {
 
 		if (weightedDrop != null && !weightedDrop.equals("")) {
 
-			return JsonUtils.parseStringIntoItemStack(weightedDrop);
+			return JsonTools.parseStringIntoItemStack(weightedDrop);
 
 		}
 

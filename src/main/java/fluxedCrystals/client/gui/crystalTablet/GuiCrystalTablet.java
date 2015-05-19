@@ -4,7 +4,6 @@ import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.reference.Reference;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

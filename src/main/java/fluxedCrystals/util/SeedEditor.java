@@ -7,7 +7,6 @@ import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import tterrag.core.common.json.JsonUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -313,13 +312,13 @@ public class SeedEditor extends JFrame {
 		seed.dropMax = Integer.parseInt(String.valueOf(dropMax.getSelectedItem()));
 		seed.dropMin = Integer.parseInt(String.valueOf(dropMin.getSelectedItem()));
 		seed.growthTime = Integer.parseInt(String.valueOf(GrowthTime.getText()));
-		ItemStack stack = JsonUtils.parseStringIntoItemStack((String) boxIngredient.getSelectedItem());
+		ItemStack stack = JsonTools.parseStringIntoItemStack((String) boxIngredient.getSelectedItem());
 		if (!ingredientMetadata.getText().isEmpty()) {
 			stack.setItemDamage(Integer.parseInt(ingredientMetadata.getText()));
 		} else {
 			stack.setItemDamage(0);
 		}
-		seed.ingredient = JsonUtils.getStringForItemStack(stack, true, false);
+		seed.ingredient = JsonTools.getStringForItemStack(stack, true, false);
 		seed.ingredientAmount = Integer.parseInt(String.valueOf(ingredientAmount.getSelectedItem()));
 		seed.isSharp = Boolean.parseBoolean(String.valueOf(sharp.getSelectedItem()));
 		seed.lore = fieldLore.getText();
@@ -334,13 +333,13 @@ public class SeedEditor extends JFrame {
 		seed.seedID = SeedRegistry.getInstance().getNextID();
 		seed.seedReturn = Integer.parseInt(String.valueOf(seedReturn.getSelectedItem()));
 		seed.tier = Integer.parseInt(String.valueOf(Tier.getText()));
-		ItemStack weightedDropstack = JsonUtils.parseStringIntoItemStack((String) weightedDrop.getSelectedItem());
+		ItemStack weightedDropstack = JsonTools.parseStringIntoItemStack((String) weightedDrop.getSelectedItem());
 		if (!weightedDropMetadata.getText().isEmpty()) {
 			weightedDropstack.setItemDamage(Integer.parseInt(weightedDropMetadata.getText()));
 		} else {
 			weightedDropstack.setItemDamage(0);
 		}
-		seed.weightedDrop = JsonUtils.getStringForItemStack(weightedDropstack, true, false);
+		seed.weightedDrop = JsonTools.getStringForItemStack(weightedDropstack, true, false);
 		seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
 		seed.type = (String) type.getSelectedItem();
 		SeedRegistry.getInstance().addTemplateSeed(seed);
