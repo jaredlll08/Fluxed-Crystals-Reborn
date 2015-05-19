@@ -339,8 +339,10 @@ public class SeedEditor extends JFrame {
 		} else {
 			weightedDropstack.setItemDamage(0);
 		}
-		seed.weightedDrop = JsonTools.getStringForItemStack(weightedDropstack, true, false);
-		seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
+		if (((String) weightedDrop.getSelectedItem()).equalsIgnoreCase("none")) {
+			seed.weightedDrop = JsonTools.getStringForItemStack(weightedDropstack, true, false);
+			seed.weigthedDropChance = Integer.parseInt(String.valueOf(weightedDropChance.getSelectedItem()));
+		}
 		seed.type = (String) type.getSelectedItem();
 		SeedRegistry.getInstance().addTemplateSeed(seed);
 		SeedRegistry.getInstance().Save();
