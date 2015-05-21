@@ -4,6 +4,7 @@ import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
 import cpw.mods.fml.common.Loader;
 import fluxedCrystals.client.gui.slot.SlotCustom;
 import fluxedCrystals.client.gui.slot.SlotIBindable;
+import fluxedCrystals.client.gui.slot.SlotRoughShard;
 import fluxedCrystals.client.gui.slot.SlotUpgrade;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.items.ItemShardRough;
@@ -33,7 +34,7 @@ public class ContainerGemCutter extends Container {
 
 		this.tile = manager;
 
-		addSlotToContainer(new Slot(manager, ROUGH_SHARD_SLOT, 46, 37));
+		addSlotToContainer(new SlotRoughShard(manager, ROUGH_SHARD_SLOT, 46, 37));
 		addSlotToContainer(new SlotCustom(manager, OUTPUT_SLOT, 114, 37, 64));
 		addSlotToContainer(new SlotUpgrade(manager, UPGRADE_SLOT_1, 147, 8));
 		addSlotToContainer(new SlotUpgrade(manager, UPGRADE_SLOT_2, 147, 26));

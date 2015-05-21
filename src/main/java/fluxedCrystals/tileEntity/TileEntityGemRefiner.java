@@ -84,7 +84,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 			RecipeGemRefiner recipeGemRefiner;
 
 			// See if we can work
-			if (getStackInSlot(0) != null && getRecipeIndex() >= 0 && storage.getEnergyStored() > 0)
+			if (getStackInSlot(0) != null && getRecipeIndex() != -1 && storage.getEnergyStored() > 0)
 			{
 
 				recipeGemRefiner = RecipeRegistry.getGemRefinerRecipeByID(getRecipeIndex());
@@ -126,6 +126,40 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 					}
 
 				}
+				else
+				{
+
+					//TODO Add check for other energy types
+
+					if (getStackInSlot(1) != null)
+					{
+
+						if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize())
+						{
+
+							if(getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount())
+							{
+
+								canWork = true;
+
+							}
+
+						}
+
+					}
+					else
+					{
+
+						if(getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount())
+						{
+
+							canWork = true;
+
+						}
+
+					}
+
+				}
 
 			}
 
@@ -151,6 +185,8 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 				{
 
 					this.itemCycleTime = 0;
+
+					//TODO Add processing for other energy types
 
 					storage.extractEnergy(refineShard(), false);
 

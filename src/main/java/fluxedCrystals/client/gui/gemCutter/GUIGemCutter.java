@@ -5,7 +5,6 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.tileEntity.TileEntityGemCutter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -57,25 +56,23 @@ public class GUIGemCutter extends GuiContainer {
 		if (tile.isUpgradeActive(FCItems.upgradeEssentia)) {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 133, 14, 42);
 		}
-		GL11.glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		if (tile.getRecipeIndex() >= 0 && tile.getStackInSlot(0) != null) {
-			if (energyOffset % 20 == 0) {
 
-				if (sawRange) {
-					sawX = sawX + 5;
-					sawY = sawY - 2;
-					sawRange = false;
-				} else {
-					sawX = sawX + 5;
-					sawY = sawY + 2;
-					sawRange = true;
-				}
+
+			if (tile.state == 1)
+			{
+
+				// Math of how long to draw the bar based on progress and the phase of the moon
+
+				int barWidth = (int)(((float) tile.itemCycleTime / tile.needCycleTime) * 49);
+
+				this.drawTexturedModalRect(guiLeft + 64, guiTop + 44, 2, 168, barWidth, 14);
+
 			}
-			if (sawX >= guiLeft + 105) {
-				sawX = guiLeft + 62;
-			}
-			RenderItem.getInstance().renderItemIntoGUI(fontRendererObj, Minecraft.getMinecraft().getTextureManager(), tile.getStackInSlot(0), sawX, sawY);
 
 		}
+		GL11.glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
+		GL11.glPopMatrix();
 	}
 }

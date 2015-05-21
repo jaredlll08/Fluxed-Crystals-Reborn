@@ -1,7 +1,10 @@
 package fluxedCrystals.tileEntity;
 
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxedCrystals.init.FCItems;
+import fluxedCrystals.network.PacketHandler;
+import fluxedCrystals.network.message.MessageGemCutter;
 import fluxedCrystals.recipe.RecipeGemCutter;
 import fluxedCrystals.recipe.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +35,11 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	// -1 if not currently working on any valid recipe
 	private int recipeIndex;
 
+	public int itemCycleTime;				// How long the current cycle has been running
+	public int deviceCycleTime;				// How long the machine will cycle
+	public byte state;
+	public int needCycleTime;				// Based on everything how long should this take?????
+
 	public TileEntityGemCutter() {
 		super(10000);
 
@@ -60,25 +68,182 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		return cut;
 	}
 
-	public void updateEntity() {
+	public void updateEntity()
+	{
+
 		super.updateEntity();
-		if (worldObj != null && !worldObj.isRemote) {
-			if (storage.getEnergyStored() > 0) {
-				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
-					if (getStackInSlot(1) != null) {
-						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency() && getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
-							refine();
-							return;
-						}
-					} else {
-						if (worldObj.getTotalWorldTime() % getSpeed() == 0 && storage.getEnergyStored() >= getEffeciency()) {
-							refine();
-							return;
-						}
-					}
-				}
-			}
+
+		boolean canWork = false;
+		boolean sendUpdate = false;
+
+		// If we are still working then cycle the counter down 1
+		if(this.deviceCycleTime > 0)
+		{
+
+			this.deviceCycleTime--;
+
 		}
+
+		if (!this.worldObj.isRemote)
+		{
+
+			RecipeGemCutter recipeGemCutter;
+
+			if (getStackInSlot(0) != null && getRecipeIndex() != -1 && storage.getEnergyStored() > 0)
+			{
+
+				recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(getRecipeIndex());
+
+				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia))
+				{
+
+					if (storage.getEnergyStored() >= getEffeciency())
+					{
+
+						if (getStackInSlot(1) != null)
+						{
+
+							if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize())
+							{
+
+								if(getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount())
+								{
+
+									canWork = true;
+
+								}
+
+							}
+
+						}
+						else
+						{
+
+							if(getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount())
+							{
+
+								canWork = true;
+
+							}
+
+						}
+
+					}
+
+				}
+				else
+				{
+
+					//TODO Add check for other energy types
+
+					if (getStackInSlot(1) != null)
+					{
+
+						if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize())
+						{
+
+							if(getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount())
+							{
+
+								canWork = true;
+
+							}
+
+						}
+
+					}
+					else
+					{
+
+						if(getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount())
+						{
+
+							canWork = true;
+
+						}
+
+					}
+
+				}
+
+			}
+
+			// Can we run a new item
+
+			if (this.deviceCycleTime == 0 && canWork)
+			{
+
+				this.deviceCycleTime = getSpeed();
+				this.needCycleTime = getSpeed();
+				sendUpdate = true;
+
+			}
+
+			// Keep working if there is something in progress
+
+			if (this.deviceCycleTime > 0 && canWork)
+			{
+
+				this.itemCycleTime++;
+
+				if(this.itemCycleTime == getSpeed())
+				{
+
+					this.itemCycleTime = 0;
+
+					//TODO Add processing for other energy types
+
+					refine();
+
+					sendUpdate = true;
+
+				}
+
+			}
+			else
+			{
+
+				this.itemCycleTime = 0;
+
+			}
+
+			// Last check
+			if (this.deviceCycleTime > 0)
+			{
+
+				sendUpdate = true;
+
+			}
+
+		}
+
+		if (sendUpdate)
+		{
+
+			this.markDirty();
+
+			this.state = this.deviceCycleTime > 0 ? (byte) 1 : (byte) 0;
+
+			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
+
+			PacketHandler.INSTANCE.sendToAllAround(new MessageGemCutter(this), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double)this.yCoord, (double)this.zCoord, 128d));
+
+			this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+
+		}
+
+	}
+
+	@Override
+	public void markDirty()
+	{
+
+		super.markDirty();
+
+		PacketHandler.INSTANCE.sendToAllAround(new MessageGemCutter(this), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double)this.yCoord, (double)this.zCoord, 128d));
+
+		worldObj.func_147451_t(xCoord, yCoord, zCoord);
+
 	}
 
 	public boolean isUpgradeActive(Item upgradeItem) {
@@ -255,7 +420,9 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		cut = tags.getInteger("cut");
 		setRecipeIndex(tags.getInteger("recipeIndex"));
 		mana = tags.getInteger("mana");
-
+		deviceCycleTime = tags.getInteger("deviceCycleTime");
+		itemCycleTime = tags.getInteger("itemCycleTime");
+		needCycleTime = tags.getInteger("needCycleTime");
 		updateCurrentRecipe();
 	}
 
@@ -277,6 +444,9 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		tags.setInteger("cut", cut);
 		tags.setInteger("recipeIndex", getRecipeIndex());
 		tags.setInteger("mana", mana);
+		tags.setInteger("deviceCycleTime", deviceCycleTime);
+		tags.setInteger("itemCycleTime", itemCycleTime);
+		tags.setInteger("needCycleTime", needCycleTime);
 	}
 
 	public void writeInventoryToNBT(NBTTagCompound tags) {
@@ -301,6 +471,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
+
 					storage.extractEnergy(250, false);
 
 					if (cut >= recipe.getInputamount()) {
