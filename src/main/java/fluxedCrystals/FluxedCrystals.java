@@ -22,6 +22,7 @@ import fluxedCrystals.reference.Reference;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
+import fluxedCrystals.util.OreDict;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -55,6 +56,8 @@ public class FluxedCrystals {
 		configDir = new File(event.getSuggestedConfigurationFile().getParentFile().getAbsolutePath() + File.separator + Reference.MOD_ID);
 		ConfigurationHandler.init(new File(configDir.getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+
+		OreDict.registerVanilla();
 
 		PacketHandler.init();
 		SeedRegistry.getInstance();

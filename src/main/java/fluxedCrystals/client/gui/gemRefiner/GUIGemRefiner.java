@@ -51,7 +51,7 @@ public class GUIGemRefiner extends GuiContainer {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 47, 14, 42);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}
-		GL11.glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		if (tile.getRecipeIndex() >= 0 && tile.getStackInSlot(0) != null) {
 
 
@@ -67,6 +67,7 @@ public class GUIGemRefiner extends GuiContainer {
 			}
 
 		}
+		GL11.glColor4f(0.2f, 0.2f, 0.2f, 1.0f);
 		GL11.glPopMatrix();
 	}
 
