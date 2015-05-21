@@ -61,6 +61,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return refined;
 	}
 
+	@Override
 	public void updateEntity()
 	{
 
@@ -97,11 +98,15 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 						if (getStackInSlot(1) != null)
 						{
 
-							// TODO Need to add check that slot 1 = expected output
 							if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize())
 							{
 
-								canWork = true;
+								if(getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount())
+								{
+
+									canWork = true;
+
+								}
 
 							}
 
@@ -109,7 +114,12 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 						else
 						{
 
-							canWork = true;
+							if(getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount())
+							{
+
+								canWork = true;
+
+							}
 
 						}
 
@@ -169,6 +179,8 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		if (sendUpdate)
 		{
 
+			this.markDirty();
+
 			this.state = this.deviceCycleTime > 0 ? (byte) 1 : (byte) 0;
 
 			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.state);
@@ -178,6 +190,18 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 			this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
 
 		}
+
+	}
+
+	@Override
+	public void markDirty()
+	{
+
+		super.markDirty();
+
+		PacketHandler.INSTANCE.sendToAllAround(new MessageGemRefiner(this), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double)this.yCoord, (double)this.zCoord, 128d));
+
+		worldObj.func_147451_t(xCoord, yCoord, zCoord);
 
 	}
 

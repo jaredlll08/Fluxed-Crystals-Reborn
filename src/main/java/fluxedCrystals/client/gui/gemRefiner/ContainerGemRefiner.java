@@ -4,6 +4,7 @@ import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
 import cpw.mods.fml.common.Loader;
 import fluxedCrystals.client.gui.slot.SlotCustom;
 import fluxedCrystals.client.gui.slot.SlotIBindable;
+import fluxedCrystals.client.gui.slot.SlotSmoothShard;
 import fluxedCrystals.client.gui.slot.SlotUpgrade;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.items.ItemShardSmooth;
@@ -35,7 +36,7 @@ public class ContainerGemRefiner extends Container {
 
 		this.tile = manager;
 
-		addSlotToContainer(new Slot(manager, SMOOTH_SHARD_SLOT, 46, 37));
+		addSlotToContainer(new SlotSmoothShard(manager, SMOOTH_SHARD_SLOT, 46, 37));
 		addSlotToContainer(new SlotCustom(manager, OUTPUT_SLOT, 114, 37, 64));
 		addSlotToContainer(new SlotUpgrade(manager, UPGRADE_SLOT_1, 147, 8));
 		addSlotToContainer(new SlotUpgrade(manager, UPGRADE_SLOT_2, 147, 26));
@@ -95,7 +96,7 @@ public class ContainerGemRefiner extends Container {
 			else
 			{
 
-				// If it is a rough shard lets move that to the ROUGH_SHARD_SLOT
+				// If it is a smooth shard lets move that to the SMOOTH_SHARD_SLOT
 
 				if (itemstack1.getItem() instanceof ItemShardSmooth)
 				{
