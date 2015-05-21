@@ -19,6 +19,7 @@ import fluxedCrystals.recipe.RecipeGemRefiner;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
+import fluxedCrystals.registry.MutationRegistry;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
@@ -62,7 +63,7 @@ public class FluxedCrystals {
 		PacketHandler.init();
 		SeedRegistry.getInstance();
 		SeedRegistry.getInstance().Load();
-
+		MutationRegistry.getInstance();
 		FCItems.preInit();
 		FCBlocks.preInit();
 
@@ -83,6 +84,7 @@ public class FluxedCrystals {
 		proxy.initialize();
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
+
 		LogHelper.info("Initialization Complete!");
 
 	}

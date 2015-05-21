@@ -57,6 +57,26 @@ public class SeedRegistry {
 
 	}
 
+	public int getIdFromName(String name) {
+		for (Seed seed : seedMap.values()) {
+			if (seed.name.equals(name)) {
+				return seed.seedID;
+			}
+
+		}
+		return -1;
+	}
+
+	public Seed getSeedFromName(String name) {
+		for (Seed seed : seedMap.values()) {
+			if (seed.name.equals(name)) {
+				return seed;
+			}
+		}
+		return new Seed();
+	}
+
+
 	public Seed addTemplateSeed(ItemStack itemStack) {
 
 		if (itemStack != null) {

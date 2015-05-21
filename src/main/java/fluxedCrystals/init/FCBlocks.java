@@ -6,6 +6,7 @@ import fluxedCrystals.blocks.BlockGemCutter;
 import fluxedCrystals.blocks.BlockGemRefiner;
 import fluxedCrystals.blocks.BlockSeedInfuser;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.blocks.crystal.BlockMutationCrystal;
 import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
@@ -40,6 +41,7 @@ public class FCBlocks {
 	public static void initialize() {
 		//GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
+		registerBlock(new BlockMutationCrystal(), "crys", "crys");
 		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
 
