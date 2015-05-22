@@ -303,7 +303,7 @@ public class SeedRegistry {
 
 				JsonObject jsonObject = parser.parse(new FileReader(fileToRead)).getAsJsonObject();
 
-				for (Seed seed : JsonTools.jsontoList(jsonObject)) {
+				for (Seed seed : JsonTools.jsontoList_seeds(jsonObject)) {
 
 					addSeed(seed);
 
@@ -336,7 +336,7 @@ public class SeedRegistry {
 		try {
 
 			writer = new FileWriter(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.tmp");
-			writer.write(JsonTools.hashmapToJson(seedMap));
+			writer.write(JsonTools.hashmapToJson_seeds(seedMap));
 
 		} catch (IOException e) {
 			e.printStackTrace();

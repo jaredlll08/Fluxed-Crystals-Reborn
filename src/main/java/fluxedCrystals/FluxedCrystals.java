@@ -64,6 +64,7 @@ public class FluxedCrystals {
 		SeedRegistry.getInstance();
 		SeedRegistry.getInstance().Load();
 		MutationRegistry.getInstance();
+		MutationRegistry.getInstance().Load();
 		FCItems.preInit();
 		FCBlocks.preInit();
 
@@ -139,6 +140,7 @@ public class FluxedCrystals {
 	public void onServerStopping(FMLServerStoppingEvent event) {
 
 		SeedRegistry.getInstance().Save();
+		MutationRegistry.getInstance().Save();
 
 	}
 
@@ -165,6 +167,8 @@ public class FluxedCrystals {
 
 	@Mod.EventHandler
 	public void remap(FMLModIdMappingEvent event) {
+
+		//TODO Need to add the mutations
 
 		for (int i : SeedRegistry.getInstance().keySet()) {
 
@@ -199,11 +203,6 @@ public class FluxedCrystals {
 		}
 
 		LogHelper.info("Remap Complete!");
-
-	}
-
-	public SeedRegistry getSeedRegistry() {
-		return SeedRegistry.getInstance();
 
 	}
 

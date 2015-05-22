@@ -4,22 +4,25 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import fluxedCrystals.registry.Mutation;
 import fluxedCrystals.registry.Seed;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JsonTools {
 
 	public static final Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
 
-	public static String hashmapToJson(HashMap<Integer, Seed> seedMap) {
+	public static String hashmapToJson_seeds(HashMap<Integer, Seed> seedMap) {
 
 		String tmpString = "{\"seeds\":[";
 
@@ -41,7 +44,51 @@ public class JsonTools {
 
 	}
 
-	public static List<Seed> jsontoList(JsonObject jsonObject) {
+	public static String mapToJson_mutations(Map<MutablePair<Seed, Seed>, Mutation> mutationMap) {
+
+		String tmpString = "{\"mutations\":[";
+
+		for(Map.Entry<MutablePair<Seed, Seed>, Mutation> entry : mutationMap.entrySet())
+		{
+
+			if (!tmpString.equals("{\"mutations\":["))
+			{
+				tmpString += ",";
+			}
+
+			tmpString += gson.toJson(entry.getValue(), Mutation.class);
+
+		}
+
+		tmpString += "] }";
+
+		return tmpString;
+
+	}
+
+	public static List<Mutation> jsontoList_mutations(JsonObject jsonObject) {
+
+		List<Mutation> list = new ArrayList<Mutation>();
+
+		if (jsonObject.has("mutations") && jsonObject.get("mutations").isJsonArray()) {
+
+			// Read the mutations from the JSON
+
+			JsonArray jsonArray = (JsonArray) jsonObject.get("mutations");
+
+			for (int i = 0; i < jsonArray.size(); i++) {
+
+				list.add(gson.fromJson(jsonArray.get(i), Mutation.class));
+
+			}
+
+		}
+
+		return list;
+
+	}
+
+	public static List<Seed> jsontoList_seeds(JsonObject jsonObject) {
 
 		List<Seed> list = new ArrayList<Seed>();
 

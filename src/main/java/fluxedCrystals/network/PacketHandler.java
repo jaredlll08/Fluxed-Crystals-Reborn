@@ -21,6 +21,8 @@ public class PacketHandler {
 		INSTANCE.registerMessage(MessageSyncSeeds.class, MessageSyncSeeds.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageGemRefiner.class, MessageGemRefiner.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageGemCutter.class, MessageGemCutter.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncMutation.class, MessageSyncMutation.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageSyncMutations.class, MessageSyncMutations.class, id++, Side.CLIENT);
 
 	}
 

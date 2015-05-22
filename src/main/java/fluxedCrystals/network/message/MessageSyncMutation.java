@@ -2,34 +2,25 @@ package fluxedCrystals.network.message;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.registry.Mutation;
+import fluxedCrystals.registry.MutationRegistry;
 import fluxedCrystals.util.CompressionHelper;
-import fluxedCrystals.util.JsonTools;
 import io.netty.buffer.ByteBuf;
 
-import java.util.HashMap;
+public class MessageSyncMutation implements IMessage, IMessageHandler<MessageSyncMutation, IMessage> {
 
-public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage> {
+	private Mutation mutation;
 
-	private static HashMap<Integer, Seed> seedMap;
-
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-	public MessageSyncSeeds() {
-
-		seedMap = new HashMap<Integer, Seed>();
+	public MessageSyncMutation () {
 
 	}
 
-	public MessageSyncSeeds(HashMap<Integer, Seed> seedMap) {
+	public MessageSyncMutation (Mutation mutation) {
 
-		MessageSyncSeeds.seedMap = seedMap;
+		this.mutation = mutation;
 
 	}
 
@@ -50,15 +41,9 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 
 			String uncompressedString = CompressionHelper.decompressStringFromByteArray(compressedString);
 
-			JsonParser parser = new JsonParser();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-			JsonObject jsonObject = parser.parse(uncompressedString).getAsJsonObject();
-
-			for (Seed seed : JsonTools.jsontoList_seeds(jsonObject)) {
-
-				seedMap.put(seed.seedID, seed);
-
-			}
+			this.mutation = gson.fromJson(uncompressedString, Mutation.class);
 
 		}
 
@@ -69,9 +54,11 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 
 		byte[] compressedString = null;
 
-		if (seedMap != null) {
+		if (mutation != null) {
 
-			String tmpString = gson.toJson(seedMap);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+			String tmpString = gson.toJson(mutation);
 
 			compressedString = CompressionHelper.compressStringToByteArray(tmpString);
 
@@ -91,15 +78,11 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncSeeds message, MessageContext ctx) {
+	public IMessage onMessage(MessageSyncMutation message, MessageContext ctx) {
 
-		if (seedMap != null) {
+		if (message.mutation != null) {
 
-			for (int i : seedMap.keySet()) {
-
-				SeedRegistry.getInstance().addSeed(seedMap.get(i));
-
-			}
+			MutationRegistry.getInstance().addMutation(message.mutation.outputSeed, message.mutation.seed1, message.mutation.seed2);
 
 		}
 
