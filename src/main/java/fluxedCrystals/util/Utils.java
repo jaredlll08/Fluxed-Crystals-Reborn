@@ -9,9 +9,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 
-public class Utils {
+public class Utils
+{
 
-	public static void setBiomeAt(World world, int x, int z, BiomeGenBase biome) {
+	public static void setBiomeAt (World world, int x, int z, BiomeGenBase biome) {
 		if (biome == null) {
 			return;
 		}
@@ -24,7 +25,7 @@ public class Utils {
 		}
 	}
 
-	public static ItemStack[] parseStringArrayIntoItemStackArray(String[] strings) {
+	public static ItemStack[] parseStringArrayIntoItemStackArray (String[] strings) {
 		ItemStack[] stacks = new ItemStack[strings.length];
 		for (int i = 0; i < strings.length; i++) {
 			String string = strings[i];
@@ -38,7 +39,8 @@ public class Utils {
 
 				try {
 					size = Integer.parseInt(num);
-				} catch (NumberFormatException e) {
+				}
+				catch (NumberFormatException e) {
 					throw new IllegalArgumentException(num + " is not a valid stack size");
 				}
 
@@ -52,8 +54,9 @@ public class Utils {
 		return stacks;
 	}
 
-	public static class ArrayUtils {
-		public static boolean contains(int[] array, int number) {
+	public static class ArrayUtils
+	{
+		public static boolean contains (int[] array, int number) {
 			for (int i : array) {
 				if (i == number) {
 					return true;

@@ -15,27 +15,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
-public class InfuserRecipeHandler extends TemplateRecipeHandler {
+public class InfuserRecipeHandler extends TemplateRecipeHandler
+{
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
-	public String getGuiTexture() {
+	public String getGuiTexture () {
 		return Reference.LOWERCASE_MOD_ID + ":textures/gui/SeedInfuser.png";
 	}
 
 	@Override
-	public String getRecipeName() {
+	public String getRecipeName () {
 		return "Seed Infuser";
 	}
 
 	@Override
-	public int recipiesPerPage() {
+	public int recipiesPerPage () {
 		return 1;
 	}
 
 	@Override
-	public void drawBackground(int recipe) {
+	public void drawBackground (int recipe) {
 
 		GuiDraw.changeTexture(getGuiTexture());
 		GuiDraw.drawTexturedModalRect(5, 5, 0, 166, 18, 18);
@@ -45,7 +46,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void drawExtras(int recipe) {
+	public void drawExtras (int recipe) {
 		CachedInfusionRecipe r = (CachedInfusionRecipe) arecipes.get(recipe);
 		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
@@ -55,24 +56,25 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result) {
+	public void loadCraftingRecipes (ItemStack result) {
 
 		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
-			if (recipe.getOutput().getItem() == result.getItem())
+			if (recipe.getOutput().getItem() == result.getItem()) {
 				if (recipe.getOutput().getItemDamage() == result.getItemDamage()) {
 					if (checkDupe(recipe)) {
 						this.arecipes.add(new CachedInfusionRecipe(recipe));
 					}
 				}
+			}
 
 		}
 
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient) {
+	public void loadUsageRecipes (ItemStack ingredient) {
 
 		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
@@ -90,7 +92,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 
 	}
 
-	private boolean checkDupe(RecipeSeedInfuser recipe) {
+	private boolean checkDupe (RecipeSeedInfuser recipe) {
 		for (Object o : this.arecipes.toArray()) {
 			if (o instanceof CachedInfusionRecipe) {
 				CachedInfusionRecipe r = (CachedInfusionRecipe) o;
@@ -105,18 +107,19 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
+	public String getOverlayIdentifier () {
 		return "seedInfuser";
 	}
 
-	public class CachedInfusionRecipe extends CachedRecipe {
+	public class CachedInfusionRecipe extends CachedRecipe
+	{
 
 		public RecipeSeedInfuser recipe;
 		private PositionedStack output;
 		private PositionedStack inputs;
 		private List<PositionedStack> other = new ArrayList<PositionedStack>();
 
-		public CachedInfusionRecipe(RecipeSeedInfuser recipe) {
+		public CachedInfusionRecipe (RecipeSeedInfuser recipe) {
 			this.output = new PositionedStack(recipe.getOutput(), 6, 44);
 			this.recipe = recipe;
 			this.inputs = new PositionedStack(recipe.getInput(), 143, 6);
@@ -125,17 +128,17 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler {
 		}
 
 		@Override
-		public PositionedStack getResult() {
+		public PositionedStack getResult () {
 			return this.output;
 		}
 
 		@Override
-		public PositionedStack getIngredient() {
+		public PositionedStack getIngredient () {
 			return this.inputs;
 		}
 
 		@Override
-		public List<PositionedStack> getOtherStacks() {
+		public List<PositionedStack> getOtherStacks () {
 			return other;
 		}
 	}

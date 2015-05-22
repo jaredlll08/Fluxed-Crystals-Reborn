@@ -2,35 +2,30 @@ package fluxedCrystals.client.gui.gemCutter;
 
 import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
 import cpw.mods.fml.common.Loader;
-import fluxedCrystals.client.gui.slot.SlotCustom;
-import fluxedCrystals.client.gui.slot.SlotIBindable;
-import fluxedCrystals.client.gui.slot.SlotRoughShard;
-import fluxedCrystals.client.gui.slot.SlotUpgrade;
+import fluxedCrystals.client.gui.slot.*;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.items.ItemShardRough;
 import fluxedCrystals.items.Upgrade;
 import fluxedCrystals.tileEntity.TileEntityGemCutter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class ContainerGemCutter extends Container {
-	private TileEntityGemCutter tile;
-	private int lastStoredEnergy = -1;
-
+public class ContainerGemCutter extends Container
+{
 	private static final int ROUGH_SHARD_SLOT = 0;
 	private static final int OUTPUT_SLOT = ROUGH_SHARD_SLOT + 1;
 	private static final int UPGRADE_SLOT_1 = OUTPUT_SLOT + 1, UPGRADE_SLOT_2 = UPGRADE_SLOT_1 + 1, UPGRADE_SLOT_3 = UPGRADE_SLOT_2 + 1;
 	private static final int RANGE_SLOT = UPGRADE_SLOT_3 + 1;
 	private static final int BLOOD_SLOT = RANGE_SLOT + 1;
 	private static final int INV_START = BLOOD_SLOT + 1, INV_END = INV_START + 26, HOTBAR_START = INV_END + 1, HOTBAR_END = HOTBAR_START + 8;
+	private TileEntityGemCutter tile;
+	private int lastStoredEnergy = -1;
 
-	public ContainerGemCutter(InventoryPlayer invPlayer, TileEntityGemCutter manager) {
+	public ContainerGemCutter (InventoryPlayer invPlayer, TileEntityGemCutter manager) {
 
 		this.tile = manager;
 
@@ -57,7 +52,7 @@ public class ContainerGemCutter extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+	public boolean canInteractWith (EntityPlayer p_75145_1_) {
 		return true;
 	}
 
@@ -65,7 +60,7 @@ public class ContainerGemCutter extends Container {
 	 * Called when a player shift-clicks on a slot. You must override this or
 	 * you will crash when someone does that.
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
+	public ItemStack transferStackInSlot (EntityPlayer player, int slotNumber) {
 
 		ItemStack itemStack = null;
 
@@ -87,7 +82,8 @@ public class ContainerGemCutter extends Container {
 
 				slot.onSlotChange(itemstack1, itemStack);
 
-			} else {
+			}
+			else {
 
 				// If it is a rough shard lets move that to the ROUGH_SHARD_SLOT
 
@@ -97,7 +93,8 @@ public class ContainerGemCutter extends Container {
 						return null;
 					}
 
-				} else if (itemstack1.getItem() instanceof Upgrade) {
+				}
+				else if (itemstack1.getItem() instanceof Upgrade) {
 
 					// Assuming only 1 upgrade per slot?????
 
@@ -111,7 +108,8 @@ public class ContainerGemCutter extends Container {
 
 							if (!this.mergeItemStack(itemStack2, RANGE_SLOT, RANGE_SLOT + 1, false)) {
 								return null;
-							} else {
+							}
+							else {
 
 								// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -121,7 +119,8 @@ public class ContainerGemCutter extends Container {
 
 						}
 
-					} else {
+					}
+					else {
 
 						// Not a range upgrade, check the other slots
 
@@ -129,7 +128,8 @@ public class ContainerGemCutter extends Container {
 
 							if (!this.mergeItemStack(itemStack2, UPGRADE_SLOT_1, UPGRADE_SLOT_1 + 1, false)) {
 								return null;
-							} else {
+							}
+							else {
 
 								// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -137,11 +137,13 @@ public class ContainerGemCutter extends Container {
 
 							}
 
-						} else if (!((Slot) this.inventorySlots.get(UPGRADE_SLOT_2)).getHasStack()) {
+						}
+						else if (!((Slot) this.inventorySlots.get(UPGRADE_SLOT_2)).getHasStack()) {
 
 							if (!this.mergeItemStack(itemStack2, UPGRADE_SLOT_2, UPGRADE_SLOT_2 + 1, false)) {
 								return null;
-							} else {
+							}
+							else {
 
 								// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -149,11 +151,13 @@ public class ContainerGemCutter extends Container {
 
 							}
 
-						} else if (!((Slot) this.inventorySlots.get(UPGRADE_SLOT_3)).getHasStack()) {
+						}
+						else if (!((Slot) this.inventorySlots.get(UPGRADE_SLOT_3)).getHasStack()) {
 
 							if (!this.mergeItemStack(itemStack2, UPGRADE_SLOT_3, UPGRADE_SLOT_3 + 1, false)) {
 								return null;
-							} else {
+							}
+							else {
 
 								// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -161,13 +165,15 @@ public class ContainerGemCutter extends Container {
 
 							}
 
-						} else {
+						}
+						else {
 							return null;
 						}
 
 					}
 
-				} else if (Loader.isModLoaded("AWWayofTime") && itemstack1.getItem() instanceof IBindable) {
+				}
+				else if (Loader.isModLoaded("AWWayofTime") && itemstack1.getItem() instanceof IBindable) {
 
 					// Assuming only 1 upgrade per slot?????
 
@@ -177,7 +183,8 @@ public class ContainerGemCutter extends Container {
 
 						if (!this.mergeItemStack(itemStack2, BLOOD_SLOT, BLOOD_SLOT + 1, false)) {
 							return null;
-						} else {
+						}
+						else {
 
 							// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -187,7 +194,8 @@ public class ContainerGemCutter extends Container {
 
 					}
 
-				} else {
+				}
+				else {
 
 					// Since we aren't sure of the other 2 slots we assume whatever makes it this far is junk
 
@@ -199,7 +207,8 @@ public class ContainerGemCutter extends Container {
 
 			if (itemstack1.stackSize == 0) {
 				slot.putStack(null);
-			} else {
+			}
+			else {
 				slot.onSlotChanged();
 			}
 
@@ -216,22 +225,25 @@ public class ContainerGemCutter extends Container {
 	}
 
 	@Override
-	public void detectAndSendChanges() {
+	public void detectAndSendChanges () {
 		super.detectAndSendChanges();
 
 		if (!tile.getWorldObj().isRemote) {
 			int energyStored = tile.getEnergyStored();
 			// send energy to players viewing this GUI
 			if (energyStored != lastStoredEnergy) {
-				for (ICrafting c : (List<ICrafting>) crafters)
+				for (ICrafting c : (List<ICrafting>) crafters) {
 					c.sendProgressBarUpdate(this, 0, energyStored);
+				}
 				lastStoredEnergy = energyStored;
 			}
 		}
 	}
 
 	@Override
-	public void updateProgressBar(int bar, int value) {
-		if (bar == 0) tile.setEnergyStored(value);
+	public void updateProgressBar (int bar, int value) {
+		if (bar == 0) {
+			tile.setEnergyStored(value);
+		}
 	}
 }

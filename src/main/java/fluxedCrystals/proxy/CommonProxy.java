@@ -2,23 +2,24 @@ package fluxedCrystals.proxy;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import fluxedCrystals.handler.PlayerEventHandler;
-import fluxedCrystals.handler.SeedRegistrySerializationHandler;
+import fluxedCrystals.handler.RegistrySerializationHandler;
 import fluxedCrystals.util.Events;
 import net.minecraftforge.common.MinecraftForge;
 
-public abstract class CommonProxy implements IProxy {
+public abstract class CommonProxy implements IProxy
+{
 
 
-	public void preInit() {
+	public void preInit () {
 
 	}
 
-	public void initialize() {
+	public void initialize () {
 
 		PlayerEventHandler playerEventHandler = new PlayerEventHandler();
 		Events playerEventHandlerOther = new Events();
 
-		FMLCommonHandler.instance().bus().register(new SeedRegistrySerializationHandler());
+		FMLCommonHandler.instance().bus().register(new RegistrySerializationHandler());
 
 		MinecraftForge.EVENT_BUS.register(playerEventHandler);
 		FMLCommonHandler.instance().bus().register(playerEventHandler);
@@ -28,7 +29,7 @@ public abstract class CommonProxy implements IProxy {
 
 	}
 
-	public void postInit() {
+	public void postInit () {
 
 	}
 

@@ -2,17 +2,18 @@ package fluxedCrystals.util;
 
 import net.minecraft.util.DamageSource;
 
-public class DamageSourceCrystal extends DamageSource {
+public class DamageSourceCrystal extends DamageSource
+{
 
-	public DamageSourceCrystal() {
+	public DamageSourceCrystal () {
 		super("Crystal");
 	}
 
-	public boolean isDifficultyScaled() {
+	public boolean isDifficultyScaled () {
 		return true;
 	}
 
-	public boolean isDamageAbsolute() {
+	public boolean isDamageAbsolute () {
 		return true;
 	}
 

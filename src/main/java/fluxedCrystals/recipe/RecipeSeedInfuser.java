@@ -5,7 +5,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeSeedInfuser {
+public class RecipeSeedInfuser
+{
 
 	private ItemStack input;
 	private ItemStack output;
@@ -13,13 +14,13 @@ public class RecipeSeedInfuser {
 	private int inputAmount;
 	private int index = -1;
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount) {
+	public RecipeSeedInfuser (ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount) {
 
 		this(ingredient, input, output, inputAmount, -1);
 
 	}
 
-	public RecipeSeedInfuser(ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount, int index) {
+	public RecipeSeedInfuser (ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount, int index) {
 
 		this.input = input;
 		this.output = output;
@@ -29,14 +30,13 @@ public class RecipeSeedInfuser {
 
 	}
 
-	public boolean matchesIngredient(ItemStack itemStack)
-	{
+	public boolean matchesIngredient (ItemStack itemStack) {
 
 		return this.matches(this.ingredient, itemStack);
 
 	}
 
-	public boolean matches(ItemStack ingredient, ItemStack stack) {
+	public boolean matches (ItemStack ingredient, ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int id : ids) {
 			String name = OreDictionary.getOreName(id);
@@ -47,7 +47,7 @@ public class RecipeSeedInfuser {
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 	}
 
-	public boolean matches(String oreDict) {
+	public boolean matches (String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
 			if (OreDictionary.itemMatches(stack, input, false) && ingredient.isItemEqual(this.ingredient)) {
@@ -57,29 +57,29 @@ public class RecipeSeedInfuser {
 		return false;
 	}
 
-	public boolean matchesExact(ItemStack input, ItemStack ingredient) {
+	public boolean matchesExact (ItemStack input, ItemStack ingredient) {
 		return this.input.isItemEqual(ingredient) && this.ingredient.isItemEqual(input);
 	}
 
-	public ItemStack getInput() {
+	public ItemStack getInput () {
 		ItemStack stack = input.copy();
 		stack.stackSize = getInputamount();
 		return stack;
 	}
 
-	public ItemStack getOutput() {
+	public ItemStack getOutput () {
 		return output.copy();
 	}
 
-	public ItemStack getIngredient() {
+	public ItemStack getIngredient () {
 		return ingredient.copy();
 	}
 
-	public int getInputamount() {
+	public int getInputamount () {
 		return inputAmount;
 	}
 
-	public int getIndex() {
+	public int getIndex () {
 		return index;
 	}
 }

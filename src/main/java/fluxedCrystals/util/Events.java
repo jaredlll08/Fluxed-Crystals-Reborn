@@ -7,12 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-public class Events {
+public class Events
+{
 
 	public static boolean debug = false;
 
 	@SubscribeEvent
-	public void sekritStuff(LivingUpdateEvent event) {
+	public void sekritStuff (LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer) {
 			if (event.entity.getCommandSenderName().equalsIgnoreCase("Jaredlll08") || event.entity.getCommandSenderName().equalsIgnoreCase("Namroc_Smith") || event.entity.getCommandSenderName().equalsIgnoreCase("kucanaut")) {
 				if (event.entity.isSneaking()) {

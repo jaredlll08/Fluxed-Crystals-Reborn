@@ -12,7 +12,8 @@ import java.util.List;
  * <p/>
  * Must be implemented on a block,  will pass it to the TileEntity by default
  */
-public interface IWailaInfo {
+public interface IWailaInfo
+{
 	/**
 	 * Add to the main WAILA tooltip
 	 *
@@ -22,7 +23,7 @@ public interface IWailaInfo {
 	 * @param z
 	 * @param world
 	 */
-	public void getWailaInfo(List<String> tooltip, int x, int y, int z, World world);
+	void getWailaInfo (List<String> tooltip, int x, int y, int z, World world);
 
-	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config);
+	ItemStack getWailaStack (IWailaDataAccessor accessor, IWailaConfigHandler config);
 }

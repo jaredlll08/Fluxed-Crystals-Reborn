@@ -10,13 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class ClientEventHandler {
+public class ClientEventHandler
+{
 
-	public boolean resetRender;
-	public float trans = 0;
-	public boolean descending;
+	private boolean resetRender;
+	private float trans = 0;
+	private boolean descending;
 
-	public static void render3DItem(EntityItem item) {
+	public static void render3DItem (EntityItem item) {
 
 		GL11.glPushMatrix();
 		GL11.glDepthMask(true);
@@ -29,13 +30,14 @@ public class ClientEventHandler {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void render(RenderLivingEvent.Pre event) {
+	public void render (RenderLivingEvent.Pre event) {
 		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
 		if (s.equals("Jaredlll08") || s.equals("esriel123") || s.equalsIgnoreCase("parcel31u") || s.equalsIgnoreCase("namroc_smith")) {
 			if (new Random().nextInt(2) == 0) {
 				if (!descending) {
 					trans++;
-				} else {
+				}
+				else {
 					trans--;
 				}
 				if (trans > 100) {
@@ -56,7 +58,7 @@ public class ClientEventHandler {
 	}
 
 	@SubscribeEvent
-	public void entityColorRender(RenderLivingEvent.Post event) {
+	public void entityColorRender (RenderLivingEvent.Post event) {
 		if (this.resetRender) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(3042);

@@ -14,7 +14,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SeedEditor extends JFrame {
+public class SeedEditor extends JFrame
+{
 
 	private JPanel contentPane;
 	private JTextField fieldLore;
@@ -38,27 +39,10 @@ public class SeedEditor extends JFrame {
 	private JComboBox type;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void start() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SeedEditor frame = new SeedEditor();
-					frame.setVisible(true);
-					frame.setAlwaysOnTop(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public SeedEditor() {
+	public SeedEditor () {
 		setType(Type.UTILITY);
 		setTitle("Fluxed-Crystals Seed Editor");
 		setResizable(false);
@@ -124,7 +108,8 @@ public class SeedEditor extends JFrame {
 
 		colorChooser = new JColorChooser();
 		colorChooser.setBounds(269, 114, 515, 147);
-		colorChooser.setPreviewPanel(new JComponent() {
+		colorChooser.setPreviewPanel(new JComponent()
+		{
 		});
 		colorChooser.setColor(0xFFFFFF);
 		contentPane.add(colorChooser);
@@ -250,10 +235,11 @@ public class SeedEditor extends JFrame {
 		JButton btnSaveNew = new JButton("Save & New");
 		btnSaveNew.setBounds(341, 581, 131, 23);
 		contentPane.add(btnSaveNew);
-		btnSaveNew.addActionListener(new ActionListener() {
+		btnSaveNew.addActionListener(new ActionListener()
+		{
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed (ActionEvent e) {
 				saveSeed();
 				clear();
 			}
@@ -282,31 +268,52 @@ public class SeedEditor extends JFrame {
 		contentPane.add(type);
 		type.addItem("crop");
 		type.addItem("crystal");
-		btnSaveExit.addActionListener(new ActionListener() {
+		btnSaveExit.addActionListener(new ActionListener()
+		{
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed (ActionEvent e) {
 				saveSeed();
 				dispose();
 			}
 		});
 
-		btnExit.addActionListener(new ActionListener() {
+		btnExit.addActionListener(new ActionListener()
+		{
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed (ActionEvent e) {
 				dispose();
 			}
 		});
 
 	}
 
-	public void clear() {
+	/**
+	 * Launch the application.
+	 */
+	public static void start () {
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run () {
+				try {
+					SeedEditor frame = new SeedEditor();
+					frame.setVisible(true);
+					frame.setAlwaysOnTop(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public void clear () {
 		dispose();
 		start();
 	}
 
-	public void saveSeed() {
+	public void saveSeed () {
 		Seed seed = new Seed();
 		seed.color = colorChooser.getColor().getRGB();
 		seed.dropMax = Integer.parseInt(String.valueOf(dropMax.getSelectedItem()));
@@ -315,7 +322,8 @@ public class SeedEditor extends JFrame {
 		ItemStack stack = JsonTools.parseStringIntoItemStack((String) boxIngredient.getSelectedItem());
 		if (!ingredientMetadata.getText().isEmpty()) {
 			stack.setItemDamage(Integer.parseInt(ingredientMetadata.getText()));
-		} else {
+		}
+		else {
 			stack.setItemDamage(0);
 		}
 		seed.ingredient = JsonTools.getStringForItemStack(stack, true, false);
@@ -336,7 +344,8 @@ public class SeedEditor extends JFrame {
 		ItemStack weightedDropstack = JsonTools.parseStringIntoItemStack((String) weightedDrop.getSelectedItem());
 		if (!weightedDropMetadata.getText().isEmpty()) {
 			weightedDropstack.setItemDamage(Integer.parseInt(weightedDropMetadata.getText()));
-		} else {
+		}
+		else {
 			weightedDropstack.setItemDamage(0);
 		}
 		if (((String) weightedDrop.getSelectedItem()).equalsIgnoreCase("none")) {

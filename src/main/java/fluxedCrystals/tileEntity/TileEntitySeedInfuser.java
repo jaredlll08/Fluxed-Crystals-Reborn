@@ -11,7 +11,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
-public class TileEntitySeedInfuser extends TileEntity implements IInventory {
+public class TileEntitySeedInfuser extends TileEntity implements IInventory
+{
 
 	public ItemStack[] items;
 
@@ -19,23 +20,23 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 	private int infused = 0;
 	private int recipeIndex;
 
-	public TileEntitySeedInfuser() {
+	public TileEntitySeedInfuser () {
 		items = new ItemStack[3];
 	}
 
-	public int getRecipeIndex() {
+	public int getRecipeIndex () {
 		return recipeIndex;
 	}
 
-	public void setRecipeIndex(int recipeIndex) {
+	public void setRecipeIndex (int recipeIndex) {
 		this.recipeIndex = recipeIndex;
 	}
 
-	public boolean isInfusing() {
+	public boolean isInfusing () {
 		return infusing;
 	}
 
-	public void setInfusing(boolean infusing) {
+	public void setInfusing (boolean infusing) {
 
 		this.infusing = infusing;
 		System.out.println("0|" + infusing);
@@ -63,29 +64,30 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 
 	}
 
-	public int getInfused() {
+	public int getInfused () {
 		return infused;
 	}
 
-	public void updateEntity() {
+	public void updateEntity () {
 		if (infusing && worldObj.getTotalWorldTime() % 20 == 0 && !worldObj.isRemote) {
 			infuseSeed();
 		}
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory () {
 
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int count) {
+	public ItemStack decrStackSize (int i, int count) {
 		ItemStack itemstack = getStackInSlot(i);
 
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
-			} else {
+			}
+			else {
 				itemstack = itemstack.splitStack(count);
 
 			}
@@ -95,55 +97,55 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInventoryName () {
 		return "Seed Infuser";
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit () {
 		return 64;
 	}
 
 	@Override
-	public int getSizeInventory() {
+	public int getSizeInventory () {
 		return items.length;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int par1) {
+	public ItemStack getStackInSlot (int par1) {
 
 		return items[par1];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
+	public ItemStack getStackInSlotOnClosing (int i) {
 		ItemStack item = getStackInSlot(i);
 		setInventorySlotContents(i, item);
 		return item;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomInventoryName () {
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot (int slot, ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer arg0) {
+	public boolean isUseableByPlayer (EntityPlayer arg0) {
 		return true;
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory () {
 
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
+	public void setInventorySlotContents (int i, ItemStack itemstack) {
 		items[i] = itemstack;
 
 		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
@@ -153,7 +155,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 
 	/* NBT */
 	@Override
-	public void readFromNBT(NBTTagCompound tags) {
+	public void readFromNBT (NBTTagCompound tags) {
 		super.readFromNBT(tags);
 		readInventoryFromNBT(tags);
 		infusing = tags.getBoolean("infusing");
@@ -161,7 +163,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 		setRecipeIndex(tags.getInteger("recipeIndex"));
 	}
 
-	public void readInventoryFromNBT(NBTTagCompound tags) {
+	public void readInventoryFromNBT (NBTTagCompound tags) {
 		NBTTagList nbttaglist = tags.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		for (int iter = 0; iter < nbttaglist.tagCount(); iter++) {
 			NBTTagCompound tagList = nbttaglist.getCompoundTagAt(iter);
@@ -173,7 +175,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tags) {
+	public void writeToNBT (NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		writeInventoryToNBT(tags);
 		tags.setBoolean("infusing", infusing);
@@ -181,7 +183,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 		tags.setInteger("recipeIndex", getRecipeIndex());
 	}
 
-	public void writeInventoryToNBT(NBTTagCompound tags) {
+	public void writeInventoryToNBT (NBTTagCompound tags) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int iter = 0; iter < items.length; iter++) {
 			if (items[iter] != null) {
@@ -195,7 +197,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 		tags.setTag("Items", nbttaglist);
 	}
 
-	public boolean addItemToSlot(int slotNumber, ItemStack stack) {
+	public boolean addItemToSlot (int slotNumber, ItemStack stack) {
 
 		boolean returnBool = false;
 
@@ -220,7 +222,7 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory {
 		return returnBool;
 	}
 
-	public boolean infuseSeed() {
+	public boolean infuseSeed () {
 		System.out.println("0:" + getRecipeIndex());
 		if (getRecipeIndex() != -1) {
 			System.out.println("1:" + getRecipeIndex());

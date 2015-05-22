@@ -11,23 +11,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-public class CreativeTabFluxedCrystals extends CreativeTabs {
+public class CreativeTabFluxedCrystals extends CreativeTabs
+{
 
-	int iconIndex = -1;
+	private int iconIndex = -1;
 
-	TimeTracker iconTracker = new TimeTracker();
+	private TimeTracker iconTracker = new TimeTracker();
 
-	public CreativeTabFluxedCrystals() {
+	public CreativeTabFluxedCrystals () {
 
 		super(Reference.LOWERCASE_MOD_ID);
 
 	}
 
-	private void updateIcon() {
+	private void updateIcon () {
 
 		World var1 = FluxedCrystals.proxy.getClientWorld();
 
@@ -44,7 +43,7 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public ItemStack getIconItemStack() {
+	public ItemStack getIconItemStack () {
 
 		updateIcon();
 
@@ -52,7 +51,8 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 
 			return new ItemStack(FCItems.seed, 1, iconIndex);
 
-		} else {
+		}
+		else {
 
 			return new ItemStack(FCItems.universalSeed, 1);
 
@@ -61,7 +61,7 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem() {
+	public Item getTabIconItem () {
 
 		return this.getIconItemStack().getItem();
 

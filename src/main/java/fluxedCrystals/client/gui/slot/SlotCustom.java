@@ -5,26 +5,26 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class SlotCustom extends Slot {
+public class SlotCustom extends Slot
+{
 
-	public int slotMax;
-	ArrayList<ItemStack> validItems = new ArrayList<ItemStack>();
+	private int slotMax;
+	private ArrayList<ItemStack> validItems = new ArrayList<ItemStack>();
 
-	public SlotCustom(IInventory inventory, int number, int x, int y, int slotMax, ItemStack... validItems) {
+	public SlotCustom (IInventory inventory, int number, int x, int y, int slotMax, ItemStack... validItems) {
 		super(inventory, number, x, y);
-		for (ItemStack stack : validItems) {
-			this.validItems.add(stack);
-		}
+		Collections.addAll(this.validItems, validItems);
 		this.slotMax = slotMax;
 	}
 
-	public int getSlotStackLimit() {
+	public int getSlotStackLimit () {
 
 		return slotMax;
 	}
 
-	public boolean isItemValid(ItemStack stack) {
+	public boolean isItemValid (ItemStack stack) {
 		if (validItems.isEmpty()) {
 			return false;
 		}

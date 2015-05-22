@@ -1,15 +1,9 @@
 package fluxedCrystals.registry;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCItems;
-import fluxedCrystals.recipe.RecipeGemCutter;
-import fluxedCrystals.recipe.RecipeGemRefiner;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
+import fluxedCrystals.recipe.*;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
 import net.minecraft.block.Block;
@@ -17,23 +11,21 @@ import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
-public class SeedRegistry {
+public class SeedRegistry
+{
 
 	private static SeedRegistry seedRegistry = null;
 	private static HashMap<Integer, Seed> seedMap;
 
-	private SeedRegistry() {
+	private SeedRegistry () {
 
 		seedMap = new HashMap<Integer, Seed>();
 
 	}
 
-	public static SeedRegistry getInstance() {
+	public static SeedRegistry getInstance () {
 
 		if (seedRegistry == null) {
 
@@ -45,7 +37,7 @@ public class SeedRegistry {
 
 	}
 
-	public Seed getSeedByID(int id) {
+	public Seed getSeedByID (int id) {
 
 		if (seedMap.containsKey(id)) {
 
@@ -57,7 +49,7 @@ public class SeedRegistry {
 
 	}
 
-	public int getIdFromName(String name) {
+	public int getIdFromName (String name) {
 		for (Seed seed : seedMap.values()) {
 			if (seed.name.equals(name)) {
 				return seed.seedID;
@@ -67,7 +59,7 @@ public class SeedRegistry {
 		return -1;
 	}
 
-	public Seed getSeedFromName(String name) {
+	public Seed getSeedFromName (String name) {
 		for (Seed seed : seedMap.values()) {
 			if (seed.name.equals(name)) {
 				return seed;
@@ -77,7 +69,7 @@ public class SeedRegistry {
 	}
 
 
-	public Seed addTemplateSeed(ItemStack itemStack) {
+	public Seed addTemplateSeed (ItemStack itemStack) {
 
 		if (itemStack != null) {
 
@@ -109,13 +101,15 @@ public class SeedRegistry {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getWeightedDrop(), seed.refinerAmount, seed.refinerOutput));
 
-					} else {
+					}
+					else {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
 
 					}
 
-				} else {
+				}
+				else {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
 
@@ -131,7 +125,7 @@ public class SeedRegistry {
 
 	}
 
-	public Seed addTemplateSeed(Seed seed) {
+	public Seed addTemplateSeed (Seed seed) {
 
 		seed = addSeed(seed);
 		if (seed != null) {
@@ -146,13 +140,15 @@ public class SeedRegistry {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getWeightedDrop(), seed.refinerAmount, seed.refinerOutput));
 
-				} else {
+				}
+				else {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
 
 				}
 
-			} else {
+			}
+			else {
 
 				RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, seed.seedID), seed.getIngredient(), seed.refinerAmount, seed.refinerOutput));
 
@@ -164,7 +160,7 @@ public class SeedRegistry {
 
 	}
 
-	private void addSeed(int id, Seed seed) {
+	private void addSeed (int id, Seed seed) {
 
 		if (seedMap.containsKey(id)) {
 
@@ -176,7 +172,7 @@ public class SeedRegistry {
 
 	}
 
-	public Seed addSeed(Seed seed) {
+	public Seed addSeed (Seed seed) {
 
 		boolean seedAdded = false;
 
@@ -243,7 +239,7 @@ public class SeedRegistry {
 
 	}
 
-	public int getNextID() {
+	public int getNextID () {
 
 		if (seedMap.isEmpty()) {
 
@@ -267,7 +263,7 @@ public class SeedRegistry {
 
 	}
 
-	public void Load() {
+	public void Load () {
 
 		File seedRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.json");
 
@@ -279,7 +275,8 @@ public class SeedRegistry {
 
 				seedRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.json");
 
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 
 				throw new RuntimeException(e);
 
@@ -291,7 +288,7 @@ public class SeedRegistry {
 
 	}
 
-	private void ReadFromDisk(File fileToRead) {
+	private void ReadFromDisk (File fileToRead) {
 
 		if (fileToRead != null && fileToRead.exists()) {
 
@@ -309,11 +306,13 @@ public class SeedRegistry {
 
 				}
 
-			} catch (FileNotFoundException ignored) {
+			}
+			catch (FileNotFoundException ignored) {
 
 				// NOOP
 
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 
 				e.printStackTrace();
 
@@ -323,13 +322,13 @@ public class SeedRegistry {
 
 	}
 
-	public Set<Integer> keySet() {
+	public Set<Integer> keySet () {
 
 		return seedMap.keySet();
 
 	}
 
-	public void Save() {
+	public void Save () {
 
 		Writer writer = null;
 
@@ -338,13 +337,16 @@ public class SeedRegistry {
 			writer = new FileWriter(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.tmp");
 			writer.write(JsonTools.hashmapToJson_seeds(seedMap));
 
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			if (writer != null) {
 				try {
 					writer.close();
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
@@ -363,7 +365,7 @@ public class SeedRegistry {
 
 	}
 
-	public HashMap<Integer, Seed> getSeedMap() {
+	public HashMap<Integer, Seed> getSeedMap () {
 
 		return seedMap;
 

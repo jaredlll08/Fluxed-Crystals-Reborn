@@ -2,25 +2,21 @@ package fluxedCrystals.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.blocks.BlockGemCutter;
-import fluxedCrystals.blocks.BlockGemRefiner;
-import fluxedCrystals.blocks.BlockSeedInfuser;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.BlockMutationCrystal;
+import fluxedCrystals.blocks.machines.*;
 import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityGemCutter;
-import fluxedCrystals.tileEntity.TileEntityGemRefiner;
-import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
+import fluxedCrystals.tileEntity.*;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import net.minecraft.block.Block;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FCBlocks {
+public class FCBlocks
+{
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public static Block poweredSoil = new BlockPowerBlock();
@@ -30,15 +26,15 @@ public class FCBlocks {
 	public static Block gemCutter = new BlockGemCutter();
 	public static Block gemRefiner = new BlockGemRefiner();
 
-	public FCBlocks() {
+	public FCBlocks () {
 
 	}
 
-	public static void preInit() {
+	public static void preInit () {
 
 	}
 
-	public static void initialize() {
+	public static void initialize () {
 		//GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
 		registerBlock(new BlockMutationCrystal(), "crys", "crys");
@@ -60,11 +56,11 @@ public class FCBlocks {
 
 	}
 
-	public static void postInit() {
+	public static void postInit () {
 
 	}
 
-	private static void registerBlock(Block block, String name, String key) {
+	private static void registerBlock (Block block, String name, String key) {
 		block.setBlockName(name).setCreativeTab(FluxedCrystals.tab);
 		GameRegistry.registerBlock(block, key);
 		blockRegistry.put(key, block);

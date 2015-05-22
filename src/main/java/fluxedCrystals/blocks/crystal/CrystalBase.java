@@ -17,14 +17,15 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public abstract class CrystalBase extends Block {
+public abstract class CrystalBase extends Block
+{
 
 	public IIcon[] crystals;
 	public IIcon[] crop;
 	public IIcon[] cropOverlay;
 
 
-	public CrystalBase() {
+	CrystalBase () {
 
 		super(Material.plants);
 
@@ -37,7 +38,7 @@ public abstract class CrystalBase extends Block {
 
 	}
 
-	public boolean growCrop(World world, int x, int y, int z, Random rand, boolean night) {
+	public boolean growCrop (World world, int x, int y, int z, Random rand, boolean night) {
 
 		if (world.getBlockLightValue(x, y + 1, z) >= 9 || night) {
 
@@ -61,14 +62,14 @@ public abstract class CrystalBase extends Block {
 	 * The type of render function that is called for this block
 	 */
 
-	public int getRenderType() {
+	public int getRenderType () {
 
 		return FluxedCrystals.crystalRenderID;
 
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister icon) {
+	public void registerBlockIcons (IIconRegister icon) {
 
 		this.crystals = new IIcon[8];
 		this.crop = new IIcon[8];
@@ -89,10 +90,14 @@ public abstract class CrystalBase extends Block {
 	}
 
 
-	public IIcon getIcon(TileEntityCrystal tile, int meta) {
+	public IIcon getIcon (TileEntityCrystal tile, int meta) {
 		Seed seed = SeedRegistry.getInstance().getSeedByID(tile.getIdx());
-		if (seed.type.equalsIgnoreCase("crystal")) return crystals[meta];
-		if (seed.type.equalsIgnoreCase("crop")) return crop[meta];
+		if (seed.type.equalsIgnoreCase("crystal")) {
+			return crystals[meta];
+		}
+		if (seed.type.equalsIgnoreCase("crop")) {
+			return crop[meta];
+		}
 		return crystals[meta];
 	}
 
@@ -110,7 +115,7 @@ public abstract class CrystalBase extends Block {
 	//
 	//	}
 	@Override
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+	public IIcon getIcon (IBlockAccess world, int x, int y, int z, int side) {
 		if (world.getBlockMetadata(x, y, z) < 0 || world.getBlockMetadata(x, y, z) >= 7) {
 			return getIcon(side, 7);
 		}
@@ -123,19 +128,19 @@ public abstract class CrystalBase extends Block {
 	 */
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt (World world, int x, int y, int z) {
 
 		return world.getBlock(x, y - 1, z) instanceof IPowerSoil;
 
 	}
 
-	public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_) {
+	public boolean func_149851_a (World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_) {
 
 		return false;
 
 	}
 
-	public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_) {
+	public boolean func_149852_a (World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_) {
 
 		return false;
 
@@ -146,13 +151,13 @@ public abstract class CrystalBase extends Block {
 	 * gets checked often with plants.
 	 */
 
-	public boolean canBlockStay(World world, int x, int y, int z) {
+	public boolean canBlockStay (World world, int x, int y, int z) {
 
 		return world.getBlock(x, y - 1, z) instanceof IPowerSoil;
 
 	}
 
-	public void dropBlockAsItemWithChance(World p_149690_1_, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_) {
+	public void dropBlockAsItemWithChance (World p_149690_1_, int p_149690_2_, int p_149690_3_, int p_149690_4_, int p_149690_5_, float p_149690_6_, int p_149690_7_) {
 
 	}
 

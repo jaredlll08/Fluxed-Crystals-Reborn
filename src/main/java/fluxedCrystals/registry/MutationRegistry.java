@@ -1,9 +1,6 @@
 package fluxedCrystals.registry;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
@@ -17,18 +14,18 @@ import java.util.Map;
 /**
  * Created by Jared on 5/20/2015.
  */
-public class MutationRegistry {
+public class MutationRegistry
+{
 	private static MutationRegistry mutationRegistry = null;
 	private static Map<MutablePair<Seed, Seed>, Mutation> mutationMap;
 
-	public MutationRegistry()
-	{
+	public MutationRegistry () {
 
 		mutationMap = new HashMap<MutablePair<Seed, Seed>, Mutation>();
 
 	}
 
-	public static MutationRegistry getInstance() {
+	public static MutationRegistry getInstance () {
 
 		if (mutationRegistry == null) {
 
@@ -40,13 +37,7 @@ public class MutationRegistry {
 
 	}
 
-	public void addMutation(String output, String seed1, String seed2) {
-
-		mutationMap.put(new MutablePair<Seed, Seed>(SeedRegistry.getInstance().getSeedFromName(seed1), SeedRegistry.getInstance().getSeedFromName(seed2)), new Mutation(output, seed1, seed2));
-	}
-
-
-	public static Mutation getMutationFromNames(String name1, String name2) {
+	public static Mutation getMutationFromNames (String name1, String name2) {
 		MutablePair<Seed, Seed> seed = new MutablePair<Seed, Seed>();
 		seed.setLeft(SeedRegistry.getInstance().getSeedFromName(name1));
 		seed.setRight(SeedRegistry.getInstance().getSeedFromName(name2));
@@ -58,8 +49,12 @@ public class MutationRegistry {
 		return null;
 	}
 
-	public void Load()
-	{
+	public void addMutation (String output, String seed1, String seed2) {
+
+		mutationMap.put(new MutablePair<Seed, Seed>(SeedRegistry.getInstance().getSeedFromName(seed1), SeedRegistry.getInstance().getSeedFromName(seed2)), new Mutation(output, seed1, seed2));
+	}
+
+	public void Load () {
 
 		File mutationRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterMutationData.json");
 
@@ -71,7 +66,8 @@ public class MutationRegistry {
 
 				mutationRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterMutationData.json");
 
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 
 				throw new RuntimeException(e);
 
@@ -83,8 +79,7 @@ public class MutationRegistry {
 
 	}
 
-	private void ReadFromDisk(File fileToRead)
-	{
+	private void ReadFromDisk (File fileToRead) {
 
 		if (fileToRead != null && fileToRead.exists()) {
 
@@ -96,18 +91,19 @@ public class MutationRegistry {
 
 				JsonObject jsonObject = parser.parse(new FileReader(fileToRead)).getAsJsonObject();
 
-				for (Mutation mutation : JsonTools.jsontoList_mutations(jsonObject))
-				{
+				for (Mutation mutation : JsonTools.jsontoList_mutations(jsonObject)) {
 
 					addMutation(mutation.outputSeed, mutation.seed1, mutation.seed2);
 
 				}
 
-			} catch (FileNotFoundException ignored) {
+			}
+			catch (FileNotFoundException ignored) {
 
 				// NOOP
 
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 
 				e.printStackTrace();
 
@@ -117,8 +113,7 @@ public class MutationRegistry {
 
 	}
 
-	public void Save()
-	{
+	public void Save () {
 
 		Writer writer = null;
 
@@ -127,13 +122,16 @@ public class MutationRegistry {
 			writer = new FileWriter(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterMutationData.tmp");
 			writer.write(JsonTools.mapToJson_mutations(mutationMap));
 
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			if (writer != null) {
 				try {
 					writer.close();
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
@@ -152,8 +150,7 @@ public class MutationRegistry {
 
 	}
 
-	public Map<MutablePair<Seed, Seed>, Mutation> getMutationMap()
-	{
+	public Map<MutablePair<Seed, Seed>, Mutation> getMutationMap () {
 
 		return mutationMap;
 

@@ -13,7 +13,10 @@ import java.util.Iterator;
 public class OreDict
 {
 
-	public static void registerVanilla() {
+	private OreDict () {
+	}
+
+	public static void registerVanilla () {
 		safeRegister("barsIron", Blocks.iron_bars);
 		safeRegister("blockHopper", Blocks.hopper);
 		safeRegister("blockObsidian", Blocks.obsidian);
@@ -44,41 +47,38 @@ public class OreDict
 		safeRegister("slabQuartz", new ItemStack(Blocks.stone_slab, 1, 7));
 	}
 
-	public static void safeRegister(String name, Block block) {
+	public static void safeRegister (String name, Block block) {
 		safeRegister(name, Item.getItemFromBlock(block));
 	}
 
-	public static void safeRegister(String name, Item item) {
+	public static void safeRegister (String name, Item item) {
 		safeRegister(name, new ItemStack(item));
 	}
 
-	public static void safeRegister(String name, ItemStack stack) {
-		if(!isRegistered(stack, OreDictionary.getOres(name))) {
+	public static void safeRegister (String name, ItemStack stack) {
+		if (!isRegistered(stack, OreDictionary.getOres(name))) {
 			OreDictionary.registerOre(name, stack);
 		}
 
 	}
 
-	private static boolean isRegistered(ItemStack stack, ArrayList<ItemStack> toCheck) {
+	private static boolean isRegistered (ItemStack stack, ArrayList<ItemStack> toCheck) {
 		Iterator i$ = toCheck.iterator();
 
 		ItemStack check;
 		do {
 			do {
 				do {
-					if(!i$.hasNext()) {
+					if (!i$.hasNext()) {
 						return false;
 					}
 
-					check = (ItemStack)i$.next();
-				} while(stack == null);
-			} while(stack.getItem() != check.getItem());
-		} while(stack.getItemDamage() != check.getItemDamage() && stack.getItemDamage() != 32767);
+					check = (ItemStack) i$.next();
+				} while (stack == null);
+			} while (stack.getItem() != check.getItem());
+		} while (stack.getItemDamage() != check.getItemDamage() && stack.getItemDamage() != 32767);
 
 		return true;
-	}
-
-	private OreDict() {
 	}
 
 }

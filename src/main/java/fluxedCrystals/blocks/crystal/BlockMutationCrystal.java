@@ -1,10 +1,7 @@
 package fluxedCrystals.blocks.crystal;
 
 import fluxedCrystals.init.FCBlocks;
-import fluxedCrystals.registry.Mutation;
-import fluxedCrystals.registry.MutationRegistry;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.registry.*;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,14 +14,15 @@ import java.util.Random;
 /**
  * Created by Jared on 5/20/2015.
  */
-public class BlockMutationCrystal extends Block {
+public class BlockMutationCrystal extends Block
+{
 
-	public BlockMutationCrystal() {
+	public BlockMutationCrystal () {
 		super(Material.plants);
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random) {
+	public void updateTick (World world, int x, int y, int z, Random random) {
 		ForgeDirection[] directions = new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST};
 		ArrayList<Seed> crystalSeeds = new ArrayList<Seed>();
 

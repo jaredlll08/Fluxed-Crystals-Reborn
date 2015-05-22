@@ -1,16 +1,8 @@
 package fluxedCrystals.network.message;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import fluxedCrystals.registry.Mutation;
-import fluxedCrystals.registry.MutationRegistry;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
+import com.google.gson.*;
+import cpw.mods.fml.common.network.simpleimpl.*;
+import fluxedCrystals.registry.*;
 import fluxedCrystals.util.CompressionHelper;
 import fluxedCrystals.util.JsonTools;
 import io.netty.buffer.ByteBuf;
@@ -19,7 +11,8 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSyncMutations, IMessage> {
+public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSyncMutations, IMessage>
+{
 
 	private static Map<MutablePair<Seed, Seed>, Mutation> mutationMap;
 
@@ -38,7 +31,7 @@ public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSy
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -69,7 +62,7 @@ public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSy
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -86,7 +79,8 @@ public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSy
 			buf.writeInt(compressedString.length);
 			buf.writeBytes(compressedString);
 
-		} else {
+		}
+		else {
 
 			buf.writeInt(0);
 
@@ -95,14 +89,11 @@ public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSy
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncMutations message, MessageContext ctx)
-	{
+	public IMessage onMessage (MessageSyncMutations message, MessageContext ctx) {
 
-		if(mutationMap != null)
-		{
+		if (mutationMap != null) {
 
-			for(Map.Entry<MutablePair<Seed, Seed>, Mutation> entry : mutationMap.entrySet())
-			{
+			for (Map.Entry<MutablePair<Seed, Seed>, Mutation> entry : mutationMap.entrySet()) {
 
 				MutationRegistry.getInstance().addMutation(entry.getValue().outputSeed, entry.getValue().seed1, entry.getValue().seed2);
 

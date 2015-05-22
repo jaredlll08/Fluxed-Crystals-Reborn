@@ -3,9 +3,7 @@ package fluxedCrystals.items.seeds;
 import cpw.mods.fml.common.Loader;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.init.FCBlocks;
-import fluxedCrystals.reference.Names;
-import fluxedCrystals.reference.Reference;
-import fluxedCrystals.reference.Textures;
+import fluxedCrystals.reference.*;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.IPowerSoil;
@@ -16,11 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import java.util.Collections;
 import java.util.List;
 
-public class ItemSeed extends SeedBase {
+public class ItemSeed extends SeedBase
+{
 
-	public ItemSeed() {
+	public ItemSeed () {
 		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SEED);
 		setTextureName(Textures.Items.SEED);
 		setHasSubtypes(true);
@@ -28,7 +28,7 @@ public class ItemSeed extends SeedBase {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
 		ItemStack seeds = stack.copy();
 		seeds.stackSize = 1;
 		if (world.getBlock(x, y, z) instanceof IPowerSoil) {
@@ -42,7 +42,7 @@ public class ItemSeed extends SeedBase {
 		return false;
 	}
 
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	public void addInformation (ItemStack stack, EntityPlayer player, List list, boolean par4) {
 
 		list.add("-" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
 		list.add("Growth:" + SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).growthTime);
@@ -61,24 +61,20 @@ public class ItemSeed extends SeedBase {
 
 			String[] lores = lore.split("\n");
 
-			for (String lor : lores) {
-
-				list.add(lor);
-
-			}
+			Collections.addAll(list, lores);
 
 		}
 
 	}
 
-	public int getRenderPasses(int metadata) {
+	public int getRenderPasses (int metadata) {
 
 		return 1;
 
 	}
 
 	@Override
-	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
+	public int getColorFromItemStack (ItemStack par1ItemStack, int par2) {
 
 		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).color;
 
@@ -86,7 +82,7 @@ public class ItemSeed extends SeedBase {
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
 
 		for (int i : SeedRegistry.getInstance().keySet()) {
 
@@ -101,7 +97,7 @@ public class ItemSeed extends SeedBase {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
+	public String getItemStackDisplayName (ItemStack stack) {
 
 		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
 

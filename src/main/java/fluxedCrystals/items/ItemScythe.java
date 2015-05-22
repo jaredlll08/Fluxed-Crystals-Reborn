@@ -11,10 +11,9 @@ import java.util.Set;
 public class ItemScythe extends ItemTool
 {
 
-	public static Set blocksEffectiveAgainst = Sets.newHashSet(FCBlocks.crystal);
+	private static Set blocksEffectiveAgainst = Sets.newHashSet(FCBlocks.crystal);
 
-	public ItemScythe(String textureName, String itemName, ToolMaterial toolMaterial)
-	{
+	public ItemScythe (String textureName, String itemName, ToolMaterial toolMaterial) {
 
 		super(3.0F, toolMaterial, blocksEffectiveAgainst);
 

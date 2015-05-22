@@ -2,7 +2,7 @@ package fluxedCrystals.client.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.blocks.BlockSeedInfuser;
+import fluxedCrystals.blocks.machines.BlockSeedInfuser;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import net.minecraft.block.Block;
@@ -11,17 +11,18 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
-public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler {
+public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler
+{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
+	public void renderInventoryBlock (Block block, int metadata, int modelId, RenderBlocks renderer) {
 		renderer.setOverrideBlockTexture(block.getIcon(0, metadata));
 		renderer.renderBlockAsItem(Blocks.stone, 0, 1.0f);
 		renderer.clearOverrideBlockTexture();
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock (IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 
 		renderer.renderStandardBlock(block, x, y, z);
 		TileEntitySeedInfuser tile = (TileEntitySeedInfuser) world.getTileEntity(x, y, z);
@@ -41,12 +42,12 @@ public class SeedInfuserRenderer implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory (int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId() {
+	public int getRenderId () {
 		return FluxedCrystals.seedInfuserRenderID;
 	}
 }

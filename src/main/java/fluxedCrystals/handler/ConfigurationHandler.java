@@ -8,23 +8,20 @@ import thaumcraft.api.aspects.Aspect;
 
 import java.io.File;
 
-public class ConfigurationHandler {
+public class ConfigurationHandler
+{
 
 	public static Configuration CONFIGURATION;
-
-	public static String addonCategory = "Addon Compatability";
-	public static String dropCategory = "Drops";
-
 	public static boolean enderioAddon;
-
 	public static boolean shard3x3;
 	public static boolean normalShardRecipes;
-
 	public static String aspectString;
 	public static int aspectRange;
 	public static Aspect aspect;
+	private static String addonCategory = "Addon Compatability";
+	private static String dropCategory = "Drops";
 
-	public static void init(File configFile) {
+	public static void init (File configFile) {
 
 		if (CONFIGURATION == null) {
 
@@ -39,7 +36,7 @@ public class ConfigurationHandler {
 
 	}
 
-	private static void loadConfiguration() {
+	private static void loadConfiguration () {
 
 		enderioAddon = CONFIGURATION.get(addonCategory, "EnderIO Addon Support", true).getBoolean(true);
 		aspectString = CONFIGURATION.get(addonCategory, "Override Aspect for Crystals. (null for nothing)", "null").getString();
@@ -63,7 +60,7 @@ public class ConfigurationHandler {
 	}
 
 	@SubscribeEvent
-	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+	public void onConfigurationChangedEvent (ConfigChangedEvent.OnConfigChangedEvent event) {
 
 		if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
 

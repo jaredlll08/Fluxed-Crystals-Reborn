@@ -7,17 +7,16 @@ import fluxedCrystals.client.gui.gemRefiner.ContainerGemRefiner;
 import fluxedCrystals.client.gui.gemRefiner.GUIGemRefiner;
 import fluxedCrystals.client.gui.seedInfuser.ContainerSeedInfuser;
 import fluxedCrystals.client.gui.seedInfuser.GUISeedInfuser;
-import fluxedCrystals.tileEntity.TileEntityGemCutter;
-import fluxedCrystals.tileEntity.TileEntityGemRefiner;
-import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
+import fluxedCrystals.tileEntity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class GUIHandler implements IGuiHandler {
+public class GUIHandler implements IGuiHandler
+{
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getServerGuiElement (int ID, EntityPlayer player, World world, int x, int y, int z) {
 
 		TileEntity te = world.getTileEntity(x, y, z);
 
@@ -50,7 +49,7 @@ public class GUIHandler implements IGuiHandler {
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getClientGuiElement (int ID, EntityPlayer player, World world, int x, int y, int z) {
 
 		TileEntity te = world.getTileEntity(x, y, z);
 

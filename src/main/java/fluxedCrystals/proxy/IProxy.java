@@ -3,25 +3,26 @@ package fluxedCrystals.proxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public interface IProxy {
+public interface IProxy
+{
 
-	void preInit();
+	void preInit ();
 
-	void initialize();
+	void initialize ();
 
-	void postInit();
+	void postInit ();
 
-	ClientProxy getClientProxy();
+	ClientProxy getClientProxy ();
 
-	World getClientWorld();
+	World getClientWorld ();
 
-	void registerRenderers();
+	void registerRenderers ();
 
-	boolean isClient();
+	boolean isClient ();
 
-	boolean isServer();
+	boolean isServer ();
 
-	EntityPlayer getClientPlayer();
+	EntityPlayer getClientPlayer ();
 
-	void openTablet();
+	void openTablet ();
 }

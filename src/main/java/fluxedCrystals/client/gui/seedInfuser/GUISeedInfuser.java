@@ -12,12 +12,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GUISeedInfuser extends GuiContainer {
+public class GUISeedInfuser extends GuiContainer
+{
 
 	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/SeedInfuser.png");
 	private TileEntitySeedInfuser tile;
 
-	public GUISeedInfuser(InventoryPlayer invPlayer, TileEntitySeedInfuser tile2) {
+	public GUISeedInfuser (InventoryPlayer invPlayer, TileEntitySeedInfuser tile2) {
 		super(new ContainerSeedInfuser(invPlayer, tile2));
 
 		xSize = 176;
@@ -27,13 +28,13 @@ public class GUISeedInfuser extends GuiContainer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void initGui() {
+	public void initGui () {
 		super.initGui();
 		buttonList.add(new GuiButton(0, guiLeft + 50, guiTop + 50, 46, 20, "Infuse"));
 
 	}
 
-	public void actionPerformed(GuiButton button) {
+	public void actionPerformed (GuiButton button) {
 		switch (button.id) {
 
 			case 0:
@@ -44,7 +45,7 @@ public class GUISeedInfuser extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+	protected void drawGuiContainerBackgroundLayer (float p_146976_1_, int p_146976_2_, int p_146976_3_) {
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);

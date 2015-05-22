@@ -2,30 +2,29 @@ package fluxedCrystals.network.message;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.*;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.CompressionHelper;
 import io.netty.buffer.ByteBuf;
 
-public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSeed, IMessage> {
+public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSeed, IMessage>
+{
 
 	private Seed seed;
 
-	public MessageSyncSeed() {
+	public MessageSyncSeed () {
 
 	}
 
-	public MessageSyncSeed(Seed seed) {
+	public MessageSyncSeed (Seed seed) {
 
 		this.seed = seed;
 
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -50,7 +49,7 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -69,7 +68,8 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 			buf.writeInt(compressedString.length);
 			buf.writeBytes(compressedString);
 
-		} else {
+		}
+		else {
 
 			buf.writeInt(0);
 
@@ -78,7 +78,7 @@ public class MessageSyncSeed implements IMessage, IMessageHandler<MessageSyncSee
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncSeed message, MessageContext ctx) {
+	public IMessage onMessage (MessageSyncSeed message, MessageContext ctx) {
 
 		if (message.seed != null) {
 

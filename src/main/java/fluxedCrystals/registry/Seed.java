@@ -6,7 +6,8 @@ import net.minecraft.item.ItemStack;
 import java.io.Serializable;
 import java.util.Random;
 
-public class Seed implements Serializable {
+public class Seed implements Serializable
+{
 
 	private static final Random rand = new Random();
 	public String name = "";
@@ -29,7 +30,7 @@ public class Seed implements Serializable {
 	public String modRequired = "";
 	public String type = "crystal";
 
-	public ItemStack getIngredient() {
+	public ItemStack getIngredient () {
 
 		if (ingredient != null && !ingredient.equals("")) {
 
@@ -41,7 +42,7 @@ public class Seed implements Serializable {
 
 	}
 
-	public ItemStack getWeightedDrop() {
+	public ItemStack getWeightedDrop () {
 
 		if (weightedDrop != null && !weightedDrop.equals("")) {
 
@@ -53,7 +54,7 @@ public class Seed implements Serializable {
 
 	}
 
-	public int getDropAmount() {
+	public int getDropAmount () {
 
 		return rand.nextInt(dropMax - dropMin + 1) + dropMin;
 

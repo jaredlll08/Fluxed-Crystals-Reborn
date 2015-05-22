@@ -1,9 +1,7 @@
 package fluxedCrystals.network.message;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.*;
 import fluxedCrystals.tileEntity.TileEntityGemRefiner;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
@@ -11,17 +9,19 @@ import net.minecraft.tileentity.TileEntity;
 public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRefiner, IMessage>
 {
 
-	public int x, y, z;
-	public byte state;
-	public int needCycleTime, itemCycleTime, deviceCycleTime;
+	private int x;
+	private int y;
+	private int z;
+	private byte state;
+	private int needCycleTime;
+	private int itemCycleTime;
+	private int deviceCycleTime;
 
-	public MessageGemRefiner()
-	{
+	public MessageGemRefiner () {
 
 	}
 
-	public MessageGemRefiner(TileEntityGemRefiner tileEntityGemRefiner)
-	{
+	public MessageGemRefiner (TileEntityGemRefiner tileEntityGemRefiner) {
 
 		this.x = tileEntityGemRefiner.xCoord;
 		this.y = tileEntityGemRefiner.yCoord;
@@ -36,8 +36,7 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
-	{
+	public void fromBytes (ByteBuf buf) {
 
 		this.x = buf.readInt();
 		this.y = buf.readInt();
@@ -52,8 +51,7 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
-	{
+	public void toBytes (ByteBuf buf) {
 
 		buf.writeInt(this.x);
 		buf.writeInt(this.y);
@@ -68,13 +66,11 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public IMessage onMessage(MessageGemRefiner message, MessageContext ctx)
-	{
+	public IMessage onMessage (MessageGemRefiner message, MessageContext ctx) {
 
 		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
-		if (tileEntity instanceof TileEntityGemRefiner)
-		{
+		if (tileEntity instanceof TileEntityGemRefiner) {
 
 			((TileEntityGemRefiner) tileEntity).state = message.state;
 			((TileEntityGemRefiner) tileEntity).needCycleTime = message.needCycleTime;

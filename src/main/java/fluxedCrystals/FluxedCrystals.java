@@ -1,9 +1,6 @@
 package fluxedCrystals;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxedCrystals.client.gui.GUIHandler;
@@ -14,14 +11,9 @@ import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
-import fluxedCrystals.recipe.RecipeGemCutter;
-import fluxedCrystals.recipe.RecipeGemRefiner;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
+import fluxedCrystals.recipe.*;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.registry.MutationRegistry;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.registry.*;
 import fluxedCrystals.util.LogHelper;
 import fluxedCrystals.util.OreDict;
 import net.minecraft.block.Block;
@@ -30,7 +22,8 @@ import net.minecraft.item.ItemStack;
 import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
-public class FluxedCrystals {
+public class FluxedCrystals
+{
 
 	public static final CreativeTabFluxedCrystals tab = new CreativeTabFluxedCrystals();
 	public static File configDir = null;
@@ -45,14 +38,14 @@ public class FluxedCrystals {
 	public static IProxy proxy;
 
 	@Mod.EventHandler
-	public void onServerStarting(FMLServerStartingEvent event) {
+	public void onServerStarting (FMLServerStartingEvent event) {
 
 		event.registerServerCommand(new CommandFC());
 
 	}
 
 	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit (FMLPreInitializationEvent event) {
 
 		configDir = new File(event.getSuggestedConfigurationFile().getParentFile().getAbsolutePath() + File.separator + Reference.MOD_ID);
 		ConfigurationHandler.init(new File(configDir.getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
@@ -77,7 +70,7 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void initialize(FMLInitializationEvent event) {
+	public void initialize (FMLInitializationEvent event) {
 
 		FCItems.initialize();
 		FCBlocks.initialize();
@@ -91,7 +84,7 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit (FMLPostInitializationEvent event) {
 
 		FCItems.postInit();
 		FCBlocks.postInit();
@@ -115,13 +108,15 @@ public class FluxedCrystals {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 
-					} else {
+					}
+					else {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
 					}
 
-				} else {
+				}
+				else {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
@@ -137,7 +132,7 @@ public class FluxedCrystals {
 	}
 
 	@Mod.EventHandler
-	public void onServerStopping(FMLServerStoppingEvent event) {
+	public void onServerStopping (FMLServerStoppingEvent event) {
 
 		SeedRegistry.getInstance().Save();
 		MutationRegistry.getInstance().Save();
@@ -166,7 +161,7 @@ public class FluxedCrystals {
 	//	}
 
 	@Mod.EventHandler
-	public void remap(FMLModIdMappingEvent event) {
+	public void remap (FMLModIdMappingEvent event) {
 
 		//TODO Need to add the mutations
 
@@ -186,13 +181,15 @@ public class FluxedCrystals {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 
-					} else {
+					}
+					else {
 
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 
 					}
 
-				} else {
+				}
+				else {
 
 					RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
 

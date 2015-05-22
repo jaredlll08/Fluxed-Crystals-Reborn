@@ -2,10 +2,7 @@ package fluxedCrystals.init;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import fluxedCrystals.items.ItemScythe;
-import fluxedCrystals.items.ItemShardRough;
-import fluxedCrystals.items.ItemShardSmooth;
-import fluxedCrystals.items.Upgrade;
+import fluxedCrystals.items.*;
 import fluxedCrystals.items.seeds.ItemSeed;
 import fluxedCrystals.items.seeds.ItemUniversalSeed;
 import fluxedCrystals.reference.Names;
@@ -15,7 +12,8 @@ import net.minecraft.item.Item;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FCItems {
+public class FCItems
+{
 
 	public static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 	public static Item universalSeed = new ItemUniversalSeed();
@@ -40,15 +38,15 @@ public class FCItems {
 	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
 	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
 
-	public FCItems() {
+	public FCItems () {
 
 	}
 
-	public static void preInit() {
+	public static void preInit () {
 
 	}
 
-	public static void initialize() {
+	public static void initialize () {
 
 		registerItem(universalSeed, Names.Items.UNIVERSAL_SEED, Names.Items.UNIVERSAL_SEED);
 		registerItem(seed, Names.Items.SEED, Names.Items.SEED);
@@ -86,11 +84,11 @@ public class FCItems {
 
 	}
 
-	public static void postInit() {
+	public static void postInit () {
 
 	}
 
-	private static void registerItem(Item item, String name, String key) {
+	private static void registerItem (Item item, String name, String key) {
 
 		GameRegistry.registerItem(item, key);
 		itemRegistry.put(key, item);

@@ -8,20 +8,21 @@ import fluxedCrystals.reference.Reference;
 import net.minecraft.item.ItemStack;
 
 @Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
-public class NEIConfig implements IConfigureNEI {
+public class NEIConfig implements IConfigureNEI
+{
 
 	@Override
-	public String getName() {
+	public String getName () {
 		return "Fluxed-Crystals-NEI";
 	}
 
 	@Override
-	public String getVersion() {
+	public String getVersion () {
 		return Reference.VERSION;
 	}
 
 	@Override
-	public void loadConfig() {
+	public void loadConfig () {
 		API.registerRecipeHandler(new GemCutterHandler());
 		API.registerUsageHandler(new GemCutterHandler());
 		API.registerRecipeHandler(new RoughShardHandler());

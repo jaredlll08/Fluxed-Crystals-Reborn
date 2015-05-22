@@ -9,7 +9,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GUIGemRefiner extends GuiContainer {
+public class GUIGemRefiner extends GuiContainer
+{
 
 	private static final ResourceLocation texture = new ResourceLocation(Reference.LOWERCASE_MOD_ID, "textures/gui/cutrefine.png");
 	private TileEntityGemRefiner tile;
@@ -19,7 +20,7 @@ public class GUIGemRefiner extends GuiContainer {
 	private int sawY;
 	private boolean sawRange = false;
 
-	public GUIGemRefiner(InventoryPlayer invPlayer, TileEntityGemRefiner tile2) {
+	public GUIGemRefiner (InventoryPlayer invPlayer, TileEntityGemRefiner tile2) {
 		super(new ContainerGemRefiner(invPlayer, tile2));
 
 		xSize = 176;
@@ -28,14 +29,14 @@ public class GUIGemRefiner extends GuiContainer {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void initGui() {
+	public void initGui () {
 		super.initGui();
 		sawX = guiLeft + 90;
 		sawY = guiTop + 37;
 	}
 
 	@Override
-	public void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+	public void drawGuiContainerBackgroundLayer (float p_146976_1_, int p_146976_2_, int p_146976_3_) {
 		GL11.glPushMatrix();
 		energyOffset++;
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -55,12 +56,11 @@ public class GUIGemRefiner extends GuiContainer {
 		if (tile.getRecipeIndex() >= 0 && tile.getStackInSlot(0) != null) {
 
 
-			if (tile.state == 1)
-			{
+			if (tile.state == 1) {
 
 				// Math of how long to draw the bar based on progress and the phase of the moon
 
-				int barWidth = (int)(((float) tile.itemCycleTime / tile.needCycleTime) * 49);
+				int barWidth = (int) (((float) tile.itemCycleTime / tile.needCycleTime) * 49);
 
 				this.drawTexturedModalRect(guiLeft + 64, guiTop + 44, 2, 168, barWidth, 14);
 

@@ -20,49 +20,52 @@ import vazkii.botania.api.mana.IManaReceiver;
 /**
  * Created by Jared on 11/2/2014.
  */
-public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil {
+public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil
+{
 
 	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 	public ItemStack[] items;
 	private int mana;
 	private int maxMana;
 
-	public TileEntityPowerBlockMana() {
+	public TileEntityPowerBlockMana () {
 		super();
 		maxMana = 10000;
 		items = new ItemStack[3];
 
 	}
 
-	public boolean canUpdate() {
+	public boolean canUpdate () {
 		return false;
 	}
 
-	public boolean growPlant(World world, boolean night) {
-		if (world != null) if (world.getBlock(xCoord, yCoord + 1, zCoord) instanceof CrystalBase) {
-			TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
-			return ((CrystalBase) world.getBlock(xCoord, yCoord + 1, zCoord)).growCrop(world, xCoord, yCoord + 1, zCoord, world.rand, night);
+	public boolean growPlant (World world, boolean night) {
+		if (world != null) {
+			if (world.getBlock(xCoord, yCoord + 1, zCoord) instanceof CrystalBase) {
+				TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
+				return ((CrystalBase) world.getBlock(xCoord, yCoord + 1, zCoord)).growCrop(world, xCoord, yCoord + 1, zCoord, world.rand, night);
+			}
 		}
 		return false;
 	}
 
-	public BlockCrystal getCrop(World world) {
+	public BlockCrystal getCrop (World world) {
 		return world.getBlock(xCoord, yCoord + 1, zCoord) != null && world.getBlock(xCoord, yCoord + 1, zCoord) instanceof BlockCrystal ? (BlockCrystal) world.getBlock(xCoord, yCoord + 1, zCoord) : null;
 	}
 
-	public TileEntityCrystal getCropTile(World world) {
+	public TileEntityCrystal getCropTile (World world) {
 		return world.getTileEntity(xCoord, yCoord + 1, zCoord) != null && world.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCrystal ? (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord) : null;
 	}
 
 	/* NBT */
 	@Override
-	public void readFromNBT(NBTTagCompound tags) {
+	public void readFromNBT (NBTTagCompound tags) {
 		super.readFromNBT(tags);
 		readInventoryFromNBT(tags);
 		mana = tags.getInteger("mana");
 	}
 
-	public void readInventoryFromNBT(NBTTagCompound tags) {
+	public void readInventoryFromNBT (NBTTagCompound tags) {
 		NBTTagList nbttaglist = tags.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		for (int iter = 0; iter < nbttaglist.tagCount(); iter++) {
 			NBTTagCompound tagList = nbttaglist.getCompoundTagAt(iter);
@@ -74,13 +77,13 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tags) {
+	public void writeToNBT (NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		writeInventoryToNBT(tags);
 		tags.setInteger("mana", mana);
 	}
 
-	public void writeInventoryToNBT(NBTTagCompound tags) {
+	public void writeInventoryToNBT (NBTTagCompound tags) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int iter = 0; iter < items.length; iter++) {
 			if (items[iter] != null) {
@@ -95,18 +98,19 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory () {
 
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int count) {
+	public ItemStack decrStackSize (int i, int count) {
 		ItemStack itemstack = getStackInSlot(i);
 
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
-			} else {
+			}
+			else {
 				itemstack = itemstack.splitStack(count);
 
 			}
@@ -116,55 +120,55 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInventoryName () {
 		return "Power Soil";
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit () {
 		return 64;
 	}
 
 	@Override
-	public int getSizeInventory() {
+	public int getSizeInventory () {
 		return items.length;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int par1) {
+	public ItemStack getStackInSlot (int par1) {
 
 		return items[par1];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
+	public ItemStack getStackInSlotOnClosing (int i) {
 		ItemStack item = getStackInSlot(i);
 		setInventorySlotContents(i, item);
 		return item;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomInventoryName () {
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot (int slot, ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer arg0) {
+	public boolean isUseableByPlayer (EntityPlayer arg0) {
 		return true;
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory () {
 
 	}
 
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
+	public void setInventorySlotContents (int i, ItemStack itemstack) {
 		items[i] = itemstack;
 
 		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
@@ -173,21 +177,21 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getAccessibleSlotsFromSide (int side) {
 		return new int[]{};
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+	public boolean canInsertItem (int slot, ItemStack stack, int side) {
 		return false;
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+	public boolean canExtractItem (int slot, ItemStack stack, int side) {
 		return false;
 	}
 
-	public boolean addUpgrade(ItemStack stack) {
+	public boolean addUpgrade (ItemStack stack) {
 		ItemStack upgrade = stack.copy();
 		upgrade.stackSize = 1;
 
@@ -201,7 +205,7 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 
-	public ItemStack removeUpgrade() {
+	public ItemStack removeUpgrade () {
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack stack = getStackInSlot(slot);
 			if (stack != null) {
@@ -212,7 +216,7 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 		return null;
 	}
 
-	public int getSpeed() {
+	public int getSpeed () {
 		int speed = 8;
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
@@ -223,7 +227,7 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 		return speed;
 	}
 
-	public int getEffeciency() {
+	public int getEffeciency () {
 		int eff = 0;
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
@@ -237,15 +241,17 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 		return eff;
 	}
 
-	public boolean isUpgradeActive(Item upgradeItem) {
+	public boolean isUpgradeActive (Item upgradeItem) {
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
-			if (item != null && item.getItem() == upgradeItem) return true;
+			if (item != null && item.getItem() == upgradeItem) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public int getUpgradeDrain(int idx) {
+	public int getUpgradeDrain (int idx) {
 		int energy = SeedRegistry.getInstance().getSeedByID(idx).powerPerStage;
 
 		for (int slot : UPGRADE_SLOTS) {
@@ -268,22 +274,22 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
-	public boolean isFull() {
+	public boolean isFull () {
 		return mana >= maxMana;
 	}
 
 	@Override
-	public void recieveMana(int mana) {
+	public void recieveMana (int mana) {
 		this.mana = Math.min(maxMana, this.mana + mana);
 	}
 
 	@Override
-	public boolean canRecieveManaFromBursts() {
+	public boolean canRecieveManaFromBursts () {
 		return true;
 	}
 
 	@Override
-	public int getCurrentMana() {
+	public int getCurrentMana () {
 		return mana;
 	}
 }

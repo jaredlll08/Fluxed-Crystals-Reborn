@@ -11,14 +11,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSeedInfuser extends Container {
+public class ContainerSeedInfuser extends Container
+{
 
 	private static final int SEED_SLOT = 0;
 	private static final int INFUSE_SLOT = SEED_SLOT + 1;
-	private static final int INV_START = INFUSE_SLOT+1, INV_END = INV_START+26,
-			HOTBAR_START = INV_END+1, HOTBAR_END = HOTBAR_START+8;
+	private static final int INV_START = INFUSE_SLOT + 1, INV_END = INV_START + 26, HOTBAR_START = INV_END + 1, HOTBAR_END = HOTBAR_START + 8;
 
-	public ContainerSeedInfuser(InventoryPlayer invPlayer, TileEntitySeedInfuser manager) {
+	public ContainerSeedInfuser (InventoryPlayer invPlayer, TileEntitySeedInfuser manager) {
 
 		addSlotToContainer(new SlotSeed(manager, SEED_SLOT, 9, 9));
 		addSlotToContainer(new SlotInfuser(manager, INFUSE_SLOT, 151, 9));
@@ -36,7 +36,7 @@ public class ContainerSeedInfuser extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+	public boolean canInteractWith (EntityPlayer p_75145_1_) {
 		return true;
 	}
 
@@ -44,25 +44,21 @@ public class ContainerSeedInfuser extends Container {
 	 * Called when a player shift-clicks on a slot. You must override this or
 	 * you will crash when someone does that.
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
-	{
+	public ItemStack transferStackInSlot (EntityPlayer player, int slotNumber) {
 
 		ItemStack itemStack = null;
 
-		Slot slot = (Slot)this.inventorySlots.get(slotNumber);
+		Slot slot = (Slot) this.inventorySlots.get(slotNumber);
 
-		if (slot != null && slot.getHasStack())
-		{
+		if (slot != null && slot.getHasStack()) {
 
 			ItemStack itemstack1 = slot.getStack();
 			itemStack = itemstack1.copy();
 
 			// This is a slot in the gui transfer to inventory
-			if (slotNumber < INV_START)
-			{
+			if (slotNumber < INV_START) {
 
-				if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, true))
-				{
+				if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, true)) {
 
 					return null;
 
@@ -71,24 +67,20 @@ public class ContainerSeedInfuser extends Container {
 				slot.onSlotChange(itemstack1, itemStack);
 
 			}
-			else
-			{
+			else {
 
 				// If we get here we need to transfer into the gui
 
-				if (itemstack1.getItem() instanceof ItemUniversalSeed && !((Slot)this.inventorySlots.get(SEED_SLOT)).getHasStack())
-				{
+				if (itemstack1.getItem() instanceof ItemUniversalSeed && !((Slot) this.inventorySlots.get(SEED_SLOT)).getHasStack()) {
 
 					// This gets a bit funny since we can only put 1 universal seed in there, but the slot takes 64 (ignores the custom slot we have)
 
 					ItemStack itemStack2 = new ItemStack(itemstack1.getItem(), 1);
 
-					if (!this.mergeItemStack(itemStack2, SEED_SLOT, SEED_SLOT + 1, false))
-					{
+					if (!this.mergeItemStack(itemStack2, SEED_SLOT, SEED_SLOT + 1, false)) {
 						return null;
 					}
-					else
-					{
+					else {
 
 						// We need to take 1 away from the original stack in the slot since we just moved one up
 
@@ -97,16 +89,13 @@ public class ContainerSeedInfuser extends Container {
 					}
 
 				}
-				else
-				{
+				else {
 
 					boolean isUsable = false;
 
-					for(int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet())
-					{
+					for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
-						if(RecipeRegistry.getSeedInfuserRecipeByID(i).matchesIngredient(itemstack1))
-						{
+						if (RecipeRegistry.getSeedInfuserRecipeByID(i).matchesIngredient(itemstack1)) {
 
 							isUsable = true;
 
@@ -116,17 +105,14 @@ public class ContainerSeedInfuser extends Container {
 
 					}
 
-					if (isUsable)
-					{
+					if (isUsable) {
 
-						if (!this.mergeItemStack(itemstack1, INFUSE_SLOT, INFUSE_SLOT + 1, false))
-						{
+						if (!this.mergeItemStack(itemstack1, INFUSE_SLOT, INFUSE_SLOT + 1, false)) {
 							return null;
 						}
 
 					}
-					else
-					{
+					else {
 						return null;
 					}
 
@@ -134,17 +120,14 @@ public class ContainerSeedInfuser extends Container {
 
 			}
 
-			if (itemstack1.stackSize == 0)
-			{
+			if (itemstack1.stackSize == 0) {
 				slot.putStack(null);
 			}
-			else
-			{
+			else {
 				slot.onSlotChanged();
 			}
 
-			if (itemstack1.stackSize == itemStack.stackSize)
-			{
+			if (itemstack1.stackSize == itemStack.stackSize) {
 				return null;
 			}
 

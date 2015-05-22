@@ -11,14 +11,15 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderCrystal implements ISimpleBlockRenderingHandler {
+public class RenderCrystal implements ISimpleBlockRenderingHandler
+{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
+	public void renderInventoryBlock (Block block, int metadata, int modelId, RenderBlocks renderer) {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock (IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntityCrystal tile = (TileEntityCrystal) world.getTileEntity(x, y, z);
 		Seed seed = SeedRegistry.getInstance().getSeedByID(tile.getIdx());
@@ -56,12 +57,12 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory (int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId() {
+	public int getRenderId () {
 		return FluxedCrystals.crystalRenderID;
 	}
 

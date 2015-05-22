@@ -12,28 +12,29 @@ import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
-public class ItemShardRough extends Item {
+public class ItemShardRough extends Item
+{
 
-	public ItemShardRough() {
+	public ItemShardRough () {
 		setUnlocalizedName(Reference.LOWERCASE_MOD_ID + "." + Names.Items.SHARDROUGH);
 		setTextureName(Reference.LOWERCASE_MOD_ID + ":" + Names.Items.SHARDROUGH);
 		setHasSubtypes(true);
 		setCreativeTab(FluxedCrystals.tab);
 	}
 
-	public int getRenderPasses(int metadata) {
+	public int getRenderPasses (int metadata) {
 		return 1;
 	}
 
 
 	@Override
-	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
+	public int getColorFromItemStack (ItemStack par1ItemStack, int par2) {
 		return SeedRegistry.getInstance().getSeedByID(par1ItemStack.getItemDamage()).color;
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
+	public void getSubItems (Item p_150895_1_, CreativeTabs p_150895_2_, List list) {
 
 		for (int i : SeedRegistry.getInstance().keySet()) {
 
@@ -46,7 +47,7 @@ public class ItemShardRough extends Item {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
+	public String getItemStackDisplayName (ItemStack stack) {
 
 		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).name);
 

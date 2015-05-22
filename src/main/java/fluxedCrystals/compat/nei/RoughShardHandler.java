@@ -13,33 +13,34 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
-public class RoughShardHandler extends TemplateRecipeHandler {
+public class RoughShardHandler extends TemplateRecipeHandler
+{
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
-	public String getGuiTexture() {
+	public String getGuiTexture () {
 		return Reference.LOWERCASE_MOD_ID + ":textures/gui/SeedInfuser.png";
 	}
 
 	@Override
-	public String getRecipeName() {
+	public String getRecipeName () {
 		return "Rough Shard";
 	}
 
 	@Override
-	public int recipiesPerPage() {
+	public int recipiesPerPage () {
 		return 1;
 	}
 
 	@Override
-	public void drawBackground(int recipe) {
+	public void drawBackground (int recipe) {
 		GuiDraw.drawTexturedModalRect(5, 5, 0, 166, 18, 18);
 		GuiDraw.fontRenderer.drawSplitString("You get Rough Shards by breaking Crystals in the world.", 19, 38, 125, 0);
 	}
 
 	@Override
-	public void drawExtras(int recipe) {
+	public void drawExtras (int recipe) {
 		CachedShard r = (CachedShard) arecipes.get(recipe);
 		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
@@ -50,7 +51,7 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result) {
+	public void loadCraftingRecipes (ItemStack result) {
 
 		for (int i : SeedRegistry.getInstance().getSeedMap().keySet()) {
 
@@ -65,7 +66,7 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 
 	}
 
-	private boolean checkDupe(Seed recipe) {
+	private boolean checkDupe (Seed recipe) {
 		for (Object o : this.arecipes.toArray()) {
 			if (o instanceof Seed) {
 				Seed r = (Seed) o;
@@ -78,19 +79,20 @@ public class RoughShardHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
+	public String getOverlayIdentifier () {
 		return "seedInfuser";
 	}
 
-	private class CachedShard extends CachedRecipe {
+	private class CachedShard extends CachedRecipe
+	{
 		int index;
 
-		public CachedShard(int index) {
+		public CachedShard (int index) {
 			this.index = index;
 		}
 
 		@Override
-		public PositionedStack getResult() {
+		public PositionedStack getResult () {
 			return new PositionedStack(new ItemStack(FCItems.shardRough, 1, index), 75, 5);
 		}
 

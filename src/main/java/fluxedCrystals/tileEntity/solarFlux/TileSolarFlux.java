@@ -8,49 +8,52 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public abstract class TileSolarFlux extends TileEntity {
+public abstract class TileSolarFlux extends TileEntity
+{
 	public int maxEnergy;
 	public int energyStored;
 	public int energyRate;
 	public int range;
 
-	public TileSolarFlux(int maxEnergy, int energyRate, int range) {
+	public TileSolarFlux (int maxEnergy, int energyRate, int range) {
 		this.maxEnergy = maxEnergy;
 		this.energyRate = energyRate;
 		this.energyStored = 0;
 		this.range = range;
 	}
 
-	public void setEnergy(int energy) {
+	public void setEnergy (int energy) {
 		this.energyStored = energy;
 	}
 
-	public int getMaxEnergy() {
+	public int getMaxEnergy () {
 		return maxEnergy;
 	}
 
-	public int getEnergyStored() {
+	public int getEnergyStored () {
 		return energyStored;
 	}
 
-	public int getEnergyRate() {
+	public int getEnergyRate () {
 		return energyRate;
 	}
 
-	public int getRange() {
+	public int getRange () {
 		return range;
 	}
 
-	public abstract void generateEnergy(World world, int x, int y, int z, boolean night, boolean canSeeSky);
+	public abstract void generateEnergy (World world, int x, int y, int z, boolean night, boolean canSeeSky);
 
-	public abstract void sendEnergy(World world, int x, int y, int z, int range);
+	public abstract void sendEnergy (World world, int x, int y, int z, int range);
 
-	public abstract boolean canRecieveEnergy();
+	public abstract boolean canRecieveEnergy ();
 
-	public int recieveEnergy(int energy, boolean simulate) {
+	public int recieveEnergy (int energy, boolean simulate) {
 		if (!simulate) {
 			energyStored += energy;
-			if (energyStored > maxEnergy) energyStored = maxEnergy;
+			if (energyStored > maxEnergy) {
+				energyStored = maxEnergy;
+			}
 			if (energyStored < 0) {
 				energyStored = 0;
 			}
@@ -60,22 +63,24 @@ public abstract class TileSolarFlux extends TileEntity {
 	}
 
 	@Override
-	public void updateEntity() {
+	public void updateEntity () {
 		super.updateEntity();
 		int oldEnergy = energyStored;
 		generateEnergy(worldObj, xCoord, yCoord, zCoord, !worldObj.provider.isDaytime(), worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord));
-		if (new Random().nextInt(energyRate) == 0) sendEnergy(worldObj, xCoord, yCoord, zCoord, range);
+		if (new Random().nextInt(energyRate) == 0) {
+			sendEnergy(worldObj, xCoord, yCoord, zCoord, range);
+		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
+	public void writeToNBT (NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("solarFluxEnergy", energyStored);
 		tag.setInteger("solarFluxRange", range);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
+	public void readFromNBT (NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		energyStored = tag.getInteger("solarFluxEnergy");
 		range = tag.getInteger("solarFluxRange");

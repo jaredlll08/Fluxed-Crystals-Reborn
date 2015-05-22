@@ -8,27 +8,40 @@ import net.minecraft.command.ICommandSender;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandFC extends CommandBase {
+public class CommandFC extends CommandBase
+{
 
 	private static List<CommandBase> modCommands = new ArrayList<CommandBase>();
 	private static List<String> commands = new ArrayList<String>();
 
+	static {
+
+		modCommands.add(new CommandSeedFromCurrentItem());
+		modCommands.add(new CommandSeedEditor());
+		for (CommandBase commandBase : modCommands) {
+
+			commands.add(commandBase.getCommandName());
+
+		}
+
+	}
+
 	@Override
-	public String getCommandName() {
+	public String getCommandName () {
 
 		return Names.Commands.BASE_COMMAND;
 
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender commandSender) {
+	public String getCommandUsage (ICommandSender commandSender) {
 
 		return Messages.Commands.BASE_COMMAND_USAGE;
 
 	}
 
 	@Override
-	public void processCommand(ICommandSender commandSender, String[] args) {
+	public void processCommand (ICommandSender commandSender, String[] args) {
 
 		if (args.length >= 1) {
 
@@ -47,13 +60,14 @@ public class CommandFC extends CommandBase {
 	}
 
 	@Override
-	public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+	public List addTabCompletionOptions (ICommandSender commandSender, String[] args) {
 
 		if (args.length == 1) {
 
 			return getListOfStringsFromIterableMatchingLastWord(args, commands);
 
-		} else if (args.length >= 2) {
+		}
+		else if (args.length >= 2) {
 
 			for (CommandBase command : modCommands) {
 
@@ -68,18 +82,6 @@ public class CommandFC extends CommandBase {
 		}
 
 		return null;
-
-	}
-
-	static {
-
-		modCommands.add(new CommandSeedFromCurrentItem());
-		modCommands.add(new CommandSeedEditor());
-		for (CommandBase commandBase : modCommands) {
-
-			commands.add(commandBase.getCommandName());
-
-		}
 
 	}
 

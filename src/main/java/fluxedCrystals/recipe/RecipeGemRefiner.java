@@ -5,25 +5,26 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
-public class RecipeGemRefiner {
+public class RecipeGemRefiner
+{
 
 	private ItemStack input;
 	private ItemStack output;
 	private int inputAmount;
 	private int outputAmount;
 
-	public RecipeGemRefiner(ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
+	public RecipeGemRefiner (ItemStack input, ItemStack output, int inputAmount, int outputAmount) {
 		this.input = input;
 		this.output = output;
 		this.inputAmount = inputAmount;
 		this.outputAmount = outputAmount;
 	}
 
-	public int getOutputAmount() {
+	public int getOutputAmount () {
 		return outputAmount;
 	}
 
-	public boolean matches(ItemStack stack) {
+	public boolean matches (ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int id : ids) {
 			String name = OreDictionary.getOreName(id);
@@ -34,7 +35,7 @@ public class RecipeGemRefiner {
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 	}
 
-	public boolean matches(String oreDict) {
+	public boolean matches (String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
 			if (OreDictionary.itemMatches(stack, input, false)) {
@@ -44,21 +45,22 @@ public class RecipeGemRefiner {
 		return false;
 	}
 
-	public boolean matchesExact(ItemStack stack) {
-		if (stack != null) return input.isItemEqual(stack);
+	public boolean matchesExact (ItemStack stack) {
+		if (stack != null) {
+			return input.isItemEqual(stack);
+		}
 		return false;
 	}
 
-	public ItemStack getInput() {
-		ItemStack stack = input.copy();
-		return stack;
+	public ItemStack getInput () {
+		return input.copy();
 	}
 
-	public ItemStack getOutput() {
+	public ItemStack getOutput () {
 		return output.copy();
 	}
 
-	public int getInputamount() {
+	public int getInputamount () {
 		return inputAmount;
 	}
 }

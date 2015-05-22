@@ -12,27 +12,28 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @Optional.Interface(iface = "codechicken.nei.api.API", modid = "NotEnoughItems")
-public class GemRefinerHandler extends TemplateRecipeHandler {
+public class GemRefinerHandler extends TemplateRecipeHandler
+{
 
 	private final ResourceLocation texture = new ResourceLocation(getGuiTexture());
 
 	@Override
-	public String getGuiTexture() {
+	public String getGuiTexture () {
 		return Reference.LOWERCASE_MOD_ID + ":textures/gui/SeedInfuser.png";
 	}
 
 	@Override
-	public String getRecipeName() {
+	public String getRecipeName () {
 		return "Gem Refiner";
 	}
 
 	@Override
-	public int recipiesPerPage() {
+	public int recipiesPerPage () {
 		return 1;
 	}
 
 	@Override
-	public void drawBackground(int recipe) {
+	public void drawBackground (int recipe) {
 
 		GuiDraw.changeTexture(getGuiTexture());
 		GuiDraw.drawTexturedModalRect(5, 5, 0, 166, 18, 18);
@@ -42,12 +43,12 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void drawForeground(int recipe) {
+	public void drawForeground (int recipe) {
 		super.drawForeground(recipe);
 	}
 
 	@Override
-	public void drawExtras(int recipe) {
+	public void drawExtras (int recipe) {
 		CachedRefinerRecipe r = (CachedRefinerRecipe) arecipes.get(recipe);
 		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
@@ -57,14 +58,16 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadCraftingRecipes(ItemStack result) {
+	public void loadCraftingRecipes (ItemStack result) {
 
 		for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
 			if (recipe.getOutput().isItemEqual(result)) {
-				if (checkDupe(recipe)) this.arecipes.add(new CachedRefinerRecipe(recipe));
+				if (checkDupe(recipe)) {
+					this.arecipes.add(new CachedRefinerRecipe(recipe));
+				}
 			}
 
 		}
@@ -72,21 +75,23 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public void loadUsageRecipes(ItemStack ingredient) {
+	public void loadUsageRecipes (ItemStack ingredient) {
 
 		for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
 			if (recipe.getInput().isItemEqual(ingredient)) {
-				if (checkDupe(recipe)) this.arecipes.add(new CachedRefinerRecipe(recipe));
+				if (checkDupe(recipe)) {
+					this.arecipes.add(new CachedRefinerRecipe(recipe));
+				}
 			}
 
 		}
 
 	}
 
-	private boolean checkDupe(RecipeGemRefiner recipe) {
+	private boolean checkDupe (RecipeGemRefiner recipe) {
 		for (Object o : this.arecipes.toArray()) {
 			if (o instanceof CachedRefinerRecipe) {
 				CachedRefinerRecipe r = (CachedRefinerRecipe) o;
@@ -101,17 +106,18 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
+	public String getOverlayIdentifier () {
 		return "gemRefiner";
 	}
 
-	public class CachedRefinerRecipe extends CachedRecipe {
+	public class CachedRefinerRecipe extends CachedRecipe
+	{
 
 		public RecipeGemRefiner recipe;
 		private PositionedStack output;
 		private PositionedStack inputs;
 
-		public CachedRefinerRecipe(RecipeGemRefiner recipe) {
+		public CachedRefinerRecipe (RecipeGemRefiner recipe) {
 			this.output = new PositionedStack(recipe.getOutput(), 143, 6);
 			this.recipe = recipe;
 			this.inputs = new PositionedStack(recipe.getInput(), 6, 6);
@@ -120,12 +126,12 @@ public class GemRefinerHandler extends TemplateRecipeHandler {
 		}
 
 		@Override
-		public PositionedStack getResult() {
+		public PositionedStack getResult () {
 			return this.output;
 		}
 
 		@Override
-		public PositionedStack getIngredient() {
+		public PositionedStack getIngredient () {
 			return this.inputs;
 		}
 

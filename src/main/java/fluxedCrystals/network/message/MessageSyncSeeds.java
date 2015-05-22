@@ -1,12 +1,7 @@
 package fluxedCrystals.network.message;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import com.google.gson.*;
+import cpw.mods.fml.common.network.simpleimpl.*;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.CompressionHelper;
@@ -15,26 +10,27 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
 
-public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage> {
+public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage>
+{
 
 	private static HashMap<Integer, Seed> seedMap;
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-	public MessageSyncSeeds() {
+	public MessageSyncSeeds () {
 
 		seedMap = new HashMap<Integer, Seed>();
 
 	}
 
-	public MessageSyncSeeds(HashMap<Integer, Seed> seedMap) {
+	public MessageSyncSeeds (HashMap<Integer, Seed> seedMap) {
 
 		MessageSyncSeeds.seedMap = seedMap;
 
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf) {
+	public void fromBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -65,7 +61,7 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
+	public void toBytes (ByteBuf buf) {
 
 		byte[] compressedString = null;
 
@@ -82,7 +78,8 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 			buf.writeInt(compressedString.length);
 			buf.writeBytes(compressedString);
 
-		} else {
+		}
+		else {
 
 			buf.writeInt(0);
 
@@ -91,7 +88,7 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 	}
 
 	@Override
-	public IMessage onMessage(MessageSyncSeeds message, MessageContext ctx) {
+	public IMessage onMessage (MessageSyncSeeds message, MessageContext ctx) {
 
 		if (seedMap != null) {
 
