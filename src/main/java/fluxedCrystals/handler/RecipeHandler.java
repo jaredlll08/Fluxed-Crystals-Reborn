@@ -21,9 +21,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeEffeciency, 4), " c ", "cuc", " c ", 'c', Blocks.coal_block, 'u', FCItems.universalSeed));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeAutomation, 4), " p ", "sus", " p ", 'p', Blocks.piston, 's', Blocks.sticky_piston, 'u', FCItems.universalSeed));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeSpeed, 4), " s ", "sus", " s ", 's', Items.sugar, 'u', FCItems.universalSeed));
-		System.out.println(">>> Refiner >>>");
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCBlocks.gemRefiner), "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'u', FCItems.upgradeAutomation));
-		System.out.println("<<< Refiner <<<");
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheWood, " ww", "s  ", " s ", 's', Items.stick, 'w', Blocks.planks).setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheStone, " ww", "s  ", " s ", 's', Items.stick, 'w', Blocks.cobblestone).setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheIron, " ww", "s  ", " s ", 's', Items.stick, 'w', "ingotIron").setMirrored(true));
