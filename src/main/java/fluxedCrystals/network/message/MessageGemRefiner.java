@@ -6,8 +6,7 @@ import fluxedCrystals.tileEntity.TileEntityGemRefiner;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
-public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRefiner, IMessage>
-{
+public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRefiner, IMessage> {
 
 	private int x;
 	private int y;
@@ -17,11 +16,11 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	private int itemCycleTime;
 	private int deviceCycleTime;
 
-	public MessageGemRefiner () {
+	public MessageGemRefiner() {
 
 	}
 
-	public MessageGemRefiner (TileEntityGemRefiner tileEntityGemRefiner) {
+	public MessageGemRefiner(TileEntityGemRefiner tileEntityGemRefiner) {
 
 		this.x = tileEntityGemRefiner.xCoord;
 		this.y = tileEntityGemRefiner.yCoord;
@@ -36,7 +35,7 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public void fromBytes (ByteBuf buf) {
+	public void fromBytes(ByteBuf buf) {
 
 		this.x = buf.readInt();
 		this.y = buf.readInt();
@@ -51,7 +50,7 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public void toBytes (ByteBuf buf) {
+	public void toBytes(ByteBuf buf) {
 
 		buf.writeInt(this.x);
 		buf.writeInt(this.y);
@@ -66,7 +65,7 @@ public class MessageGemRefiner implements IMessage, IMessageHandler<MessageGemRe
 	}
 
 	@Override
-	public IMessage onMessage (MessageGemRefiner message, MessageContext ctx) {
+	public IMessage onMessage(MessageGemRefiner message, MessageContext ctx) {
 
 		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 

@@ -8,10 +8,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class RecipeHandler
-{
+public class RecipeHandler {
 
-	public static void postInit () {
+	public static void postInit() {
 
 		GameRegistry.addShapedRecipe(new ItemStack(FCItems.universalSeed, 2), "sss", "rar", "sss", 's', Items.wheat_seeds, 'r', Blocks.redstone_block, 'a', new ItemStack(Items.potionitem, 1, 16));
 
@@ -22,14 +21,15 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeEffeciency, 4), " c ", "cuc", " c ", 'c', Blocks.coal_block, 'u', FCItems.universalSeed));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeAutomation, 4), " p ", "sus", " p ", 'p', Blocks.piston, 's', Blocks.sticky_piston, 'u', FCItems.universalSeed));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeSpeed, 4), " s ", "sus", " s ", 's', Items.sugar, 'u', FCItems.universalSeed));
+		System.out.println(">>> Refiner >>>");
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCBlocks.gemRefiner), "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'u', FCItems.upgradeAutomation));
+		System.out.println("<<< Refiner <<<");
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheWood, " ww", "s  ", " s ", 's', Items.stick, 'w', Blocks.planks).setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheStone, " ww", "s  ", " s ", 's', Items.stick, 'w', Blocks.cobblestone).setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheIron, " ww", "s  ", " s ", 's', Items.stick, 'w', "ingotIron").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheGold, " ww", "s  ", " s ", 's', Items.stick, 'w', "ingotGold").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheDiamond, " ww", "s  ", " s ", 's', Items.stick, 'w', "gemDiamond").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.gemCutter, "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'u', "ingotIron"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.gemRefiner, "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotgold", 'd', "gemDiamond", 'u', FCItems.upgradeAutomation));
-
 	}
 
 }

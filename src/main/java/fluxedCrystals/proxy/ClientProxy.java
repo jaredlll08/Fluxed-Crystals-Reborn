@@ -1,19 +1,22 @@
 package fluxedCrystals.proxy;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.client.gui.crystalTablet.GuiCrystalTablet;
-import fluxedCrystals.client.render.RenderCrystal;
-import fluxedCrystals.client.render.SeedInfuserRenderer;
-import fluxedCrystals.handler.ClientEventHandler;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.client.render.MultiBlocktest;
+import fluxedCrystals.client.render.RenderCrystal;
+import fluxedCrystals.client.render.RenderMultiBlock;
+import fluxedCrystals.client.render.SeedInfuserRenderer;
+import fluxedCrystals.handler.ClientEventHandler;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
+import fluxedCrystals.util.TilebigCube;
 
 public class ClientProxy extends CommonProxy
 {
@@ -30,6 +33,10 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers () {
 
 		FluxedCrystals.crystalRenderID = RenderingRegistry.getNextAvailableRenderId();
+		FluxedCrystals.bigCubeID = RenderingRegistry.getNextAvailableRenderId();
+		MultiBlocktest model = new MultiBlocktest();
+		RenderMultiBlock multi = new RenderMultiBlock(model);
+		ClientRegistry.bindTileEntitySpecialRenderer(TilebigCube.class, new RenderMultiBlock(model));
 		RenderCrystal renderCrystal = new RenderCrystal();
 		RenderingRegistry.registerBlockHandler(renderCrystal);
 
@@ -91,7 +98,8 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public void openTablet () {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiCrystalTablet());
+//		Minecraft.getMinecraft().displayGuiScreen(new GuiCrystalTablet());
+		
 	}
 
 }

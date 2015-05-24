@@ -1,6 +1,8 @@
 package fluxedCrystals.client.gui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import fluxedCrystals.client.gui.crystalTablet.ContainerCrystalTablet;
+import fluxedCrystals.client.gui.crystalTablet.GuiCrystalTablet;
 import fluxedCrystals.client.gui.gemCutter.ContainerGemCutter;
 import fluxedCrystals.client.gui.gemCutter.GUIGemCutter;
 import fluxedCrystals.client.gui.gemRefiner.ContainerGemRefiner;
@@ -19,8 +21,9 @@ public class GUIHandler implements IGuiHandler
 	public Object getServerGuiElement (int ID, EntityPlayer player, World world, int x, int y, int z) {
 
 		TileEntity te = world.getTileEntity(x, y, z);
-
 		switch (ID) {
+		case 0:
+			return new ContainerCrystalTablet(player.inventory);
 
 			case 1:
 
@@ -54,6 +57,8 @@ public class GUIHandler implements IGuiHandler
 		TileEntity te = world.getTileEntity(x, y, z);
 
 		switch (ID) {
+		case 0:
+			return new GuiCrystalTablet(player.inventory);
 
 			case 1:
 

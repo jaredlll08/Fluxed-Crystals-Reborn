@@ -6,8 +6,7 @@ import fluxedCrystals.tileEntity.TileEntityGemCutter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
-public class MessageGemCutter implements IMessage, IMessageHandler<MessageGemCutter, IMessage>
-{
+public class MessageGemCutter implements IMessage, IMessageHandler<MessageGemCutter, IMessage> {
 
 	private int x;
 	private int y;
@@ -17,26 +16,23 @@ public class MessageGemCutter implements IMessage, IMessageHandler<MessageGemCut
 	private int itemCycleTime;
 	private int deviceCycleTime;
 
-	public MessageGemCutter () {
+	public MessageGemCutter() {
 
 	}
 
-	public MessageGemCutter (TileEntityGemCutter tileEntityGemCutter) {
+	public MessageGemCutter(TileEntityGemCutter tileEntityGemCutter) {
 
 		this.x = tileEntityGemCutter.xCoord;
 		this.y = tileEntityGemCutter.yCoord;
 		this.z = tileEntityGemCutter.zCoord;
-
 		this.state = tileEntityGemCutter.state;
-
 		this.needCycleTime = tileEntityGemCutter.needCycleTime;
 		this.itemCycleTime = tileEntityGemCutter.itemCycleTime;
 		this.deviceCycleTime = tileEntityGemCutter.deviceCycleTime;
-
 	}
 
 	@Override
-	public void fromBytes (ByteBuf buf) {
+	public void fromBytes(ByteBuf buf) {
 
 		this.x = buf.readInt();
 		this.y = buf.readInt();
@@ -51,7 +47,7 @@ public class MessageGemCutter implements IMessage, IMessageHandler<MessageGemCut
 	}
 
 	@Override
-	public void toBytes (ByteBuf buf) {
+	public void toBytes(ByteBuf buf) {
 
 		buf.writeInt(this.x);
 		buf.writeInt(this.y);
@@ -66,7 +62,7 @@ public class MessageGemCutter implements IMessage, IMessageHandler<MessageGemCut
 	}
 
 	@Override
-	public IMessage onMessage (MessageGemCutter message, MessageContext ctx) {
+	public IMessage onMessage(MessageGemCutter message, MessageContext ctx) {
 
 		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
