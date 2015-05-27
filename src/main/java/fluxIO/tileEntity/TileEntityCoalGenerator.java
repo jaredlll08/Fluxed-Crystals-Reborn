@@ -13,14 +13,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxIO.api.Registry;
 import fluxIO.api.generators.GeneratorBase;
+import fluxIO.network.MessageCoalGenerator;
+import fluxIO.network.PacketHandler;
 
 public class TileEntityCoalGenerator extends GeneratorBase {
 	private static int maxEnergy = 50000;
 
-	private int generationTimer = -1;
-	private int generationTimerDefault = -1;
+	public int generationTimer = -1;
+	public int generationTimerDefault = -1;
 
 	public TileEntityCoalGenerator() {
 		super(maxEnergy, 1);
@@ -43,12 +46,24 @@ public class TileEntityCoalGenerator extends GeneratorBase {
 			if (generationTimerDefault >= 0 && getEnergyStored() < getMaxStorage()) {
 				generationTimer--;
 				generateEnergy(worldObj, xCoord, yCoord, zCoord, generationTimer);
+				markDirty();
 			}
 			if (generationTimer < 0 && generationTimerDefault >= 0) {
 				generationTimer = -1;
 				generationTimerDefault = -1;
 			}
 		}
+	}
+
+	@Override
+	public void markDirty() {
+
+		super.markDirty();
+
+		PacketHandler.INSTANCE.sendToAllAround(new MessageCoalGenerator(this), new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, (double) this.xCoord, (double) this.yCoord, (double) this.zCoord, 128d));
+
+		worldObj.func_147451_t(xCoord, yCoord, zCoord);
+
 	}
 
 	@Override
@@ -85,7 +100,7 @@ public class TileEntityCoalGenerator extends GeneratorBase {
 		readInventoryFromNBT(nbt);
 		generationTimer = nbt.getInteger("generationTimer");
 		generationTimerDefault = nbt.getInteger("generationTimerDefault");
-		
+
 	}
 
 	public void readInventoryFromNBT(NBTTagCompound tags) {
@@ -179,7 +194,7 @@ public class TileEntityCoalGenerator extends GeneratorBase {
 
 	@Override
 	public EnumSet<ForgeDirection> getValidInputs() {
-		return EnumSet.noneOf(ForgeDirection.class);
+		return EnumSet.allOf(ForgeDirection.class);
 	}
 
 }

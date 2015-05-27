@@ -17,7 +17,6 @@ public class BlockConnected extends Block {
 	}
 
 	public BlockConnected(Block block, int x, int y, int z, Block baseBlock) {
-
 		super(block.getMaterial());
 		this.block = block;
 		this.x = x;
@@ -36,7 +35,12 @@ public class BlockConnected extends Block {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
-		
+		baseBlock.onBlockHarvested(world, x, y, z, meta, player);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+		return baseBlock.onBlockActivated(world, x, y, z, player, meta, hitX, hitY, hitZ);
 	}
 
 	public void destroy(World world) {

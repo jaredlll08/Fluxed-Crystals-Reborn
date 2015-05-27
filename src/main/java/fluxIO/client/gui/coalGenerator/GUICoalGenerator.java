@@ -34,6 +34,7 @@ public class GUICoalGenerator extends GuiContainer {
 
 	public void updateScreen() {
 		super.updateScreen();
+		drawGuiContainerBackgroundLayer(0, 0, 0);
 	}
 
 	@Override
@@ -41,5 +42,11 @@ public class GUICoalGenerator extends GuiContainer {
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		int barHeight = (int) (((float) tile.generationTimer / tile.generationTimerDefault) * 13);
+		drawTexturedModalRect(guiLeft+76, guiTop+33, 177, 0, 16, 13-barHeight);
+
+		// this.drawTexturedModalRect(guiLeft + 64, guiTop + 44, 2, 168,
+		// barWidth, 14);
+
 	}
 }

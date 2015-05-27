@@ -39,7 +39,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 	public TileEntityGemCutter() {
 		super(10000);
-
 		MAX_MANA = getMaxStorage();
 		mana = 0;
 		items = new ItemStack[7];

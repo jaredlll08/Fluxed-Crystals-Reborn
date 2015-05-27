@@ -29,6 +29,7 @@ public class FluxIO {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.initGuis();
+		proxy.initRenderers();
 	}
 
 	@EventHandler
