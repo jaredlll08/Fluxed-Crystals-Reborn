@@ -35,7 +35,7 @@ public class RecipeGemCutter
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 	}
 
-	public boolean matches (String oreDict) {
+	private boolean matches (String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
 			if (OreDictionary.itemMatches(stack, input, false)) {
@@ -46,16 +46,12 @@ public class RecipeGemCutter
 	}
 
 	public boolean matchesExact (ItemStack stack) {
-		if (stack != null) {
-			return input.isItemEqual(stack);
-		}
-		return false;
+		return stack != null && input.isItemEqual(stack);
 	}
 
 	public ItemStack getInput () {
-		ItemStack stack = input.copy();
 		// stack.stackSize = getInputamount();
-		return stack;
+		return input.copy();
 	}
 
 	public ItemStack getOutput () {

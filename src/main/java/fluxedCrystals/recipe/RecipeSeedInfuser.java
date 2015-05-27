@@ -47,7 +47,7 @@ public class RecipeSeedInfuser
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 	}
 
-	public boolean matches (String oreDict) {
+	private boolean matches (String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
 			if (OreDictionary.itemMatches(stack, input, false) && ingredient.isItemEqual(this.ingredient)) {

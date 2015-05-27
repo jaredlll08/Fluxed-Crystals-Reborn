@@ -1,38 +1,33 @@
 package fluxedCrystals.init;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.block.Block;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.BlockHidden;
 import fluxedCrystals.blocks.BlockMulti;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.BlockMutationCrystal;
-import fluxedCrystals.blocks.machines.BlockGemCutter;
-import fluxedCrystals.blocks.machines.BlockGemRefiner;
-import fluxedCrystals.blocks.machines.BlockSeedInfuser;
+import fluxedCrystals.blocks.machines.*;
 import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.TileEntityGemCutter;
-import fluxedCrystals.tileEntity.TileEntityGemRefiner;
-import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
+import fluxedCrystals.tileEntity.*;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
+import net.minecraft.block.Block;
 
-public class FCBlocks {
-	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
+import java.util.HashMap;
+import java.util.Map;
 
+public class FCBlocks
+{
 	public static Block poweredSoil = new BlockPowerBlock();
-
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
 	public static Block gemRefiner = new BlockGemRefiner();
 	public static Block multi = new BlockMulti();
 	public static Block hidden = new BlockHidden();
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	private static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public FCBlocks() {
 

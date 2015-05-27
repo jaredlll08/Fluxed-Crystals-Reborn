@@ -95,6 +95,7 @@ public class ContainerSeedInfuser extends Container
 
 					for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
+						//noinspection ConstantConditions
 						if (RecipeRegistry.getSeedInfuserRecipeByID(i).matchesIngredient(itemstack1)) {
 
 							isUsable = true;

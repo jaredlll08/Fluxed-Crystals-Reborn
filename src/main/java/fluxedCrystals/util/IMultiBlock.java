@@ -4,5 +4,5 @@ import net.minecraft.world.World;
 
 public interface IMultiBlock {
 
-	public void breakBlocks(World world);
+	void breakBlocks (World world);
 }

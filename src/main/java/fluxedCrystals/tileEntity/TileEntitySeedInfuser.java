@@ -223,24 +223,27 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	}
 
 	public boolean infuseSeed () {
-		System.out.println("0:" + getRecipeIndex());
+
 		if (getRecipeIndex() != -1) {
-			System.out.println("1:" + getRecipeIndex());
+
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(getRecipeIndex());
-			System.out.println("2:" + recipe.getIngredient().getDisplayName() + "|" + recipe.getOutput().getDisplayName());
 
-			if (getStackInSlot(0) != null && getStackInSlot(0).getItem() == FCItems.universalSeed && getStackInSlot(1) != null) {
-				System.out.println("3: not null");
+			if (recipe != null) {
 
-				if ((recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1))) && getStackInSlot(1).stackSize >= recipe.getInputamount()) {
-					System.out.println("4: it matches and infused");
+				if (getStackInSlot(0) != null && getStackInSlot(0).getItem() == FCItems.universalSeed && getStackInSlot(1) != null) {
 
-					setInventorySlotContents(0, new ItemStack(FCItems.seed, 1, getRecipeIndex()));
-					decrStackSize(1, recipe.getInputamount());
-					infusing = false;
-					infused = 0;
-					setRecipeIndex(-1);
-					return true;
+
+					if ((recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1))) && getStackInSlot(1).stackSize >= recipe.getInputamount()) {
+
+
+						setInventorySlotContents(0, new ItemStack(FCItems.seed, 1, getRecipeIndex()));
+						decrStackSize(1, recipe.getInputamount());
+						infusing = false;
+						infused = 0;
+						setRecipeIndex(-1);
+						return true;
+
+					}
 
 				}
 

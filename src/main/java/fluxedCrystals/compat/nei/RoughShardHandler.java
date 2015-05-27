@@ -42,7 +42,7 @@ public class RoughShardHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras (int recipe) {
 		CachedShard r = (CachedShard) arecipes.get(recipe);
-		int coords2[] = {0, 0};
+//		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 

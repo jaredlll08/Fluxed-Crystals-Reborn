@@ -112,9 +112,9 @@ public class JsonTools
 			return null;
 		}
 		else if (OreDictionary.getOres(string).isEmpty()) {
-			ItemStack stack = null;
+			ItemStack stack;
 			String[] info = string.split(";");
-			Object temp = null;
+			Object temp;
 			int damage = 32767;
 			temp = Item.itemRegistry.getObject(info[0]);
 			if (info.length > 1) {
@@ -160,7 +160,9 @@ public class JsonTools
 		}
 
 		ItemStack stack1 = (ItemStack) parseStringIntoRecipeItem(string, true);
-		stack1.stackSize = MathHelper.clamp_int(size, 1, stack1.getMaxStackSize());
+		if (stack1 != null) {
+			stack1.stackSize = MathHelper.clamp_int(size, 1, stack1.getMaxStackSize());
+		}
 		return stack1;
 	}
 

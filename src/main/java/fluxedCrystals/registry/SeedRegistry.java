@@ -11,7 +11,8 @@ import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Set;
 
 public class SeedRegistry
 {
@@ -83,8 +84,8 @@ public class SeedRegistry
 			seed.dropMin = 3;
 			seed.ingredientAmount = itemStack.stackSize;
 			seed.isSharp = true;
-			String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
-			if (!mod.equalsIgnoreCase("minecraft")) {
+			@SuppressWarnings("ConstantConditions") String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
+			if (mod != null && !mod.equalsIgnoreCase("minecraft")) {
 				seed.modRequired = mod;
 			}
 			seed.seedReturn = 1;
@@ -247,8 +248,6 @@ public class SeedRegistry
 
 		}
 
-		SortedSet<Integer> keys = new TreeSet<Integer>(seedMap.keySet());
-
 		for (int key = 1; key < Integer.MAX_VALUE; key++) {
 
 			if (!seedMap.containsKey(key)) {
@@ -267,6 +266,7 @@ public class SeedRegistry
 
 		File seedRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterSeedData.json");
 
+		//noinspection ConstantConditions
 		if (seedRegistryFile == null || !seedRegistryFile.exists()) {
 
 			try {
@@ -294,7 +294,7 @@ public class SeedRegistry
 
 			try {
 
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				@SuppressWarnings("UnusedAssignment") Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 
@@ -357,10 +357,12 @@ public class SeedRegistry
 
 		if (file2.exists()) {
 
+			//noinspection ResultOfMethodCallIgnored
 			file2.delete();
 
 		}
 
+		//noinspection ResultOfMethodCallIgnored
 		file1.renameTo(file2);
 
 	}

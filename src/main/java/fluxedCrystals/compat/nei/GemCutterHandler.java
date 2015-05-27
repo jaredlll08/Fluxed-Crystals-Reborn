@@ -50,7 +50,7 @@ public class GemCutterHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras (int recipe) {
 		CachedCutterRecipe r = (CachedCutterRecipe) arecipes.get(recipe);
-		int coords2[] = {0, 0};
+//		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -64,10 +64,14 @@ public class GemCutterHandler extends TemplateRecipeHandler
 
 			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-			if (recipeGemCutter.getOutput().isItemEqual(result)) {
-				if (checkDupe(recipeGemCutter)) {
-					this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
+			if (recipeGemCutter != null) {
+
+				if (recipeGemCutter.getOutput().isItemEqual(result)) {
+					if (checkDupe(recipeGemCutter)) {
+						this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
+					}
 				}
+
 			}
 
 		}
@@ -81,7 +85,7 @@ public class GemCutterHandler extends TemplateRecipeHandler
 
 			RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-			if (recipeGemCutter.getInput().isItemEqual(ingredient)) {
+			if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(ingredient)) {
 				if (checkDupe(recipeGemCutter)) {
 					this.arecipes.add(new CachedCutterRecipe(recipeGemCutter));
 				}

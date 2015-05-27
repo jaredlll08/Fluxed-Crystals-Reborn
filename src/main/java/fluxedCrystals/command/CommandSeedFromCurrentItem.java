@@ -44,6 +44,7 @@ class CommandSeedFromCurrentItem extends CommandBase
 
 			ItemStack itemStack = ((EntityPlayer) commandSender).getCurrentEquippedItem().copy();
 
+			//noinspection ConstantConditions
 			if (itemStack != null) {
 
 				Seed seed = SeedRegistry.getInstance().addTemplateSeed(itemStack);

@@ -15,12 +15,10 @@ import java.util.Map;
 public class FCItems
 {
 
-	public static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 	public static Item universalSeed = new ItemUniversalSeed();
 	public static Item seed = new ItemSeed();
 	public static Item shardRough = new ItemShardRough();
 	public static Item shardSmooth = new ItemShardSmooth();
-
 	public static Item upgradeEffeciency = new Upgrade(Textures.Items.UPGRADE_EFFECIENCY, Names.Items.UPGRADE_EFFECIENCY);
 	public static Item upgradeNight = new Upgrade(Textures.Items.UPGRADE_NIGHT, Names.Items.UPGRADE_NIGHT);
 	public static Item upgradeSpeed = new Upgrade(Textures.Items.UPGRADE_SPEED, Names.Items.UPGRADE_SPEED);
@@ -31,12 +29,13 @@ public class FCItems
 	public static Item upgradeRangeBasic = new Upgrade(Textures.Items.UPGRADE_RANGE_BASIC, Names.Items.UPGRADE_RANGE_BASIC);
 	public static Item upgradeRangeGreater = new Upgrade(Textures.Items.UPGRADE_RANGE_GREATER, Names.Items.UPGRADE_RANGE_GREATER);
 	public static Item upgradeRangeAdvanced = new Upgrade(Textures.Items.UPGRADE_RANGE_ADVANCED, Names.Items.UPGRADE_RANGE_ADVANCED);
-
 	public static Item scytheWood = new ItemScythe(Textures.Items.SCYTHE_WOOD, Names.Items.SCYTHE_WOOD, Item.ToolMaterial.WOOD);
 	public static Item scytheStone = new ItemScythe(Textures.Items.SCYTHE_STONE, Names.Items.SCYTHE_STONE, Item.ToolMaterial.STONE);
 	public static Item scytheIron = new ItemScythe(Textures.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON, Item.ToolMaterial.IRON);
 	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
 	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	private static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 
 	public FCItems () {
 

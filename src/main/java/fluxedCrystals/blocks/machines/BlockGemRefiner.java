@@ -10,9 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-/**
- * Created by Jared on 11/3/2014.
- */
 public class BlockGemRefiner extends Block implements ITileEntityProvider
 {
 	public BlockGemRefiner () {

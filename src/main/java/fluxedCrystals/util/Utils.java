@@ -48,7 +48,13 @@ public class Utils
 			}
 
 			ItemStack stack = (ItemStack) JsonTools.parseStringIntoRecipeItem(string, true);
-			stack.stackSize = MathHelper.clamp_int(size, 1, stack.getMaxStackSize());
+
+			if (stack != null) {
+
+				stack.stackSize = MathHelper.clamp_int(size, 1, stack.getMaxStackSize());
+
+			}
+
 			stacks[i] = stack;
 		}
 		return stacks;

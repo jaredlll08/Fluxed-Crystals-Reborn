@@ -57,7 +57,7 @@ public class ItemSeed extends SeedBase
 
 			String lore = SeedRegistry.getInstance().getSeedByID(stack.getItemDamage()).lore;
 
-			lore.replaceAll("\t", "    ");
+			lore = lore.replaceAll("\t", "    ");
 
 			String[] lores = lore.split("\n");
 

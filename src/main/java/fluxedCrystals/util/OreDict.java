@@ -47,15 +47,15 @@ public class OreDict
 		safeRegister("slabQuartz", new ItemStack(Blocks.stone_slab, 1, 7));
 	}
 
-	public static void safeRegister (String name, Block block) {
+	private static void safeRegister (String name, Block block) {
 		safeRegister(name, Item.getItemFromBlock(block));
 	}
 
-	public static void safeRegister (String name, Item item) {
+	private static void safeRegister (String name, Item item) {
 		safeRegister(name, new ItemStack(item));
 	}
 
-	public static void safeRegister (String name, ItemStack stack) {
+	private static void safeRegister (String name, ItemStack stack) {
 		if (!isRegistered(stack, OreDictionary.getOres(name))) {
 			OreDictionary.registerOre(name, stack);
 		}

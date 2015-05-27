@@ -6,7 +6,6 @@ import fluxedCrystals.tileEntity.TileEntityCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,7 +22,7 @@ public class BlockMutationCrystal extends Block
 
 	@Override
 	public void updateTick (World world, int x, int y, int z, Random random) {
-		ForgeDirection[] directions = new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST};
+//		ForgeDirection[] directions = new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST};
 		ArrayList<Seed> crystalSeeds = new ArrayList<Seed>();
 
 		if (world.getBlock(x, y, z + 1) != null && world.getBlock(x, y, z - 1) != null) {

@@ -86,9 +86,41 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 				recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(getRecipeIndex());
 
-				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
+				if (recipeGemCutter != null) {
 
-					if (storage.getEnergyStored() >= getEffeciency()) {
+					if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
+
+						if (storage.getEnergyStored() >= getEffeciency()) {
+
+							if (getStackInSlot(1) != null) {
+
+								if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+									if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+										canWork = true;
+
+									}
+
+								}
+
+							}
+							else {
+
+								if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						}
+
+					}
+					else {
+
+						// TODO Add check for other energy types
 
 						if (getStackInSlot(1) != null) {
 
@@ -102,39 +134,14 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 							}
 
-						} else {
+						}
+						else {
 
 							if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
 
 								canWork = true;
 
 							}
-
-						}
-
-					}
-
-				} else {
-
-					// TODO Add check for other energy types
-
-					if (getStackInSlot(1) != null) {
-
-						if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
-
-							if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
-
-								canWork = true;
-
-							}
-
-						}
-
-					} else {
-
-						if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
-
-							canWork = true;
 
 						}
 
@@ -324,7 +331,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter.getInput().isItemEqual(stack)) {
+				if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
 
 					return true;
 
@@ -444,7 +451,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		if (getRecipeIndex() != -1) {
 
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
-			if (getStackInSlot(0) != null && recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && getStackInSlot(0) != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
@@ -468,7 +475,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public boolean refineMana() {
 		if (getRecipeIndex() != -1) {
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
@@ -493,7 +500,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public boolean refineLP() {
 		if (getRecipeIndex() != -1) {
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
@@ -517,7 +524,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public boolean refineEssentia() {
 		if (getRecipeIndex() != -1) {
 			RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
@@ -543,7 +550,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 		if (inputStack != null && inputStack.stackSize > 0) {
 			for (int id : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 				RecipeGemCutter recipe = RecipeRegistry.getGemCutterRecipeByID(id);
-				if (recipe.matchesExact(inputStack)) {
+				if (recipe != null && recipe.matchesExact(inputStack)) {
 					setRecipeIndex(id);
 					break;
 				}
@@ -603,7 +610,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter.getInput().isItemEqual(stack)) {
+				if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
 					return true;
 				}
 

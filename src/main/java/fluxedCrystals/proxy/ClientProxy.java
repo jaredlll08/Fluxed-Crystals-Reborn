@@ -1,22 +1,17 @@
 package fluxedCrystals.proxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.client.render.MultiBlocktest;
-import fluxedCrystals.client.render.RenderCrystal;
-import fluxedCrystals.client.render.RenderMultiBlock;
-import fluxedCrystals.client.render.SeedInfuserRenderer;
+import fluxedCrystals.client.render.*;
 import fluxedCrystals.handler.ClientEventHandler;
-import fluxedCrystals.recipe.RecipeRegistry;
-import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.util.TilebigCube;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
@@ -82,12 +77,6 @@ public class ClientProxy extends CommonProxy
 	public void postInit () {
 
 		super.postInit();
-
-		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
-
-			RecipeSeedInfuser recipeSeedInfuser = RecipeRegistry.getSeedInfuserRecipeByID(i);
-
-		}
 
 	}
 

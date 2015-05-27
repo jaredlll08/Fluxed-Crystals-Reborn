@@ -58,6 +58,7 @@ public class MutationRegistry
 
 		File mutationRegistryFile = new File(FluxedCrystals.configDir.getAbsolutePath() + File.separator + "masterMutationData.json");
 
+		//noinspection ConstantConditions
 		if (mutationRegistryFile == null || !mutationRegistryFile.exists()) {
 
 			try {
@@ -85,7 +86,7 @@ public class MutationRegistry
 
 			try {
 
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				@SuppressWarnings("UnusedAssignment") Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 
@@ -142,10 +143,12 @@ public class MutationRegistry
 
 		if (file2.exists()) {
 
+			//noinspection ResultOfMethodCallIgnored
 			file2.delete();
 
 		}
 
+		//noinspection ResultOfMethodCallIgnored
 		file1.renameTo(file2);
 
 	}

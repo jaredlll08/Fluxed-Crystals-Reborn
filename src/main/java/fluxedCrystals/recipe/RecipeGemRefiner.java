@@ -35,7 +35,7 @@ public class RecipeGemRefiner
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 	}
 
-	public boolean matches (String oreDict) {
+	private boolean matches (String oreDict) {
 		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : stacks) {
 			if (OreDictionary.itemMatches(stack, input, false)) {
@@ -46,10 +46,7 @@ public class RecipeGemRefiner
 	}
 
 	public boolean matchesExact (ItemStack stack) {
-		if (stack != null) {
-			return input.isItemEqual(stack);
-		}
-		return false;
+		return stack != null && input.isItemEqual(stack);
 	}
 
 	public ItemStack getInput () {

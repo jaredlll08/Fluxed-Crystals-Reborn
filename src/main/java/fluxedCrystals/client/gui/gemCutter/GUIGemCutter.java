@@ -16,8 +16,6 @@ public class GUIGemCutter extends GuiContainer
 	private TileEntityGemCutter tile;
 	private int energyOffset = 0;
 	private int cut = 0;
-	private int sawX;
-	private int sawY;
 	private boolean sawRange = false;
 
 	public GUIGemCutter (InventoryPlayer invPlayer, TileEntityGemCutter tile2) {
@@ -32,8 +30,6 @@ public class GUIGemCutter extends GuiContainer
 	@SuppressWarnings("unchecked")
 	public void initGui () {
 		super.initGui();
-		sawX = guiLeft + 90;
-		sawY = guiTop + 37;
 	}
 
 	@Override

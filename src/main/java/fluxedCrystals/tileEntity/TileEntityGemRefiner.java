@@ -20,9 +20,6 @@ import vazkii.botania.api.mana.IManaReceiver;
 
 import java.util.EnumSet;
 
-/**
- * Created by Jared on 11/2/2014.
- */
 public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, IManaReceiver, ISidedInventory
 {
 
@@ -85,9 +82,41 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 				recipeGemRefiner = RecipeRegistry.getGemRefinerRecipeByID(getRecipeIndex());
 
-				if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
+				if (recipeGemRefiner != null) {
 
-					if (storage.getEnergyStored() >= getEffeciency()) {
+					if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia)) {
+
+						if (storage.getEnergyStored() >= getEffeciency()) {
+
+							if (getStackInSlot(1) != null) {
+
+								if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+									if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+										canWork = true;
+
+									}
+
+								}
+
+							}
+							else {
+
+								if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						}
+
+					}
+					else {
+
+						//TODO Add check for other energy types
 
 						if (getStackInSlot(1) != null) {
 
@@ -109,34 +138,6 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 								canWork = true;
 
 							}
-
-						}
-
-					}
-
-				}
-				else {
-
-					//TODO Add check for other energy types
-
-					if (getStackInSlot(1) != null) {
-
-						if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
-
-							if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
-
-								canWork = true;
-
-							}
-
-						}
-
-					}
-					else {
-
-						if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
-
-							canWork = true;
 
 						}
 
@@ -327,9 +328,13 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 					RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-					if (recipe.getInput().isItemEqual(stack)) {
+					if (recipe != null) {
 
-						return true;
+						if (recipe.getInput().isItemEqual(stack)) {
+
+							return true;
+
+						}
 
 					}
 
@@ -461,18 +466,22 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0)) && recipe.getInputamount() <= getStackInSlot(0).stackSize) {
-				refined++;
-				ItemStack out = recipe.getOutput().copy();
-				out.stackSize = recipe.getOutputAmount();
-				if (out.getItemDamage() == 32767) {
-					out.setItemDamage(0);
-				}
 
-				if (addItemToSlot(1, out)) {
-					decrStackSize(0, recipe.getInputamount());
-					refined = 0;
-					energyUsed = (150 * recipe.getInputamount());
+			if (recipe != null) {
+
+				if (recipe.matchesExact(getStackInSlot(0)) && recipe.getInputamount() <= getStackInSlot(0).stackSize) {
+					refined++;
+					ItemStack out = recipe.getOutput().copy();
+					out.stackSize = recipe.getOutputAmount();
+					if (out.getItemDamage() == 32767) {
+						out.setItemDamage(0);
+					}
+
+					if (addItemToSlot(1, out)) {
+						decrStackSize(0, recipe.getInputamount());
+						refined = 0;
+						energyUsed = (150 * recipe.getInputamount());
+					}
 				}
 			}
 		}
@@ -484,7 +493,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					refined++;
@@ -509,7 +518,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	public boolean refineMana () {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					refined++;
@@ -534,7 +543,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	public boolean refineLP () {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					refined++;
@@ -559,7 +568,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	public boolean refineEssentia () {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
-			if (recipe.matchesExact(getStackInSlot(0))) {
+			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					refined++;
@@ -587,7 +596,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 				RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-				if (recipe.matchesExact(getStackInSlot(0))) {
+				if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
 					setRecipeIndex(i);
 					break;
 				}
@@ -641,7 +650,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 				RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-				if (recipe.getInput().isItemEqual(stack)) {
+				if (recipe != null && recipe.getInput().isItemEqual(stack)) {
 					return true;
 				}
 

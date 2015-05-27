@@ -50,7 +50,7 @@ public class GemRefinerHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras (int recipe) {
 		CachedRefinerRecipe r = (CachedRefinerRecipe) arecipes.get(recipe);
-		int coords2[] = {0, 0};
+//		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -64,9 +64,11 @@ public class GemRefinerHandler extends TemplateRecipeHandler
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-			if (recipe.getOutput().isItemEqual(result)) {
-				if (checkDupe(recipe)) {
-					this.arecipes.add(new CachedRefinerRecipe(recipe));
+			if (recipe != null) {
+				if (recipe.getOutput().isItemEqual(result)) {
+					if (checkDupe(recipe)) {
+						this.arecipes.add(new CachedRefinerRecipe(recipe));
+					}
 				}
 			}
 
@@ -81,9 +83,11 @@ public class GemRefinerHandler extends TemplateRecipeHandler
 
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-			if (recipe.getInput().isItemEqual(ingredient)) {
-				if (checkDupe(recipe)) {
-					this.arecipes.add(new CachedRefinerRecipe(recipe));
+			if (recipe != null) {
+				if (recipe.getInput().isItemEqual(ingredient)) {
+					if (checkDupe(recipe)) {
+						this.arecipes.add(new CachedRefinerRecipe(recipe));
+					}
 				}
 			}
 

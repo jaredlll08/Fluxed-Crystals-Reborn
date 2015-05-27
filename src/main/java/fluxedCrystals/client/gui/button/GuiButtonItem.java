@@ -4,14 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.item.ItemEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-
-import org.lwjgl.opengl.GL11;
 
 public class GuiButtonItem extends GuiButton {
 
-	ItemStack stack = null;
+	private ItemStack stack = null;
 
 	public GuiButtonItem(int par1, int par2, int par3, int par4, int par5, String par6Str, ItemStack stack) {
 		super(par1, par2, par3, par4, par5, par6Str);

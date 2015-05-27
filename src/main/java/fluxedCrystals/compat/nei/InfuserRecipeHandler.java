@@ -48,7 +48,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void drawExtras (int recipe) {
 		CachedInfusionRecipe r = (CachedInfusionRecipe) arecipes.get(recipe);
-		int coords2[] = {0, 0};
+//		int coords2[] = {0, 0};
 		GL11.glScalef(.08f, .08f, .08f);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -61,7 +61,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 		for (int i : RecipeRegistry.getAllSeedInfuserRecipes().keySet()) {
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
-			if (recipe.getOutput().getItem() == result.getItem()) {
+			if (recipe != null && recipe.getOutput().getItem() == result.getItem()) {
 				if (recipe.getOutput().getItemDamage() == result.getItemDamage()) {
 					if (checkDupe(recipe)) {
 						this.arecipes.add(new CachedInfusionRecipe(recipe));
@@ -80,7 +80,7 @@ public class InfuserRecipeHandler extends TemplateRecipeHandler
 
 			RecipeSeedInfuser recipe = RecipeRegistry.getSeedInfuserRecipeByID(i);
 
-			if (recipe.getInput().isItemEqual(ingredient) || recipe.getIngredient().isItemEqual(ingredient)) {
+			if (recipe != null && recipe.getInput().isItemEqual(ingredient) || recipe.getIngredient().isItemEqual(ingredient)) {
 
 				if (checkDupe(recipe)) {
 					this.arecipes.add(new CachedInfusionRecipe(recipe));
