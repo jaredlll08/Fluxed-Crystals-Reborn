@@ -9,80 +9,93 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellParadigmProjectile extends SpellParadigm {
-	public DamageSource damageSource;
-	public float damage;
-	public int cost;
-	public List<IProjectileImpactEffect> impactList;
-	public List<IProjectileUpdateEffect> updateEffectList;
-	public boolean penetration;
-	public int ricochetMax;
-	public boolean isSilkTouch;
+public class SpellParadigmProjectile extends SpellParadigm
+{
+    public DamageSource damageSource;
+    public float damage;
+    public int cost;
+    public List<IProjectileImpactEffect> impactList;
+    public List<IProjectileUpdateEffect> updateEffectList;
+    public boolean penetration;
+    public int ricochetMax;
+    public boolean isSilkTouch;
 
-	public SpellParadigmProjectile() {
-		this.damageSource = DamageSource.generic;
-		this.damage = 1;
-		this.cost = 0;
-		this.impactList = new ArrayList();
-		this.updateEffectList = new ArrayList();
-		this.penetration = false;
-		this.ricochetMax = 0;
-		this.isSilkTouch = false;
-	}
+    public SpellParadigmProjectile()
+    {
+        this.damageSource = DamageSource.generic;
+        this.damage = 1;
+        this.cost = 0;
+        this.impactList = new ArrayList();
+        this.updateEffectList = new ArrayList();
+        this.penetration = false;
+        this.ricochetMax = 0;
+        this.isSilkTouch = false;
+    }
 
-	public static SpellParadigmProjectile getParadigmForEffectArray(List<SpellEffect> effectList) {
-		SpellParadigmProjectile parad = new SpellParadigmProjectile();
+    @Override
+    public void enhanceParadigm(SpellEnhancement enh)
+    {
 
-		for (SpellEffect eff : effectList) {
-			parad.addBufferedEffect(eff);
-		}
+    }
 
-		return parad;
-	}
+    @Override
+    public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack)
+    {
+    	int cost = this.getTotalCost();
+        
+        if(!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost))
+        {
+        	return;
+        }
+        
+        EntitySpellProjectile proj = new EntitySpellProjectile(world, entityPlayer);
+        this.prepareProjectile(proj);
+        world.spawnEntityInWorld(proj);
+    }
 
-	@Override
-	public void enhanceParadigm(SpellEnhancement enh) {
+    public static SpellParadigmProjectile getParadigmForEffectArray(List<SpellEffect> effectList)
+    {
+        SpellParadigmProjectile parad = new SpellParadigmProjectile();
 
-	}
+        for (SpellEffect eff : effectList)
+        {
+            parad.addBufferedEffect(eff);
+        }
 
-	@Override
-	public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
-		int cost = this.getTotalCost();
+        return parad;
+    }
 
-		if (!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost)) {
-			return;
-		}
+    public void prepareProjectile(EntitySpellProjectile proj)
+    {
+        proj.setDamage(damage);
+        proj.setImpactList(impactList);
+        proj.setUpdateEffectList(updateEffectList);
+        proj.setPenetration(penetration);
+        proj.setRicochetMax(ricochetMax);
+        proj.setIsSilkTouch(isSilkTouch);
+        proj.setSpellEffectList(bufferedEffectList);
+    }
 
-		EntitySpellProjectile proj = new EntitySpellProjectile(world, entityPlayer);
-		this.prepareProjectile(proj);
-		world.spawnEntityInWorld(proj);
-	}
+    public void addImpactEffect(IProjectileImpactEffect eff)
+    {
+        if (eff != null)
+        {
+            this.impactList.add(eff);
+        }
+    }
 
-	public void prepareProjectile(EntitySpellProjectile proj) {
-		proj.setDamage(damage);
-		proj.setImpactList(impactList);
-		proj.setUpdateEffectList(updateEffectList);
-		proj.setPenetration(penetration);
-		proj.setRicochetMax(ricochetMax);
-		proj.setIsSilkTouch(isSilkTouch);
-		proj.setSpellEffectList(bufferedEffectList);
-	}
+    public void addUpdateEffect(IProjectileUpdateEffect eff)
+    {
+        if (eff != null)
+        {
+            this.updateEffectList.add(eff);
+        }
+    }
 
-	public void addImpactEffect(IProjectileImpactEffect eff) {
-		if (eff != null) {
-			this.impactList.add(eff);
-		}
-	}
-
-	public void addUpdateEffect(IProjectileUpdateEffect eff) {
-		if (eff != null) {
-			this.updateEffectList.add(eff);
-		}
-	}
-
-	@Override
-	public int getDefaultCost() {
-		return 50;
-	}
+    @Override
+    public int getDefaultCost()
+    {
+        return 50;
+    }
 
 }

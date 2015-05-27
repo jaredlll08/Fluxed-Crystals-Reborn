@@ -6,23 +6,28 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HarvestRegistry {
-	public static List<IHarvestHandler> handlerList = new ArrayList();
+public class HarvestRegistry
+{
+    public static List<IHarvestHandler> handlerList = new ArrayList();
 
-	public static void registerHarvestHandler(IHarvestHandler handler) {
-		handlerList.add(handler);
-	}
+    public static void registerHarvestHandler(IHarvestHandler handler)
+    {
+        handlerList.add(handler);
+    }
 
-	public static boolean harvestBlock(World world, int xCoord, int yCoord, int zCoord) {
-		Block block = world.getBlock(xCoord, yCoord, zCoord);
-		int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
+    public static boolean harvestBlock(World world, int xCoord, int yCoord, int zCoord)
+    {
+        Block block = world.getBlock(xCoord, yCoord, zCoord);
+        int meta = world.getBlockMetadata(xCoord, yCoord, zCoord);
 
-		for (IHarvestHandler handler : handlerList) {
-			if (handler.harvestAndPlant(world, xCoord, yCoord, zCoord, block, meta)) {
-				return true;
-			}
-		}
+        for (IHarvestHandler handler : handlerList)
+        {
+            if (handler.harvestAndPlant(world, xCoord, yCoord, zCoord, block, meta))
+            {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

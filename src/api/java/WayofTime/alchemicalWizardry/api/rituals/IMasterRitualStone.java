@@ -4,36 +4,41 @@ import WayofTime.alchemicalWizardry.api.alchemy.energy.ISegmentedReagentHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public interface IMasterRitualStone extends ISegmentedReagentHandler {
-	public void performRitual(World world, int x, int y, int z, String ritualID);
+public interface IMasterRitualStone extends ISegmentedReagentHandler
+{
+    void performRitual (World world, int x, int y, int z, String ritualID);
 
-	public String getOwner();
+    String getOwner ();
 
-	public int getCooldown();
+    void setCooldown (int newCooldown);
 
-	public void setCooldown(int newCooldown);
+    int getCooldown ();
 
-	public int getVar1();
+    void setVar1 (int newVar1);
 
-	public void setVar1(int newVar1);
+    int getVar1 ();
 
-	public void setActive(boolean active);
+    void setActive (boolean active);
 
-	public int getDirection();
+    int getDirection ();
 
-	public World getWorld();
+    World getWorld ();
 
-	public int getXCoord();
+    int getXCoord ();
 
-	public int getYCoord();
+    int getYCoord ();
 
-	public int getZCoord();
+    int getZCoord ();
 
-	public NBTTagCompound getCustomRitualTag();
+    NBTTagCompound getCustomRitualTag ();
 
-	public void setCustomRitualTag(NBTTagCompound tag);
-
-	public boolean areTanksEmpty();
-
-	public int getRunningTime();
+    void setCustomRitualTag (NBTTagCompound tag);
+    
+    boolean areTanksEmpty ();
+    
+    int getRunningTime ();
+    
+    LocalRitualStorage getLocalStorage ();
+    
+    void setLocalStorage (LocalRitualStorage storage);
 }

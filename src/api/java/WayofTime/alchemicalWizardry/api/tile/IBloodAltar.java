@@ -3,23 +3,41 @@ package WayofTime.alchemicalWizardry.api.tile;
 /**
  * Created by Pokefenn.
  */
-public interface IBloodAltar {
+public interface IBloodAltar
+{
 
-	public int getCapacity();
+    int getCapacity ();
 
-	public int getCurrentBlood();
+    int getCurrentBlood ();
 
-	public int getTier();
+    int getTier ();
 
-	public int getProgress();
+    int getProgress ();
 
-	public float getSacrificeMultiplier();
+    float getSacrificeMultiplier ();
 
-	public float getSelfSacrificeMultiplier();
+    float getSelfSacrificeMultiplier ();
 
-	public float getOrbMultiplier();
+    float getOrbMultiplier ();
 
-	public float getDislocationMultiplier();
+    float getDislocationMultiplier ();
 
-	public int getBufferCapacity();
+    int getBufferCapacity ();
+
+	void sacrificialDaggerCall (int amount, boolean b);
+
+	void startCycle ();
+	
+	/**
+	 * Will set the altar to initiate a cooldown cycle after it crafts before starting to craft again, giving the user time to interact with the altar.
+	 * This can only be set while the altar is not active.
+	 * @param amount
+	 */
+    void requestPauseAfterCrafting (int amount);
+	
+	void addToDemonBloodDuration (int dur);
+	
+	boolean hasDemonBlood ();
+	
+	void decrementDemonBlood ();
 }

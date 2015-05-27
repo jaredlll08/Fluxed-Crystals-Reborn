@@ -1,8 +1,10 @@
 package WayofTime.alchemicalWizardry.api.spell;
 
-public class SpellEnhancementCost extends SpellEnhancement {
+public class SpellEnhancementCost extends SpellEnhancement
+{
 
-	public SpellEnhancementCost() {
-		super(SpellEnhancement.EFFICIENCY);
-	}
+    public SpellEnhancementCost()
+    {
+        super(SpellEnhancement.EFFICIENCY);
+    }
 }

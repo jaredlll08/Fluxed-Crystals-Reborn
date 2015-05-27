@@ -8,42 +8,51 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellParadigmSelf extends SpellParadigm {
-	public List<ISelfSpellEffect> selfSpellEffectList;
+public class SpellParadigmSelf extends SpellParadigm
+{
+    public List<ISelfSpellEffect> selfSpellEffectList;
 
-	public SpellParadigmSelf() {
-		selfSpellEffectList = new ArrayList();
-	}
+    public SpellParadigmSelf()
+    {
+        selfSpellEffectList = new ArrayList();
+    }
 
-	@Override
-	public void enhanceParadigm(SpellEnhancement enh) {
+    @Override
+    public void enhanceParadigm(SpellEnhancement enh)
+    {
 
-	}
+    }
 
-	@Override
-	public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
-		this.applyAllSpellEffects();
+    @Override
+    public void castSpell(World world, EntityPlayer entityPlayer, ItemStack itemStack)
+    {
+        this.applyAllSpellEffects();
+        
+        int cost = this.getTotalCost();
+        
+        if(!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost))
+        {
+        	return;
+        }
 
-		int cost = this.getTotalCost();
+        for (ISelfSpellEffect eff : selfSpellEffectList)
+        {
+            eff.onSelfUse(world, entityPlayer);
+        }
+    }
 
-		if (!SoulNetworkHandler.syphonAndDamageFromNetwork(itemStack, entityPlayer, cost)) {
-			return;
-		}
+    public void addSelfSpellEffect(ISelfSpellEffect eff)
+    {
+        if (eff != null)
+        {
+            this.selfSpellEffectList.add(eff);
+        }
+    }
 
-		for (ISelfSpellEffect eff : selfSpellEffectList) {
-			eff.onSelfUse(world, entityPlayer);
-		}
-	}
-
-	public void addSelfSpellEffect(ISelfSpellEffect eff) {
-		if (eff != null) {
-			this.selfSpellEffectList.add(eff);
-		}
-	}
-
-	@Override
-	public int getDefaultCost() {
-		return 100;
-	}
+    @Override
+    public int getDefaultCost()
+    {
+        return 100;
+    }
 
 }
