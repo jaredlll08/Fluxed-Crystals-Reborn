@@ -2,11 +2,10 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- *
+ * 
+ * Botania is Open Source and distributed under the
+ * Botania License: http://botaniamod.net/license.php
+ * 
  * File Created @ [Sep 2, 2014, 5:58:39 PM (GMT)]
  */
 package vazkii.botania.api.wiki;
@@ -38,16 +37,20 @@ public class SimpleWikiProvider implements IWikiProvider {
 		int z = pos.blockZ;
 
 		Block block = world.getBlock(x, y, z);
-		if (block == null) return null;
+		if(block == null)
+			return null;
 
 		ItemStack stack = block.getPickBlock(pos, world, x, y, z);
 
-		if (stack == null || stack.getItem() == null) stack = new ItemStack(block, 1, world.getBlockMetadata(x, y, z));
+		if(stack == null || stack.getItem() == null)
+			stack = new ItemStack(block, 1, world.getBlockMetadata(x, y, z));
 
-		if (stack.getItem() == null) return null;
+		if(stack.getItem() == null)
+			return null;
 
 		String name = stack.getDisplayName();
-		if (name == null || name.isEmpty()) return null;
+		if(name == null || name.isEmpty())
+			return null;
 
 		return name;
 	}
@@ -55,7 +58,8 @@ public class SimpleWikiProvider implements IWikiProvider {
 	@Override
 	public String getWikiURL(World world, MovingObjectPosition pos) {
 		String name = getBlockName(world, pos);
-		if (name == null) return null;
+		if(name == null)
+			return null;
 		return String.format(urlBase, WordUtils.capitalizeFully(name).replaceAll(" ", replacement));
 	}
 

@@ -8,12 +8,11 @@ import net.minecraft.util.ChunkCoordinates;
 /**
  * The item equivalent of ITileBound, renders when the
  * item is in hand.
- *
  * @see ITileBound
  */
 public interface ICoordBoundItem {
 
 	@SideOnly(Side.CLIENT)
-	public ChunkCoordinates getBinding(ItemStack stack);
+	ChunkCoordinates getBinding (ItemStack stack);
 
 }

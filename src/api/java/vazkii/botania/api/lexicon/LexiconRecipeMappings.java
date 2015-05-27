@@ -2,11 +2,10 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- *
+ * 
+ * Botania is Open Source and distributed under the
+ * Botania License: http://botaniamod.net/license.php
+ * 
  * File Created @ [Mar 6, 2014, 3:54:12 PM (GMT)]
  */
 package vazkii.botania.api.lexicon;
@@ -32,20 +31,26 @@ public final class LexiconRecipeMappings {
 		EntryData data = new EntryData(entry, page);
 		String str = stackToString(stack);
 
-		if (force || !mappings.containsKey(str)) mappings.put(str, data);
+		if(force || !mappings.containsKey(str))
+			mappings.put(str, data);
+		if(entry.getIcon() == null)
+			entry.setIcon(stack.copy());
 	}
 
 	public static void map(ItemStack stack, LexiconEntry entry, int page) {
 		map(stack, entry, page, false);
 	}
 
+	public static void remove(ItemStack stack) {
+		mappings.remove(stackToString(stack));
+	}
 
 	public static EntryData getDataForStack(ItemStack stack) {
 		return mappings.get(stackToString(stack));
 	}
 
 	public static String stackToString(ItemStack stack) {
-		if (stack.hasTagCompound() && stack.getItem() instanceof IRecipeKeyProvider)
+		if(stack.hasTagCompound() && stack.getItem() instanceof IRecipeKeyProvider)
 			return ((IRecipeKeyProvider) stack.getItem()).getKey(stack);
 
 		return stack.getUnlocalizedName() + "~" + stack.getItemDamage();

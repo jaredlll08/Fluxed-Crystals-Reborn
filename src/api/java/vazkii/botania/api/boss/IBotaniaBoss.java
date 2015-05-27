@@ -2,11 +2,10 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- *
+ * 
+ * Botania is Open Source and distributed under the
+ * Botania License: http://botaniamod.net/license.php
+ * 
  * File Created @ [Oct 29, 2014, 6:09:48 PM (GMT)]
  */
 package vazkii.botania.api.boss;
@@ -34,7 +33,7 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * the one used by botania bosses.
 	 */
 	@SideOnly(Side.CLIENT)
-	public ResourceLocation getBossBarTexture();
+	ResourceLocation getBossBarTexture ();
 
 	/**
 	 * A Rectangle instance delimiting the uv, width and height of this boss's
@@ -42,7 +41,7 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * the HP.
 	 */
 	@SideOnly(Side.CLIENT)
-	public Rectangle getBossBarTextureRect();
+	Rectangle getBossBarTextureRect ();
 
 	/**
 	 * A Rectangle instance delimiting the uv, width and height of this boss's
@@ -51,12 +50,12 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * faction of the boss's current HP by max HP.
 	 */
 	@SideOnly(Side.CLIENT)
-	public Rectangle getBossBarHPTextureRect();
+	Rectangle getBossBarHPTextureRect ();
 
 	/**
 	 * A callback for when this boss's boss bar renders, you can do aditional rendering
 	 * here if needed.
 	 */
 	@SideOnly(Side.CLIENT)
-	public void bossBarRenderCallback();
+	void bossBarRenderCallback ();
 }

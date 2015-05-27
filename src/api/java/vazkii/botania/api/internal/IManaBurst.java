@@ -2,11 +2,10 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- *
+ * 
+ * Botania is Open Source and distributed under the
+ * Botania License: http://botaniamod.net/license.php
+ * 
  * File Created @ [Jan 31, 2014, 4:36:13 PM (GMT)]
  */
 package vazkii.botania.api.internal;
@@ -19,44 +18,48 @@ import net.minecraft.util.ChunkCoordinates;
  */
 public interface IManaBurst {
 
-	public boolean isFake();
+	boolean isFake ();
 
-	public void setMotion(double x, double y, double z);
+	void setMotion (double x, double y, double z);
 
-	public int getColor();
+	int getColor ();
 
-	public void setColor(int color);
+	void setColor (int color);
 
-	public int getMana();
+	int getMana ();
 
-	public void setMana(int mana);
+	void setMana (int mana);
 
-	public int getStartingMana();
+	int getStartingMana ();
 
-	public void setStartingMana(int mana);
+	void setStartingMana (int mana);
 
-	public int getMinManaLoss();
+	int getMinManaLoss ();
 
-	public void setMinManaLoss(int minManaLoss);
+	void setMinManaLoss (int minManaLoss);
 
-	public float getManaLossPerTick();
+	float getManaLossPerTick ();
 
-	public void setManaLossPerTick(float mana);
+	void setManaLossPerTick (float mana);
 
-	public float getGravity();
+	float getGravity ();
 
-	public void setGravity(float gravity);
+	void setGravity (float gravity);
 
-	public ChunkCoordinates getBurstSourceChunkCoordinates();
+	ChunkCoordinates getBurstSourceChunkCoordinates ();
 
-	public void setBurstSourceCoords(int x, int y, int z);
+	void setBurstSourceCoords (int x, int y, int z);
 
-	public ItemStack getSourceLens();
+	ItemStack getSourceLens ();
 
-	public void setSourceLens(ItemStack lens);
+	void setSourceLens (ItemStack lens);
 
-	public boolean hasAlreadyCollidedAt(int x, int y, int z);
+	boolean hasAlreadyCollidedAt (int x, int y, int z);
 
-	public int getTicksExisted();
+	void setCollidedAt (int x, int y, int z);
+
+	int getTicksExisted ();
+
+	void setFake (boolean fake);
 
 }

@@ -2,11 +2,10 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- *
- * Botania is Open Source and distributed under a
- * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
- * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- *
+ * 
+ * Botania is Open Source and distributed under the
+ * Botania License: http://botaniamod.net/license.php
+ * 
  * File Created @ [Nov 1, 2014, 6:22:54 PM (GMT)]
  */
 package vazkii.botania.api.brew;
@@ -14,9 +13,7 @@ package vazkii.botania.api.brew;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * The class for a Brew definition, each one is a singleton.
@@ -29,12 +26,13 @@ public class Brew {
 	int cost;
 	List<PotionEffect> effects;
 	boolean canInfuseBloodPendant = true;
+	boolean canInfuseIncense = true;
 
 	/**
-	 * @param name    The unlocalized name of this potion.
-	 * @param color   The color for the potion to be rendered in the bottle, note that it will get
-	 *                changed a bit when it renders (for more or less brightness) to give a fancy effect.
-	 * @param cost    The cost, in Mana for this brew.
+	 * @param name The unlocalized name of this potion.
+	 * @param color The color for the potion to be rendered in the bottle, note that it will get
+	 * changed a bit when it renders (for more or less brightness) to give a fancy effect.
+	 * @param cost The cost, in Mana for this brew.
 	 * @param effects A list of effects to apply to the player when they drink it.
 	 */
 	public Brew(String key, String name, int color, int cost, PotionEffect... effects) {
@@ -53,8 +51,20 @@ public class Brew {
 		return this;
 	}
 
+	/**
+	 * Sets this brew to not be able to be infused onto Incense Sticks.
+	 */
+	public Brew setNotIncenseInfusable() {
+		canInfuseIncense = false;
+		return this;
+	}
+
 	public boolean canInfuseBloodPendant() {
 		return canInfuseBloodPendant;
+	}
+
+	public boolean canInfuseIncense() {
+		return canInfuseIncense;
 	}
 
 	/**
