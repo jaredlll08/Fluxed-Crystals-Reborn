@@ -2,7 +2,9 @@ package fluxedCrystals;
 
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.network.NetworkCheckHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import fluxedCrystals.client.gui.GUIHandler;
 import fluxedCrystals.command.CommandFC;
 import fluxedCrystals.handler.ConfigurationHandler;
@@ -20,6 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 import java.io.File;
+import java.util.Map;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class FluxedCrystals
@@ -42,6 +45,13 @@ public class FluxedCrystals
 
 		event.registerServerCommand(new CommandFC());
 
+	}
+
+	//Force the client and server to have or not have this mod
+	@NetworkCheckHandler()
+	public boolean matchModVersions (Map<String, String> remoteVersions, Side side)
+	{
+		return remoteVersions.containsKey(Reference.MOD_ID) && Reference.VERSION.equals(remoteVersions.get(Reference.MOD_ID));
 	}
 
 	@Mod.EventHandler

@@ -39,6 +39,14 @@ minecraft {
     runDir = "eclipse"
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
 processResources
         {
             // this will ensure that this task is redone when the versions change.
