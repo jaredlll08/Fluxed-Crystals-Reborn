@@ -2,7 +2,7 @@
 {
   "modid": "fluxedcrystals",
   "name": "Fluxed-Crystals",
-  "description": "RF-Powered Crystal Farming!",
+  "description": "Powered Crystal Farming!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
