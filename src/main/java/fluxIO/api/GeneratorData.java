@@ -28,15 +28,12 @@ public class GeneratorData {
 	}
 
 	private static void registerTrashGeneratorItems() {
-		for (Object item : Item.itemRegistry.getKeys()) {
-			Registry.TrashGenerator.addTrashGeneratorItem(new ItemStack((Item) Item.itemRegistry.getObject((String) item)));
-		}
 	}
 
 	private static void registerBasicCoalGeneratorItems() {
-		Registry.BasicCoalGenerator.basicCoalGenerator.add(new MutablePair<ItemStack, Integer>(new ItemStack(Items.coal), 600));
+//		Registry.BasicCoalGenerator.basicCoalGenerator.add(new MutablePair<ItemStack, Integer>(new ItemStack(Items.coal), 600));
 		addBasicCoalGeneratorItem(new ItemStack(Items.coal), 600);
-		addBasicCoalGeneratorItem(new ItemStack(Items.coal, 1), 600);
+		addBasicCoalGeneratorItem(new ItemStack(Items.coal, 1, 1), 600);
 		for (ItemStack stack : OreDictionary.getOres("blockCoal")) {
 			addBasicCoalGeneratorItem(stack, 5400);
 		}

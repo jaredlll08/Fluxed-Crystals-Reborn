@@ -1,33 +1,27 @@
-package fluxIO.client.gui.coalGenerator;
+package fluxIO.client.gui.trashGenerator;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
 import fluxIO.ModProps;
 import fluxIO.tileEntity.TileEntityCoalGenerator;
+import fluxIO.tileEntity.TileEntityTrashGenerator;
 
-public class GUICoalGenerator extends GuiContainer {
+public class GuiTrashGenerator extends GuiContainer {
 
-	private TileEntityCoalGenerator tile;
+	private TileEntityTrashGenerator tile;
 
-	public GUICoalGenerator(InventoryPlayer invPlayer, TileEntityCoalGenerator tile2) {
-		super(new ContainerCoalGenerator(invPlayer, tile2));
-
+	public GuiTrashGenerator(InventoryPlayer invPlayer, TileEntityTrashGenerator tile2) {
+		super(new ContainerTrashGenerator(invPlayer, tile2));
 		xSize = 176;
 		ySize = 166;
 		this.tile = tile2;
-
 	}
 
-	private static final ResourceLocation texture = new ResourceLocation(ModProps.modid, "textures/gui/coalGenerator.png");
+	private static final ResourceLocation texture = new ResourceLocation(ModProps.modid, "textures/gui/trashGenerator.png");
 
-	@SuppressWarnings("unchecked")
 	public void initGui() {
 		super.initGui();
 	}
@@ -43,9 +37,8 @@ public class GUICoalGenerator extends GuiContainer {
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		int barHeight = (int) (((float) tile.generationTimer / tile.generationTimerDefault) * 13);
-		drawTexturedModalRect(guiLeft+76, guiTop+33, 177, 0, 16, 13-barHeight);
 		int barWidth= (int) (((float) tile.getEnergyStored() / tile.getMaxStorage()) * 87);
 		drawTexturedModalRect(guiLeft + 42, guiTop + 48, 0, 166, barWidth, 18);
-
+		drawTexturedModalRect(guiLeft + 76, guiTop + 33 + barHeight, 177, barHeight, 16, barHeight + 13);
 	}
 }

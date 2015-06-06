@@ -12,8 +12,8 @@ public class PacketHandler {
 
 	public static void init() {
 
-		INSTANCE.registerMessage(MessageCoalGenerator.class, MessageCoalGenerator.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageFluid.class, MessageFluid.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageGenerator.class, MessageGenerator.class, id++, Side.CLIENT);
 		
 
 	}

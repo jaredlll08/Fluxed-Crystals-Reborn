@@ -3,14 +3,9 @@ package fluxIO.blocks;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import fluxIO.FluxIO;
-import fluxIO.api.Registry;
 import fluxIO.tileEntity.TileEntityCoalGenerator;
 
 public class BlockCoalGenerator extends BlockContainer {
@@ -24,16 +19,6 @@ public class BlockCoalGenerator extends BlockContainer {
 		if (!world.isRemote) {
 
 			player.openGui(FluxIO.instance, 0, world, x, y, z);
-//
-//			TileEntityCoalGenerator tile = (TileEntityCoalGenerator) world.getTileEntity(x, y, z);
-//
-//			if (player.getCurrentEquippedItem() != null) {
-//				tile.addInventorySlotContents(0, player.getCurrentEquippedItem());
-//			}
-//			player.addChatComponentMessage(new ChatComponentText("Energy:" + tile.getEnergyStored()));
-//			if (tile.getStackInSlot(0) != null)
-//				player.addChatComponentMessage(new ChatComponentText("Items:" + tile.getStackInSlot(0).getDisplayName() + ":" + tile.getStackInSlot(0).stackSize));
-
 		}
 		return true;
 	}

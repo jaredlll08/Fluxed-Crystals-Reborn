@@ -1,7 +1,6 @@
 package fluxIO.tileEntity;
 
 import java.util.EnumSet;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;

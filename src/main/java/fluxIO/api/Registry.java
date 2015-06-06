@@ -1,11 +1,10 @@
 package fluxIO.api;
 
 import java.util.ArrayList;
-
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.apache.commons.lang3.tuple.MutablePair;
 
 public class Registry {
@@ -41,24 +40,23 @@ public class Registry {
 
 	public static class TrashGenerator {
 
-		public static ArrayList<ItemStack> trashGeneratorItems = new ArrayList<ItemStack>();
+		public static ArrayList<ItemStack> trashGeneratorBlacklist = new ArrayList<ItemStack>();
 
 		public static boolean canTrash(ItemStack item) {
-			for (ItemStack stack : trashGeneratorItems) {
+			for (ItemStack stack : trashGeneratorBlacklist) {
 				if (stack.isItemEqual(item)) {
-					return true;
+					return false;
 				}
 			}
-			return false;
+			return true;
 		}
 
 		public static void addTrashGeneratorItem(ItemStack stack) {
-			if (!trashGeneratorItems.contains(stack))
-				trashGeneratorItems.add(stack);
+			if (!trashGeneratorBlacklist.contains(stack)) trashGeneratorBlacklist.add(stack);
 		}
 
 		public static void removeBasicCoalGeneratorItem(ItemStack stack) {
-			trashGeneratorItems.remove(stack);
+			trashGeneratorBlacklist.remove(stack);
 		}
 	}
 
@@ -84,8 +82,7 @@ public class Registry {
 		}
 
 		public static void addBasicCoalGeneratorItem(ItemStack stack, int burnTime) {
-			if (!containsItemStack(stack))
-				basicCoalGenerator.add(new MutablePair<ItemStack, Integer>(stack, burnTime));
+			if (!containsItemStack(stack)) basicCoalGenerator.add(new MutablePair<ItemStack, Integer>(stack, burnTime));
 		}
 
 		public static void removeBasicCoalGeneratorItem(ItemStack stack) {

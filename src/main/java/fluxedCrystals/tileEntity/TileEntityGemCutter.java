@@ -16,7 +16,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import vazkii.botania.api.mana.IManaReceiver;
-
 import java.util.EnumSet;
 
 public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory {
@@ -104,8 +103,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 								}
 
-							}
-							else {
+							} else {
 
 								if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
 
@@ -117,8 +115,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 						}
 
-					}
-					else {
+					} else {
 
 						// TODO Add check for other energy types
 
@@ -134,8 +131,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 							}
 
-						}
-						else {
+						} else {
 
 							if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
 
@@ -322,25 +318,25 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			return false;
 		}
 		switch (slot) {
-		default:
-			return false;
+			default:
+				return false;
 
-		case 0:
+			case 0:
 
-			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
+				for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
-				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
+					RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-				if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
+					if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
 
-					return true;
+						return true;
+
+					}
 
 				}
 
-			}
-
-		case 1:
-			return false;
+			case 1:
+				return false;
 
 		}
 	}

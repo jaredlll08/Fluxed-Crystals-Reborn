@@ -109,7 +109,7 @@ public class FluxedCrystals
 			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
 
 				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
-
+				System.out.println(">>> " + seed.seedID + " : " + seed.getIngredient().getDisplayName() + ">>>");
 				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
 
 				if (seed.weightedDrop != null && !seed.weightedDrop.equals("")) {

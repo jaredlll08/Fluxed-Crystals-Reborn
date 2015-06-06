@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import fluxIO.FluxIO;
 import fluxIO.api.Registry;
 import fluxIO.tileEntity.TileEntityCoalGenerator;
 import fluxIO.tileEntity.TileEntityTrashGenerator;
@@ -22,15 +23,7 @@ public class BlockTrashGenerator extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			TileEntityTrashGenerator tile = (TileEntityTrashGenerator) world.getTileEntity(x, y, z);
-
-			if (player.getCurrentEquippedItem() != null)
-				tile.addInventorySlotContents(0, player.getCurrentEquippedItem());
-
-			player.addChatComponentMessage(new ChatComponentText("Energy:" + tile.getEnergyStored()));
-			if (tile.getStackInSlot(0) != null)
-				player.addChatComponentMessage(new ChatComponentText("Items:" + tile.getStackInSlot(0).getDisplayName() + ":" + tile.getStackInSlot(0).stackSize));
-
+			player.openGui(FluxIO.instance, 1, world, x, y, z);
 		}
 		return true;
 	}

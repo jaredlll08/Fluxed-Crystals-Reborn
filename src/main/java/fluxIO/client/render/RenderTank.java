@@ -1,7 +1,6 @@
 package fluxIO.client.render;
 
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,9 +11,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
-
 import fluxIO.ModProps;
 import fluxIO.client.TextureUtils;
 import fluxIO.tileEntity.fluids.TileEntityFluidTank;
@@ -143,8 +140,7 @@ public class RenderTank extends TileEntitySpecialRenderer {
 	}
 
 	public static ResourceLocation getFluidSheet(FluidStack liquid) {
-		if (liquid == null)
-			return TextureMap.locationBlocksTexture;
+		if (liquid == null) return TextureMap.locationBlocksTexture;
 		return getFluidSheet(liquid.getFluid());
 	}
 

@@ -1,19 +1,17 @@
-package fluxIO.client.gui.coalGenerator;
+package fluxIO.client.gui.trashGenerator;
 
-import fluxIO.client.gui.slot.SlotTileDep;
-import fluxIO.tileEntity.TileEntityCoalGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerBeacon;
-import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import fluxIO.client.gui.slot.SlotTileDep;
+import fluxIO.tileEntity.TileEntityTrashGenerator;
 
-public class ContainerCoalGenerator extends Container {
-	public ContainerCoalGenerator(InventoryPlayer invPlayer, TileEntityCoalGenerator tile) {
+public class ContainerTrashGenerator extends Container {
+	public ContainerTrashGenerator(InventoryPlayer invPlayer, TileEntityTrashGenerator manager) {
 
-		addSlotToContainer(new SlotTileDep(tile, 0, 76, 12));
+		addSlotToContainer(new SlotTileDep(manager, 0, 76, 12));
 
 		for (int x = 0; x < 9; x++) {
 			addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));
