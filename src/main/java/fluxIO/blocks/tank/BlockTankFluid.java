@@ -78,7 +78,7 @@ public class BlockTankFluid extends Block implements ITileEntityProvider {
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
 		super.onBlockHarvested(world, x, y - 1, z, meta, player);
 		world.getBlock(x, y - 1, z).onBlockHarvested(world, x, y - 1, z, meta, player);
-		if (player.capabilities.isCreativeMode)
+		if (!player.capabilities.isCreativeMode)
 			world.getBlock(x, y - 1, z).dropBlockAsItem(world, x, y - 1, z, 0, 0);
 		world.setBlockToAir(x, y - 1, z);
 	}

@@ -25,6 +25,11 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 		setNoTitle();
 	}
 
+	@Override
+	public boolean hasSearchBar() {
+		return true;
+	}
+
 	private void updateIcon() {
 
 		World var1 = FluxedCrystals.proxy.getClientWorld();
@@ -57,14 +62,17 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 		}
 
 	}
-	
-	
 
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
 
 		return this.getIconItemStack().getItem();
 
+	}
+
+	@Override
+	public int getSearchbarWidth() {
+		return 85;
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import fluxIO.proxy.CommonProxy;
 @Mod(modid = ModProps.modid, name = ModProps.name, version = ModProps.version)
 public class FluxIO {
 
+	public static final CreativeTabFluxIO tab = new CreativeTabFluxIO();
 	@Instance(ModProps.modid)
 	public static FluxIO instance;
 	@SidedProxy(clientSide = "fluxIO.proxy.ClientProxy", serverSide = "fluxIO.proxy.CommonProxy")

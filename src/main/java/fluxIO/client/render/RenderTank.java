@@ -21,7 +21,7 @@ public class RenderTank extends TileEntitySpecialRenderer {
 	private RenderBlocks renderBlock = new RenderBlocks();
 	private Minecraft mc = Minecraft.getMinecraft();
 	private final float size = 0.0625f;
-	private tankModel model = new tankModel();
+	private ModelTank model = new ModelTank();
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float p_147500_8_) {
