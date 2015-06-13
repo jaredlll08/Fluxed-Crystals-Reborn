@@ -13,9 +13,9 @@ import java.util.HashMap;
 public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSeeds, IMessage>
 {
 
-	private static HashMap<Integer, Seed> seedMap;
+	private HashMap<Integer, Seed> seedMap;
 
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public MessageSyncSeeds () {
 
@@ -25,7 +25,7 @@ public class MessageSyncSeeds implements IMessage, IMessageHandler<MessageSyncSe
 
 	public MessageSyncSeeds (HashMap<Integer, Seed> seedMap) {
 
-		MessageSyncSeeds.seedMap = seedMap;
+		this.seedMap = seedMap;
 
 	}
 

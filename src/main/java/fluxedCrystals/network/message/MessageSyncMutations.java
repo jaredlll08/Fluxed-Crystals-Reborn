@@ -14,9 +14,9 @@ import java.util.Map;
 public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSyncMutations, IMessage>
 {
 
-	private static Map<MutablePair<Seed, Seed>, Mutation> mutationMap;
+	private Map<MutablePair<Seed, Seed>, Mutation> mutationMap;
 
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public MessageSyncMutations () {
 
@@ -26,7 +26,7 @@ public class MessageSyncMutations implements IMessage, IMessageHandler<MessageSy
 
 	public MessageSyncMutations (Map<MutablePair<Seed, Seed>, Mutation> mutationMap) {
 
-		MessageSyncMutations.mutationMap = mutationMap;
+		this.mutationMap = mutationMap;
 
 	}
 
