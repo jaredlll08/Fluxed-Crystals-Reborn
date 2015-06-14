@@ -3,6 +3,7 @@ package fluxedCrystals.handler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.SeedRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -28,6 +29,21 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheGold, " ww", "s  ", " s ", 's', Items.stick, 'w', "ingotGold").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheDiamond, " ww", "s  ", " s ", 's', Items.stick, 'w', "gemDiamond").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.gemCutter, "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'u', "ingotIron"));
+
+		// Gonna put this in here like this, WE NEED A BETTER WAY????
+
+		for (int i : SeedRegistry.getInstance().keySet())
+		{
+			for (int j : SeedRegistry.getInstance().keySet())
+			{
+
+				GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.crystalSword, " I ", " J ", " S ",
+						Character.valueOf('I'), new ItemStack(FCItems.shardSmooth, 1, i), Character.valueOf('S'), "stickWood",
+						Character.valueOf('J'), new ItemStack(FCItems.shardSmooth, 1, j)));
+
+			}
+		}
+
 	}
 
 }

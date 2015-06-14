@@ -4,6 +4,7 @@ import cofh.lib.util.helpers.MathHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.init.FCItems;
 import fluxedCrystals.reference.*;
 import fluxedCrystals.util.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -51,6 +52,13 @@ public class CrystalSword extends ItemSword
 		}
 
 		return 8 * fallingMult * potionDamage;
+
+	}
+
+	public boolean getIsRepairable(ItemStack var1, ItemStack var2)
+	{
+
+		return var2.getItem() == FCItems.shardSmooth;
 
 	}
 
