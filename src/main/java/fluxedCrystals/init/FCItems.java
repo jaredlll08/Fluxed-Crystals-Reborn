@@ -5,11 +5,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.items.*;
 import fluxedCrystals.items.seeds.ItemSeed;
 import fluxedCrystals.items.seeds.ItemUniversalSeed;
+import fluxedCrystals.items.tools.ItemScythe;
 import fluxedCrystals.items.tools.ItemShardPickaxe;
-import fluxedCrystals.reference.Names;
-import fluxedCrystals.reference.Reference;
-import fluxedCrystals.reference.Textures;
+import fluxedCrystals.items.weapons.CrystalSword;
+import fluxedCrystals.reference.*;
 import net.minecraft.item.Item;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class FCItems {
 	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
 	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
 	public static Item shardPickaxe = new ItemShardPickaxe();
+	public static Item crystalSword = new CrystalSword();
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	private static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 
@@ -58,6 +60,7 @@ public class FCItems {
 		registerItem(scytheIron, Names.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON);
 		registerItem(scytheGold, Names.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD);
 		registerItem(scytheDiamond, Names.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND);
+		registerItem(crystalSword, Names.Items.CRYSTAL_SWORD, Names.Items.CRYSTAL_SWORD);
 		// registerItem(shardPickaxe, "shardPickaxe", "shardPickaxe");
 
 		if (Loader.isModLoaded("Thaumcraft")) {

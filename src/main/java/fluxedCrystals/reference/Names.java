@@ -61,6 +61,8 @@ public class Names
 		public static final String SCYTHE_GOLD = "scytheGold";
 		public static final String SCYTHE_DIAMOND = "scytheDiamond";
 
+		public static final String CRYSTAL_SWORD = "crystalSword";
+
 	}
 
 }

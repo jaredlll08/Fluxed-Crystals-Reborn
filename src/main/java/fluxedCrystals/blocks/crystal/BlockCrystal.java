@@ -1,8 +1,16 @@
 package fluxedCrystals.blocks.crystal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.compat.waila.IWailaInfo;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.items.tools.ItemScythe;
+import fluxedCrystals.reference.Textures;
+import fluxedCrystals.registry.Seed;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.tileEntity.soil.*;
+import fluxedCrystals.util.DamageSourceCrystal;
+import fluxedCrystals.util.IPowerSoil;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
@@ -16,19 +24,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.compat.waila.IWailaInfo;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.items.ItemScythe;
-import fluxedCrystals.reference.Textures;
-import fluxedCrystals.registry.Seed;
-import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
-import fluxedCrystals.util.DamageSourceCrystal;
-import fluxedCrystals.util.IPowerSoil;
+
+import java.util.*;
 
 public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IWailaInfo {
 

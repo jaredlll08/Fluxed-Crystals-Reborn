@@ -1,4 +1,4 @@
-package fluxedCrystals.items;
+package fluxedCrystals.items.tools;
 
 import com.google.common.collect.Sets;
 import fluxedCrystals.FluxedCrystals;
