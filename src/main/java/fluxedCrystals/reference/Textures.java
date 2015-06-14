@@ -43,6 +43,10 @@ public class Textures
 		public static final String SCYTHE_DIAMOND = RESOURCE_PREFIX + Names.Items.SCYTHE_DIAMOND;
 
 		public static final String CRYSTAL_SWORD = RESOURCE_PREFIX + Names.Items.CRYSTAL_SWORD;
+		public static final String CRYSTAL_SHOVEL = RESOURCE_PREFIX + Names.Items.CRYSTAL_SHOVEL;
+		public static final String CRYSTAL_AXE = RESOURCE_PREFIX + Names.Items.CRYSTAL_AXE;
+		public static final String CRYSTAL_PICK = RESOURCE_PREFIX + Names.Items.CRYSTAL_PICK;
+		public static final String CRYSTAL_HOE = RESOURCE_PREFIX + Names.Items.CRYSTAL_HOE;
 
 	}
 

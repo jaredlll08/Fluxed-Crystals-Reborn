@@ -7,7 +7,7 @@ import fluxedCrystals.items.seeds.ItemSeed;
 import fluxedCrystals.items.seeds.ItemUniversalSeed;
 import fluxedCrystals.items.tools.ItemScythe;
 import fluxedCrystals.items.tools.ItemShardPickaxe;
-import fluxedCrystals.items.weapons.CrystalSword;
+import fluxedCrystals.items.weapons.ItemCrystalSword;
 import fluxedCrystals.reference.*;
 import net.minecraft.item.Item;
 
@@ -36,7 +36,7 @@ public class FCItems {
 	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
 	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
 	public static Item shardPickaxe = new ItemShardPickaxe();
-	public static Item crystalSword = new CrystalSword();
+	public static Item crystalSword = new ItemCrystalSword();
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	private static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 

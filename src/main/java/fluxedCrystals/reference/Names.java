@@ -62,6 +62,10 @@ public class Names
 		public static final String SCYTHE_DIAMOND = "scytheDiamond";
 
 		public static final String CRYSTAL_SWORD = "crystalSword";
+		public static final String CRYSTAL_SHOVEL = "crystalShovel";
+		public static final String CRYSTAL_AXE = "crystalAxe";
+		public static final String CRYSTAL_PICK = "crystalPick";
+		public static final String CRYSTAL_HOE = "crystalHoe";
 
 	}
 

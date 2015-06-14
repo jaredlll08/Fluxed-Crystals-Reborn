@@ -21,10 +21,10 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class CrystalSword extends ItemSword
+public class ItemCrystalSword extends ItemSword
 {
 
-	public CrystalSword()
+	public ItemCrystalSword ()
 	{
 
 		super(Material.Tools.crystal);
