@@ -15,7 +15,7 @@ public class Events
 	@SubscribeEvent
 	public void sekritStuff (LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer) {
-			if (event.entity.getCommandSenderName().equalsIgnoreCase("Jaredlll08") || event.entity.getCommandSenderName().equalsIgnoreCase("Namroc_Smith") || event.entity.getCommandSenderName().equalsIgnoreCase("kucanaut")) {
+			if (Utils.isPlayerSpecial(event.entity.getCommandSenderName())) {
 				if (event.entity.isSneaking()) {
 					for (int x = -6; x < 5; x++) {
 						for (int y = -3; y < 40; y++) {

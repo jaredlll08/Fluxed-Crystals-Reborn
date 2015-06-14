@@ -5,6 +5,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.reference.*;
+import fluxedCrystals.util.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -61,7 +62,12 @@ public class CrystalSword extends ItemSword
 
 		itemStack.damageItem(1, player);
 
-		entity.addPotionEffect(new PotionEffect(Potion.wither.getId(), 140, 10));
+		if (Utils.isPlayerSpecial(((EntityPlayer) player).getDisplayName()))
+		{
+
+			entity.addPotionEffect(new PotionEffect(Potion.wither.getId(), 140, 10));
+
+		}
 
 		entity.attackEntityFrom(DamageSource.causePlayerDamage(entityPlayer), getDamage(player));
 
@@ -150,7 +156,7 @@ public class CrystalSword extends ItemSword
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isCurrentItem) {
 
-		if (entity instanceof EntityPlayer) {
+		if (entity instanceof EntityPlayer && Utils.isPlayerSpecial(((EntityPlayer) entity).getDisplayName())) {
 
 			if (((EntityPlayer) entity).isBlocking()) {
 
@@ -169,8 +175,6 @@ public class CrystalSword extends ItemSword
 					}
 
 				}
-
-				return;
 
 			}
 

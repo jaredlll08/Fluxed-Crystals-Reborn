@@ -18,5 +18,4 @@ dependencies {
     compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.nei_version}:dev"
     compile "mcp.mobius.waila:Waila:${config.waila_version}"
-
 }

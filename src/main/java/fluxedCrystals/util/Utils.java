@@ -12,6 +12,13 @@ import net.minecraft.world.chunk.Chunk;
 public class Utils
 {
 
+	public static boolean isPlayerSpecial(String player)
+	{
+
+		return player.equalsIgnoreCase("parcel31u") || player.equalsIgnoreCase("esriel123") || player.equalsIgnoreCase("kucanaut") || player.equalsIgnoreCase("Namroc_Smith") || player.equalsIgnoreCase("Jaredlll08");
+
+	}
+
 	public static void setBiomeAt (World world, int x, int z, BiomeGenBase biome) {
 		if (biome == null) {
 			return;

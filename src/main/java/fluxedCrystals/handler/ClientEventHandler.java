@@ -2,18 +2,13 @@ package fluxedCrystals.handler;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
+import fluxedCrystals.util.Utils;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import org.lwjgl.opengl.GL11;
+
 import java.util.Random;
 
 public class ClientEventHandler {
@@ -37,7 +32,7 @@ public class ClientEventHandler {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void render(RenderLivingEvent.Pre event) {
 		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
-		if (s.equals("Jaredlll08") || s.equals("esriel123") || s.equalsIgnoreCase("parcel31u") || s.equalsIgnoreCase("namroc_smith")) {
+		if (Utils.isPlayerSpecial(s)) {
 			if (new Random().nextInt(2) == 0) {
 				if (!descending) {
 					trans++;
