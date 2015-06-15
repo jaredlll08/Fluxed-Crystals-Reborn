@@ -1,13 +1,15 @@
 package fluxedCrystals.handler;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import fluxedCrystals.init.FCBlocks;
-import fluxedCrystals.init.FCItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
+import fluxedCrystals.init.FCBlocks;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.Seed;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.util.NBTHelper;
 
 public class RecipeHandler {
 
@@ -30,9 +32,28 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.scytheDiamond, " ww", "s  ", " s ", 's', Items.stick, 'w', "gemDiamond").setMirrored(true));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.gemCutter, "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', "ingotGold", 'd', "gemDiamond", 'u', "ingotIron"));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(FCItems.crystalSword, " I ", " I ", " S ",
-			Character.valueOf('I'), new ItemStack(FCItems.shardSmooth, 1, OreDictionary.WILDCARD_VALUE), Character.valueOf('S'), "stickWood"));
-
+		for (Seed seed : SeedRegistry.getInstance().getSeedMap().values()) {
+			ItemStack sword = new ItemStack(FCItems.crystalSword);
+			NBTHelper.setInteger(sword, "colorType", seed.color);
+			NBTHelper.setInteger(sword, "seedID", seed.seedID);
+			GameRegistry.addRecipe(new ShapedOreRecipe(sword, " I ", " I ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood"));
+			ItemStack pickaxe = new ItemStack(FCItems.crystalPickaxe);
+			NBTHelper.setInteger(pickaxe, "colorType", seed.color);
+			NBTHelper.setInteger(pickaxe, "seedID", seed.seedID);
+			GameRegistry.addRecipe(new ShapedOreRecipe(pickaxe, "III", " S ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood"));
+			ItemStack shovel= new ItemStack(FCItems.crystalShovel);
+			NBTHelper.setInteger(shovel, "colorType", seed.color);
+			NBTHelper.setInteger(shovel, "seedID", seed.seedID);
+			GameRegistry.addRecipe(new ShapedOreRecipe(shovel, " I ", " S ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood"));
+			ItemStack axe = new ItemStack(FCItems.crystalAxe);
+			NBTHelper.setInteger(axe, "colorType", seed.color);
+			NBTHelper.setInteger(axe, "seedID", seed.seedID);
+			GameRegistry.addRecipe(new ShapedOreRecipe(axe, " II", " SI", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood").setMirrored(true));
+			GameRegistry.addRecipe(new ShapedOreRecipe(axe, "II ", "IS ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood").setMirrored(true));
+			
+			
+			
+		}
 	}
 
 }

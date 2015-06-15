@@ -14,6 +14,13 @@ public class NBTHelper {
 		}
 	}
 
+	public static boolean isMatch(ItemStack target, ItemStack input){
+		initNBTTagCompound(input);
+		initNBTTagCompound(target);
+		
+		return target.stackTagCompound.equals(input.stackTagCompound);
+		
+	}
 	/**
 	 * Initializes the NBT Tag Compound for the given ItemStack if it is null
 	 *
