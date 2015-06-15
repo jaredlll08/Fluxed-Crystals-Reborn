@@ -1,18 +1,23 @@
 package fluxedCrystals.init;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-import fluxedCrystals.items.*;
-import fluxedCrystals.items.seeds.ItemSeed;
-import fluxedCrystals.items.seeds.ItemUniversalSeed;
-import fluxedCrystals.items.tools.ItemScythe;
-import fluxedCrystals.items.tools.ItemShardPickaxe;
-import fluxedCrystals.items.weapons.ItemCrystalSword;
-import fluxedCrystals.reference.*;
-import net.minecraft.item.Item;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.item.Item;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
+import fluxedCrystals.items.ItemShardRough;
+import fluxedCrystals.items.ItemShardSmooth;
+import fluxedCrystals.items.Upgrade;
+import fluxedCrystals.items.seeds.ItemSeed;
+import fluxedCrystals.items.seeds.ItemUniversalSeed;
+import fluxedCrystals.items.tools.ItemCrystalAxe;
+import fluxedCrystals.items.tools.ItemCrystalPick;
+import fluxedCrystals.items.tools.ItemCrystalShovel;
+import fluxedCrystals.items.tools.ItemScythe;
+import fluxedCrystals.items.weapons.ItemCrystalSword;
+import fluxedCrystals.reference.Names;
+import fluxedCrystals.reference.Textures;
 
 public class FCItems {
 
@@ -35,8 +40,12 @@ public class FCItems {
 	public static Item scytheIron = new ItemScythe(Textures.Items.SCYTHE_IRON, Names.Items.SCYTHE_IRON, Item.ToolMaterial.IRON);
 	public static Item scytheGold = new ItemScythe(Textures.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD, Item.ToolMaterial.GOLD);
 	public static Item scytheDiamond = new ItemScythe(Textures.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND, Item.ToolMaterial.EMERALD);
-	public static Item shardPickaxe = new ItemShardPickaxe();
+	public static Item crystalPickaxe = new ItemCrystalPick();
 	public static Item crystalSword = new ItemCrystalSword();
+	public static Item crystalShovel= new ItemCrystalShovel();
+	public static Item crystalAxe= new ItemCrystalAxe();
+	
+	
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	private static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 
@@ -45,7 +54,6 @@ public class FCItems {
 	}
 
 	public static void preInit() {
-		shardPickaxe.setTextureName(Reference.MOD_ID + ":shardPickaxe");
 
 	}
 
@@ -61,31 +69,24 @@ public class FCItems {
 		registerItem(scytheGold, Names.Items.SCYTHE_GOLD, Names.Items.SCYTHE_GOLD);
 		registerItem(scytheDiamond, Names.Items.SCYTHE_DIAMOND, Names.Items.SCYTHE_DIAMOND);
 		registerItem(crystalSword, Names.Items.CRYSTAL_SWORD, Names.Items.CRYSTAL_SWORD);
-		// registerItem(shardPickaxe, "shardPickaxe", "shardPickaxe");
-
-		if (Loader.isModLoaded("Thaumcraft")) {
-
+		registerItem(crystalPickaxe, Names.Items.CRYSTAL_PICK, Names.Items.CRYSTAL_PICK);
+		registerItem(crystalShovel, Names.Items.CRYSTAL_SHOVEL, Names.Items.CRYSTAL_SHOVEL);
+		registerItem(crystalAxe, Names.Items.CRYSTAL_AXE, Names.Items.CRYSTAL_AXE);
+		
+		
+		if(Loader.isModLoaded("Thaumcraft")) {
 			registerItem(upgradeEssentia, Names.Items.UPGRADE_ESSENTIA, Names.Items.UPGRADE_ESSENTIA);
-
 		}
-
-		if (Loader.isModLoaded("AWWayofTime")) {
-
+		if(Loader.isModLoaded("AWWayofTime")) {
 			registerItem(upgradeLP, Names.Items.UPGRADE_LP, Names.Items.UPGRADE_LP);
-
 		}
-
-		if (Loader.isModLoaded("Botania")) {
-
+		if(Loader.isModLoaded("Botania")) {
 			registerItem(upgradeMana, Names.Items.UPGRADE_MANA, Names.Items.UPGRADE_MANA);
-
 		}
-
 		registerItem(upgradeEffeciency, Names.Items.UPGRADE_EFFECIENCY, Names.Items.UPGRADE_EFFECIENCY);
 		registerItem(upgradeNight, Names.Items.UPGRADE_NIGHT, Names.Items.UPGRADE_NIGHT);
 		registerItem(upgradeSpeed, Names.Items.UPGRADE_SPEED, Names.Items.UPGRADE_SPEED);
 		registerItem(upgradeAutomation, Names.Items.UPGRADE_AUTOMATION, Names.Items.UPGRADE_AUTOMATION);
-
 	}
 
 	public static void postInit() {
@@ -97,5 +98,4 @@ public class FCItems {
 		GameRegistry.registerItem(item, key);
 		itemRegistry.put(key, item);
 	}
-
 }

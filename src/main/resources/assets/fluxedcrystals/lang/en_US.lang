@@ -30,7 +30,12 @@ item.fluxedcrystals.scytheStone.name=Stone Scythe
 item.fluxedcrystals.scytheIron.name=Iron Scythe
 item.fluxedcrystals.scytheGold.name=Gold Scythe
 item.fluxedcrystals.scytheDiamond.name=Diamond Scythe
-item.fluxedcrystals.crystalSword.name=Crystal Sword
+item.fluxedcrystals.crystalSword.name=%s Sword
+item.fluxedcrystals.crystalPick.name=%s Pickaxe
+item.fluxedcrystals.crystalAxe.name=%s Axe
+item.fluxedcrystals.crystalShovel.name=%s Shovel
+
+
 death.attack.Crystal=%s was cut by a Crystal
 tile.fluxedcrystals.gemRefiner.name=Gem Refiner
 
