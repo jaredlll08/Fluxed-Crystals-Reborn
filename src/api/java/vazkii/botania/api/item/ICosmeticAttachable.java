@@ -23,11 +23,11 @@ public interface ICosmeticAttachable {
 	/**
 	 * Gets the cosmetic item stored in the stack passed in.
 	 */
-	ItemStack getCosmeticItem (ItemStack stack);
+	public ItemStack getCosmeticItem(ItemStack stack);
 
 	/**
 	 * Sets the stack's cosmetic item to the one passed in.
 	 */
-	void setCosmeticItem (ItemStack stack, ItemStack cosmetic);
+	public void setCosmeticItem(ItemStack stack, ItemStack cosmetic);
 
 }

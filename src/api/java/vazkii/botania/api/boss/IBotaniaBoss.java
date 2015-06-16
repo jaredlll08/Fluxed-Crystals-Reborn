@@ -10,12 +10,12 @@
  */
 package vazkii.botania.api.boss;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.awt.Rectangle;
+
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.util.ResourceLocation;
-
-import java.awt.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * An extension of IBossDisplayData. This counts as a botania boss and as a normal
@@ -33,7 +33,7 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * the one used by botania bosses.
 	 */
 	@SideOnly(Side.CLIENT)
-	ResourceLocation getBossBarTexture ();
+	public ResourceLocation getBossBarTexture();
 
 	/**
 	 * A Rectangle instance delimiting the uv, width and height of this boss's
@@ -41,7 +41,7 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * the HP.
 	 */
 	@SideOnly(Side.CLIENT)
-	Rectangle getBossBarTextureRect ();
+	public Rectangle getBossBarTextureRect();
 
 	/**
 	 * A Rectangle instance delimiting the uv, width and height of this boss's
@@ -50,12 +50,12 @@ public interface IBotaniaBoss extends IBossDisplayData {
 	 * faction of the boss's current HP by max HP.
 	 */
 	@SideOnly(Side.CLIENT)
-	Rectangle getBossBarHPTextureRect ();
+	public Rectangle getBossBarHPTextureRect();
 
 	/**
 	 * A callback for when this boss's boss bar renders, you can do aditional rendering
 	 * here if needed.
 	 */
 	@SideOnly(Side.CLIENT)
-	void bossBarRenderCallback ();
+	public void bossBarRenderCallback();
 }

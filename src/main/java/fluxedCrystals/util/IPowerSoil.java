@@ -1,7 +1,5 @@
 package fluxedCrystals.util;
 
-public interface IPowerSoil
-{
-
-
+public interface IPowerSoil {
+	
 }

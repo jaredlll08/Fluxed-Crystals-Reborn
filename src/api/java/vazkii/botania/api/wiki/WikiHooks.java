@@ -10,12 +10,12 @@
  */
 package vazkii.botania.api.wiki;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
-import net.minecraft.block.Block;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.block.Block;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 
 public class WikiHooks {
 

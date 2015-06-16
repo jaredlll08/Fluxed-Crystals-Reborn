@@ -10,11 +10,11 @@
  */
 package vazkii.botania.api.item;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
-
-import java.util.List;
 
 /**
  * An item that implements this will allow for various wireframes to be drawn
@@ -27,6 +27,6 @@ public interface IWireframeCoordinateListProvider {
 	 * Returns a list of ChunkCoordinates for the wireframes to draw.
 	 * Can be null.
 	 */
-	List<ChunkCoordinates> getWireframesToDraw (EntityPlayer player, ItemStack stack);
+	public List<ChunkCoordinates> getWireframesToDraw(EntityPlayer player, ItemStack stack);
 
 }

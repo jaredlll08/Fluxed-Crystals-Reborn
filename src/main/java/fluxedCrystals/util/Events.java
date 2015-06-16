@@ -10,7 +10,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 public class Events
 {
 
-	public static boolean debug = false;
 
 	@SubscribeEvent
 	public void sekritStuff (LivingUpdateEvent event) {

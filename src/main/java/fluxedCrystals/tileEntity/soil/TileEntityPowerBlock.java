@@ -1,12 +1,7 @@
 package fluxedCrystals.tileEntity.soil;
 
-import fluxedCrystals.blocks.crystal.BlockCrystal;
-import fluxedCrystals.blocks.crystal.CrystalBase;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.registry.SeedRegistry;
-import fluxedCrystals.tileEntity.TileEnergyBase;
-import fluxedCrystals.tileEntity.TileEntityCrystal;
-import fluxedCrystals.util.ITileSoil;
+import java.util.EnumSet;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -16,8 +11,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.EnumSet;
+import fluxedCrystals.blocks.crystal.BlockCrystal;
+import fluxedCrystals.blocks.crystal.CrystalBase;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.registry.SeedRegistry;
+import fluxedCrystals.tileEntity.TileEnergyBase;
+import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.util.ITileSoil;
 
 /**
  * Created by Jared on 11/2/2014.
@@ -249,16 +249,6 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		return eff;
 	}
 
-	public boolean isUpgradeActive (Item upgradeItem) {
-		for (int slot : UPGRADE_SLOTS) {
-			ItemStack item = getStackInSlot(slot);
-			if (item != null && item.getItem() == upgradeItem) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public int getUpgradeDrain (int idx) {
 		int energy = SeedRegistry.getInstance().getSeedByID(idx).powerPerStage;
 
@@ -280,4 +270,31 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 
 		return energy;
 	}
+
+	@Override
+	public int getStoredEnergy() {
+		return getEnergyStored();
+	}
+
+	@Override
+	public boolean canDrainEnergy(int energy) {
+		return getEnergyStored() + energy <= getMaxStorage();
+	}
+
+	@Override
+	public void drainEnergy(int energy) {
+		storage.extractEnergy(energy, false);
+	}
+
+	@Override
+	public boolean isUpgradeActive(Item upgrade) {
+		for (int slot : UPGRADE_SLOTS) {
+			ItemStack item = getStackInSlot(slot);
+			if (item != null && item.getItem() == upgrade) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

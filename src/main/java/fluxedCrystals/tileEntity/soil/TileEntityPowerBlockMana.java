@@ -292,4 +292,19 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	public int getCurrentMana () {
 		return mana;
 	}
+
+	@Override
+	public int getStoredEnergy() {
+		return getCurrentMana();
+	}
+
+	@Override
+	public boolean canDrainEnergy(int energy) {
+		return !isFull();
+	}
+
+	@Override
+	public void drainEnergy(int energy) {
+		recieveMana(-energy);
+	}
 }

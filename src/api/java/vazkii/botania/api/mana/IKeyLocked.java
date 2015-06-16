@@ -22,8 +22,8 @@ package vazkii.botania.api.mana;
  */
 public interface IKeyLocked {
 
-	String getInputKey ();
+	public String getInputKey();
 
-	String getOutputKey ();
+	public String getOutputKey();
 
 }

@@ -23,6 +23,6 @@ public interface IWandable {
 	 * Called when the block is used by a wand. Note that the player parameter can be null
 	 * if this function is called from a dispenser.
 	 */
-	boolean onUsedByWand (EntityPlayer player, ItemStack stack, World world, int x, int y, int z, int side);
+	public boolean onUsedByWand(EntityPlayer player, ItemStack stack, World world, int x, int y, int z, int side);
 
 }

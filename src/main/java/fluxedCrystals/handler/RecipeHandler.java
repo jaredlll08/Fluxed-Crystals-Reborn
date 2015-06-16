@@ -41,7 +41,7 @@ public class RecipeHandler {
 			NBTHelper.setInteger(pickaxe, "colorType", seed.color);
 			NBTHelper.setInteger(pickaxe, "seedID", seed.seedID);
 			GameRegistry.addRecipe(new ShapedOreRecipe(pickaxe, "III", " S ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood"));
-			ItemStack shovel= new ItemStack(FCItems.crystalShovel);
+			ItemStack shovel = new ItemStack(FCItems.crystalShovel);
 			NBTHelper.setInteger(shovel, "colorType", seed.color);
 			NBTHelper.setInteger(shovel, "seedID", seed.seedID);
 			GameRegistry.addRecipe(new ShapedOreRecipe(shovel, " I ", " S ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood"));
@@ -50,9 +50,7 @@ public class RecipeHandler {
 			NBTHelper.setInteger(axe, "seedID", seed.seedID);
 			GameRegistry.addRecipe(new ShapedOreRecipe(axe, " II", " SI", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood").setMirrored(true));
 			GameRegistry.addRecipe(new ShapedOreRecipe(axe, "II ", "IS ", " S ", 'I', new ItemStack(FCItems.shardRough, 1, seed.seedID), 'S', "stickWood").setMirrored(true));
-			
-			
-			
+
 		}
 	}
 

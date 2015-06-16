@@ -17,8 +17,8 @@ import net.minecraft.item.ItemStack;
  */
 public interface IPhantomInkable {
 
-	boolean hasPhantomInk (ItemStack stack);
+	public boolean hasPhantomInk(ItemStack stack);
 
-	void setPhantomInk (ItemStack stack, boolean ink);
+	public void setPhantomInk(ItemStack stack, boolean ink);
 
 }

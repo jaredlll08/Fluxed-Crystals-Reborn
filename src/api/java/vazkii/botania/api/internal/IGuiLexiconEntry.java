@@ -10,10 +10,10 @@
  */
 package vazkii.botania.api.internal;
 
+import java.util.List;
+
 import net.minecraft.client.gui.GuiButton;
 import vazkii.botania.api.lexicon.LexiconEntry;
-
-import java.util.List;
 
 /**
  * Internal interface for the Lexicon Entry GUI. This contains
@@ -25,57 +25,57 @@ public interface IGuiLexiconEntry {
 	/**
 	 * Gets the entry currently portrayed in this gui.
 	 */
-	LexiconEntry getEntry ();
+	public LexiconEntry getEntry();
 
 	/**
 	 * Gets the current page the lexicon GUI is browsing.
 	 */
-	int getPageOn ();
+	public int getPageOn();
 
 	/**
 	 * Gets the leftmost part of the GUI.
 	 */
-	int getLeft ();
+	public int getLeft();
 
 	/**
 	 * Gets the topmost part of the GUI.
 	 */
-	int getTop ();
+	public int getTop();
 
 	/**
 	 * Gets the GUI's width.
 	 */
-	int getWidth ();
+	public int getWidth();
 
 	/**
 	 * Gets the GUI's height
 	 */
-	int getHeight ();
+	public int getHeight();
 
 	/**
 	 * Gets the GUI's Z level for rendering.
 	 */
-	float getZLevel ();
+	public float getZLevel();
 
 	/**
 	 * Gets the list of buttons in this gui.
 	 */
-	List<GuiButton> getButtonList ();
+	public List<GuiButton> getButtonList();
 
 	/**
 	 * Gets the total amount of ticks (+ partial ticks) the player
 	 * has been in this gui.
 	 */
-	float getElapsedTicks ();
+	public float getElapsedTicks();
 
 	/**
 	 * Gets the current partial ticks.
 	 */
-	float getPartialTicks ();
+	public float getPartialTicks();
 
 	/**
 	 * Gets the delta (1F = 1 tick) between this render call
 	 * and the last one.
 	 */
-	float getTickDelta ();
+	public float getTickDelta();
 }

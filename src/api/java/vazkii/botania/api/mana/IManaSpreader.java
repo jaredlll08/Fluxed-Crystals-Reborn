@@ -18,18 +18,18 @@ package vazkii.botania.api.mana;
  */
 public interface IManaSpreader extends IManaBlock {
 
-	float getRotationX ();
+	public float getRotationX();
 
-	float getRotationY ();
+	public float getRotationY();
 
-	void setCanShoot (boolean canShoot);
+	public void setCanShoot(boolean canShoot);
 
-	int getBurstParticleTick ();
+	public int getBurstParticleTick();
 
-	void setBurstParticleTick (int i);
+	public void setBurstParticleTick(int i);
 
-	int getLastBurstDeathTick ();
+	public int getLastBurstDeathTick();
 
-	void setLastBurstDeathTick (int ticksExisted);
+	public void setLastBurstDeathTick(int ticksExisted);
 
 }

@@ -10,9 +10,9 @@
  */
 package vazkii.botania.api.boss;
 
+import vazkii.botania.api.internal.ShaderCallback;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vazkii.botania.api.internal.ShaderCallback;
 
 /**
  * A Botania boss whose HP bar makes use of shaders. Shaders
@@ -31,12 +31,12 @@ public interface IBotaniaBossWithShader extends IBotaniaBoss {
 	 * false if rendering the bar itself that shows the HP.
 	 */
 	@SideOnly(Side.CLIENT)
-	int getBossBarShaderProgram (boolean background);
+	public int getBossBarShaderProgram(boolean background);
 
 	/**
 	 * A callback for the shader, used to pass in uniforms. Return null for no callback.
 	 */
 	@SideOnly(Side.CLIENT)
-	ShaderCallback getBossBarShaderCallback (boolean background, int shader);
+	public ShaderCallback getBossBarShaderCallback(boolean background, int shader);
 
 }

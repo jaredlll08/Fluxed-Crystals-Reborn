@@ -272,11 +272,20 @@ public class TileEntityPowerBlockLP extends TileEntity implements ISidedInventor
 		return energy;
 	}
 
-	public boolean drainEnergy (int energy) {
-		for (int i = 0; i < 10; i++) {
-			System.out.println(i + ":" + SoulNetworkHandler.syphonFromNetwork(playerName, energy));
-		}
-		return true;
+
+	@Override
+	public int getStoredEnergy() {
+		return SoulNetworkHandler.getCurrentEssence(playerName);
+	}
+
+	@Override
+	public boolean canDrainEnergy(int energy) {
+		return SoulNetworkHandler.canSyphonFromOnlyNetwork(playerName, energy);
+	}
+
+	@Override
+	public void drainEnergy(int energy) {
+		SoulNetworkHandler.syphonFromNetwork(playerName, energy);
 	}
 
 

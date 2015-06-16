@@ -10,8 +10,8 @@
  */
 package vazkii.botania.api.internal;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,9 +25,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import vazkii.botania.api.boss.IBotaniaBoss;
 import vazkii.botania.api.lexicon.LexiconPage;
-import vazkii.botania.api.recipe.*;
-
-import java.util.List;
+import vazkii.botania.api.recipe.RecipeBrew;
+import vazkii.botania.api.recipe.RecipeElvenTrade;
+import vazkii.botania.api.recipe.RecipeManaInfusion;
+import vazkii.botania.api.recipe.RecipePetals;
+import vazkii.botania.api.recipe.RecipeRuneAltar;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Any methods that refer to internal methods in Botania are here.
@@ -38,68 +42,68 @@ import java.util.List;
  */
 public interface IInternalMethodHandler {
 
-	LexiconPage textPage (String key);
+	public LexiconPage textPage(String key);
 
-	LexiconPage elfPaperTextPage (String key);
+	public LexiconPage elfPaperTextPage(String key);
 
-	LexiconPage imagePage (String key, String resource);
+	public LexiconPage imagePage(String key, String resource);
 
-	LexiconPage craftingRecipesPage (String key, List<IRecipe> recipes);
+	public LexiconPage craftingRecipesPage(String key, List<IRecipe> recipes);
 
-	LexiconPage craftingRecipePage (String key, IRecipe recipe);
+	public LexiconPage craftingRecipePage(String key, IRecipe recipe);
 
-	LexiconPage petalRecipesPage (String key, List<RecipePetals> recipes);
+	public LexiconPage petalRecipesPage(String key, List<RecipePetals> recipes);
 
-	LexiconPage petalRecipePage (String key, RecipePetals recipe);
+	public LexiconPage petalRecipePage(String key, RecipePetals recipe);
 
-	LexiconPage runeRecipesPage (String key, List<RecipeRuneAltar> recipes);
+	public LexiconPage runeRecipesPage(String key, List<RecipeRuneAltar> recipes);
 
-	LexiconPage runeRecipePage (String key, RecipeRuneAltar recipe);
+	public LexiconPage runeRecipePage(String key, RecipeRuneAltar recipe);
 
-	LexiconPage manaInfusionRecipesPage (String key, List<RecipeManaInfusion> recipes);
+	public LexiconPage manaInfusionRecipesPage(String key, List<RecipeManaInfusion> recipes);
 
-	LexiconPage manaInfusionRecipePage (String key, RecipeManaInfusion recipe);
+	public LexiconPage manaInfusionRecipePage(String key, RecipeManaInfusion recipe);
 
-	LexiconPage elvenTradePage (String key, List<RecipeElvenTrade> recipes);
+	public LexiconPage elvenTradePage(String key, List<RecipeElvenTrade> recipes);
 
-	LexiconPage elvenTradesPage (String key, RecipeElvenTrade recipe);
+	public LexiconPage elvenTradesPage(String key, RecipeElvenTrade recipe);
 
-	LexiconPage brewPage (String key, String bottomText, RecipeBrew recipe);
+	public LexiconPage brewPage(String key, String bottomText, RecipeBrew recipe);
 
-	IManaNetwork getManaNetworkInstance ();
+	public IManaNetwork getManaNetworkInstance();
 
-	ItemStack getSubTileAsStack (String subTile);
+	public ItemStack getSubTileAsStack(String subTile);
 
-	ItemStack getSubTileAsFloatingFlowerStack (String subTile);
+	public ItemStack getSubTileAsFloatingFlowerStack(String subTile);
 
-	String getStackSubTileKey (ItemStack stack);
+	public String getStackSubTileKey(ItemStack stack);
 
-	IIcon getSubTileIconForName (String name);
+	public IIcon getSubTileIconForName(String name);
 
-	void registerBasicSignatureIcons (String name, IIconRegister register);
+	public void registerBasicSignatureIcons(String name, IIconRegister register);
 
-	boolean shouldForceCheck ();
+	public boolean shouldForceCheck();
 
-	int getPassiveFlowerDecay ();
+	public int getPassiveFlowerDecay();
 
-	IInventory getBaublesInventory (EntityPlayer player);
+	public IInventory getBaublesInventory(EntityPlayer player);
 
-	void breakOnAllCursors (EntityPlayer player, Item item, ItemStack stack, int x, int y, int z, int side);
-
-	@SideOnly(Side.CLIENT)
-	void drawSimpleManaHUD (int color, int mana, int maxMana, String name, ScaledResolution res);
+	public void breakOnAllCursors(EntityPlayer player, Item item, ItemStack stack, int x, int y, int z, int side);
 
 	@SideOnly(Side.CLIENT)
-	void renderLexiconText (int x, int y, int width, int height, String unlocalizedText);
+	public void drawSimpleManaHUD(int color, int mana, int maxMana, String name, ScaledResolution res);
 
 	@SideOnly(Side.CLIENT)
-	ResourceLocation getDefaultBossBarTexture ();
+	public void renderLexiconText(int x, int y, int width, int height, String unlocalizedText);
 
 	@SideOnly(Side.CLIENT)
-	void setBossStatus (IBotaniaBoss status);
+	public ResourceLocation getDefaultBossBarTexture();
 
-	boolean isBuildcraftPipe (TileEntity tile);
+	@SideOnly(Side.CLIENT)
+	public void setBossStatus(IBotaniaBoss status);
 
-	void sparkleFX (World world, double x, double y, double z, float r, float g, float b, float size, int m);
+	public boolean isBuildcraftPipe(TileEntity tile);
+
+	public void sparkleFX(World world, double x, double y, double z, float r, float g, float b, float size, int m);
 
 }

@@ -21,7 +21,7 @@ public interface ISortableTool {
 	/**
 	 * Gets the type of tool that this is. A pick, axe or shovel.
 	 */
-	ToolType getSortingType (ItemStack stack);
+	public ToolType getSortingType(ItemStack stack);
 
 	/**
 	 * Gets the priority that this tool should have when being sorted. The
@@ -38,9 +38,9 @@ public interface ISortableTool {
 	 * Of course, you don't have to always adhere to this. Tools like the <b>Vitreous Pickaxe</b> don't,
 	 * that one in particular is priority 0 so it's never picked.
 	 */
-	int getSortingPriority (ItemStack stack);
+	public int getSortingPriority(ItemStack stack);
 
-	enum ToolType {
+	public static enum ToolType {
 		PICK, AXE, SHOVEL
 	}
 

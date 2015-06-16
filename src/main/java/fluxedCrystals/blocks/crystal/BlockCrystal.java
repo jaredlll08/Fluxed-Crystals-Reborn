@@ -11,6 +11,7 @@ import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.tileEntity.soil.*;
 import fluxedCrystals.util.DamageSourceCrystal;
 import fluxedCrystals.util.IPowerSoil;
+import fluxedCrystals.util.ITileSoil;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
@@ -55,56 +56,24 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(x, y, z);
-		int index = crystal.getIdx();
-		if (world.getBlockMetadata(x, y, z) < 7) {
-			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlock) {
-				TileEntityPowerBlock power = (TileEntityPowerBlock) world.getTileEntity(x, y - 1, z);
-
-				if (crystal != null && power != null) {
-					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
-						if (power.getEnergyStored() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
-							crystal.setTicksgrown(0);
-							power.storage.extractEnergy(power.getUpgradeDrain(index), false);
+		if (!world.isRemote) {
+			int index = crystal.getIdx();
+			if (world.getBlockMetadata(x, y, z) < 7) {
+				if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof ITileSoil) {
+					ITileSoil soil = (ITileSoil) world.getTileEntity(x, y - 1, z);
+					if (crystal != null && soil != null) {
+						if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / soil.getSpeed()) {
+							if (soil.getStoredEnergy() >= soil.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
+								crystal.setTicksgrown(0);
+								soil.drainEnergy(soil.getUpgradeDrain(index));
+							}
+						}
+						if (world.getBlockMetadata(x, y, z) == 7 && soil.isUpgradeActive(FCItems.upgradeAutomation) && soil.getStoredEnergy() >= 250) {
+							doDrop(crystal, world, x, y, z, 0, false);
+							world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+							soil.drainEnergy(250);
 						}
 					}
-				}
-				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getEnergyStored() >= 250) {
-					doDrop(crystal, world, x, y, z, 0, false);
-					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-					power.storage.extractEnergy(250, false);
-				}
-			}
-			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlockMana) {
-				TileEntityPowerBlockMana power = (TileEntityPowerBlockMana) world.getTileEntity(x, y - 1, z);
-
-				if (crystal != null && power != null) {
-					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
-						if (power.getCurrentMana() >= power.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
-							crystal.setTicksgrown(0);
-							power.recieveMana(-power.getUpgradeDrain(index));
-						}
-					}
-				}
-				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.getCurrentMana() >= 250) {
-					doDrop(crystal, world, x, y, z, 0, false);
-					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-					power.recieveMana(-250);
-				}
-			}
-
-			if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof TileEntityPowerBlockLP) {
-				TileEntityPowerBlockLP power = (TileEntityPowerBlockLP) world.getTileEntity(x, y - 1, z);
-
-				if (crystal != null && power != null) {
-					if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / power.getSpeed()) {
-						if (power.drainEnergy(power.getUpgradeDrain(index) / 4) && growCrop(world, x, y, z, rand, true)) {
-							crystal.setTicksgrown(0);
-						}
-					}
-				}
-				if (world.getBlockMetadata(x, y, z) == 7 && power.isUpgradeActive(FCItems.upgradeAutomation) && power.drainEnergy(250)) {
-					doDrop(crystal, world, x, y, z, 0, false);
-					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
 				}
 			}
 		}

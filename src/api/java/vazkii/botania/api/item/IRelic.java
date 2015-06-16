@@ -22,21 +22,21 @@ public interface IRelic {
 	/**
 	 * Binds to the player name passed in.
 	 */
-	void bindToUsername (String playerName, ItemStack stack);
+	public void bindToUsername(String playerName, ItemStack stack);
 
 	/**
 	 * Gets the username of the person this relic is bound to.
 	 */
-	String getSoulbindUsername (ItemStack stack);
+	public String getSoulbindUsername(ItemStack stack);
 
 	/**
 	 * Sets the achievement that this relic binds to.
 	 */
-	void setBindAchievement (Achievement achievement);
+	public void setBindAchievement(Achievement achievement);
 
 	/**
 	 * Gets the achievement that this relic binds to.
 	 */
-	Achievement getBindAchievement ();
+	public Achievement getBindAchievement();
 
 }

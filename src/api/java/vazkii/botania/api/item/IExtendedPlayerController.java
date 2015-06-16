@@ -19,10 +19,10 @@ public interface IExtendedPlayerController {
 	/**
 	 * Sets the extra reach the player should have.
 	 */
-	void setReachDistanceExtension (float f);
+	public void setReachDistanceExtension(float f);
 
 	/**
 	 * Gets the current reach extension.
 	 */
-	float getReachDistanceExtension ();
+	public float getReachDistanceExtension();
 }

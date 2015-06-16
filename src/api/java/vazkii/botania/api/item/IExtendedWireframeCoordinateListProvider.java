@@ -23,6 +23,6 @@ public interface IExtendedWireframeCoordinateListProvider extends IWireframeCoor
 	/**
 	 * Gets the source wireframe to draw, this one will be drawn thicker.
 	 */
-	ChunkCoordinates getSourceWireframe (EntityPlayer player, ItemStack stack);
+	public ChunkCoordinates getSourceWireframe(EntityPlayer player, ItemStack stack);
 
 }

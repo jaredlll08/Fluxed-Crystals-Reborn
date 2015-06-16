@@ -18,6 +18,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface IRecipeKeyProvider {
 
-	String getKey (ItemStack stack);
+	public String getKey(ItemStack stack);
 
 }

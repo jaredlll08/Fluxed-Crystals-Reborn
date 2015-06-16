@@ -24,6 +24,6 @@ public interface IPixieSpawner {
 	 * The chance this item adds for pixies to be spawned. From 0.0 to 1.0. All values
 	 * are put together when calculating.
 	 */
-	float getPixieChance (ItemStack stack);
+	public float getPixieChance(ItemStack stack);
 
 }

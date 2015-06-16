@@ -23,16 +23,16 @@ public interface IWikiProvider {
 	/**
 	 * Gets the name of the block being looked at for display.
 	 */
-	String getBlockName (World world, MovingObjectPosition pos);
+	public String getBlockName(World world, MovingObjectPosition pos);
 
 	/**
 	 * Gets the URL to open when the block is clicked.
 	 */
-	String getWikiURL (World world, MovingObjectPosition pos);
+	public String getWikiURL(World world, MovingObjectPosition pos);
 
 	/**
 	 * Gets the name of the wiki for display.
 	 */
-	String getWikiName (World world, MovingObjectPosition pos);
+	public String getWikiName(World world, MovingObjectPosition pos);
 
 }

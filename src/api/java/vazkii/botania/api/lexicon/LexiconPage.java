@@ -10,10 +10,10 @@
  */
 package vazkii.botania.api.lexicon;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import vazkii.botania.api.internal.IGuiLexiconEntry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class LexiconPage {
 

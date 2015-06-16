@@ -20,6 +20,6 @@ import net.minecraft.world.World;
  */
 public interface IWandHUD {
 
-	void renderHUD (Minecraft mc, ScaledResolution res, World world, int x, int y, int z);
+	public void renderHUD(Minecraft mc, ScaledResolution res, World world, int x, int y, int z);
 
 }

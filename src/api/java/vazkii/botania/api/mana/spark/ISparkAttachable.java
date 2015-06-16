@@ -23,18 +23,18 @@ public interface ISparkAttachable extends IManaReceiver {
 	 * Can this block have a Spark attached to it. Note that this will not
 	 * unattach the Spark if it's changed later.
 	 */
-	boolean canAttachSpark (ItemStack stack);
+	public boolean canAttachSpark(ItemStack stack);
 
 	/**
 	 * Called when the Spark is attached.
 	 */
-	void attachSpark (ISparkEntity entity);
+	public void attachSpark(ISparkEntity entity);
 
 	/**
 	 * Returns how much space for mana is available in this block, normally the total - the current.
 	 * Should NEVER return negative values. Make sure to check against that.
 	 */
-	int getAvailableSpaceForMana ();
+	public int getAvailableSpaceForMana();
 
 	/**
 	 * Gets the Spark that is attached to this block. A common implementation is
@@ -48,12 +48,12 @@ public interface ISparkAttachable extends IManaReceiver {
 
 		return null;
 	 */
-	ISparkEntity getAttachedSpark ();
+	public ISparkEntity getAttachedSpark();
 
 	/**
 	 * Return true if this Tile no longer requires mana and all Sparks
 	 * transferring mana to it should cancel their transfer.
 	 */
-	boolean areIncomingTranfersDone ();
+	public boolean areIncomingTranfersDone();
 
 }

@@ -9,6 +9,12 @@
  * File Created @ [Feb 14, 2015, 3:28:54 PM (GMT)]
  */
 package vazkii.botania.api.corporea;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,8 +24,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.*;
 
 public final class CorporeaHelper {
 
@@ -174,6 +178,7 @@ public final class CorporeaHelper {
 
 		int count = itemCount;
 		for(IInventory inv : inventories) {
+			boolean removedAny = false;
 			ICorporeaSpark invSpark = getSparkForInventory(inv);
 
 			if(inv instanceof ICorporeaInterceptor) {
@@ -201,6 +206,7 @@ public final class CorporeaHelper {
 					lastRequestExtractions += rem;
 					if(doit && rem > 0) {
 						inv.decrStackSize(i, rem);
+						removedAny = true;
 						if(invSpark != null)
 							invSpark.onItemExtracted(stackAt);
 					}
@@ -208,6 +214,9 @@ public final class CorporeaHelper {
 						count -= rem;
 				}
 			}
+			
+			if(removedAny)
+				inv.markDirty();
 		}
 
 		for(ICorporeaInterceptor interceptor : interceptors.keySet())

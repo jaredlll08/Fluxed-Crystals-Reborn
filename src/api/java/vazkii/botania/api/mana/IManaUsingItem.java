@@ -20,6 +20,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface IManaUsingItem {
 
-	boolean usesMana (ItemStack stack);
+	public boolean usesMana(ItemStack stack);
 
 }

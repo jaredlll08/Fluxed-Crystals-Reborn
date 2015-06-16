@@ -10,13 +10,15 @@
  */
 package vazkii.botania.api.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * A Bauble Item that implements this will be have hooks to render something on
@@ -34,12 +36,12 @@ public interface IBaubleRender {
 	 * has a cosmetic bauble attached to it.
 	 */
 	@SideOnly(Side.CLIENT)
-	void onPlayerBaubleRender (ItemStack stack, RenderPlayerEvent event, RenderType type);
+	public void onPlayerBaubleRender(ItemStack stack, RenderPlayerEvent event, RenderType type);
 
 	/**
 	 * A few helper methods for the render.
 	 */
-	class Helper {
+	public static class Helper {
 
 		public static void rotateIfSneaking(EntityPlayer player) {
 			if(player.isSneaking())
@@ -56,7 +58,7 @@ public interface IBaubleRender {
 
 	}
 
-	enum RenderType {
+	public static enum RenderType {
 		/**
 		 * Render Type for the player's body, translations apply on the player's rotation.
 		 * Sneaking is not handled and should be done during the render.
@@ -69,7 +71,7 @@ public interface IBaubleRender {
 		 * Sneaking is not handled and should be done during the render.~
 		 * @see IBaubleRender.Helper
 		 */
-		HEAD
+		HEAD;
 	}
 
 }

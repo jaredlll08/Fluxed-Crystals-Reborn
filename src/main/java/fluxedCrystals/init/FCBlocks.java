@@ -8,10 +8,12 @@ import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.BlockMutationCrystal;
 import fluxedCrystals.blocks.machines.*;
 import fluxedCrystals.blocks.soil.BlockPowerBlock;
+import fluxedCrystals.blocks.soil.BlockPowerBlockMana;
 import fluxedCrystals.reference.Names;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.tileEntity.*;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
+import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import net.minecraft.block.Block;
 
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class FCBlocks
 {
 	public static Block poweredSoil = new BlockPowerBlock();
+	public static Block poweredSoilMana = new BlockPowerBlockMana();
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
@@ -40,12 +43,12 @@ public class FCBlocks
 	public static void initialize() {
 		// GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
-		registerBlock(new BlockMutationCrystal(), "crys", "crys");
-		registerBlock(multi, "multi", "multi");
-		registerBlock(hidden, "hidden", "hidden");
-
 		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
+		
+		registerBlock(poweredSoilMana, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
+		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
+		
 
 		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);

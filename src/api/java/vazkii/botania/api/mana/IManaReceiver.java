@@ -18,17 +18,17 @@ public interface IManaReceiver extends IManaBlock {
 	/**
 	 * Is this Mana Receiver is full? Being full means no mana bursts will be sent.
 	 */
-	boolean isFull ();
+	public boolean isFull();
 
 	/**
 	 * Called when this receiver receives mana.
 	 */
-	void recieveMana (int mana);
+	public void recieveMana(int mana);
 
 	/**
 	 * Can this tile receive mana from bursts? Generally set to false for
 	 * implementations of IManaCollector.
 	 */
-	boolean canRecieveManaFromBursts ();
+	public boolean canRecieveManaFromBursts();
 
 }

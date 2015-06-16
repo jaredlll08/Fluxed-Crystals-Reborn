@@ -19,11 +19,11 @@ public interface ISubTileContainer {
 	 * Gets the SubTile in this block. Generally shouldn't return null, but in that
 	 * case use the fallback DummySubTile.
 	 */
-	SubTileEntity getSubTile ();
+	public SubTileEntity getSubTile();
 
 	/**
 	 * Sets the SubTile on this block from it's name.
 	 */
-	void setSubTile (String name);
+	public void setSubTile(String name);
 
 }

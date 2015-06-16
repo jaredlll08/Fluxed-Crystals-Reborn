@@ -19,11 +19,11 @@ public interface IPetalApothecary {
 	/**
 	 * Sets if the the apothecary has water or not.
 	 */
-	void setWater (boolean water);
+	public void setWater(boolean water);
 
 	/**
 	 * Does the apothecary have water in it?
 	 */
-	boolean hasWater ();
+	public boolean hasWater();
 
 }

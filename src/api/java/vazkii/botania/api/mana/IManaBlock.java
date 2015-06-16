@@ -20,6 +20,6 @@ public interface IManaBlock {
 	/**
 	 * Gets the amount of mana currently in this block.
 	 */
-	int getCurrentMana ();
+	public int getCurrentMana();
 
 }

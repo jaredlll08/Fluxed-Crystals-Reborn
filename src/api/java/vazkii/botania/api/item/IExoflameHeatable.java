@@ -19,25 +19,25 @@ public interface IExoflameHeatable {
 	 * Can this TileEntity smelt its contents. If true, the Exoflame is allowed
 	 * to fuel it.
 	 */
-	boolean canSmelt ();
+	public boolean canSmelt();
 
 	/**
 	 * Gets the amount of ticks left for the fuel. If below 2, the exoflame
 	 * will call boostBurnTime.
 	 */
-	int getBurnTime ();
+	public int getBurnTime();
 
 	/**
 	 * Called to increase the amount of time this furnace should be burning
 	 * the fuel for. Even if it doesn't have any fuel.
 	 */
-	void boostBurnTime ();
+	public void boostBurnTime();
 
 	/**
 	 * Called once every two ticks to increase the speed of the furnace. Feel
 	 * free to not do anything if all you want is to allow the exoflame to feed
 	 * it, not make it faster.
 	 */
-	void boostCookTime ();
+	public void boostCookTime();
 
 }

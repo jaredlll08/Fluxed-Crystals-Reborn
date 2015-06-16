@@ -10,9 +10,9 @@
  */
 package vazkii.botania.api.internal;
 
+import vazkii.botania.api.lexicon.LexiconPage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import vazkii.botania.api.lexicon.LexiconPage;
 
 /**
  * A dummy page. It does absolutely nothing and is only

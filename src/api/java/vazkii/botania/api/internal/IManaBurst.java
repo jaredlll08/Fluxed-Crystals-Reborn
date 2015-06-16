@@ -18,48 +18,48 @@ import net.minecraft.util.ChunkCoordinates;
  */
 public interface IManaBurst {
 
-	boolean isFake ();
+	public boolean isFake();
 
-	void setMotion (double x, double y, double z);
+	public void setMotion(double x, double y, double z);
 
-	int getColor ();
+	public int getColor();
 
-	void setColor (int color);
+	public void setColor(int color);
 
-	int getMana ();
+	public int getMana();
 
-	void setMana (int mana);
+	public void setMana(int mana);
 
-	int getStartingMana ();
+	public int getStartingMana();
 
-	void setStartingMana (int mana);
+	public void setStartingMana(int mana);
 
-	int getMinManaLoss ();
+	public int getMinManaLoss();
 
-	void setMinManaLoss (int minManaLoss);
+	public void setMinManaLoss(int minManaLoss);
 
-	float getManaLossPerTick ();
+	public float getManaLossPerTick();
 
-	void setManaLossPerTick (float mana);
+	public void setManaLossPerTick(float mana);
 
-	float getGravity ();
+	public float getGravity();
 
-	void setGravity (float gravity);
+	public void setGravity(float gravity);
 
-	ChunkCoordinates getBurstSourceChunkCoordinates ();
+	public ChunkCoordinates getBurstSourceChunkCoordinates();
 
-	void setBurstSourceCoords (int x, int y, int z);
+	public void setBurstSourceCoords(int x, int y, int z);
 
-	ItemStack getSourceLens ();
+	public ItemStack getSourceLens();
 
-	void setSourceLens (ItemStack lens);
+	public void setSourceLens(ItemStack lens);
 
-	boolean hasAlreadyCollidedAt (int x, int y, int z);
+	public boolean hasAlreadyCollidedAt(int x, int y, int z);
 
-	void setCollidedAt (int x, int y, int z);
+	public void setCollidedAt(int x, int y, int z);
 
-	int getTicksExisted ();
+	public int getTicksExisted();
 
-	void setFake (boolean fake);
+	public void setFake(boolean fake);
 
 }

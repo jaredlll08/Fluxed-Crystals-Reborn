@@ -19,6 +19,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface IBrewItem {
 
-	Brew getBrew (ItemStack brew);
+	public Brew getBrew(ItemStack brew);
 
 }

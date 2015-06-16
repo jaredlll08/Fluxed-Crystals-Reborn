@@ -10,29 +10,51 @@
  */
 package vazkii.botania.api;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import cpw.mods.fml.common.Loader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 import vazkii.botania.api.brew.Brew;
-import vazkii.botania.api.internal.*;
-import vazkii.botania.api.lexicon.*;
-import vazkii.botania.api.recipe.*;
+import vazkii.botania.api.internal.DummyMethodHandler;
+import vazkii.botania.api.internal.DummySubTile;
+import vazkii.botania.api.internal.IInternalMethodHandler;
+import vazkii.botania.api.lexicon.KnowledgeType;
+import vazkii.botania.api.lexicon.LexiconCategory;
+import vazkii.botania.api.lexicon.LexiconEntry;
+import vazkii.botania.api.recipe.RecipeBrew;
+import vazkii.botania.api.recipe.RecipeElvenTrade;
+import vazkii.botania.api.recipe.RecipeManaInfusion;
+import vazkii.botania.api.recipe.RecipeMiniFlower;
+import vazkii.botania.api.recipe.RecipePetals;
+import vazkii.botania.api.recipe.RecipePureDaisy;
+import vazkii.botania.api.recipe.RecipeRuneAltar;
 import vazkii.botania.api.subtile.SubTileEntity;
 import vazkii.botania.api.subtile.signature.BasicSignature;
 import vazkii.botania.api.subtile.signature.SubTileSignature;
-import vazkii.botania.api.wiki.*;
+import vazkii.botania.api.wiki.IWikiProvider;
+import vazkii.botania.api.wiki.SimpleWikiProvider;
+import vazkii.botania.api.wiki.WikiHooks;
 
-import java.util.*;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+import cpw.mods.fml.common.Loader;
 
 public final class BotaniaAPI {
 
@@ -51,11 +73,11 @@ public final class BotaniaAPI {
 	public static List<RecipeBrew> brewRecipes = new ArrayList<RecipeBrew>();
 	public static List<RecipeManaInfusion> miniFlowerRecipes = new ArrayList<RecipeManaInfusion>();
 
-	private static BiMap<String, Class<? extends SubTileEntity>> subTiles = HashBiMap.create();
+	private static BiMap<String, Class<? extends SubTileEntity>> subTiles = HashBiMap.<String, Class<? extends SubTileEntity>> create();
 	private static Map<Class<? extends SubTileEntity>, SubTileSignature> subTileSignatures = new HashMap<Class<? extends SubTileEntity>, SubTileSignature>();
 	public static Set<String> subtilesForCreativeMenu = new LinkedHashSet();
 	public static Map<String, String> subTileMods = new HashMap<String, String>();
-	public static BiMap<String, String> miniFlowers = HashBiMap.create();
+	public static BiMap<String, String> miniFlowers = HashBiMap.<String, String> create();
 
 	public static Map<String, Integer> oreWeights = new HashMap<String, Integer>();
 	public static Map<String, Integer> oreWeightsNether = new HashMap<String, Integer>();

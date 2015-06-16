@@ -16,9 +16,9 @@ package vazkii.botania.api.item;
  */
 public interface IDyablePool {
 
-	int getColor ();
+	public int getColor();
 
-	void setColor (int color);
+	public void setColor(int color);
 
 
 }

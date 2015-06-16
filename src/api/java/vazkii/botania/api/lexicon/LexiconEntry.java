@@ -10,11 +10,13 @@
  */
 package vazkii.botania.api.lexicon;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import vazkii.botania.api.BotaniaAPI;
-
-import java.util.*;
 
 public class LexiconEntry implements Comparable<LexiconEntry> {
 

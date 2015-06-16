@@ -10,6 +10,8 @@
  */
 package vazkii.botania.api.subtile;
 
+import java.awt.Color;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -22,8 +24,6 @@ import net.minecraft.util.StatCollector;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.internal.IManaNetwork;
 import vazkii.botania.api.mana.IManaCollector;
-
-import java.awt.*;
 
 /**
  * The basic class for a Generating Flower.
@@ -89,7 +89,7 @@ public class SubTileGenerating extends SubTileEntity {
 				if(supertile.getWorldObj().blockExists(cachedCollectorCoordinates.posX, cachedCollectorCoordinates.posY, cachedCollectorCoordinates.posZ)) {
 					needsNew = true;
 					TileEntity tileAt = supertile.getWorldObj().getTileEntity(cachedCollectorCoordinates.posX, cachedCollectorCoordinates.posY, cachedCollectorCoordinates.posZ);
-					if(tileAt != null && tileAt instanceof IManaCollector) {
+					if(tileAt != null && tileAt instanceof IManaCollector && !tileAt.isInvalid()) {
 						linkedCollector = tileAt;
 						needsNew = false;
 					}
@@ -100,7 +100,7 @@ public class SubTileGenerating extends SubTileEntity {
 
 		if(!needsNew && linkedCollector != null) {
 			TileEntity tileAt = supertile.getWorldObj().getTileEntity(linkedCollector.xCoord, linkedCollector.yCoord, linkedCollector.zCoord);
-			if(!(tileAt instanceof IManaCollector)) {
+			if(!(tileAt instanceof IManaCollector) || tileAt.isInvalid()) {
 				linkedCollector = null;
 				needsNew = true;
 			} else linkedCollector = tileAt;

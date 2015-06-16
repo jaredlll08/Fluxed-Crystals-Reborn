@@ -29,17 +29,17 @@ public interface ISparkEntity {
 
 		return null;
 	 */
-	ISparkAttachable getAttachedTile ();
+	public ISparkAttachable getAttachedTile();
 
 	/**
 	 * Gets a collection of all Sparks this is tranfering to.
 	 */
-	Collection<ISparkEntity> getTransfers ();
+	public Collection<ISparkEntity> getTransfers();
 
 	/**
 	 * Registers the Spark passed in as a Spark meant for mana to be transfered towards.
 	 */
-	void registerTransfer (ISparkEntity entity);
+	public void registerTransfer(ISparkEntity entity);
 
 	/**
 	 * Gets which upgrade is in this Spark.<br>
@@ -49,16 +49,16 @@ public interface ISparkEntity {
 	 * 3: Recessive<br>
 	 * 4: Isolated
 	 */
-	int getUpgrade ();
+	public int getUpgrade();
 
 	/**
 	 * Sets the upgrade on this Spark. See {@link ISparkEntity#getUpgrade}
 	 */
-	void setUpgrade (int upgrade);
+	public void setUpgrade(int upgrade);
 
 	/**
 	 * See {@link ISparkAttachable#areIncomingTranfersDone()}
 	 */
-	boolean areIncomingTransfersDone ();
+	public boolean areIncomingTransfersDone();
 
 }

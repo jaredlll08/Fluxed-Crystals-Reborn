@@ -10,8 +10,8 @@
  */
 package vazkii.botania.api.subtile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,8 +26,8 @@ import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.wand.IWandBindable;
-
-import java.util.ArrayList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * A Sub-TileEntity, this is used for the flower system. Make sure to map subclasses

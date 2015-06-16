@@ -10,10 +10,10 @@
  */
 package vazkii.botania.api.corporea;
 
+import java.util.List;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 /**
  * An interface for a Corporea Spark. Includes functions for handling
@@ -33,12 +33,12 @@ public interface ICorporeaSpark {
 	 * at that point the connection list in the master spark would be cleared out, also clearing out the one
 	 * in this instance, as it should be a pointer.
 	 */
-	void registerConnections (ICorporeaSpark master, ICorporeaSpark referrer, List<ICorporeaSpark> connections);
+	public void registerConnections(ICorporeaSpark master, ICorporeaSpark referrer, List<ICorporeaSpark> connections);
 
 	/**
 	 * Gets the inventory this spark is bound to, generally the one right below it.
 	 */
-	IInventory getInventory ();
+	public IInventory getInventory();
 
 	/**
 	 * Gets the list of sparks this spark is connected to, see registerConnections(). This list
@@ -46,42 +46,42 @@ public interface ICorporeaSpark {
 	 * that the spark is still in the network, if that's not the case, the pointer should be
 	 * eliminated.
 	 */
-	List<ICorporeaSpark> getConnections ();
+	public List<ICorporeaSpark> getConnections();
 
 	/**
 	 * Gets the list of sparks that this spark added to the list of connections during registerConnections(), this
 	 * is mainly used to create a non messy chain of particles to display the network when a spark is right
 	 * clicked with a wand.
 	 */
-	List<ICorporeaSpark> getRelatives ();
+	public List<ICorporeaSpark> getRelatives();
 
 	/**
 	 * Gets the master spark in this network, see registerConnections(). The value this returns
 	 * should be null and the pointer should be eliminated if the spark is no longer present
 	 * in the network.
 	 */
-	ICorporeaSpark getMaster ();
+	public ICorporeaSpark getMaster();
 
 	/**
 	 * Called when an item is extracted from the inventory this spark is attached to through this
 	 * spark.
 	 */
-	void onItemExtracted (ItemStack stack);
+	public void onItemExtracted(ItemStack stack);
 
 	/**
 	 * Called when this spark requests items, passes in the result of the request and not the actual requested stack(s).
 	 */
-	void onItemsRequested (List<ItemStack> stacks);
+	public void onItemsRequested(List<ItemStack> stacks);
 
 	/**
 	 * Gets if this spark is considered a master spark.
 	 */
-	boolean isMaster ();
+	public boolean isMaster();
 
 	/**
 	 * Gets the network that this spark is on, or the color it's displaying. Sparks may only connect to others
 	 * of the same network, and on changing network should trigger a re-cache of the previous network.
 	 */
-	int getNetwork ();
+	public int getNetwork();
 
 }
