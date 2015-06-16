@@ -12,21 +12,25 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import vazkii.botania.api.internal.VanillaPacketDispatcher;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.IThrottledPacket;
 
 /**
  * Created by Jared on 11/2/2014.
  */
-public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil
+public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil, IThrottledPacket
 {
 
 	private final int[] UPGRADE_SLOTS = {0, 1, 2};
 	public ItemStack[] items;
 	private int mana;
 	private int maxMana;
+	private boolean sendPacket;
 
 	public TileEntityPowerBlockMana () {
 		super();
@@ -304,7 +308,20 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	}
 
 	@Override
+	public Packet getDescriptionPacket() {
+		return super.getDescriptionPacket();
+	}
+	@Override
 	public void drainEnergy(int energy) {
-		recieveMana(-energy);
+		recieveMana(-(energy/10));
+	}
+
+	@Override
+	public void markDispatchable() {
+	}
+	
+	@Override
+	public int scaleEnergy(int energy){
+		return energy/10;
 	}
 }

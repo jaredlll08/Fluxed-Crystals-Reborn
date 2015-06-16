@@ -297,4 +297,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		return false;
 	}
 
+	@Override
+	public int scaleEnergy(int energy) {
+		return energy;
+	}
+
 }

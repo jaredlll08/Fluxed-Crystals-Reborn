@@ -10,4 +10,5 @@ public interface ITileSoil {
 	public void drainEnergy(int energy);
 	public int getUpgradeDrain(int index);
 	public boolean isUpgradeActive(Item upgrade);
+	public int scaleEnergy(int energy);
 }
