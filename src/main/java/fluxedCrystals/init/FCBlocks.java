@@ -27,13 +27,12 @@ import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.tileEntity.soil.TileSoilEU;
 
-public class FCBlocks
-{
+public class FCBlocks {
 	public static Block poweredSoil = new BlockPowerBlock();
 	public static Block poweredSoilMana = new BlockPowerBlockMana();
-	public static Block poweredSoilLP= new BlockPowerBlockLP();
-	public static Block poweredSoilEU= new BlockPoweredSoilEU();
-	
+	public static Block poweredSoilLP = new BlockPowerBlockLP();
+	public static Block poweredSoilEU = new BlockPoweredSoilEU();
+
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
@@ -41,7 +40,7 @@ public class FCBlocks
 	public static Block multi = new BlockMulti();
 	public static Block hidden = new BlockHidden();
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-	private static Map<String, Block> blockRegistry = new HashMap<String, Block>();
+	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public FCBlocks() {
 
@@ -56,15 +55,15 @@ public class FCBlocks
 
 		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
-		
+
 		registerBlock(poweredSoilMana, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
 		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
-		registerBlock(poweredSoilEU, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL+"EU", Names.Blocks.POWEREDSOIL+"EU");
-		GameRegistry.registerTileEntity(TileSoilEU.class, Names.Blocks.POWEREDSOIL+"EU");
-		
+
+		registerBlock(poweredSoilEU, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL + "EU", Names.Blocks.POWEREDSOIL + "EU");
+		GameRegistry.registerTileEntity(TileSoilEU.class, Names.Blocks.POWEREDSOIL + "EU");
+
 		registerBlock(poweredSoilLP, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
 		GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class, Names.Blocks.POWEREDSOILLP);
-		
 
 		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);

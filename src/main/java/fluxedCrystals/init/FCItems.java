@@ -47,7 +47,7 @@ public class FCItems {
 	
 	
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-	private static Map<String, Item> itemRegistry = new HashMap<String, Item>();
+	public static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 
 	public FCItems() {
 

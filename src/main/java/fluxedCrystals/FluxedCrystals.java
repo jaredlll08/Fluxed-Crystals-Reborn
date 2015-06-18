@@ -1,9 +1,25 @@
 package fluxedCrystals;
 
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.event.*;
+import java.io.File;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLModIdMappingEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkCheckHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import fluxedCrystals.client.gui.GUIHandler;
 import fluxedCrystals.command.CommandFC;
@@ -13,16 +29,16 @@ import fluxedCrystals.init.FCBlocks;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.network.PacketHandler;
 import fluxedCrystals.proxy.IProxy;
-import fluxedCrystals.recipe.*;
+import fluxedCrystals.recipe.RecipeGemCutter;
+import fluxedCrystals.recipe.RecipeGemRefiner;
+import fluxedCrystals.recipe.RecipeRegistry;
+import fluxedCrystals.recipe.RecipeSeedInfuser;
 import fluxedCrystals.reference.Reference;
-import fluxedCrystals.registry.*;
+import fluxedCrystals.registry.MutationRegistry;
+import fluxedCrystals.registry.Seed;
+import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.LogHelper;
 import fluxedCrystals.util.OreDict;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
-import java.io.File;
-import java.util.Map;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, name = Reference.MOD_NAME, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class FluxedCrystals {
@@ -89,12 +105,12 @@ public class FluxedCrystals {
 		proxy.postInit();
 		for (int i : SeedRegistry.getInstance().keySet()) {
 			Seed seed = SeedRegistry.getInstance().getSeedByID(i);
-			if(seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
+			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
 				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
 				System.out.println(">>> " + seed.seedID + " : " + seed.getIngredient().getDisplayName() + ">>>");
 				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
-				if(seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
-					if(!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
+				if (seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
+					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 					} else {
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
@@ -115,39 +131,42 @@ public class FluxedCrystals {
 		MutationRegistry.getInstance().Save();
 	}
 
-	// @Mod.EventHandler
-	// public void alias(FMLMissingMappingsEvent e) {
-	// for (FMLMissingMappingsEvent.MissingMapping map : e.getAll()) {
-	// if (map.name.startsWith("fluxedCrystals:") ||
-	// map.name.startsWith("fluxedcrystals")) {
-	// if (map.type == GameRegistry.Type.BLOCK) for (String key :
-	// FCBlocks.blockRegistry.keySet()) {
-	// if (map.name.endsWith(key)) {
-	// map.remap(FCBlocks.blockRegistry.get(key));
-	// }
-	// }
-	// if (map.type == GameRegistry.Type.ITEM) {
-	// for (String key : FCItems.itemRegistry.keySet()) {
-	// if (map.name.endsWith(key)) {
-	// map.remap(FCItems.itemRegistry.get(key));
-	// }
-	// }
-	// }
-	//
-	// }
-	// }
-	// }
+//	@Mod.EventHandler
+//	public void alias(FMLMissingMappingsEvent e) {
+//		for (FMLMissingMappingsEvent.MissingMapping map : e.getAll()) {
+//			if (map.name.startsWith("fluxedCrystals:") || map.name.startsWith("fluxedcrystals:")) {
+//				if (map.type == GameRegistry.Type.BLOCK)
+//					for (String key : FCBlocks.blockRegistry.keySet()) {
+//						if (map.name.endsWith(key)) {
+//							System.out.println(map.name + ":" + key);
+//							map.remap(FCBlocks.blockRegistry.get(key));
+//						}
+//					}
+//				System.out.println(map.name);
+//				if (map.type == GameRegistry.Type.ITEM) {
+//					for (String key : FCItems.itemRegistry.keySet()) {
+//						if (map.name.endsWith(key)) {
+//							System.out.println(map.name + ":" + key);
+//							map.remap(FCItems.itemRegistry.get(key));
+//						}
+//					}
+//				}
+//
+//			}
+//		}
+//	}
+
 	@Mod.EventHandler
 	public void remap(FMLModIdMappingEvent event) {
 
 		// TODO Need to add the mutations
 		for (int i : SeedRegistry.getInstance().keySet()) {
 			Seed seed = SeedRegistry.getInstance().getSeedByID(i);
-			if(seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
+			if (seed.modRequired.equals("") || (!seed.modRequired.equals("") && Loader.isModLoaded(seed.modRequired))) {
 				RecipeRegistry.registerSeedInfuserRecipe(seed.seedID, new RecipeSeedInfuser(new ItemStack(FCItems.universalSeed), seed.getIngredient(), new ItemStack(FCItems.seed, 1, seed.seedID), seed.ingredientAmount, seed.seedID));
 				RecipeRegistry.registerGemCutterRecipe(seed.seedID, new RecipeGemCutter(new ItemStack(FCItems.shardRough, 1, seed.seedID), new ItemStack(FCItems.shardSmooth, 1, seed.seedID), 1, 1));
-				if(seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
-					if(!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
+				if (seed.weightedDrop != null && !seed.weightedDrop.equals("")) {
+					if (!(Block.getBlockFromName("minecraft:portal") == Block.getBlockFromItem(seed.getWeightedDrop().getItem()))) {
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getWeightedDrop(), seed.refinerAmount, 1));
 					} else {
 						RecipeRegistry.registerGemRefinerRecipe(seed.seedID, new RecipeGemRefiner(new ItemStack(FCItems.shardSmooth, 1, i), seed.getIngredient(), seed.refinerAmount, 1));
