@@ -16,9 +16,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.IThrottledPacket;
+
 import java.util.EnumSet;
 
-public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory {
+public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory, IThrottledPacket {
 
 	private static int[] slotsAll = { 0, 1, 2, 3, 4, 5, 6 };
 	private final int[] UPGRADE_SLOTS = { 2, 3, 4 };
@@ -318,25 +320,25 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			return false;
 		}
 		switch (slot) {
-			default:
-				return false;
+		default:
+			return false;
 
-			case 0:
+		case 0:
 
-				for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
+			for (int i : RecipeRegistry.getAllGemCutterRecipes().keySet()) {
 
-					RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
+				RecipeGemCutter recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(i);
 
-					if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
+				if (recipeGemCutter != null && recipeGemCutter.getInput().isItemEqual(stack)) {
 
-						return true;
-
-					}
+					return true;
 
 				}
 
-			case 1:
-				return false;
+			}
+
+		case 1:
+			return false;
 
 		}
 	}
@@ -619,6 +621,10 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot != 0 && slot != 2 && slot != 3 && slot != 4;
+	}
+
+	@Override
+	public void markDispatchable() {
 	}
 
 }

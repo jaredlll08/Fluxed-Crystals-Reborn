@@ -1,12 +1,7 @@
 package fluxedCrystals.tileEntity;
 
-import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import fluxedCrystals.init.FCItems;
-import fluxedCrystals.network.PacketHandler;
-import fluxedCrystals.network.message.MessageGemRefiner;
-import fluxedCrystals.recipe.RecipeGemRefiner;
-import fluxedCrystals.recipe.RecipeRegistry;
+import java.util.EnumSet;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -17,19 +12,25 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.IThrottledPacket;
+import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import fluxedCrystals.init.FCItems;
+import fluxedCrystals.network.PacketHandler;
+import fluxedCrystals.network.message.MessageGemRefiner;
+import fluxedCrystals.recipe.RecipeGemRefiner;
+import fluxedCrystals.recipe.RecipeRegistry;
 
-import java.util.EnumSet;
+public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, IManaReceiver, ISidedInventory, IThrottledPacket {
 
-public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, IManaReceiver, ISidedInventory
-{
-
-	private static int[] slotsAll = {0, 1, 2, 3, 4, 5, 6};
-	private final int[] UPGRADE_SLOTS = {2, 3, 4};
+	private static int[] slotsAll = { 0, 1, 2, 3, 4, 5, 6 };
+	private final int[] UPGRADE_SLOTS = { 2, 3, 4 };
 	public ItemStack[] items;
-	public int itemCycleTime;                // How long the current cycle has been running
-	public int deviceCycleTime;                // How long the machine will cycle
+	public int itemCycleTime; // How long the current cycle has been running
+	public int deviceCycleTime; // How long the machine will cycle
 	public byte state;
-	public int needCycleTime;                // Based on everything how long should this take?????
+	public int needCycleTime; // Based on everything how long should this
+								// take?????
 	private int refined = 0;
 	// -1 if not currently refining
 	private int recipeIndex;
@@ -38,7 +39,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	private boolean RF = true;
 	private int energy = 0;
 
-	public TileEntityGemRefiner () {
+	public TileEntityGemRefiner() {
 		super(10000);
 		MAX_MANA = getMaxStorage();
 		mana = 0;
@@ -46,20 +47,20 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	}
 
-	public int getRecipeIndex () {
+	public int getRecipeIndex() {
 		return recipeIndex;
 	}
 
-	public void setRecipeIndex (int recipeIndex) {
+	public void setRecipeIndex(int recipeIndex) {
 		this.recipeIndex = recipeIndex;
 	}
 
-	public int getRefined () {
+	public int getRefined() {
 		return refined;
 	}
 
 	@Override
-	public void updateEntity () {
+	public void updateEntity() {
 
 		super.updateEntity();
 
@@ -100,8 +101,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 								}
 
-							}
-							else {
+							} else {
 
 								if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
 
@@ -113,10 +113,9 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 						}
 
-					}
-					else {
+					} else {
 
-						//TODO Add check for other energy types
+						// TODO Add check for other energy types
 
 						if (getStackInSlot(1) != null) {
 
@@ -130,8 +129,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 							}
 
-						}
-						else {
+						} else {
 
 							if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
 
@@ -167,7 +165,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 					this.itemCycleTime = 0;
 
-					//TODO Add processing for other energy types
+					// TODO Add processing for other energy types
 
 					storage.extractEnergy(refineShard(), false);
 
@@ -175,8 +173,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 				}
 
-			}
-			else {
+			} else {
 
 				this.itemCycleTime = 0;
 
@@ -208,7 +205,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public void markDirty () {
+	public void markDirty() {
 
 		super.markDirty();
 
@@ -218,7 +215,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	}
 
-	public boolean isUpgradeActive (Item upgradeItem) {
+	public boolean isUpgradeActive(Item upgradeItem) {
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack stack = getStackInSlot(slot);
 			if (stack != null && stack.getItem() == upgradeItem) {
@@ -228,7 +225,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return false;
 	}
 
-	public int getSpeed () {
+	public int getSpeed() {
 		int speed = 100;
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
@@ -239,7 +236,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return speed;
 	}
 
-	public int getEffeciency () {
+	public int getEffeciency() {
 		int eff = 250;
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
@@ -260,19 +257,18 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public void closeInventory () {
+	public void closeInventory() {
 
 	}
 
 	@Override
-	public ItemStack decrStackSize (int i, int count) {
+	public ItemStack decrStackSize(int i, int count) {
 		ItemStack itemstack = getStackInSlot(i);
 
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
-			}
-			else {
+			} else {
 				itemstack = itemstack.splitStack(count);
 
 			}
@@ -282,86 +278,90 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public String getInventoryName () {
+	public String getInventoryName() {
 		return "Gem Refiner";
 	}
 
 	@Override
-	public int getInventoryStackLimit () {
+	public int getInventoryStackLimit() {
 		return 64;
 	}
 
 	@Override
-	public int getSizeInventory () {
+	public int getSizeInventory() {
 		return items.length;
 	}
 
 	@Override
-	public ItemStack getStackInSlot (int par1) {
+	public ItemStack getStackInSlot(int par1) {
 		return items[par1];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing (int i) {
+	public ItemStack getStackInSlotOnClosing(int i) {
 		ItemStack item = getStackInSlot(i);
 		setInventorySlotContents(i, item);
 		return item;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName () {
+	public boolean hasCustomInventoryName() {
 		return false;
 	}
 
 	@Override
-	public boolean isItemValidForSlot (int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (stack == null) {
 			return false;
 		}
 		switch (slot) {
-			default:
-				return false;
+		default:
+			return false;
 
-			case 0:
+		case 0:
 
-				for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
+			for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
 
-					RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
+				RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(i);
 
-					if (recipe != null) {
+				if (recipe != null) {
 
-						if (recipe.getInput().isItemEqual(stack)) {
+					if (recipe.getInput().isItemEqual(stack)) {
 
-							return true;
-
-						}
+						return true;
 
 					}
 
 				}
-			case 1:
-				return false;
+
+			}
+		case 1:
+			return false;
 
 		}
 	}
 
 	@Override
-	public boolean isUseableByPlayer (EntityPlayer arg0) {
+	public boolean isUseableByPlayer(EntityPlayer arg0) {
 		return true;
 	}
 
 	@Override
-	public void openInventory () {
+	public void openInventory() {
 
 	}
 
 	@Override
-	public void setInventorySlotContents (int i, ItemStack itemstack) {
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		boolean changedItem;
 		if (items[i] == null || itemstack == null) {
-			changedItem = (items[i] == null) != (itemstack == null); // non-null to null, or vice versa
-		}
-		else {
+			changedItem = (items[i] == null) != (itemstack == null); // non-null
+																		// to
+																		// null,
+																		// or
+																		// vice
+																		// versa
+		} else {
 			changedItem = !items[i].isItemEqual(itemstack);
 		}
 
@@ -376,7 +376,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		}
 	}
 
-	public boolean addInventorySlotContents (int i, ItemStack itemstack) {
+	public boolean addInventorySlotContents(int i, ItemStack itemstack) {
 		if (items[i] != null) {
 
 			if (items[i].isItemEqual(itemstack)) {
@@ -385,8 +385,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 			if (items[i].stackSize > getInventoryStackLimit()) {
 				items[i].stackSize = getInventoryStackLimit();
 			}
-		}
-		else {
+		} else {
 			setInventorySlotContents(i, itemstack);
 		}
 		return false;
@@ -394,7 +393,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	/* NBT */
 	@Override
-	public void readFromNBT (NBTTagCompound tags) {
+	public void readFromNBT(NBTTagCompound tags) {
 		super.readFromNBT(tags);
 		readInventoryFromNBT(tags);
 		refined = tags.getInteger("refined");
@@ -406,7 +405,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		updateCurrentRecipe();
 	}
 
-	public void readInventoryFromNBT (NBTTagCompound tags) {
+	public void readInventoryFromNBT(NBTTagCompound tags) {
 		NBTTagList nbttaglist = tags.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		for (int iter = 0; iter < nbttaglist.tagCount(); iter++) {
 			NBTTagCompound tagList = nbttaglist.getCompoundTagAt(iter);
@@ -418,7 +417,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public void writeToNBT (NBTTagCompound tags) {
+	public void writeToNBT(NBTTagCompound tags) {
 		super.writeToNBT(tags);
 		writeInventoryToNBT(tags);
 		tags.setInteger("refined", refined);
@@ -429,7 +428,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		tags.setInteger("needCycleTime", needCycleTime);
 	}
 
-	public void writeInventoryToNBT (NBTTagCompound tags) {
+	public void writeInventoryToNBT(NBTTagCompound tags) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int iter = 0; iter < items.length; iter++) {
 			if (items[iter] != null) {
@@ -443,7 +442,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		tags.setTag("Items", nbttaglist);
 	}
 
-	public boolean addItemToSlot (int slotNumber, ItemStack stack) {
+	public boolean addItemToSlot(int slotNumber, ItemStack stack) {
 		boolean returnBool = false;
 		if (stack != null) {
 			if (getStackInSlot(slotNumber) == null || (getStackInSlot(slotNumber).isItemEqual(stack)) && (getStackInSlot(slotNumber).getMaxStackSize() - getStackInSlot(slotNumber).stackSize - stack.stackSize) > 0) {
@@ -460,7 +459,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return returnBool;
 	}
 
-	public int refineShard () {
+	public int refineShard() {
 		int energyUsed = 0;
 
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
@@ -489,7 +488,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return energyUsed;
 	}
 
-	public boolean refine () {
+	public boolean refine() {
 
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
@@ -515,7 +514,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return false;
 	}
 
-	public boolean refineMana () {
+	public boolean refineMana() {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
@@ -540,7 +539,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return false;
 	}
 
-	public boolean refineLP () {
+	public boolean refineLP() {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
@@ -565,7 +564,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return false;
 	}
 
-	public boolean refineEssentia () {
+	public boolean refineEssentia() {
 		if (getRecipeIndex() != -1 && getStackInSlot(0) != null) {
 			RecipeGemRefiner recipe = RecipeRegistry.getGemRefinerRecipeByID(recipeIndex);
 			if (recipe != null && recipe.matchesExact(getStackInSlot(0))) {
@@ -588,7 +587,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 		return false;
 	}
 
-	public void updateCurrentRecipe () {
+	public void updateCurrentRecipe() {
 		setRecipeIndex(-1);
 		if (getStackInSlot(0) != null) {
 
@@ -608,27 +607,27 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public EnumSet<ForgeDirection> getValidOutputs () {
+	public EnumSet<ForgeDirection> getValidOutputs() {
 		return EnumSet.noneOf(ForgeDirection.class);
 	}
 
 	@Override
-	public EnumSet<ForgeDirection> getValidInputs () {
+	public EnumSet<ForgeDirection> getValidInputs() {
 		return EnumSet.allOf(ForgeDirection.class);
 	}
 
 	@Override
-	public int getCurrentMana () {
+	public int getCurrentMana() {
 		return mana;
 	}
 
 	@Override
-	public boolean isFull () {
+	public boolean isFull() {
 		return mana == MAX_MANA;
 	}
 
 	@Override
-	public void recieveMana (int mana) {
+	public void recieveMana(int mana) {
 		if (!isFull()) {
 			this.mana += mana;
 		}
@@ -638,12 +637,12 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide (int side) {
+	public int[] getAccessibleSlotsFromSide(int side) {
 		return slotsAll;
 	}
 
 	@Override
-	public boolean canInsertItem (int slot, ItemStack stack, int side) {
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
 		if (isItemValidForSlot(slot, stack)) {
 
 			for (int i : RecipeRegistry.getAllGemRefinerRecipes().keySet()) {
@@ -661,12 +660,16 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	}
 
 	@Override
-	public boolean canExtractItem (int slot, ItemStack stack, int side) {
+	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot != 0 && slot != 2 && slot != 3 && slot != 4;
 	}
 
 	@Override
-	public boolean canRecieveManaFromBursts () {
+	public boolean canRecieveManaFromBursts() {
 		return true;
+	}
+
+	@Override
+	public void markDispatchable() {
 	}
 }
