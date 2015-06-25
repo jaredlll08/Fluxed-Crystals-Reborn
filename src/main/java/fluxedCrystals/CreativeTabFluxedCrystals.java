@@ -21,8 +21,8 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 
 	public CreativeTabFluxedCrystals() {
 
-		super(Reference.LOWERCASE_MOD_ID);
-		setNoTitle();
+		super(Reference.MOD_NAME);
+//		setNoTitle();
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class CreativeTabFluxedCrystals extends CreativeTabs {
 		return 85;
 	}
 
-	@Override
-	public String getBackgroundImageName() {
-		return "fluxedcrystals.png";
-	}
+//	@Override
+//	public String getBackgroundImageName() {
+//		return "fluxedcrystals.png";
+//	}
 
 }

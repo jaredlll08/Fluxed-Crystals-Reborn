@@ -22,12 +22,17 @@ public class JsonTools
 		String tmpString = "{\"seeds\":[";
 
 		for (int i : seedMap.keySet()) {
-
-			if (i > 0) {
-
+			boolean doneFirst = false;
+			
+			if(doneFirst){
 				tmpString += ",";
-
+			}else{
+				doneFirst = true;
 			}
+
+
+				
+
 
 			tmpString += gson.toJson(seedMap.get(i), Seed.class);
 

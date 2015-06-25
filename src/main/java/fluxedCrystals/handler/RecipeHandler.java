@@ -20,6 +20,7 @@ public class RecipeHandler {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoil, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "ingotIron", 'a', Blocks.sand, 'e', Items.wheat_seeds));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoilMana, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "ingotManasteel", 'a', "livingrock", 'e', "manaPearl"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoilEU, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "circuitBasic", 'a', "itemRubber", 'e', "dustDiamond"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.seedInfuser, "gdi", "sus", "idg", 's', Blocks.soul_sand, 'i', "ingotIron", 'g', Items.gold_ingot, 'd', "gemDiamond", 'u', FCItems.universalSeed));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FCItems.upgradeNight, 4), " c ", "cuc", " c ", 'c', Items.clock, 'u', FCItems.universalSeed));

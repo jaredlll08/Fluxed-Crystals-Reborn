@@ -4,7 +4,7 @@ commands.fluxedcrystals.seed-from-current.usage=/fluxedcrystals seed-from-curren
 commands.fluxedcrystals.seed-from-current.success=A template seed has been created out of %s
 
 # Other
-itemGroup.fluxedcrystals=Fluxed-Crystals
+itemGroup.FluxedCrystals2=Fluxed-Crystals 2
 item.fluxedcrystals.universalSeed.name=Blank Seed
 item.fluxedcrystals.seed.name=%s Seed
 item.fluxedcrystals.smoothShard.name=Smooth %s Shard

@@ -1,7 +1,7 @@
 [
 {
   "modid": "fluxedcrystals",
-  "name": "Fluxed-Crystals",
+  "name": "Fluxed-Crystals 2",
   "description": "Powered Crystal Farming!",
   "version": "${version}",
   "mcversion": "${mcversion}",
@@ -12,21 +12,5 @@
   "logoFile": "FCLogo.png",
   "screenshots": [],
   "dependencies": []
-},{
-        "name": "Flux IO",
-        "parent": "fluxedcrystals",
-        "url": "",
-        "logoFile": "",
-        "updateUrl": "",
-        "credits": "Everyone who gave suggestions on the reddit post",
-        "version": "${version}",
-        "modid": "fluxio",
-        "authorList": [ "Jaredlll08, JHard52207" ],
-        "mcversion": "${mcversion}",
-        "screenshots": [],
-        "dependencies": [
-            "fluxedcrystals"
-        ],
-        "description": "Energy generation for Fluxed-Crystals"
-    }
+}
 ]
