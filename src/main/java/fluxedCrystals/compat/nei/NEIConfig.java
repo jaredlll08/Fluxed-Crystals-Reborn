@@ -31,8 +31,6 @@ public class NEIConfig implements IConfigureNEI
 		API.registerRecipeHandler(new InfuserRecipeHandler());
 		API.registerUsageHandler(new InfuserRecipeHandler());
 		API.hideItem(new ItemStack(FCBlocks.crystal));
-		API.hideItem(new ItemStack(FCBlocks.hidden));
-		API.hideItem(new ItemStack(FCBlocks.multi));
 	}
 
 }

@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.blocks.BlockHidden;
-import fluxedCrystals.blocks.BlockMulti;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.machines.BlockGemCutter;
 import fluxedCrystals.blocks.machines.BlockGemRefiner;
@@ -23,7 +22,6 @@ import fluxedCrystals.tileEntity.TileEntityGemCutter;
 import fluxedCrystals.tileEntity.TileEntityGemRefiner;
 import fluxedCrystals.tileEntity.TileEntitySeedInfuser;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
-import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockLP;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.tileEntity.soil.TileSoilEU;
 
@@ -37,8 +35,6 @@ public class FCBlocks {
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
 	public static Block gemRefiner = new BlockGemRefiner();
-	public static Block multi = new BlockMulti();
-	public static Block hidden = new BlockHidden();
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
@@ -62,10 +58,12 @@ public class FCBlocks {
 		registerBlock(poweredSoilEU, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL + "EU", Names.Blocks.POWEREDSOIL + "EU");
 		GameRegistry.registerTileEntity(TileSoilEU.class, Names.Blocks.POWEREDSOIL + "EU");
 
-		registerBlock(poweredSoilLP, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class, Names.Blocks.POWEREDSOILLP);
+		// registerBlock(poweredSoilLP, Reference.LOWERCASE_MOD_ID + "." +
+		// Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
+		// GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class,
+		// Names.Blocks.POWEREDSOILLP);
 
-		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL);
+		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL, null);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);
 
 		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
@@ -85,6 +83,11 @@ public class FCBlocks {
 
 	private static void registerBlock(Block block, String name, String key) {
 		block.setBlockName(name).setCreativeTab(FluxedCrystals.tab);
+		GameRegistry.registerBlock(block, key);
+		blockRegistry.put(key, block);
+	}
+	private static void registerBlock(Block block, String name, String key, CreativeTabs tab) {
+		block.setBlockName(name).setCreativeTab(tab);
 		GameRegistry.registerBlock(block, key);
 		blockRegistry.put(key, block);
 	}

@@ -32,7 +32,6 @@ public abstract class CrystalBase extends Block
 		float f = 0.5f;
 
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
-		this.setCreativeTab(null);
 		this.setStepSound(soundTypeGrass);
 		this.disableStats();
 

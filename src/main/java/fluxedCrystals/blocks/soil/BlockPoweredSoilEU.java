@@ -22,7 +22,7 @@ public class BlockPoweredSoilEU extends Block implements ITileEntityProvider, IP
 		super(Material.grass);
 		this.setHardness(1.0F);
 		this.setHarvestLevel("shovel", 1);
-		this.setBlockTextureName(Textures.Blocks.POWERED_SOIL+"Vis");
+		this.setBlockTextureName(Textures.Blocks.POWEREDSOILEU);
 		setStepSound(Block.soundTypeGrass);
 	}
 

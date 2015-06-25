@@ -1,17 +1,17 @@
 package fluxedCrystals.proxy;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import fluxedCrystals.FluxedCrystals;
-import fluxedCrystals.client.render.*;
-import fluxedCrystals.handler.ClientEventHandler;
-import fluxedCrystals.util.TilebigCube;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.client.render.MultiBlocktest;
+import fluxedCrystals.client.render.RenderCrystal;
+import fluxedCrystals.client.render.SeedInfuserRenderer;
+import fluxedCrystals.handler.ClientEventHandler;
 
 public class ClientProxy extends CommonProxy
 {
@@ -30,8 +30,6 @@ public class ClientProxy extends CommonProxy
 		FluxedCrystals.crystalRenderID = RenderingRegistry.getNextAvailableRenderId();
 		FluxedCrystals.bigCubeID = RenderingRegistry.getNextAvailableRenderId();
 		MultiBlocktest model = new MultiBlocktest();
-		RenderMultiBlock multi = new RenderMultiBlock(model);
-		ClientRegistry.bindTileEntitySpecialRenderer(TilebigCube.class, new RenderMultiBlock(model));
 		RenderCrystal renderCrystal = new RenderCrystal();
 		RenderingRegistry.registerBlockHandler(renderCrystal);
 

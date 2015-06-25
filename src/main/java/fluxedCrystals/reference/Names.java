@@ -22,6 +22,8 @@ public class Names {
 		public static final String POWEREDSOIL = "poweredSoil";
 		public static final String POWEREDSOILMANA = POWEREDSOIL + "Mana";
 		public static final String POWEREDSOILLP = POWEREDSOIL + "Blood";
+		public static final String POWEREDSOILEU = POWEREDSOIL + "EU";
+		
 
 		public static final String CRYSTAL = "crystal";
 

@@ -16,6 +16,7 @@ public class Textures
 		public static final String POWERED_SOIL = RESOURCE_PREFIX + Names.Blocks.POWEREDSOIL + "RF";
 		public static final String POWEREDSOILMANA = RESOURCE_PREFIX + Names.Blocks.POWEREDSOILMANA;
 		public static final String POWEREDSOILLP = RESOURCE_PREFIX + Names.Blocks.POWEREDSOILLP;
+		public static final String POWEREDSOILEU = RESOURCE_PREFIX + Names.Blocks.POWEREDSOILEU;
 
 	}
 
