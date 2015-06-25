@@ -48,6 +48,7 @@ public class GUIGemRefiner extends GuiContainer {
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 		if (tile.isUpgradeActive(FCItems.upgradeMana)) {
+			GL11.glColor4d(tile.getCurrentMana()/tile.getMaxMana(), tile.getCurrentMana()/tile.getMaxMana(), tile.getCurrentMana()/tile.getMaxMana(), 1f);
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 47, 14, 42);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}

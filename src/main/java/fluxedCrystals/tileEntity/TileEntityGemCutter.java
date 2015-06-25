@@ -148,6 +148,71 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 				}
 
 			}
+			if (getStackInSlot(0) != null && getRecipeIndex() != -1 && mana > 0) {
+
+				recipeGemCutter = RecipeRegistry.getGemCutterRecipeByID(getRecipeIndex());
+
+				if (recipeGemCutter != null) {
+
+					if (isUpgradeActive(FCItems.upgradeMana)) {
+
+						if (mana / 10 >= getEffeciency()) {
+
+							if (getStackInSlot(1) != null) {
+
+								if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+									if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+										canWork = true;
+
+									}
+
+								}
+
+							} else {
+
+								if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						}
+
+					} else {
+
+						// TODO Add check for other energy types
+
+						if (getStackInSlot(1) != null) {
+
+							if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+								if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						} else {
+
+							if (getStackInSlot(0).stackSize >= recipeGemCutter.getInputamount()) {
+
+								canWork = true;
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
 
 			// Can we run a new item
 
@@ -168,11 +233,12 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 				if (this.itemCycleTime == getSpeed()) {
 
 					this.itemCycleTime = 0;
-
-					// TODO Add processing for other energy types
-
 					refine();
-
+					// TODO Add processing for other energy types
+					if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia))
+						storage.extractEnergy(250, false);
+					if(isUpgradeActive(FCItems.upgradeMana))
+						recieveMana(250/10);
 					sendUpdate = true;
 
 				}
@@ -453,8 +519,6 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 				if (getStackInSlot(1) == null || getStackInSlot(1).isItemEqual(recipe.getOutput())) {
 					decrStackSize(0, 1);
 					cut++;
-
-					storage.extractEnergy(250, false);
 
 					if (cut >= recipe.getInputamount()) {
 						ItemStack out = recipe.getOutput().copy();

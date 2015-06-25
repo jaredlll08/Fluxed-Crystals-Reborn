@@ -41,7 +41,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 	public TileEntityGemRefiner() {
 		super(10000);
-		MAX_MANA = getMaxStorage();
+		MAX_MANA = getMaxStorage()/10;
 		mana = 0;
 		items = new ItemStack[7];
 
@@ -144,6 +144,71 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 				}
 
 			}
+			if (getStackInSlot(0) != null && getRecipeIndex() != -1 && mana > 0) {
+
+				recipeGemRefiner = RecipeRegistry.getGemRefinerRecipeByID(getRecipeIndex());
+
+				if (recipeGemRefiner != null) {
+
+					if (isUpgradeActive(FCItems.upgradeMana)) {
+
+						if (mana / 10 >= getEffeciency()) {
+
+							if (getStackInSlot(1) != null) {
+
+								if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+									if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+										canWork = true;
+
+									}
+
+								}
+
+							} else {
+
+								if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						}
+
+					} else {
+
+						// TODO Add check for other energy types
+
+						if (getStackInSlot(1) != null) {
+
+							if (getStackInSlot(1).stackSize < getStackInSlot(1).getMaxStackSize()) {
+
+								if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+									canWork = true;
+
+								}
+
+							}
+
+						} else {
+
+							if (getStackInSlot(0).stackSize >= recipeGemRefiner.getInputamount()) {
+
+								canWork = true;
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
 
 			// Can we run a new item
 
@@ -166,8 +231,10 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 					this.itemCycleTime = 0;
 
 					// TODO Add processing for other energy types
-
-					storage.extractEnergy(refineShard(), false);
+					if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia))
+						storage.extractEnergy(refineShard(), false);
+					if(isUpgradeActive(FCItems.upgradeMana))
+						recieveMana(-refineShard());
 
 					sendUpdate = true;
 
@@ -619,6 +686,10 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 	@Override
 	public int getCurrentMana() {
 		return mana;
+	}
+	
+	public int getMaxMana(){
+		return MAX_MANA;
 	}
 
 	@Override
