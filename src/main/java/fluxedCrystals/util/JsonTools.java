@@ -20,14 +20,19 @@ public class JsonTools
 	public static String hashmapToJson_seeds (HashMap<Integer, Seed> seedMap) {
 
 		String tmpString = "{\"seeds\":[";
-
+		boolean doneFirst = false;
 		for (int i : seedMap.keySet()) {
-
-			if (i > 0) {
-
+			
+			
+			if(doneFirst){
 				tmpString += ",";
-
+			}else{
+				doneFirst = true;
 			}
+
+
+				
+
 
 			tmpString += gson.toJson(seedMap.get(i), Seed.class);
 
