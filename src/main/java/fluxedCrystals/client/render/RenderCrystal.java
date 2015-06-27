@@ -2,6 +2,11 @@ package fluxedCrystals.client.render;
 
 import java.awt.Color;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.crystal.CrystalBase;
@@ -9,36 +14,63 @@ import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.HolidayHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCake;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.IBlockAccess;
+import fluxedCrystals.util.TimeTracker;
 
-public class RenderCrystal implements ISimpleBlockRenderingHandler
-{
+public class RenderCrystal implements ISimpleBlockRenderingHandler {
+	public int lastColor = 0;
 
 	@Override
-	public void renderInventoryBlock (Block block, int metadata, int modelId, RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
 	}
 
 	@Override
-	public boolean renderWorldBlock (IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntityCrystal tile = (TileEntityCrystal) world.getTileEntity(x, y, z);
 		Seed seed = SeedRegistry.getInstance().getSeedByID(tile.getIdx());
 
 		Tessellator tess = Tessellator.instance;
-		tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 		tess.setBrightness(0xF000F0);
-		Color col = new Color(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 		renderer.enableAO = false;
-		if(HolidayHelper.isBirthdayJared()){
+		int color = SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color;
+		TimeTracker track = new TimeTracker();
+		if (HolidayHelper.isLGBTQ()) {
+			if (track.hasDelayPassed(tile.getWorldObj(), 10)) {
+				switch (lastColor) {
+				case 0:
+					color = 14942979;
+					lastColor= 1;
+					break;
+				case 1:
+					color = 16747520;
+					lastColor = 2;
+					break;
+				case 2:
+					color = 16772352;
+					lastColor = 3;
+					break;
+				case 3:
+					color = 32806;
+					lastColor = 4;
+				break;
+				case 4:
+					color = 19967;
+					lastColor = 5;
+					break;
+				case 5:
+					color = 7669639;
+					lastColor = 0;
+					break;
+					
+				}
+			}
+		}
+		tess.setColorOpaque_I(color);
+		if (HolidayHelper.isBirthdayJared()) {
 			renderer.renderBlockByRenderType(Blocks.cake, x, y, z);
 		}
-		if ((seed.type.equalsIgnoreCase("crystal") || seed.type.equalsIgnoreCase("")) ) {
-			tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
+		if ((seed.type.equalsIgnoreCase("crystal") || seed.type.equalsIgnoreCase(""))) {
+			tess.setColorOpaque_I(color);
 			renderer.drawCrossedSquares(((CrystalBase) block).crystals[meta], x, y, z, 1.0f);
 			renderer.enableAO = true;
 			return true;
@@ -46,7 +78,7 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler
 		if (seed.type.equalsIgnoreCase("crop")) {
 			tess.setColorOpaque_I(0xFFFFFF);
 			renderer.drawCrossedSquares(((CrystalBase) block).crop[meta], x, y, z, 1.0f);
-			tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
+			tess.setColorOpaque_I(color);
 			if (meta == 5) {
 				renderer.drawCrossedSquares(((CrystalBase) block).cropOverlay[0], x, y, z, 1.0f);
 			}
@@ -59,19 +91,18 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler
 			renderer.enableAO = true;
 			return true;
 
-
 		}
 		renderer.enableAO = true;
 		return true;
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory (int modelId) {
+	public boolean shouldRender3DInInventory(int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId () {
+	public int getRenderId() {
 		return FluxedCrystals.crystalRenderID;
 	}
 

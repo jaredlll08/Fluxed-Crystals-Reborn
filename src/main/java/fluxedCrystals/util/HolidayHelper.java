@@ -30,6 +30,14 @@ public class HolidayHelper {
 		return curTime.after(holidayStart) && curTime.before(holidayEnd);
 		
 	}
+	public static boolean isLGBTQ(){
+		setDate(holidayStart, Calendar.JUNE, 27, false);
+		setDate(holidayEnd, Calendar.JULY, 3, false);
+		
+		curTime = Calendar.getInstance();
+		return curTime.after(holidayStart) && curTime.before(holidayEnd);
+		
+	}
 
 	public static boolean isNewYear() {
 
