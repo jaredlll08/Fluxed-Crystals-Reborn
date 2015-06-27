@@ -1,14 +1,19 @@
 package fluxedCrystals.client.render;
 
+import java.awt.Color;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
+import fluxedCrystals.util.HolidayHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCake;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderCrystal implements ISimpleBlockRenderingHandler
@@ -27,8 +32,12 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler
 		Tessellator tess = Tessellator.instance;
 		tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 		tess.setBrightness(0xF000F0);
+		Color col = new Color(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 		renderer.enableAO = false;
-		if (seed.type.equalsIgnoreCase("crystal") || seed.type.equalsIgnoreCase("")) {
+		if(HolidayHelper.isBirthdayJared()){
+			renderer.renderBlockByRenderType(Blocks.cake, x, y, z);
+		}
+		if ((seed.type.equalsIgnoreCase("crystal") || seed.type.equalsIgnoreCase("")) ) {
 			tess.setColorOpaque_I(SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color);
 			renderer.drawCrossedSquares(((CrystalBase) block).crystals[meta], x, y, z, 1.0f);
 			renderer.enableAO = true;
