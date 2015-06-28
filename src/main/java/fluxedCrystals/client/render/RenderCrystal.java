@@ -34,37 +34,6 @@ public class RenderCrystal implements ISimpleBlockRenderingHandler {
 		renderer.enableAO = false;
 		int color = SeedRegistry.getInstance().getSeedByID(tile.getIndex()).color;
 		TimeTracker track = new TimeTracker();
-		if (HolidayHelper.isLGBTQ()) {
-			if (track.hasDelayPassed(tile.getWorldObj(), 10)) {
-				switch (lastColor) {
-				case 0:
-					color = 14942979;
-					lastColor= 1;
-					break;
-				case 1:
-					color = 16747520;
-					lastColor = 2;
-					break;
-				case 2:
-					color = 16772352;
-					lastColor = 3;
-					break;
-				case 3:
-					color = 32806;
-					lastColor = 4;
-				break;
-				case 4:
-					color = 19967;
-					lastColor = 5;
-					break;
-				case 5:
-					color = 7669639;
-					lastColor = 0;
-					break;
-					
-				}
-			}
-		}
 		tess.setColorOpaque_I(color);
 		if (HolidayHelper.isBirthdayJared()) {
 			renderer.renderBlockByRenderType(Blocks.cake, x, y, z);
