@@ -1,0 +1,57 @@
+# Commands
+commands.fluxedcrystals.usage=/fluxedcrystals
+commands.fluxedcrystals.seed-from-current.usage=/fluxedcrystals seed-from-current
+commands.fluxedcrystals.seed-from-current.success=A template seed has been created out of %s
+
+# Other
+itemGroup.FluxedCrystals2=变换水晶 2
+item.fluxedcrystals.universalSeed.name=空白种子
+item.fluxedcrystals.seed.name=%s 种子
+item.fluxedcrystals.smoothShard.name=光滑 %s 碎片
+item.fluxedcrystals.roughShard.name=粗糙 %s 碎片
+item.fluxedcrystals.roughChunk.name=粗糙 %s 碎块
+tile.fluxedcrystals.poweredSoil.name=充能土壤
+tile.fluxedcrystals.poweredSoilMana.name=充能魔力土壤
+tile.fluxedcrystals.poweredSoilEU.name=充能EU土壤
+item.fluxedcrystals.upgradeRangeBasic.name=基础范围升级
+item.fluxedcrystals.upgradeRangeGreater.name=增强范围升级
+item.fluxedcrystals.upgradeRangeAdvanced.name=高级范围升级
+tile.fluxedcrystals.gemCutter.name=宝石切割刀
+item.fluxedcrystals.universalSeed.name=通用种子
+item.fluxedcrystals.upgradeEfficiency.name=效率升级
+item.fluxedcrystals.upgradeNight.name=夜间工作升级
+item.fluxedcrystals.upgradeSpeed.name=速度升级
+item.fluxedcrystals.upgradeAutomation.name=自动收割升级
+item.fluxedcrystals.upgradeMana.name=魔力能源升级
+item.fluxedcrystals.upgradeEssentia.name=要素能源升级
+item.fluxedcrystals.upgradeLP.name=血之能源升级
+item.fluxedcrystals.upgradeRange.name=范围升级
+tile.fluxedcrystals.seedInfuser.name=种子融合机
+item.fluxedcrystals.scytheWood.name=木镰刀
+item.fluxedcrystals.scytheStone.name=石镰刀
+item.fluxedcrystals.scytheIron.name=铁镰刀
+item.fluxedcrystals.scytheGold.name=金镰刀
+item.fluxedcrystals.scytheDiamond.name=钻石镰刀
+item.fluxedcrystals.crystalSword.name=%s剑
+item.fluxedcrystals.crystalPick.name=%s镐
+item.fluxedcrystals.crystalAxe.name=%s斧
+item.fluxedcrystals.crystalShovel.name=%s铲
+
+
+death.attack.Crystal=%s被水晶碎片分割成了碎片
+tile.fluxedcrystals.gemRefiner.name=宝石精炼仪
+
+# Old Stuff
+item.shardHelm.name=%s头盔
+item.shardChest.name=%s胸甲
+item.shardLegs.name=%s护腿
+item.shardBoots.name=%s靴子
+tile.Manager Block.name=农场管理器
+tile.Blood Manager Block.name=血魔法农场管理器
+tile.Thaumic Manager Block=神秘农场管理器
+tile.Mana Manager Block.name=魔力农场管理器
+tile.Industrial Manager Block.name=工业农场管理器
+item.hammerCrystal.name=水晶之锤
+fc.manager.energy.eu=当前能源 EU
+fc.manager.energy.rf=当前能源 RF
+fc.manager.energy.mana=当前能源 Mana
