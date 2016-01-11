@@ -292,7 +292,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 18,
+      "seedID": 18,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -309,7 +309,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 19,
+      "seedID": 19,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -326,7 +326,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 20,
+      "seedID": 20,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -343,7 +343,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 21,
+      "seedID": 21,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -360,7 +360,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 22,
+      "seedID": 22,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -377,7 +377,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 23,
+      "seedID": 23,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -394,7 +394,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 24,
+      "seedID": 24,
       "modRequired": "EnderIO",
       "type": "crystal"
     },
@@ -411,7 +411,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 25,
+      "seedID": 25,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -428,7 +428,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 26,
+      "seedID": 26,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -445,7 +445,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 27,
+      "seedID": 27,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -462,7 +462,7 @@
       "dropMin": 3,
       "dropMax": 8,
       "seedReturn": 1,
-      "ID": 28,
+      "seedID": 28,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -479,7 +479,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 29,
+      "seedID": 29,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -496,7 +496,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 30,
+      "seedID": 30,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -513,7 +513,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 31,
+      "seedID": 31,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -530,7 +530,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 32,
+      "seedID": 32,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -547,7 +547,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 33,
+      "seedID": 33,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -564,7 +564,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 34,
+      "seedID": 34,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -581,7 +581,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 35,
+      "seedID": 35,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -598,7 +598,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 36,
+      "seedID": 36,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
@@ -615,7 +615,7 @@
       "powerPerStage": 4000,
       "refinerAmount": 4,
       "seedReturn": 1,
-      "ID": 37,
+      "seedID": 37,
       "modRequired": "ThermalFoundation",
       "type": "crystal"
     },
