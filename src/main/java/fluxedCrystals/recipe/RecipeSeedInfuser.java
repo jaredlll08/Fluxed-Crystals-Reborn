@@ -3,6 +3,7 @@ package fluxedCrystals.recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+
 import java.util.ArrayList;
 
 public class RecipeSeedInfuser
@@ -38,19 +39,23 @@ public class RecipeSeedInfuser
 
 	public boolean matches (ItemStack ingredient, ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
+		
 		for (int id : ids) {
 			String name = OreDictionary.getOreName(id);
+			if (name.contains("FMC")){ return false;}
+			
 			if (matches(name) && ingredient.isItemEqual(this.ingredient)) {
 				return true;
 			}
 		}
-		return stack != null && OreDictionary.itemMatches(stack, input, false);
+		return stack != null && OreDictionary.itemMatches(stack, input, true);
+		
 	}
 
 	private boolean matches (String oreDict) {
-		ArrayList<ItemStack> stacks = OreDictionary.getOres(oreDict);
-		for (ItemStack stack : stacks) {
-			if (OreDictionary.itemMatches(stack, input, false) && ingredient.isItemEqual(this.ingredient)) {
+		ArrayList<ItemStack> listStacks = OreDictionary.getOres(oreDict);
+		for (ItemStack stack : listStacks) {
+			if (OreDictionary.itemMatches(stack, input, true) && ingredient.isItemEqual(this.ingredient)) {
 				return true;
 			}
 		}

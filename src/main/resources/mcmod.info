@@ -1,13 +1,13 @@
 [
 {
   "modid": "fluxedcrystals",
-  "name": "Fluxed-Crystals 2",
+  "name": "Fluxed-Crystals 2 - FerretEdition",
   "description": "Powered Crystal Farming!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Jaredlll08, Darkbyte, JHarb52207"],
+  "authorList": ["Jaredlll08, Darkbyte, JHarb52207, El Cid534"],
   "credits": "Roze, for the amazing crystal texture",
   "logoFile": "FCLogo.png",
   "screenshots": [],

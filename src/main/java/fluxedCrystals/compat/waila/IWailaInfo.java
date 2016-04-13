@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 /**
- * Used to add WAILA compatability without using and abusing <code>{@literal @}Optional</code>
+ * Used to add WAILA compatibility without using and abusing <code>{@literal @}Optional</code>
  * <p/>
  * Must be implemented on a block,  will pass it to the TileEntity by default
  */
