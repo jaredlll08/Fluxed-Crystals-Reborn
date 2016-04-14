@@ -2,9 +2,12 @@ package fluxedCrystals.recipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import fluxedCrystals.util.LogHelper;
 
 
 import java.util.ArrayList;
+
+import fluxedCrystals.handler.ConfigurationHandler;
 
 public class RecipeSeedInfuser
 {
@@ -14,6 +17,7 @@ public class RecipeSeedInfuser
 	private ItemStack ingredient;
 	private int inputAmount;
 	private int index = -1;
+	private String[] blacklist = ConfigurationHandler.oreDictBlacklist.getStringList();
 
 	public RecipeSeedInfuser (ItemStack ingredient, ItemStack input, ItemStack output, int inputAmount) {
 
@@ -39,23 +43,47 @@ public class RecipeSeedInfuser
 
 	public boolean matches (ItemStack ingredient, ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
+		boolean fail = false;
+		
+		 
+		 /* a list of ore names, a list of ones to ignore
+		 * and a ingredient
+		 * 
+		 *  We are trying to check all ids, and each id against all blacklist items.
+		 */
 		
 		for (int id : ids) {
-			String name = OreDictionary.getOreName(id);
-			if (name.contains("FMC")){ return false;}
+			String name = OreDictionary.getOreName(id); //get oredict name from id, i.e dustGunpowder or FMC250Material.
 			
+			LogHelper.info("Blacklist.length="+blacklist.length+" | oreDict name="+name);
+			if (!(blacklist.length ==0) ){
+				//only do this if blacklist has at least 1 entry				
+				for (int i = 0; i < blacklist.length; i++){
+				 
+					if (name.contains(blacklist[i])){ fail=true;} 
+		        }	
+			}
+		        
+			if (fail==true){fail=false; continue;}//it failed the blacklist check so just finish this iteration.
 			if (matches(name) && ingredient.isItemEqual(this.ingredient)) {
+				
 				return true;
 			}
 		}
-		return stack != null && OreDictionary.itemMatches(stack, input, true);
+		
+		return stack != null && OreDictionary.itemMatches(stack, input, false);
 		
 	}
-
+	private boolean blacklistcheck ( String oreName, int i){
+		
+		
+	return true;
+	}
+	
 	private boolean matches (String oreDict) {
 		ArrayList<ItemStack> listStacks = OreDictionary.getOres(oreDict);
 		for (ItemStack stack : listStacks) {
-			if (OreDictionary.itemMatches(stack, input, true) && ingredient.isItemEqual(this.ingredient)) {
+			if (OreDictionary.itemMatches(stack, input, false) && ingredient.isItemEqual(this.ingredient)) {
 				return true;
 			}
 		}
