@@ -11,6 +11,6 @@ Changelog:
 Current build for 1.710 is Fluxed Crystal 2 1.0.7b-FerretEdition:
 	https://www.dropbox.com/s/29xonez6ohf477q/Fluxed-Crystals2-1.0.7b-FerretEdition.jar?dl=0
 	
-	Old Version:
+Old Version:
 Fluxed Crystal 2 1.0.7-FerretEdition
 	https://www.dropbox.com/s/8i3uc3byer8sk7j/Fluxed-Crystals2-1.0.7-FerretEdition.jar?dl=0
