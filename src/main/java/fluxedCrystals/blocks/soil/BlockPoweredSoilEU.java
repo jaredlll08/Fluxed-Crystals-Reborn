@@ -38,7 +38,9 @@ public class BlockPoweredSoilEU extends Block implements ITileEntityProvider, IP
 	@Override
 	public TileEntity createNewTileEntity (World p_149915_1_, int p_149915_2_) {
 		if(Loader.isModLoaded("IC2")){
-		return new TileSoilEU();}else{
+		return new TileSoilEU();}
+		else
+		{
 			return new TileSoilEUStripped();	
 		}
 	}
