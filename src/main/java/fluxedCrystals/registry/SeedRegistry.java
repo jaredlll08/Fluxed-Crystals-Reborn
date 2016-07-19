@@ -84,7 +84,7 @@ public class SeedRegistry
 			seed.dropMin = 3;
 			seed.ingredientAmount = itemStack.stackSize;
 			seed.isSharp = true;
-			@SuppressWarnings("ConstantConditions") String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
+			String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
 			if (mod != null && !mod.equalsIgnoreCase("minecraft")) {
 				seed.modRequired = mod;
 			}
@@ -294,7 +294,7 @@ public class SeedRegistry
 
 			try {
 
-				@SuppressWarnings("UnusedAssignment") Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 
