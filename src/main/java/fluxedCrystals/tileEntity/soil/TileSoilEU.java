@@ -17,7 +17,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.init.FCItems;
@@ -29,10 +31,11 @@ import fluxedCrystals.util.ITileSoil;
 /**
  * Created by Jared on 11/2/2014.
  */
-@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2")
+@Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "IC2",striprefs = true)
 public class TileSoilEU extends TileEntity implements ISidedInventory, ITileSoil, IEnergySink {
 
 	private final int[] UPGRADE_SLOTS = { 0, 1, 2 };
+	private final boolean isIc2Loaded = Loader.isModLoaded("IC2");
 	public ItemStack[] items;
 	public double energy;
 	public double maxEnergy;
@@ -335,14 +338,21 @@ public class TileSoilEU extends TileEntity implements ISidedInventory, ITileSoil
 	    {
 	      this.addedToWorld = true;
 	      this.addedToEnet = true;
-	      Ic2EventPoster();
+	      if(isIc2Loaded){
+	    	  TileLoadEvent();
+	      }
 	    }
 	  
 	  }
-	 private void Ic2EventPoster(){
-		MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));	 
-		 
-	 }
+	@Optional.Method(modid="IC2")
+	private void TileLoadEvent(){
+		MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+	}
+	@Optional.Method(modid="IC2")
+	private void TileUnloadEvent(){
+		 MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+	}
+
 	  public void validate()
 	  {
 	    super.validate();
@@ -356,8 +366,9 @@ public class TileSoilEU extends TileEntity implements ISidedInventory, ITileSoil
 	    if (this.addedToEnet)
 	    {
 	      if (!this.worldObj.isRemote) {
-	        MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-	      }
+	    	  if(isIc2Loaded){
+	    		  TileUnloadEvent();
+	      }}
 	      this.addedToEnet = false;
 	    }
 	    super.invalidate();
