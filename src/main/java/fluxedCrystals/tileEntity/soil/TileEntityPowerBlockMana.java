@@ -1,5 +1,6 @@
 package fluxedCrystals.tileEntity.soil;
 
+import cpw.mods.fml.common.Optional;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.init.FCItems;
@@ -23,6 +24,11 @@ import vazkii.botania.api.mana.IThrottledPacket;
 /**
  * Created by Jared on 11/2/2014.
  */
+//cut out Botania crap when Botania ain't in existence
+@Optional.InterfaceList({
+@Optional.Interface(iface = "vazkii.botania.api.mana.IManaReceiver", modid = "Botania",striprefs = true),
+@Optional.Interface(iface = "vazkii.botania.api.mana.IThrottledPacket", modid = "Botania",striprefs = true)
+})
 public class TileEntityPowerBlockMana extends TileEntity implements ISidedInventory, IManaReceiver, ITileSoil, IThrottledPacket
 {
 
@@ -276,22 +282,22 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 
 		return energy;
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public boolean isFull () {
 		return mana >= maxMana;
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public void recieveMana (int mana) {
 		this.mana = Math.min(maxMana, this.mana + mana);
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public boolean canRecieveManaFromBursts () {
 		return true;
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public int getCurrentMana () {
 		return mana;
@@ -315,7 +321,7 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	public void drainEnergy(int energy) {
 		recieveMana(-(energy/10));
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public void markDispatchable() {
 	}

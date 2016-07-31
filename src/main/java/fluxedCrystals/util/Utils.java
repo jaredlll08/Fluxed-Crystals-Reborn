@@ -15,7 +15,7 @@ public class Utils
 	public static boolean isPlayerSpecial(String player)
 	{
 
-		return player.equalsIgnoreCase("Namroc_Smith") || player.toLowerCase().equalsIgnoreCase("jaredlll08");
+		return player.equalsIgnoreCase("Namroc_Smith") || player.toLowerCase().equalsIgnoreCase("jaredlll08") || player.toLowerCase().equalsIgnoreCase("thebluetroll");
 
 	}
 

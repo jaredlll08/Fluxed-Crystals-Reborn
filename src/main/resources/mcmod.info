@@ -11,6 +11,6 @@
   "credits": "Roze, for the amazing crystal texture",
   "logoFile": "FCLogo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["IC2"]
 }
 ]
