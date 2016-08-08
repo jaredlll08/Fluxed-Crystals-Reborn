@@ -273,7 +273,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		if (isUpgradeActive(FCItems.upgradeEffeciency)) {
 			energy /= getEffeciency();
 		}
-
+		if( energy >=100000){
+			energy=100000;
+		}
 		return energy;
 	}
 
