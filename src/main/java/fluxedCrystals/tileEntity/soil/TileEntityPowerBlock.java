@@ -13,11 +13,13 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
+import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEnergyBase;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.ITileSoil;
+import fluxedCrystals.util.LogHelper;
 
 /**
  * Created by Jared on 11/2/2014.
@@ -250,8 +252,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 	}
 
 	public int getUpgradeDrain (int idx) {
+		//this gets called to check how much power we need for the seed on top, the block doesnt know, but gets handed the id of the seed.
 		int energy = SeedRegistry.getInstance().getSeedByID(idx).powerPerStage;
-
+		
 		for (int slot : UPGRADE_SLOTS) {
 			ItemStack item = getStackInSlot(slot);
 			if (item != null) {
@@ -260,6 +263,9 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 				}
 				if (item.isItemEqual(new ItemStack(FCItems.upgradeSpeed))) {
 					energy += energy / 12;
+				}
+				if (item.isItemEqual(new ItemStack(FCItems.upgradeAutomation))){
+					energy= energy + 35;
 				}
 			}
 		}

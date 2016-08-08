@@ -3,7 +3,6 @@ package fluxedCrystals.blocks.soil;
 import fluxedCrystals.items.Upgrade;
 import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.soil.TileSoilEU;
-import fluxedCrystals.tileEntity.soil.TileSoilEUStripped;
 import fluxedCrystals.util.IPowerSoil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

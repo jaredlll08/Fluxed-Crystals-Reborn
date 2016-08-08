@@ -6,6 +6,7 @@ import fluxedCrystals.init.FCItems;
 import fluxedCrystals.recipe.*;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
+import fluxedCrystals.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
@@ -293,8 +294,8 @@ public class SeedRegistry
 		if (fileToRead != null && fileToRead.exists()) {
 
 			try {
-
-				 Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				//why are we getting gson involved just to ignore it?
+				// Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 
@@ -309,7 +310,7 @@ public class SeedRegistry
 			}
 			catch (FileNotFoundException ignored) {
 
-				// NOOP
+				LogHelper.error("File Not Found!:Seed Registry:ReadFromDisk (I swear the file was just there)!");
 
 			}
 			catch (IOException e) {
