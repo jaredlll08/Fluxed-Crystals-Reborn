@@ -1,11 +1,11 @@
 [
 {
   "modid": "fluxedCrystals",
-  "name": "Fluxed-Crystals 2 - FerretEdition",
+  "name": "Fluxed-Crystals 2",
   "description": "Powered Crystal Farming!",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/TheBlueTroll/Fluxed-Crystals-Reborn",
+  "url": "https://github.com/jaredlll08/Fluxed-Crystals-Reborn",
   "updateUrl": "",
   "authorList": ["Jaredlll08, Darkbyte, JHarb52207, El Cid534"],
   "credits": "Roze, for the amazing crystal texture",

@@ -1,4 +1,4 @@
-##Welcome to Fluxed Crystals - Ferret Edition!
+##Welcome to Fluxed Crystals!
 
 Extra changes to fix issues with The Ferret Modpack
 
