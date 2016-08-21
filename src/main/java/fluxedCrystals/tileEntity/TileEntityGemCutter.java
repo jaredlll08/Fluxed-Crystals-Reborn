@@ -235,7 +235,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 				this.itemCycleTime++;
 
-				if (this.itemCycleTime == getSpeed()) {
+				if (this.itemCycleTime >= getSpeed()) {
 
 					this.itemCycleTime = 0;
 					refine();
