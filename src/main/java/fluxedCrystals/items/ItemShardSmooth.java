@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ItemShardSmooth extends Item {

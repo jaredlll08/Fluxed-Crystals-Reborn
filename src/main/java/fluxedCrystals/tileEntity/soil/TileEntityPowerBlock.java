@@ -13,13 +13,11 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
-import fluxedCrystals.blocks.soil.BlockPowerBlock;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEnergyBase;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.ITileSoil;
-import fluxedCrystals.util.LogHelper;
 
 /**
  * Created by Jared on 11/2/2014.
@@ -273,7 +271,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		if (isUpgradeActive(FCItems.upgradeEffeciency)) {
 			energy /= getEffeciency();
 		}
-		if( energy >=100000){
+		if( energy >=100000){//clamp to max storage of the soil, its not like anything can use more anyway
 			energy=100000;
 		}
 		return energy;

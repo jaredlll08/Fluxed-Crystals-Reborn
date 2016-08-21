@@ -1,6 +1,5 @@
 package fluxedCrystals.tileEntity;
 
-import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.compat.waila.IWailaInfo;
 import fluxedCrystals.init.FCItems;
@@ -27,7 +26,8 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo
 	private int ticksgrown = 0;
 	private boolean harvested = false;
 	private ITileSoil power;
-	private BlockCrystal crystal;
+	//private BlockCrystal crystal;
+	private SeedRegistry SeedReg = SeedRegistry.getInstance(); //by the time a new tile ent is called, we are WAYYY past loading.
 
 	public boolean isHarvested () {
 		return harvested;
@@ -59,7 +59,7 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo
 		return power;
 	}
 
-	public void setPower (ITileSoil power) {
+	public void setPower (ITileSoil power) { // why the hell are we passing around tile ents like they are intergers?
 		this.power = power;
 	}
 
@@ -68,7 +68,7 @@ public class TileEntityCrystal extends TileEntity implements IWailaInfo
 		if (power == null && worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof ITileSoil) {
 			power = (ITileSoil) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
 		}
-		if (SeedRegistry.getInstance().getSeedByID(idx) != null && power != null) {
+		if (SeedReg.getSeedByID(idx) != null && power != null) {
 			ticksgrown++;
 			if (ticksgrown > SeedRegistry.getInstance().getSeedByID(idx).growthTime / power.getSpeed()) {
 				worldObj.getBlock(xCoord, yCoord, zCoord).updateTick(worldObj, xCoord, yCoord, zCoord, worldObj.rand);

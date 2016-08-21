@@ -329,8 +329,8 @@ public class SeedRegistry
 
 	}
 
-	public void Save () {/*
-
+	public void Save () {  
+		if(fluxedCrystals.handler.ConfigurationHandler.seedRegistryAutosave){
 		Writer writer = null;
 
 		try {
@@ -366,7 +366,7 @@ public class SeedRegistry
 		//noinspection ResultOfMethodCallIgnored
 		file1.renameTo(file2);
 
-	*/}
+	}}
 
 	public HashMap<Integer, Seed> getSeedMap () {
 

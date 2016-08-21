@@ -4,8 +4,6 @@ import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySink;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -19,11 +17,9 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
 import fluxedCrystals.blocks.crystal.CrystalBase;
 import fluxedCrystals.init.FCItems;
-import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.tileEntity.TileEntityCrystal;
 import fluxedCrystals.util.ITileSoil;

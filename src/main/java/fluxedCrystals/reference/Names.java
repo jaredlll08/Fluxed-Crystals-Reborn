@@ -14,6 +14,7 @@ public class Names {
 		public static final String RESET_SEEDS = "reset-seeds";
 		public static final String SEED_FROM_CURRENT = "seed-from-current";
 		public static final String SEED_EDITOR = "seed-editor";
+		public static final String SET_DEBUG = "debug";
 
 	}
 

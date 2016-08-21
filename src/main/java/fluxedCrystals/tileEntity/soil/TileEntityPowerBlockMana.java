@@ -52,7 +52,7 @@ public class TileEntityPowerBlockMana extends TileEntity implements ISidedInvent
 	public boolean growPlant (World world, boolean night) {
 		if (world != null) {
 			if (world.getBlock(xCoord, yCoord + 1, zCoord) instanceof CrystalBase) {
-				TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
+				//TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(xCoord, yCoord + 1, zCoord);
 				return ((CrystalBase) world.getBlock(xCoord, yCoord + 1, zCoord)).growCrop(world, xCoord, yCoord + 1, zCoord, world.rand, night);
 			}
 		}

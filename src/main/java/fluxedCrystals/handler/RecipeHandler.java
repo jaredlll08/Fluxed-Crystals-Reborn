@@ -22,7 +22,7 @@ public class RecipeHandler {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoil, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "ingotIron", 'a', Blocks.sand, 'e', Items.wheat_seeds));
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoilMana, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "ingotManasteel", 'a', "livingrock", 'e', "manaPearl"));
-		if(Loader.isModLoaded("IC2")){
+		if(Loader.isModLoaded("IC2")){//its only craftable if ic2 is installed
 		GameRegistry.addRecipe(new ShapedOreRecipe(FCBlocks.poweredSoilEU, "sis", "aea", "sis", 's', Blocks.soul_sand, 'i', "circuitBasic", 'a', "itemRubber", 'e', "dustDiamond"));
 		}
 

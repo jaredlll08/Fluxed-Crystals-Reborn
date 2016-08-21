@@ -74,11 +74,7 @@ public class RecipeSeedInfuser
 		return stack != null && OreDictionary.itemMatches(stack, input, false);
 		
 	}
-	private boolean blacklistcheck ( String oreName, int i){
-		
-		
-	return true;
-	}
+
 	
 	private boolean matches (String oreDict) {
 		ArrayList<ItemStack> listStacks = OreDictionary.getOres(oreDict);
