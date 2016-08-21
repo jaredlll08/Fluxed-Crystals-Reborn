@@ -3,6 +3,7 @@ package fluxedCrystals.tileEntity;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.recipe.RecipeRegistry;
 import fluxedCrystals.recipe.RecipeSeedInfuser;
+import fluxedCrystals.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -35,23 +36,27 @@ public class TileEntitySeedInfuser extends TileEntity implements IInventory
 	public boolean isInfusing () {
 		return infusing;
 	}
-
+	private void DebugLogging(String string){
+		if(fluxedCrystals.handler.ConfigurationHandler.oreDictRecipieDebug){
+			LogHelper.warn(string);
+		}
+	}
 	public void setInfusing (boolean infusing) {
 
 		this.infusing = infusing;
-		System.out.println("0|" + infusing);
+		DebugLogging("0|" + infusing);
 		setRecipeIndex(-1);
-		System.out.println("1|" + getRecipeIndex());
+		DebugLogging("1|" + getRecipeIndex());
 
 		if (getStackInSlot(0) != null && getStackInSlot(1) != null) {
-			System.out.println("2|" + (getStackInSlot(0) != null) + "|" + (getStackInSlot(1) != null));
+			DebugLogging("2|" + (getStackInSlot(0) != null) + "|" + (getStackInSlot(1) != null));
 
 			for (RecipeSeedInfuser recipe : RecipeRegistry.getAllSeedInfuserRecipes().values()) {
-				System.out.println("3|" + recipe.getIndex());
+				DebugLogging("3|" + recipe.getIndex());
 
 
 				if (recipe.matches(getStackInSlot(0), getStackInSlot(1)) || recipe.matchesExact(getStackInSlot(0), getStackInSlot(1))) {
-					System.out.println("4|" + recipe.getIndex());
+					DebugLogging("4|" + recipe.getIndex());
 
 					setRecipeIndex(recipe.getIndex());
 					break;

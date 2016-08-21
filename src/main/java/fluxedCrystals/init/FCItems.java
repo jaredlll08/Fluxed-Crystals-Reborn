@@ -46,7 +46,6 @@ public class FCItems {
 	public static Item crystalAxe= new ItemCrystalAxe();
 	
 	
-	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 	public static Map<String, Item> itemRegistry = new HashMap<String, Item>();
 
 	public FCItems() {

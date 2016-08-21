@@ -86,7 +86,7 @@ public class MutationRegistry
 
 			try {
 
-				@SuppressWarnings("UnusedAssignment") Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 

@@ -4,6 +4,7 @@ import fluxedCrystals.items.Upgrade;
 import fluxedCrystals.reference.Textures;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import fluxedCrystals.util.IPowerSoil;
+import fluxedCrystals.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -11,19 +12,53 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class BlockPowerBlock extends Block implements ITileEntityProvider, IPowerSoil
+public class BlockPowerBlock extends Block implements ITileEntityProvider, IPowerSoil 
 {
+	public boolean isWorking = false;
 
+	
+	@SideOnly(Side.CLIENT)
+	public static IIcon OffIcon;
+	@SideOnly(Side.CLIENT)
+	public static IIcon OnIcon;
+
+		
+		
+	
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+	    super.registerBlockIcons(register);
+	    OffIcon = register.registerIcon(Textures.Blocks.POWERED_SOIL_OFF);
+	    OnIcon = register.registerIcon(Textures.Blocks.POWERED_SOIL_ON);
+
+	}
+	@Override
+	public IIcon getIcon(int side, int meta) {//meta dont matter
+		if(this.isWorking) {
+	    	return OnIcon;
+	    }else{
+	        return OffIcon;
+
+	    }
+	  }
+	
 	public BlockPowerBlock () {
-
+		
+		
 		super(Material.grass);
 		this.setHardness(1.0F);
 		this.setHarvestLevel("shovel", 1);
-		this.setBlockTextureName(Textures.Blocks.POWERED_SOIL);
-		setStepSound(Block.soundTypeGrass);
+		this.setBlockTextureName(Textures.Blocks.POWERED_SOIL_OFF); //This is how the texture is currently set...
+		setStepSound(Block.soundTypeGrass); //also shouldnt this be dirt?
 	}
 
 	public ArrayList<ItemStack> getDrops (World world, int x, int y, int z, int metadata, int fortune) {

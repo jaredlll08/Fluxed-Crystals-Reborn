@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.Loader;
+
 public class BlockPoweredSoilEU extends Block implements ITileEntityProvider, IPowerSoil
 {
 
@@ -36,7 +38,6 @@ public class BlockPoweredSoilEU extends Block implements ITileEntityProvider, IP
 	public TileEntity createNewTileEntity (World p_149915_1_, int p_149915_2_) {
 		return new TileSoilEU();
 	}
-
 	public void onBlockPreDestroy (World world, int x, int y, int z, int meta) {
 		TileSoilEU tile = (TileSoilEU) world.getTileEntity(x, y, z);
 		if (tile != null) {

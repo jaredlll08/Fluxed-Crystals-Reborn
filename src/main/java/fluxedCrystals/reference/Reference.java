@@ -2,7 +2,7 @@ package fluxedCrystals.reference;
 
 public class Reference {
 
-	public static final String MOD_ID = "fluxedcrystals";
+	public static final String MOD_ID = "fluxedCrystals";
 	public static final String LOWERCASE_MOD_ID = MOD_ID.toLowerCase();
 	public static final String MOD_NAME = "FluxedCrystals2";
 	public static final String VERSION = "@VERSION@";

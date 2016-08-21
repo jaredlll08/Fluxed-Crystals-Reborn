@@ -6,6 +6,7 @@ import fluxedCrystals.init.FCItems;
 import fluxedCrystals.recipe.*;
 import fluxedCrystals.reference.Reference;
 import fluxedCrystals.util.JsonTools;
+import fluxedCrystals.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.io.FileUtils;
@@ -84,7 +85,7 @@ public class SeedRegistry
 			seed.dropMin = 3;
 			seed.ingredientAmount = itemStack.stackSize;
 			seed.isSharp = true;
-			@SuppressWarnings("ConstantConditions") String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
+			String mod = JsonTools.getStringForItemStack(itemStack, false, false).split(":")[0];
 			if (mod != null && !mod.equalsIgnoreCase("minecraft")) {
 				seed.modRequired = mod;
 			}
@@ -293,8 +294,8 @@ public class SeedRegistry
 		if (fileToRead != null && fileToRead.exists()) {
 
 			try {
-
-				@SuppressWarnings("UnusedAssignment") Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				//why are we getting gson involved just to ignore it?
+				// Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 				JsonParser parser = new JsonParser();
 
@@ -309,7 +310,7 @@ public class SeedRegistry
 			}
 			catch (FileNotFoundException ignored) {
 
-				// NOOP
+				LogHelper.error("File Not Found!:Seed Registry:ReadFromDisk (I swear the file was just there)!");
 
 			}
 			catch (IOException e) {
@@ -328,8 +329,8 @@ public class SeedRegistry
 
 	}
 
-	public void Save () {
-
+	public void Save () {  
+		if(fluxedCrystals.handler.ConfigurationHandler.seedRegistryAutosave){
 		Writer writer = null;
 
 		try {
@@ -365,7 +366,7 @@ public class SeedRegistry
 		//noinspection ResultOfMethodCallIgnored
 		file1.renameTo(file2);
 
-	}
+	}}
 
 	public HashMap<Integer, Seed> getSeedMap () {
 

@@ -1,6 +1,7 @@
 package fluxedCrystals.tileEntity;
 
 import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.network.PacketHandler;
@@ -19,7 +20,11 @@ import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.IThrottledPacket;
 
 import java.util.EnumSet;
-
+// cut out Botania crap when Botania ain't in existence
+@Optional.InterfaceList({
+@Optional.Interface(iface = "vazkii.botania.api.mana.IManaReceiver", modid = "Botania",striprefs = true),
+@Optional.Interface(iface = "vazkii.botania.api.mana.IThrottledPacket", modid = "Botania",striprefs = true)
+})
 public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver, ISidedInventory, IThrottledPacket {
 
 	private static int[] slotsAll = { 0, 1, 2, 3, 4, 5, 6 };
@@ -230,14 +235,15 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 
 				this.itemCycleTime++;
 
-				if (this.itemCycleTime == getSpeed()) {
+				if (this.itemCycleTime >= getSpeed()) {
 
 					this.itemCycleTime = 0;
 					refine();
 					// TODO Add processing for other energy types
 					if (!isUpgradeActive(FCItems.upgradeMana) && !isUpgradeActive(FCItems.upgradeLP) && !isUpgradeActive(FCItems.upgradeEssentia))
-						storage.extractEnergy(250, false);
-					if(isUpgradeActive(FCItems.upgradeMana))
+						storage.extractEnergy(250, false);  // needs cofh core
+					if(isUpgradeActive(FCItems.upgradeMana))// shit wont be called if upgrade mana isnt installed
+						//and upgrade mana isnt registered if botania isnt installed
 						recieveMana(250/10);
 					sendUpdate = true;
 
@@ -629,17 +635,17 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public EnumSet<ForgeDirection> getValidInputs() {
 		return EnumSet.allOf(ForgeDirection.class);
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public int getCurrentMana() {
 		return mana;
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public boolean isFull() {
 		return mana == MAX_MANA;
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public void recieveMana(int mana) {
 		if (!isFull()) {
@@ -649,7 +655,7 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 			this.mana = MAX_MANA;
 		}
 	}
-
+	@Optional.Method(modid="Botania")
 	@Override
 	public boolean canRecieveManaFromBursts() {
 		return true;
@@ -686,7 +692,8 @@ public class TileEntityGemCutter extends TileEnergyBase implements IManaReceiver
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot != 0 && slot != 2 && slot != 3 && slot != 4;
 	}
-
+	/// nothing calls this
+	@Optional.Method(modid="Botania")
 	@Override
 	public void markDispatchable() {
 	}

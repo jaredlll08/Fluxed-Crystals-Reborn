@@ -226,7 +226,7 @@ public class TileEntityGemRefiner extends TileEnergyBase implements IInventory, 
 
 				this.itemCycleTime++;
 
-				if (this.itemCycleTime == getSpeed()) {
+				if (this.itemCycleTime >= getSpeed()) {
 
 					this.itemCycleTime = 0;
 

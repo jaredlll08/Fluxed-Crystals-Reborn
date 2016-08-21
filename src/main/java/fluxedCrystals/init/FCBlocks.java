@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fluxedCrystals.FluxedCrystals;
 import fluxedCrystals.blocks.crystal.BlockCrystal;
@@ -25,21 +26,23 @@ import fluxedCrystals.tileEntity.soil.TileEntityPowerBlock;
 import fluxedCrystals.tileEntity.soil.TileEntityPowerBlockMana;
 import fluxedCrystals.tileEntity.soil.TileSoilEU;
 
+
+@SuppressWarnings("unused")
 public class FCBlocks {
 	public static Block poweredSoil = new BlockPowerBlock();
 	public static Block poweredSoilMana = new BlockPowerBlockMana();
 	public static Block poweredSoilLP = new BlockPowerBlockLP();
 	public static Block poweredSoilEU = new BlockPoweredSoilEU();
-
+	
 	public static Block crystal = new BlockCrystal();
 	public static Block seedInfuser = new BlockSeedInfuser();
 	public static Block gemCutter = new BlockGemCutter();
 	public static Block gemRefiner = new BlockGemRefiner();
-	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	
 	public static Map<String, Block> blockRegistry = new HashMap<String, Block>();
 
 	public FCBlocks() {
-
+		
 	}
 
 	public static void preInit() {
@@ -49,15 +52,20 @@ public class FCBlocks {
 	public static void initialize() {
 		// GameRegistry.registerTileEntity(TileEnergyBase.class, "FCEnergy");
 
-		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL, Names.Blocks.POWEREDSOIL);
+		registerBlock(poweredSoil, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL,
+				Names.Blocks.POWEREDSOIL);
 		GameRegistry.registerTileEntity(TileEntityPowerBlock.class, Names.Blocks.POWEREDSOIL);
+		if (fluxedCrystals.handler.ConfigurationHandler.botaniaAddon) {
+			registerBlock(poweredSoilMana, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA,
+					Names.Blocks.POWEREDSOILMANA);
+			GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
+		}
+		if (fluxedCrystals.handler.ConfigurationHandler.ic2Addon) {
+			registerBlock(poweredSoilEU, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL + "EU",
+					Names.Blocks.POWEREDSOIL + "EU");
 
-		registerBlock(poweredSoilMana, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOILMANA, Names.Blocks.POWEREDSOILMANA);
-		GameRegistry.registerTileEntity(TileEntityPowerBlockMana.class, Names.Blocks.POWEREDSOILMANA);
-
-		registerBlock(poweredSoilEU, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.POWEREDSOIL + "EU", Names.Blocks.POWEREDSOIL + "EU");
-		GameRegistry.registerTileEntity(TileSoilEU.class, Names.Blocks.POWEREDSOIL + "EU");
-
+			GameRegistry.registerTileEntity(TileSoilEU.class, Names.Blocks.POWEREDSOIL + "EU");
+		}
 		// registerBlock(poweredSoilLP, Reference.LOWERCASE_MOD_ID + "." +
 		// Names.Blocks.POWEREDSOILLP, Names.Blocks.POWEREDSOILLP);
 		// GameRegistry.registerTileEntity(TileEntityPowerBlockLP.class,
@@ -66,13 +74,15 @@ public class FCBlocks {
 		registerBlock(crystal, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.CRYSTAL, Names.Blocks.CRYSTAL, null);
 		GameRegistry.registerTileEntity(TileEntityCrystal.class, Names.Blocks.CRYSTAL);
 
-		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER, Names.Blocks.SEED_INFUSER);
+		registerBlock(seedInfuser, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.SEED_INFUSER,
+				Names.Blocks.SEED_INFUSER);
 		GameRegistry.registerTileEntity(TileEntitySeedInfuser.class, Names.Blocks.SEED_INFUSER);
 
 		registerBlock(gemCutter, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_CUTTER, Names.Blocks.GEM_CUTTER);
 		GameRegistry.registerTileEntity(TileEntityGemCutter.class, Names.Blocks.GEM_CUTTER);
 
-		registerBlock(gemRefiner, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_REFINER, Names.Blocks.GEM_REFINER);
+		registerBlock(gemRefiner, Reference.LOWERCASE_MOD_ID + "." + Names.Blocks.GEM_REFINER,
+				Names.Blocks.GEM_REFINER);
 		GameRegistry.registerTileEntity(TileEntityGemRefiner.class, Names.Blocks.GEM_REFINER);
 
 	}

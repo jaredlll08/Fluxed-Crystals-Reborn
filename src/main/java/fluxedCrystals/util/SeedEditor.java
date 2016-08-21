@@ -23,20 +23,20 @@ public class SeedEditor extends JFrame
 	private JTextField Tier;
 	private JTextField PowerPerStage;
 	private JTextField fieldName;
-	private JComboBox boxIngredient;
-	private JComboBox weightedDrop;
-	private JComboBox weightedDropChance;
+	private JComboBox<Object> boxIngredient;
+	private JComboBox<Object> weightedDrop;
+	private JComboBox<Integer> weightedDropChance;
 	private JColorChooser colorChooser;
-	private JComboBox refinerAmount;
-	private JComboBox dropMin;
-	private JComboBox dropMax;
-	private JComboBox refinerOutput;
-	private JComboBox ingredientAmount;
-	private JComboBox sharp;
-	private JComboBox seedReturn;
+	private JComboBox<Integer> refinerAmount;
+	private JComboBox<Integer> dropMin;
+	private JComboBox<Integer> dropMax;
+	private JComboBox<Integer> refinerOutput;
+	private JComboBox<Integer> ingredientAmount;
+	private JComboBox<Boolean> sharp;
+	private JComboBox<Integer> seedReturn;
 	private JTextField ingredientMetadata;
 	private JTextField weightedDropMetadata;
-	private JComboBox type;
+	private JComboBox<String> type;
 
 	/**
 	 * Create the frame.
@@ -77,7 +77,7 @@ public class SeedEditor extends JFrame
 		lblIngredient.setBounds(10, 61, 68, 14);
 		contentPane.add(lblIngredient);
 
-		boxIngredient = new JComboBox();
+		boxIngredient = new JComboBox<Object>();
 		boxIngredient.setBounds(269, 58, 400, 20);
 		for (Object o : Item.itemRegistry.getKeys()) {
 			boxIngredient.addItem(o);
@@ -91,7 +91,7 @@ public class SeedEditor extends JFrame
 		lblWeightedDrop.setBounds(10, 450, 96, 14);
 		contentPane.add(lblWeightedDrop);
 
-		weightedDrop = new JComboBox();
+		weightedDrop = new JComboBox<Object>();
 		weightedDrop.setBounds(269, 447, 400, 20);
 		weightedDrop.addItem("none");
 		for (Object o : Item.itemRegistry.getKeys()) {
@@ -161,7 +161,7 @@ public class SeedEditor extends JFrame
 		lblWeightedDropChance.setBounds(10, 475, 249, 14);
 		contentPane.add(lblWeightedDropChance);
 
-		weightedDropChance = new JComboBox();
+		weightedDropChance = new JComboBox<Integer>();
 		weightedDropChance.setBounds(269, 472, 515, 20);
 		for (int i = 0; i <= 10; i++) {
 			weightedDropChance.addItem(i);
@@ -172,35 +172,35 @@ public class SeedEditor extends JFrame
 		lblRefinerAmount.setBounds(10, 400, 249, 14);
 		contentPane.add(lblRefinerAmount);
 
-		refinerAmount = new JComboBox();
+		refinerAmount = new JComboBox<Integer>();
 		refinerAmount.setBounds(269, 397, 515, 20);
 		for (int i = 1; i <= 64; i++) {
 			refinerAmount.addItem(i);
 		}
 		contentPane.add(refinerAmount);
 
-		dropMin = new JComboBox();
+		dropMin = new JComboBox<Integer>();
 		dropMin.setBounds(269, 272, 515, 20);
 		for (int i = 1; i <= 64; i++) {
 			dropMin.addItem(i);
 		}
 		contentPane.add(dropMin);
 
-		dropMax = new JComboBox();
+		dropMax = new JComboBox<Integer>();
 		dropMax.setBounds(269, 297, 515, 20);
 		for (int i = 1; i <= 64; i++) {
 			dropMax.addItem(i);
 		}
 		contentPane.add(dropMax);
 
-		refinerOutput = new JComboBox();
+		refinerOutput = new JComboBox<Integer>();
 		refinerOutput.setBounds(268, 372, 516, 20);
 		for (int i = 1; i <= 64; i++) {
 			refinerOutput.addItem(i);
 		}
 		contentPane.add(refinerOutput);
 
-		ingredientAmount = new JComboBox();
+		ingredientAmount = new JComboBox<Integer>();
 		ingredientAmount.setBounds(269, 83, 515, 20);
 		for (int i = 1; i <= 64; i++) {
 			ingredientAmount.addItem(i);
@@ -215,7 +215,7 @@ public class SeedEditor extends JFrame
 		lblSharp.setBounds(10, 525, 249, 14);
 		contentPane.add(lblSharp);
 
-		sharp = new JComboBox();
+		sharp = new JComboBox<Boolean>();
 		sharp.setBounds(269, 522, 515, 20);
 		sharp.addItem(true);
 		sharp.addItem(false);
@@ -225,7 +225,7 @@ public class SeedEditor extends JFrame
 		btnExit.setBounds(10, 581, 89, 23);
 		contentPane.add(btnExit);
 
-		seedReturn = new JComboBox();
+		seedReturn = new JComboBox<Integer>();
 		seedReturn.setBounds(269, 497, 515, 20);
 		for (int i = 0; i <= 64; i++) {
 			seedReturn.addItem(i);
@@ -263,7 +263,7 @@ public class SeedEditor extends JFrame
 		lblType.setBounds(10, 550, 46, 14);
 		contentPane.add(lblType);
 
-		type = new JComboBox();
+		type = new JComboBox<String>();
 		type.setBounds(269, 547, 515, 20);
 		contentPane.add(type);
 		type.addItem("crop");

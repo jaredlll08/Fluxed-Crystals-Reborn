@@ -47,7 +47,7 @@ public class GUIGemRefiner extends GuiContainer {
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 4, 14, 42);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		}
-		if (tile.isUpgradeActive(FCItems.upgradeMana)) {
+		if (tile.isUpgradeActive(FCItems.upgradeMana)) { //Potential crash , dont play with fire
 			GL11.glColor4d(tile.getCurrentMana()/tile.getMaxMana(), tile.getCurrentMana()/tile.getMaxMana(), tile.getCurrentMana()/tile.getMaxMana(), 1f);
 			drawTexturedModalRect(guiLeft + 14, guiTop + 15, 193, 47, 14, 42);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);

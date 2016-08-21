@@ -65,7 +65,7 @@ public abstract class TileSolarFlux extends TileEntity
 	@Override
 	public void updateEntity () {
 		super.updateEntity();
-		int oldEnergy = energyStored;
+		//int oldEnergy = energyStored;
 		generateEnergy(worldObj, xCoord, yCoord, zCoord, !worldObj.provider.isDaytime(), worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord));
 		if (new Random().nextInt(energyRate) == 0) {
 			sendEnergy(worldObj, xCoord, yCoord, zCoord, range);

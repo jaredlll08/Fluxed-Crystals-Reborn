@@ -63,7 +63,7 @@ public class OreDict
 	}
 
 	private static boolean isRegistered (ItemStack stack, ArrayList<ItemStack> toCheck) {
-		Iterator i$ = toCheck.iterator();
+		Iterator<ItemStack> i$ = toCheck.iterator();
 
 		ItemStack check;
 		do {

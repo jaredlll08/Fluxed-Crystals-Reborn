@@ -55,27 +55,29 @@ public class BlockCrystal extends CrystalBase implements ITileEntityProvider, IW
 	}
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(x, y, z);
+		
 		if (!world.isRemote) {
+			TileEntityCrystal crystal = (TileEntityCrystal) world.getTileEntity(x, y, z);
 			int index = crystal.getIdx();
-			if (world.getBlockMetadata(x, y, z) < 7) {
 				if (world.getTileEntity(x, y - 1, z) != null && world.getTileEntity(x, y - 1, z) instanceof ITileSoil) {
 					ITileSoil soil = (ITileSoil) world.getTileEntity(x, y - 1, z);
 					if (crystal != null && soil != null) {
+						if (world.getBlockMetadata(x, y, z) < 7) {
 						if (crystal.getTicksgrown() >= SeedRegistry.getInstance().getSeedByID(crystal.getIdx()).growthTime / soil.getSpeed()) {
 							if (soil.getStoredEnergy() >= soil.getUpgradeDrain(index) && growCrop(world, x, y, z, rand, true)) {
 								crystal.setTicksgrown(0);
 								soil.drainEnergy(soil.getUpgradeDrain(index));
 							}
 						}
-						if (world.getBlockMetadata(x, y, z) == 7 && soil.isUpgradeActive(FCItems.upgradeAutomation) && soil.getStoredEnergy() >= 250) {
+						}
+						if (world.getBlockMetadata(x, y, z) == 7 && soil.isUpgradeActive(FCItems.upgradeAutomation)) {
 							doDrop(crystal, world, x, y, z, 0, false);
 							world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-							soil.drainEnergy(250);
+							//soil.drainEnergy(250);
 						}
 					}
 				}
-			}
+			//
 		}
 	}
 

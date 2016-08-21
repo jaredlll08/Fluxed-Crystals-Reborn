@@ -31,7 +31,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void render(RenderLivingEvent.Pre event) {
-		String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
+		/*String s = EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName());
 		if (Utils.isPlayerSpecial(s)) {
 			if (new Random().nextInt(2) == 0) {
 				if (!descending) {
@@ -52,7 +52,7 @@ public class ClientEventHandler {
 			GL11.glEnable(3042);
 			GL11.glBlendFunc(770, 771);
 			resetRender = true;
-		}
+		}*/
 
 	}
 
