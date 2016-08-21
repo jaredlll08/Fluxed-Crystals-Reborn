@@ -6,12 +6,12 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import fluxedCrystals.FluxedCrystals;
+import fluxedCrystals.handler.ConfigurationHandler;
 import fluxedCrystals.init.FCItems;
 import fluxedCrystals.reference.*;
 import fluxedCrystals.registry.Seed;
 import fluxedCrystals.registry.SeedRegistry;
 import fluxedCrystals.util.NBTHelper;
-import fluxedCrystals.util.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -61,7 +61,7 @@ public class ItemCrystalSword extends ItemSword {
 
 		EntityPlayer entityPlayer = (EntityPlayer) player;
 		itemStack.damageItem(1, player);
-		if(Utils.isPlayerSpecial(((EntityPlayer) player).getDisplayName())) {
+		if(ConfigurationHandler.isPlayerSpecial(((EntityPlayer) player).getDisplayName())) {
 			entity.addPotionEffect(new PotionEffect(Potion.wither.getId(), 140, 10));
 		}
 		entity.attackEntityFrom(DamageSource.causePlayerDamage(entityPlayer), getDamage(player));
@@ -157,7 +157,7 @@ public class ItemCrystalSword extends ItemSword {
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isCurrentItem) {
 
-		if(entity instanceof EntityPlayer && Utils.isPlayerSpecial(((EntityPlayer) entity).getDisplayName())) {
+		if(entity instanceof EntityPlayer && ConfigurationHandler.isPlayerSpecial(((EntityPlayer) entity).getDisplayName())) {
 			if(((EntityPlayer) entity).isBlocking()) {
 				AxisAlignedBB axisalignedbb = entity.boundingBox.expand(2.0D, 1.0D, 2.0D);
 				List<EntityMob> list = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, axisalignedbb);
