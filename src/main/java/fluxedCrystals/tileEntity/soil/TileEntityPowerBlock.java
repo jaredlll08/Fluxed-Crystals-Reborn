@@ -271,9 +271,7 @@ public class TileEntityPowerBlock extends TileEnergyBase implements ISidedInvent
 		if (isUpgradeActive(FCItems.upgradeEffeciency)) {
 			energy /= getEffeciency();
 		}
-		if( energy >=100000){//clamp to max storage of the soil, its not like anything can use more anyway
-			energy=100000;
-		}
+
 		return energy;
 	}
 
